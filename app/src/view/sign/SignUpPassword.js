@@ -1,11 +1,11 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {StyleSheet, Text, View} from 'react-native';
-import {SIGN_UP_EMAIL_STATUS} from '../../constant/SignUpEmailStatus';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { StyleSheet, Text, View } from 'react-native';
+import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
 import SignUpNextButton from './SignUpNextButton';
 import PasswordInputTextView from './PasswordInputTextView';
-import {inject, observer} from 'mobx-react';
-import {SIGN_UP_PASSWORD_STATUS} from '../../constant/SignUpPasswordStatus';
+import { inject, observer } from 'mobx-react';
+import { SIGN_UP_PASSWORD_STATUS } from '../../constant/SignUpPasswordStatus';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -15,7 +15,7 @@ import {SIGN_UP_PASSWORD_STATUS} from '../../constant/SignUpPasswordStatus';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signViewStore', 'signUpPasswordStore')
+@inject('signProcessStore', 'signUpPasswordStore')
 @observer
 class SignUpPassword extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class SignUpPassword extends React.Component {
 
   signUpNextButtonClicked() {
     console.log('signin clicked');
-    this.props.signViewStore.passwordCompleted();
+    this.props.signProcessStore.passwordCompleted();
     this.props.navigation.navigate('SignUpGender');
   }
 
@@ -55,6 +55,7 @@ class SignUpPassword extends React.Component {
           {this.props.signUpPasswordStore.passwordValidation ===
           SIGN_UP_PASSWORD_STATUS.SUCCEED ? (
             <SignUpNextButton
+              text="Next"
               onClick={this.signUpNextButtonClicked.bind(this)}
             />
           ) : null}
@@ -72,20 +73,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 30,
-    width: '100%',
+    width: '100%'
   },
 
   contentContainer: {
     flex: 5,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   bottomContainer: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
 });
 

@@ -12,7 +12,7 @@ export default class SignUpNextButton extends Component {
       <TouchableOpacity
         style={styles.button}
         onPress={() => this.props.onClick()}>
-        <Text style={styles.title}>Next</Text>
+        <Text style={styles.title}>{this.props.text}</Text>
       </TouchableOpacity>
     );
   }

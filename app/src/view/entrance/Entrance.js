@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {inject, observer} from 'mobx-react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, { Component } from 'react';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { inject, observer } from 'mobx-react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from '../sign/SignIn';
 import Welcome from './Welcome';
 import SignUpEmail from '../sign/SignUpEmail';
@@ -20,7 +20,7 @@ import SignUpPhone from '../sign/SignUpPhone';
 
 const Stack = createStackNavigator();
 
-@inject('signViewStore')
+@inject('signProcessStore')
 @observer
 class Entrance extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class Entrance extends React.Component {
   componentDidUpdate(
     prevProps: Readonly<P>,
     prevState: Readonly<S>,
-    snapshot: SS,
+    snapshot: SS
   ) {}
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
@@ -52,8 +52,8 @@ class Entrance extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Welcome">
-          <Stack.Screen name="Welcome" options={{headerShown: false}}>
-            {(props) => <Welcome {...props} />}
+          <Stack.Screen name="Welcome" options={{ headerShown: false }}>
+            {props => <Welcome {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignIn"
@@ -64,10 +64,11 @@ class Entrance extends React.Component {
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontWeight: 'bold'
               },
-            }}>
-            {(props) => <SignIn {...props} />}
+            }}
+          >
+            {props => <SignIn {...props} />}
           </Stack.Screen>
 
           <Stack.Screen
@@ -79,10 +80,11 @@ class Entrance extends React.Component {
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontWeight: 'bold'
               },
-            }}>
-            {(props) => <SignUpEmail {...props} />}
+            }}
+          >
+            {props => <SignUpEmail {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignUpPassword"
@@ -93,10 +95,11 @@ class Entrance extends React.Component {
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontWeight: 'bold'
               },
-            }}>
-            {(props) => <SignUpPassword {...props} />}
+            }}
+          >
+            {props => <SignUpPassword {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignUpGender"
@@ -107,10 +110,11 @@ class Entrance extends React.Component {
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontWeight: 'bold'
               },
-            }}>
-            {(props) => <SignUpGender {...props} />}
+            }}
+          >
+            {props => <SignUpGender {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignUpPhone"
@@ -121,10 +125,11 @@ class Entrance extends React.Component {
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontWeight: 'bold'
               },
-            }}>
-            {(props) => <SignUpPhone {...props} />}
+            }}
+          >
+            {props => <SignUpPhone {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,6 +1,6 @@
-import {observable, action} from 'mobx';
+import { observable, action } from 'mobx';
 import UserRepository from '../repository/UserRepository';
-import {USER_STATUS} from '../constant/UserStatus';
+import { USER_STATUS } from '../constant/UserStatus';
 
 export default class SplashStore {
   userRepository = new UserRepository();
@@ -12,11 +12,11 @@ export default class SplashStore {
     this.userStatus = USER_STATUS.GUEST;
   };
 
-  @action signInCompleted = async () => {
+  @action signInCompleted = () => {
     this.userStatus = USER_STATUS.USER;
   };
 
-  @action signUpCompleted = async () => {
+  @action signUpCompleted = () => {
     this.userStatus = USER_STATUS.USER;
   };
 

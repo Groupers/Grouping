@@ -22,9 +22,13 @@ export default class SignUpEmailStore {
       return this.emailText;
     }
 
-    console.log('123');
-    await this.userRepository.checkEmail(text);
-    console.log('456');
+    try {
+      let data = await this.userRepository.checkEmail(text);
+      console.log(data);
+    } catch {
+      this.emailText = text;
+      return this.emailText;
+    }
     this.emailValidation = SIGN_UP_EMAIL_STATUS.SUCCEED;
     this.emailText = text;
     return this.emailText;

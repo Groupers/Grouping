@@ -5,6 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
+import { SIGN_UP_PHONE_STATUS } from '../../constant/SignUpPhoneStatus';
+import SignUpPhoneSentBefore from './SignUpPhoneSentBefore';
+import SignUpPhoneSentAfter from './SignUpPhoneSentAfter';
+import SignUpPhoneValidationSucceed from './SignUpPhoneValidationSucceed';
+import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -14,7 +19,7 @@ import SignUpNextButton from './SignUpNextButton';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signViewStore', 'splashStore')
+@inject('signProcessStore', 'signUpPhoneStore', 'splashStore')
 @observer
 class SignUpPhone extends React.Component {
   constructor(props) {
@@ -28,7 +33,7 @@ class SignUpPhone extends React.Component {
 
   signUpNextButtonClicked() {
     console.log('signin clicked');
-    this.props.signViewStore.phoneCompleted();
+    this.props.signProcessStore.phoneCompleted();
     this.props.splashStore.signUpCompleted();
   }
 
@@ -37,14 +42,27 @@ class SignUpPhone extends React.Component {
   // 예: return nextProps.id !== this.props.id;
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
-    return (
-      <View style={styles.body}>
-        <View style={styles.contentContainer} />
-        <View style={styles.bottomContainer}>
-          <SignUpNextButton onClick={this.signUpNextButtonClicked.bind(this)} />
-        </View>
-      </View>
-    );
+    let view;
+
+    if (
+      this.props.signUpPhoneStore.phoneValidationStatus ===
+      SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_BEFORE
+    ) {
+      view = <SignUpPhoneSentBefore />;
+    } else if (
+      this.props.signUpPhoneStore.phoneValidationStatus ===
+      SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_AFTER
+    ) {
+      view = <SignUpPhoneSentAfter />;
+    } else {
+      view = (
+        <SignUpPhoneValidationSucceed
+          signUpCompleted={this.signUpNextButtonClicked.bind(this)}
+        />
+      );
+    }
+
+    return <View style={styles.body}>{view}</View>;
   }
 }
 

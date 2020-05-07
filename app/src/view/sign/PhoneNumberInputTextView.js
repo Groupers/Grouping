@@ -12,7 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-export default class PasswordInputTextView extends React.Component {
+export default class PhoneNumberInputTextView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -31,13 +31,11 @@ export default class PasswordInputTextView extends React.Component {
       <View style={styles.passwordContainer}>
         <TextInput
           style={styles.password}
-          maxLength={20}
-          autoCompleteType="password"
-          placeholder="Password"
-          secureTextEntry={true}
+          maxLength={16}
+          placeholder="폰 번호를 입력하세요."
           autoCorrect={false}
           clearTextOnFocus={true}
-          textContentType="password"
+          textContentType="telephoneNumber"
           placeholderTextColor={Colors.white}
           value={this.props.text}
           onChangeText={
@@ -62,6 +60,7 @@ const styles = StyleSheet.create({
   password: {
     width: '90%',
     alignItems: 'center',
+    fontSize: 25,
     justifyContent: 'center',
     margin: 10,
   },

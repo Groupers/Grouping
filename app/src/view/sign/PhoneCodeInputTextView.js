@@ -12,9 +12,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-export default class PasswordInputTextView extends React.Component {
+export default class PhoneCodeInputTextView extends React.Component {
   constructor(props) {
     super(props);
+    console.log("PhoneCodeInputTextView : " + this.props.myRef);
   }
 
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -28,21 +29,32 @@ export default class PasswordInputTextView extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <View style={styles.passwordContainer}>
+      <View style={styles.phoneCodeInputContainer}>
         <TextInput
-          style={styles.password}
-          maxLength={20}
-          autoCompleteType="password"
-          placeholder="Password"
-          secureTextEntry={true}
+          style={styles.phoneCode}
+          maxLength={1}
           autoCorrect={false}
           clearTextOnFocus={true}
-          textContentType="password"
+          returnKeyType="next"
+          ref={this.props.myRef}
+          textContentType="creditCardNumber"
           placeholderTextColor={Colors.white}
           value={this.props.text}
           onChangeText={
             this.props.onChangeText != null
-              ? text => this.props.onChangeText(text)
+              ? text => this.props.onChangeText(text, this.props.myRef)
+              : null
+          }
+          onKeyPress={({ nativeEvent }) => {
+            if (nativeEvent.key === 'Backspace') {
+              this.props.onBackSpacePressed != null
+                ? this.props.onBackSpacePressed(this.props.myRef)
+                : null;
+            }
+          }}
+          onFocus={
+            this.props.onFocus != null
+              ? () => this.props.onFocus(this.props.myRef)
               : null
           }
         />
@@ -52,15 +64,16 @@ export default class PasswordInputTextView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  passwordContainer: {
+  phoneCodeInputContainer: {
     borderColor: Colors.white,
     borderBottomWidth: 1,
-    width: '90%',
+    width: '10%',
     margin: 10,
   },
 
-  password: {
-    width: '90%',
+  phoneCode: {
+  	color: Colors.white,
+    fontSize: 25,
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10,

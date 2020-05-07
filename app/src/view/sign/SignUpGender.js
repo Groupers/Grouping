@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, { Component } from 'react';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import PasswordInputTextView from './PasswordInputTextView';
-import {SIGN_UP_PASSWORD_STATUS} from '../../constant/SignUpPasswordStatus';
+import { SIGN_UP_PASSWORD_STATUS } from '../../constant/SignUpPasswordStatus';
 import SignUpNextButton from './SignUpNextButton';
-import {inject, observer} from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -16,7 +16,7 @@ import {inject, observer} from 'mobx-react';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signViewStore')
+@inject('signProcessStore')
 @observer
 class SignUpGender extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class SignUpGender extends Component {
 
   signUpNextButtonClicked() {
     console.log('signin clicked');
-    this.props.signViewStore.genderCompleted();
+    this.props.signProcessStore.genderCompleted();
     this.props.navigation.navigate('SignUpPhone');
   }
 
@@ -43,7 +43,10 @@ class SignUpGender extends Component {
       <View style={styles.body}>
         <View style={styles.contentContainer} />
         <View style={styles.bottomContainer}>
-          <SignUpNextButton onClick={this.signUpNextButtonClicked.bind(this)} />
+          <SignUpNextButton
+            text="Next"
+            onClick={this.signUpNextButtonClicked.bind(this)}
+          />
         </View>
       </View>
     );
@@ -58,20 +61,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 30,
-    width: '100%',
+    width: '100%'
   },
 
   contentContainer: {
     flex: 5,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   bottomContainer: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
 });
 
