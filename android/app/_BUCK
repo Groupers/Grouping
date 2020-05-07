@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.grouping",
+    package = "com.covengers.grouping",
 )
 
 android_resource(
     name = "res",
-    package = "com.grouping",
+    package = "com.covengers.grouping",
     res = "src/main/res",
 )
 

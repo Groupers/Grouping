@@ -1,4 +1,4 @@
-package com.grouping;
+package com.covengers.grouping;
 
 import com.facebook.react.ReactActivity;
 

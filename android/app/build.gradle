@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.grouping"
+        applicationId "com.covengers.grouping"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
