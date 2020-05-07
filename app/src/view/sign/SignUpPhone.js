@@ -1,9 +1,9 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {inject, observer} from 'mobx-react';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -56,20 +56,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 30,
-    width: '100%',
+    width: '100%'
   },
 
   contentContainer: {
     flex: 5,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   bottomContainer: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
 });
 

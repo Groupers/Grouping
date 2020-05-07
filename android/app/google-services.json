@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "373492643626-od04tgm5s0ctj064bb7l3f53e8b6vu6t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.covengers.grouping",
+            "certificate_hash": "fd297f5ba17c7545d74b0b8f3e8e86bf74c99fb4"
+          }
+        },
+        {
           "client_id": "373492643626-mh7dgu3lc45jt1kjbsvbrba9t9u390gf.apps.googleusercontent.com",
           "client_type": 3
         }
