@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
-import { SIGN_UP_PHONE_STATUS } from '../../constant/SignUpPhoneStatus';
-import SignUpPhoneSentBefore from './SignUpPhoneSentBefore';
-import SignUpPhoneSentAfter from './SignUpPhoneSentAfter';
-import SignUpPhoneValidationSucceed from './SignUpPhoneValidationSucceed';
-import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
+import { inject, observer } from 'mobx-react';
+import { SIGN_UP_NAME_STATUS } from '../../constant/SignUpNameStatus';
+import NameInputTextView from './NameInputTextView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -19,9 +14,9 @@ import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signProcessStore', 'signUpPhoneStore', 'splashStore')
+@inject('signProcessStore', 'signUpNameStore')
 @observer
-class SignUpPhone extends React.Component {
+class SignUpName extends Component {
   constructor(props) {
     super(props);
   }
@@ -31,14 +26,15 @@ class SignUpPhone extends React.Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  signUpNextButtonClicked() {
-    this.props.signProcessStore.phoneCompleted(
-      this.props.signUpPhoneStore.phoneNumber
-    );
-    console.log("sign up Completed!!!!!!");
-    console.log(this.props.signProcessStore.signUpInfo);
+  nameTextChanged(text) {
+    console.log('changed : ' + text);
+    this.props.signUpNameStore.nameTextChanged(text);
+  }
 
-    this.props.splashStore.signUpCompleted();
+  signUpNextButtonClicked() {
+    console.log('signin clicked');
+    this.props.signProcessStore.nameCompleted(this.props.signUpNameStore.nameText);
+    this.props.navigation.navigate('SignUpGender');
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
@@ -46,27 +42,25 @@ class SignUpPhone extends React.Component {
   // 예: return nextProps.id !== this.props.id;
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
-    let view;
-
-    if (
-      this.props.signUpPhoneStore.phoneValidationStatus ===
-      SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_BEFORE
-    ) {
-      view = <SignUpPhoneSentBefore />;
-    } else if (
-      this.props.signUpPhoneStore.phoneValidationStatus ===
-      SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_AFTER
-    ) {
-      view = <SignUpPhoneSentAfter />;
-    } else {
-      view = (
-        <SignUpPhoneValidationSucceed
-          signUpCompleted={this.signUpNextButtonClicked.bind(this)}
-        />
-      );
-    }
-
-    return <View style={styles.body}>{view}</View>;
+    return (
+      <View style={styles.body}>
+        <View style={styles.contentContainer}>
+          <NameInputTextView
+            text={this.props.signUpNameStore.nameText}
+            onChangeText={this.nameTextChanged.bind(this)}
+          />
+        </View>
+        <View style={styles.bottomContainer}>
+          {this.props.signUpNameStore.nameValidation ===
+          SIGN_UP_NAME_STATUS.SUCCEED ? (
+            <SignUpNextButton
+              text="Next"
+              onClick={this.signUpNextButtonClicked.bind(this)}
+            />
+          ) : null}
+        </View>
+      </View>
+    );
   }
 }
 
@@ -95,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpPhone;
+export default SignUpName;

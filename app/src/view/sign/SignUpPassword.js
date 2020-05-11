@@ -1,7 +1,6 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, Text, View } from 'react-native';
-import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
 import SignUpNextButton from './SignUpNextButton';
 import PasswordInputTextView from './PasswordInputTextView';
 import { inject, observer } from 'mobx-react';
@@ -34,8 +33,8 @@ class SignUpPassword extends React.Component {
 
   signUpNextButtonClicked() {
     console.log('signin clicked');
-    this.props.signProcessStore.passwordCompleted();
-    this.props.navigation.navigate('SignUpGender');
+    this.props.signProcessStore.passwordCompleted(this.props.signUpPasswordStore.passwordText);
+    this.props.navigation.navigate('SignUpName');
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.

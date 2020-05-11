@@ -10,7 +10,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-export default class PasswordInputTextView extends React.Component {
+export default class NameInputTextView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -26,16 +26,13 @@ export default class PasswordInputTextView extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <View style={styles.passwordContainer}>
+      <View style={styles.nameContainer}>
         <TextInput
-          style={styles.password}
-          maxLength={20}
-          autoCompleteType="password"
-          placeholder="Password"
-          secureTextEntry={true}
+          style={styles.name}
+          maxLength={10}
+          placeholder="이름"
           autoCorrect={false}
-          clearTextOnFocus={true}
-          textContentType="password"
+          clearTextOnFocus={false}
           placeholderTextColor={Colors.white}
           value={this.props.text}
           onChangeText={
@@ -50,14 +47,14 @@ export default class PasswordInputTextView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  passwordContainer: {
+  nameContainer: {
     borderColor: Colors.white,
     borderBottomWidth: 1,
     width: '90%',
     margin: 10,
   },
 
-  password: {
+  name: {
     width: '90%',
     alignItems: 'center',
     justifyContent: 'center',

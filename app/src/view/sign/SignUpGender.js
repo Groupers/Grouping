@@ -30,7 +30,7 @@ class SignUpGender extends Component {
 
   signUpNextButtonClicked() {
     console.log('signin clicked');
-    this.props.signProcessStore.genderCompleted();
+    this.props.signProcessStore.genderCompleted("Male");
     this.props.navigation.navigate('SignUpPhone');
   }
 

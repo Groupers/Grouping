@@ -9,6 +9,7 @@ import SignUpEmail from '../sign/SignUpEmail';
 import SignUpPassword from '../sign/SignUpPassword';
 import SignUpGender from '../sign/SignUpGender';
 import SignUpPhone from '../sign/SignUpPhone';
+import SignUpName from '../sign/SignUpName';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -100,6 +101,21 @@ class Entrance extends React.Component {
             }}
           >
             {props => <SignUpPassword {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="SignUpName"
+            options={{
+              title: 'Sign Up Name',
+              headerStyle: {
+                backgroundColor: Colors.primary,
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold'
+              },
+            }}
+          >
+            {props => <SignUpName {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignUpGender"

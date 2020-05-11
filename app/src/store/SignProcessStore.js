@@ -9,6 +9,7 @@ export default class SignProcessStore {
     name: '',
     password: '',
     gender: '',
+    birthDay: '',
     phoneNumber: ''
   };
 

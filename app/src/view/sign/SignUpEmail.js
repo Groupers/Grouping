@@ -35,7 +35,7 @@ class SignUpEmail extends React.Component {
 
   signUpNextButtonClicked() {
     console.log('signin clicked');
-    this.props.signProcessStore.emailCompleted();
+    this.props.signProcessStore.emailCompleted(this.props.signUpEmailStore.emailText);
     this.props.navigation.navigate('SignUpPassword');
   }
 
