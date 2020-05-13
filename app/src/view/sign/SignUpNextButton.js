@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 
 export default class SignUpNextButton extends Component {
@@ -7,11 +7,30 @@ export default class SignUpNextButton extends Component {
     super(props);
   }
 
+  buttonStyle = function() {
+    console.log('bottomContainer');
+    return {
+      width: '90%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: 10,
+      marginRight: 10,
+      marginTop: 10,
+      backgroundColor: Colors.white,
+      borderRadius: 5,
+      height: 50,
+      // marginBottom: this.props.isKeyboardShow
+      //   ? this.props.keyboardHeight - 15
+      //   : 0,
+    };
+  };
+
   render() {
     return (
       <TouchableOpacity
-        style={styles.button}
-        onPress={() => this.props.onClick()}>
+        style={this.buttonStyle()}
+        onPress={() => this.props.onClick()}
+      >
         <Text style={styles.title}>{this.props.text}</Text>
       </TouchableOpacity>
     );
@@ -30,6 +49,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 23,
-    fontWeight: '600',
+    fontWeight: '600'
   },
 });

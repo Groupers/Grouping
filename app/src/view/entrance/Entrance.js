@@ -10,6 +10,7 @@ import SignUpPassword from '../sign/SignUpPassword';
 import SignUpGender from '../sign/SignUpGender';
 import SignUpPhone from '../sign/SignUpPhone';
 import SignUpName from '../sign/SignUpName';
+import { Dimensions, Keyboard } from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -28,11 +29,38 @@ class Entrance extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow.bind(this)
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide.bind(this)
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow(e) {
+    this.props.signProcessStore.keyboardDidShow(
+      e.endCoordinates.height,
+      Dimensions.get('window').height,
+      Dimensions.get('window').height - e.endCoordinates.height
+    );
+  }
+
+  _keyboardDidHide() {
+    this.props.signProcessStore.keyboardDidHide();
+  }
+
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  componentDidMount() {}
-
   componentDidUpdate(
     prevProps: Readonly<P>,
     prevState: Readonly<S>,

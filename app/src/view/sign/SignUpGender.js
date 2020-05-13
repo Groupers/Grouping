@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PasswordInputTextView from './PasswordInputTextView';
@@ -40,15 +48,25 @@ class SignUpGender extends Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.contentContainer} />
-        <View style={styles.bottomContainer}>
-          <SignUpNextButton
-            text="Next"
-            onClick={this.signUpNextButtonClicked.bind(this)}
-          />
-        </View>
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
+        style={styles.body}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <View style={styles.contentContainer} />
+            <View style={styles.bottomContainer}>
+              <SignUpNextButton
+                isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
+                keyboardHeight={this.props.signProcessStore.keyboardHeight}
+                text="Next"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -60,7 +78,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 30,
+    width: '100%'
+  },
+
+  inner: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%'
   },
 
@@ -74,7 +100,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginBottom: 30,
   },
 });
 

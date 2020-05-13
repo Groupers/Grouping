@@ -52,15 +52,27 @@ class SignUpPhone extends React.Component {
       this.props.signUpPhoneStore.phoneValidationStatus ===
       SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_BEFORE
     ) {
-      view = <SignUpPhoneSentBefore />;
+      view = (
+        <SignUpPhoneSentBefore
+          isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
+          keyboardHeight={this.props.signProcessStore.keyboardHeight}
+        />
+      );
     } else if (
       this.props.signUpPhoneStore.phoneValidationStatus ===
       SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_AFTER
     ) {
-      view = <SignUpPhoneSentAfter />;
+      view = (
+        <SignUpPhoneSentAfter
+          isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
+          keyboardHeight={this.props.signProcessStore.keyboardHeight}
+        />
+      );
     } else {
       view = (
         <SignUpPhoneValidationSucceed
+          isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
+          keyboardHeight={this.props.signProcessStore.keyboardHeight}
           signUpCompleted={this.signUpNextButtonClicked.bind(this)}
         />
       );
@@ -77,7 +89,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 30,
     width: '100%'
   },
 
@@ -91,7 +102,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    paddingBottom: 30,
   },
 });
 

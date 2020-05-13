@@ -13,6 +13,25 @@ export default class SignProcessStore {
     phoneNumber: ''
   };
 
+  @observable isKeyboardShow = false;
+  @observable keyboardHeight = 0;
+  @observable normalHeight = 0;
+  @observable shortHeight = 0;
+
+  @action keyboardDidShow = (keyboardHeight, normalHeight, shortHeight) => {
+    console.log('keyboard up!!!');
+    console.log(keyboardHeight + ':' + normalHeight + ':' + shortHeight);
+    this.isKeyboardShow = true;
+    this.keyboardHeight = keyboardHeight;
+    this.normalHeight = normalHeight;
+    this.shortHeight = shortHeight;
+  };
+
+  @action keyboardDidHide = () => {
+    console.log('keyboard hide!!!');
+    this.isKeyboardShow = false;
+  };
+
   @action signInStarted = () => {
     this.signViewStatus = SIGN_VIEW_STATUS.SIGN_IN_STARTED;
   };

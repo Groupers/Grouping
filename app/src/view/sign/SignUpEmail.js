@@ -1,8 +1,14 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  StyleSheet,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import EmailInputTextView from './EmailInputTextView';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
@@ -28,14 +34,14 @@ class SignUpEmail extends React.Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  emailTextChanged(text) {
-    console.log('changed : ' + text);
-    this.props.signUpEmailStore.emailTextChanged(text);
+  async emailTextChanged(text) {
+    await this.props.signUpEmailStore.emailTextChanged(text);
   }
 
   signUpNextButtonClicked() {
-    console.log('signin clicked');
-    this.props.signProcessStore.emailCompleted(this.props.signUpEmailStore.emailText);
+    this.props.signProcessStore.emailCompleted(
+      this.props.signUpEmailStore.emailText
+    );
     this.props.navigation.navigate('SignUpPassword');
   }
 
@@ -45,23 +51,33 @@ class SignUpEmail extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.contentContainer}>
-          <EmailInputTextView
-            text={this.props.signUpEmailStore.emailText}
-            onChangeText={this.emailTextChanged.bind(this)}
-          />
-        </View>
-        <View style={styles.bottomContainer}>
-          {this.props.signUpEmailStore.emailValidation ===
-          SIGN_UP_EMAIL_STATUS.SUCCEED ? (
-            <SignUpNextButton
-              text="Next"
-              onClick={this.signUpNextButtonClicked.bind(this)}
-            />
-          ) : null}
-        </View>
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
+        style={styles.body}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <View style={styles.contentContainer}>
+              <EmailInputTextView
+                text={this.props.signUpEmailStore.emailText}
+                onChangeText={this.emailTextChanged.bind(this)}
+              />
+            </View>
+            <View style={styles.bottomContainer}>
+              {this.props.signUpEmailStore.emailValidation ===
+              SIGN_UP_EMAIL_STATUS.SUCCEED ? (
+                <SignUpNextButton
+                  isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
+                  keyboardHeight={this.props.signProcessStore.keyboardHeight}
+                  text="Next"
+                  onClick={this.signUpNextButtonClicked.bind(this)}
+                />
+              ) : null}
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -73,7 +89,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 30,
+    width: '100%'
+  },
+
+  inner: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%'
   },
 
@@ -87,7 +111,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginBottom: 30,
   },
 });
 

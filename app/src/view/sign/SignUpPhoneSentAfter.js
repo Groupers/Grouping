@@ -1,6 +1,14 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { inject, observer } from 'mobx-react';
@@ -87,60 +95,82 @@ class SignUpPhoneSentAfter extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.contentContainer}>
-          <PhoneCodeInputTextView
-            myRef={this.viewRef[0]}
-            onChangeText={this.phoneCodeChanged.bind(this)}
-            onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(this)}
-            text={this.props.signUpPhoneStore.phoneCode[0]}
-            onFocus={this.phoneCodeViewFocused.bind(this)}
-          />
-          <PhoneCodeInputTextView
-            myRef={this.viewRef[1]}
-            onChangeText={this.phoneCodeChanged.bind(this)}
-            onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(this)}
-            text={this.props.signUpPhoneStore.phoneCode[1]}
-            onFocus={this.phoneCodeViewFocused.bind(this)}
-          />
-          <PhoneCodeInputTextView
-            myRef={this.viewRef[2]}
-            onChangeText={this.phoneCodeChanged.bind(this)}
-            onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(this)}
-            text={this.props.signUpPhoneStore.phoneCode[2]}
-            onFocus={this.phoneCodeViewFocused.bind(this)}
-          />
-          <PhoneCodeInputTextView
-            myRef={this.viewRef[3]}
-            onChangeText={this.phoneCodeChanged.bind(this)}
-            onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(this)}
-            text={this.props.signUpPhoneStore.phoneCode[3]}
-            onFocus={this.phoneCodeViewFocused.bind(this)}
-          />
-          <PhoneCodeInputTextView
-            myRef={this.viewRef[4]}
-            onChangeText={this.phoneCodeChanged.bind(this)}
-            onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(this)}
-            text={this.props.signUpPhoneStore.phoneCode[4]}
-            onFocus={this.phoneCodeViewFocused.bind(this)}
-          />
-          <PhoneCodeInputTextView
-            myRef={this.viewRef[5]}
-            onChangeText={this.phoneCodeChanged.bind(this)}
-            onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(this)}
-            text={this.props.signUpPhoneStore.phoneCode[5]}
-            onFocus={this.phoneCodeViewFocused.bind(this)}
-          />
-        </View>
-        <View style={styles.bottomContainer}>
-          {this.props.signUpPhoneStore.isPhoneCodeCorrect ? (
-            <SignUpNextButton
-              text="complete sign up"
-              onClick={this.phoneCodeValidationSucceed.bind(this)}
-            />
-          ) : null}
-        </View>
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={this.props.keyboardHeight / 3}
+        style={styles.body}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <View style={styles.contentContainer}>
+              <PhoneCodeInputTextView
+                myRef={this.viewRef[0]}
+                onChangeText={this.phoneCodeChanged.bind(this)}
+                onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(
+                  this
+                )}
+                text={this.props.signUpPhoneStore.phoneCode[0]}
+                onFocus={this.phoneCodeViewFocused.bind(this)}
+              />
+              <PhoneCodeInputTextView
+                myRef={this.viewRef[1]}
+                onChangeText={this.phoneCodeChanged.bind(this)}
+                onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(
+                  this
+                )}
+                text={this.props.signUpPhoneStore.phoneCode[1]}
+                onFocus={this.phoneCodeViewFocused.bind(this)}
+              />
+              <PhoneCodeInputTextView
+                myRef={this.viewRef[2]}
+                onChangeText={this.phoneCodeChanged.bind(this)}
+                onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(
+                  this
+                )}
+                text={this.props.signUpPhoneStore.phoneCode[2]}
+                onFocus={this.phoneCodeViewFocused.bind(this)}
+              />
+              <PhoneCodeInputTextView
+                myRef={this.viewRef[3]}
+                onChangeText={this.phoneCodeChanged.bind(this)}
+                onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(
+                  this
+                )}
+                text={this.props.signUpPhoneStore.phoneCode[3]}
+                onFocus={this.phoneCodeViewFocused.bind(this)}
+              />
+              <PhoneCodeInputTextView
+                myRef={this.viewRef[4]}
+                onChangeText={this.phoneCodeChanged.bind(this)}
+                onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(
+                  this
+                )}
+                text={this.props.signUpPhoneStore.phoneCode[4]}
+                onFocus={this.phoneCodeViewFocused.bind(this)}
+              />
+              <PhoneCodeInputTextView
+                myRef={this.viewRef[5]}
+                onChangeText={this.phoneCodeChanged.bind(this)}
+                onBackSpacePressed={this.phoneCodeChangedViaBackSpace.bind(
+                  this
+                )}
+                text={this.props.signUpPhoneStore.phoneCode[5]}
+                onFocus={this.phoneCodeViewFocused.bind(this)}
+              />
+            </View>
+            <View style={styles.bottomContainer}>
+              {this.props.signUpPhoneStore.isPhoneCodeCorrect ? (
+                <SignUpNextButton
+                  text="complete sign up"
+                  isKeyboardShow={this.props.isKeyboardShow}
+                  keyboardHeight={this.props.keyboardHeight}
+                  onClick={this.phoneCodeValidationSucceed.bind(this)}
+                />
+              ) : null}
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -152,15 +182,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 30,
+    marginBottom: 30,
+    width: '100%'
+  },
+
+  inner: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%'
   },
 
   contentContainer: {
     flex: 5,
     width: '100%',
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'center'
   },
   bottomContainer: {
@@ -170,5 +209,4 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 });
-
 export default SignUpPhoneSentAfter;

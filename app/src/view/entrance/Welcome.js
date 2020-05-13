@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Keyboard, Dimensions } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import SignInButton from './SignInButton';
 import SignUpButton from './SignUpButton';
@@ -26,7 +26,6 @@ class Welcome extends React.Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  componentDidMount() {}
 
   componentDidUpdate(
     prevProps: Readonly<P>,
@@ -43,7 +42,6 @@ class Welcome extends React.Component {
   //   nextState: Readonly<S>,
   //   nextContext: any,
   // ): boolean {}
-
   signInButtonClicked() {
     console.log('signin clicked');
     this.props.signProcessStore.signInStarted();

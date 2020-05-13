@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import SignUpNextButton from './SignUpNextButton';
 import { inject, observer } from 'mobx-react';
 import { SIGN_UP_NAME_STATUS } from '../../constant/SignUpNameStatus';
@@ -33,7 +41,9 @@ class SignUpName extends Component {
 
   signUpNextButtonClicked() {
     console.log('signin clicked');
-    this.props.signProcessStore.nameCompleted(this.props.signUpNameStore.nameText);
+    this.props.signProcessStore.nameCompleted(
+      this.props.signUpNameStore.nameText
+    );
     this.props.navigation.navigate('SignUpGender');
   }
 
@@ -43,23 +53,33 @@ class SignUpName extends Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.contentContainer}>
-          <NameInputTextView
-            text={this.props.signUpNameStore.nameText}
-            onChangeText={this.nameTextChanged.bind(this)}
-          />
-        </View>
-        <View style={styles.bottomContainer}>
-          {this.props.signUpNameStore.nameValidation ===
-          SIGN_UP_NAME_STATUS.SUCCEED ? (
-            <SignUpNextButton
-              text="Next"
-              onClick={this.signUpNextButtonClicked.bind(this)}
-            />
-          ) : null}
-        </View>
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
+        style={styles.body}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <View style={styles.contentContainer}>
+              <NameInputTextView
+                text={this.props.signUpNameStore.nameText}
+                onChangeText={this.nameTextChanged.bind(this)}
+              />
+            </View>
+            <View style={styles.bottomContainer}>
+              {this.props.signUpNameStore.nameValidation ===
+              SIGN_UP_NAME_STATUS.SUCCEED ? (
+                <SignUpNextButton
+                  isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
+                  keyboardHeight={this.props.signProcessStore.keyboardHeight}
+                  text="Next"
+                  onClick={this.signUpNextButtonClicked.bind(this)}
+                />
+              ) : null}
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -71,7 +91,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 30,
+    width: '100%'
+  },
+
+  inner: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%'
   },
 
@@ -85,7 +113,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginBottom: 30,
   },
 });
 

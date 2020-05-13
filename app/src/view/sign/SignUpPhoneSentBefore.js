@@ -1,6 +1,14 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { inject, observer } from 'mobx-react';
@@ -46,22 +54,32 @@ class SignUpPhoneSentBefore extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.contentContainer}>
-          <PhoneNumberInputTextView
-            text={this.props.signUpPhoneStore.phoneNumber}
-            onChangeText={this.phoneNumberChanged.bind(this)}
-          />
-        </View>
-        <View style={styles.bottomContainer}>
-          {this.props.signUpPhoneStore.isPhoneNumberCorrect ? (
-            <SignUpNextButton
-              text="Send Phone Code."
-              onClick={this.sendPhoneCode.bind(this)}
-            />
-          ) : null}
-        </View>
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={this.props.keyboardHeight / 3}
+        style={styles.body}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <View style={styles.contentContainer}>
+              <PhoneNumberInputTextView
+                text={this.props.signUpPhoneStore.phoneNumber}
+                onChangeText={this.phoneNumberChanged.bind(this)}
+              />
+            </View>
+            <View style={styles.bottomContainer}>
+              {this.props.signUpPhoneStore.isPhoneNumberCorrect ? (
+                <SignUpNextButton
+                  isKeyboardShow={this.props.isKeyboardShow}
+                  keyboardHeight={this.props.keyboardHeight}
+                  text="Send Phone Code."
+                  onClick={this.sendPhoneCode.bind(this)}
+                />
+              ) : null}
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -73,7 +91,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 30,
+    marginBottom: 30,
+    width: '100%'
+  },
+
+  inner: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%'
   },
 
