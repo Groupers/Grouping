@@ -35,7 +35,6 @@ export default class EmailInputTextView extends React.Component {
           autoCompleteType="email"
           placeholder="Email"
           autoCorrect={false}
-          autoFocus={true}
           placeholderTextColor={Colors.white}
           value={this.props.text}
           onChangeText={

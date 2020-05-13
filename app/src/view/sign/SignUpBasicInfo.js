@@ -22,9 +22,9 @@ import NameInputTextView from './NameInputTextView';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signProcessStore', 'signUpNameStore')
+@inject('signProcessStore', 'signUpBasicInfoStore')
 @observer
-class SignUpName extends Component {
+class SignUpBasicInfo extends Component {
   constructor(props) {
     super(props);
   }
@@ -35,16 +35,14 @@ class SignUpName extends Component {
   componentDidMount() {}
 
   nameTextChanged(text) {
-    console.log('changed : ' + text);
-    this.props.signUpNameStore.nameTextChanged(text);
+    this.props.signUpBasicInfoStore.nameTextChanged(text);
   }
 
   signUpNextButtonClicked() {
-    console.log('signin clicked');
-    this.props.signProcessStore.nameCompleted(
-      this.props.signUpNameStore.nameText
+    this.props.signProcessStore.basicInfoCompleted(
+      this.props.signUpBasicInfoStore.nameText
     );
-    this.props.navigation.navigate('SignUpGender');
+    this.props.navigation.navigate('SignUpPhone');
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
@@ -62,12 +60,12 @@ class SignUpName extends Component {
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
               <NameInputTextView
-                text={this.props.signUpNameStore.nameText}
+                text={this.props.signUpBasicInfoStore.nameText}
                 onChangeText={this.nameTextChanged.bind(this)}
               />
             </View>
             <View style={styles.bottomContainer}>
-              {this.props.signUpNameStore.nameValidation ===
+              {this.props.signUpBasicInfoStore.nameValidation ===
               SIGN_UP_NAME_STATUS.SUCCEED ? (
                 <SignUpNextButton
                   isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
@@ -118,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpName;
+export default SignUpBasicInfo;

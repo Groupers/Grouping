@@ -43,19 +43,16 @@ class Welcome extends React.Component {
   //   nextContext: any,
   // ): boolean {}
   signInButtonClicked() {
-    console.log('signin clicked');
     this.props.signProcessStore.signInStarted();
     this.props.navigation.navigate('SignIn');
   }
 
   signUpButtonClicked() {
-    console.log('sign up clicked');
     this.props.signProcessStore.signUpStarted();
     this.props.navigation.navigate('SignUpEmail');
   }
 
   render() {
-    console.log('WELCOME : ' + this.props.signProcessStore.signViewStatus);
     return (
       <View style={styles.body}>
         <View style={styles.logoContainer}>

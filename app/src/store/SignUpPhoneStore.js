@@ -1,6 +1,8 @@
 import { action, observable } from 'mobx';
 import { SIGN_UP_PHONE_STATUS } from '../constant/SignUpPhoneStatus';
-import UserRepository from '../repository/UserRepository';
+import SignRepository from '../repository/SignRepository';
+import FirebaseRepository from '../repository/FirebaseRepository';
+import SignProcessStore from './SignProcessStore';
 
 export default class SignUpPhoneStore {
   koreaPhonePrefixConditionFirst = "010";
@@ -16,11 +18,16 @@ export default class SignUpPhoneStore {
 
   codeConfirmation = null;
 
-  userRepository = new UserRepository();
+  signRepository = new SignRepository();
+  firebaseRepository = new FirebaseRepository();
+
+  signProcessStore;
+
+  constructor(signProcessStore: SignProcessStore) {
+    this.signProcessStore = signProcessStore;
+  }
 
   @action phoneNumberChanged = async text => {
-    console.log('phoneNumber' + text + this.phoneValidationStatus);
-
     text = text.replace(/-/gi, "");
 
     if (text.toString().slice(0, 3) === this.koreaPhonePrefixConditionFirst) {
@@ -48,14 +55,7 @@ export default class SignUpPhoneStore {
     }
 
     this.phoneNumber = this.phoneNumber.trim();
-    console.log(
-      "hellllllllo",
-      this.phoneNumber +
-        " : " +
-        this.phoneNumber.toString().length +
-        " : " +
-        this.phoneNumber.toString().slice(0, 3)
-    );
+
     if (
       this.phoneNumber.toString().length === 13 &&
       this.phoneNumber.toString().slice(0, 3) === this.koreaPhonePrefix
@@ -69,7 +69,18 @@ export default class SignUpPhoneStore {
   };
 
   @action phoneCodeSent = async () => {
-    this.codeConfirmation = await this.userRepository.sendSignUpPhoneCode(
+    try {
+      const data = await this.signRepository.enrollPhoneNumber(
+        this.signProcessStore.groupingUserDto.id,
+        this.phoneNumber
+      );
+      if (data !== undefined) {
+      }
+    } catch (e) {
+      this.isPhoneNumberCorrect = false;
+      return;
+    }
+    this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(
       this.phoneNumber
     );
     this.phoneValidationStatus = SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_AFTER;

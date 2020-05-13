@@ -8,7 +8,6 @@ export default class SignInButton extends Component {
   }
 
   render() {
-    console.log('signinbutton : ' + this.props.onClick);
     return (
       <TouchableOpacity
         style={styles.button}

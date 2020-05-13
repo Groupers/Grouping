@@ -7,9 +7,8 @@ import SignIn from '../sign/SignIn';
 import Welcome from './Welcome';
 import SignUpEmail from '../sign/SignUpEmail';
 import SignUpPassword from '../sign/SignUpPassword';
-import SignUpGender from '../sign/SignUpGender';
 import SignUpPhone from '../sign/SignUpPhone';
-import SignUpName from '../sign/SignUpName';
+import SignUpBasicInfo from '../sign/SignUpBasicInfo';
 import { Dimensions, Keyboard } from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -30,7 +29,6 @@ class Entrance extends React.Component {
   }
 
   componentDidMount() {
-
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this._keyboardDidShow.bind(this)
@@ -131,9 +129,9 @@ class Entrance extends React.Component {
             {props => <SignUpPassword {...props} />}
           </Stack.Screen>
           <Stack.Screen
-            name="SignUpName"
+            name="SignUpBasicInfo"
             options={{
-              title: 'Sign Up Name',
+              title: 'Sign Up basic info',
               headerStyle: {
                 backgroundColor: Colors.primary,
               },
@@ -143,22 +141,7 @@ class Entrance extends React.Component {
               },
             }}
           >
-            {props => <SignUpName {...props} />}
-          </Stack.Screen>
-          <Stack.Screen
-            name="SignUpGender"
-            options={{
-              title: 'Sign Up Gender',
-              headerStyle: {
-                backgroundColor: Colors.primary,
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold'
-              },
-            }}
-          >
-            {props => <SignUpGender {...props} />}
+            {props => <SignUpBasicInfo {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignUpPhone"

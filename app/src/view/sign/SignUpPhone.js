@@ -35,8 +35,6 @@ class SignUpPhone extends React.Component {
     this.props.signProcessStore.phoneCompleted(
       this.props.signUpPhoneStore.phoneNumber
     );
-    console.log("sign up Completed!!!!!!");
-    console.log(this.props.signProcessStore.signUpInfo);
 
     this.props.splashStore.signUpCompleted();
   }

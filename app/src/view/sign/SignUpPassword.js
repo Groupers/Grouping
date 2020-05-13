@@ -44,7 +44,7 @@ class SignUpPassword extends React.Component {
     this.props.signProcessStore.passwordCompleted(
       this.props.signUpPasswordStore.passwordText
     );
-    this.props.navigation.navigate('SignUpName');
+    this.props.navigation.navigate('SignUpBasicInfo');
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.

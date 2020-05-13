@@ -1,11 +1,18 @@
-import {action, observable} from 'mobx';
-import {SIGN_UP_PASSWORD_STATUS} from '../constant/SignUpPasswordStatus';
+import { action, observable } from 'mobx';
+import { SIGN_UP_PASSWORD_STATUS } from '../constant/SignUpPasswordStatus';
+import SignProcessStore from './SignProcessStore';
 
 export default class SignUpPasswordStore {
   @observable passwordText = '';
   @observable passwordValidation = SIGN_UP_PASSWORD_STATUS.NONE;
 
-  @action passwordTextChanged = async (text) => {
+  signProcessStore;
+
+  constructor(signProcessStore: SignProcessStore) {
+    this.signProcessStore = signProcessStore;
+  }
+
+  @action passwordTextChanged = async text => {
     console.log('passwordStore: ' + text + this.passwordValidation);
 
     const expression = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
