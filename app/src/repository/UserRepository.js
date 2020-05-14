@@ -15,22 +15,4 @@ export default class UserRepository {
         return err;
       });
   };
-
-  checkEmail = async email => {
-    axios
-      .get(TARGET_URL + '/sign/email?email=' + email)
-      .then(response => {
-        return response.data;
-      })
-      .catch(err => {
-        return err;
-      });
-  };
-
-  sendSignUpPhoneCode = async phoneNumber => {
-    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-    console.log("sendSignUpPhoneCode.");
-    console.log(confirmation);
-    return confirmation;
-  };
 }

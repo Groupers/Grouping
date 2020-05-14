@@ -27,6 +27,15 @@ export default class SignUpPhoneStore {
     this.signProcessStore = signProcessStore;
   }
 
+  @action clearPhoneNumber = async () => {
+    if (this.phoneNumber !== "") {
+      await this.signRepository.cancelSignUpPhoneNumber(
+        this.phoneNumber,
+        () => {}
+      );
+    }
+  };
+
   @action phoneNumberChanged = async text => {
     text = text.replace(/-/gi, "");
 
@@ -69,14 +78,11 @@ export default class SignUpPhoneStore {
   };
 
   @action phoneCodeSent = async () => {
-    try {
-      const data = await this.signRepository.enrollPhoneNumber(
-        this.signProcessStore.groupingUserDto.id,
-        this.phoneNumber
-      );
-      if (data !== undefined) {
-      }
-    } catch (e) {
+    let data = await this.signRepository.checkPhoneNumber(
+      this.phoneNumber,
+      responseCode => {}
+    );
+    if (data.phoneNumberAvailable !== true) {
       this.isPhoneNumberCorrect = false;
       return;
     }
@@ -88,27 +94,21 @@ export default class SignUpPhoneStore {
 
   @action phoneCodeChanged = (index, code) => {
     this.phoneCode[index] = code;
-    console.log(" phoneCodeChanged: " + this.phoneCode);
   };
 
   @action phoneCodeDeleted = index => {
     if (this.phoneCode[index] !== "") {
       this.phoneCode[index] = "";
-      console.log(" phoneCodeDeleted1: " + this.phoneCode);
       return true;
     }
-    console.log(" phoneCodeDeleted2: " + this.phoneCode);
     return false;
   };
 
   @action phoneCodeFocused = index => {
     this.phoneCode[index] = "";
-    console.log("phone Code Focused: " + this.phoneCode);
   };
 
   @action validatePhoneCode = () => {
-    console.log("valid");
-    console.log(this.phoneCode);
     let isValid = true;
     this.phoneCode.forEach((value, index, array) => {
       if (value === "") {
@@ -117,21 +117,14 @@ export default class SignUpPhoneStore {
       }
     });
 
-    console.log('validatePhoneCode : ' + isValid);
     this.isPhoneCodeCorrect = isValid;
   };
 
   @action invalidatePhoneCode = () => {
-    console.log("invalid");
     this.isPhoneCodeCorrect = false;
   };
 
   @action phoneCodeValidationSucceed = async () => {
-    console.log("phoneCodeValidationSucceed");
-    console.log(this.isPhoneCodeCorrect);
-    console.log(this.codeConfirmation != null);
-    console.log("*" + this.phoneCode.toString() + '*');
-
     let isSucceed;
     if (this.isPhoneCodeCorrect && this.codeConfirmation != null) {
       try {

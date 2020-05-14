@@ -35,12 +35,10 @@ class SignUpPassword extends React.Component {
   componentDidMount() {}
 
   passwordTextChanged(text) {
-    console.log('changed : ' + text);
     this.props.signUpPasswordStore.passwordTextChanged(text);
   }
 
   signUpNextButtonClicked() {
-    console.log('signin clicked');
     this.props.signProcessStore.passwordCompleted(
       this.props.signUpPasswordStore.passwordText
     );

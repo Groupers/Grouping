@@ -18,7 +18,6 @@ export default class SignProcessStore {
   @observable shortHeight = 0;
 
   @action keyboardDidShow = (keyboardHeight, normalHeight, shortHeight) => {
-    console.log(keyboardHeight + ':' + normalHeight + ':' + shortHeight);
     this.isKeyboardShow = true;
     this.keyboardHeight = keyboardHeight;
     this.normalHeight = normalHeight;
@@ -38,12 +37,13 @@ export default class SignProcessStore {
   };
 
   @action emailCompleted = async email => {
-    try {
-      this.groupingUserDto = await this.signRepository.enrollEmail(email);
-      if (this.groupingUserDto !== undefined) {
-        this.signViewStatus = SIGN_VIEW_STATUS.EMAIL_COMPLETED;
-      }
-    } catch (e) {}
+    let isSucceed = await this.signRepository.enrollEmail(
+      email,
+      responseCode => {}
+    );
+    if (isSucceed) {
+      this.signViewStatus = SIGN_VIEW_STATUS.EMAIL_COMPLETED;
+    }
   };
 
   @action passwordCompleted = password => {
@@ -59,14 +59,12 @@ export default class SignProcessStore {
   };
 
   @action phoneCompleted = async phoneNumber => {
-    try {
-      this.groupingUserDto = await this.signRepository.enrollPhoneNumber(
-        this.groupingUserDto.id,
-        phoneNumber
-      );
-      if (this.groupingUserDto !== undefined) {
-        this.signViewStatus = SIGN_VIEW_STATUS.PHONE_COMPLETED;
-      }
-    } catch (e) {}
+    let isSucceed = (this.groupingUserDto = await this.signRepository.enrollPhoneNumber(
+      phoneNumber,
+      () => {}
+    ));
+    if (isSucceed === true) {
+      this.signViewStatus = SIGN_VIEW_STATUS.PHONE_COMPLETED;
+    }
   };
 }

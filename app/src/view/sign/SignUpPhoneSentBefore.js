@@ -38,9 +38,9 @@ class SignUpPhoneSentBefore extends React.Component {
     this.props.signUpPhoneStore.phoneNumberChanged(text);
   }
 
-  sendPhoneCode() {
+  async sendPhoneCode() {
     console.log('phone code sent');
-    this.props.signUpPhoneStore.phoneCodeSent();
+    await this.props.signUpPhoneStore.phoneCodeSent();
   }
 
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.

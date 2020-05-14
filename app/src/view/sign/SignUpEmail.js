@@ -25,6 +25,7 @@ import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
 @inject('signUpEmailStore', 'signProcessStore')
 @observer
 class SignUpEmail extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -32,14 +33,24 @@ class SignUpEmail extends React.Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  componentDidMount() {}
-
-  async emailTextChanged(text) {
-    await this.props.signUpEmailStore.emailTextChanged(text);
+  async componentDidMount() {
+    this.focusListener = this.props.navigation.addListener(
+      'focus',
+      this.props.signUpEmailStore.clearEmail.bind(this)
+    );
   }
 
-  signUpNextButtonClicked() {
-    this.props.signProcessStore.emailCompleted(
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
+
+  emailTextChanged(text) {
+    console.log(text);
+    this.props.signUpEmailStore.emailTextChanged(text);
+  }
+
+  async signUpNextButtonClicked() {
+    await this.props.signProcessStore.emailCompleted(
       this.props.signUpEmailStore.emailText
     );
     this.props.navigation.navigate('SignUpPassword');

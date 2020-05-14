@@ -3,64 +3,147 @@ import axios from 'axios';
 import CommonResponse from '../dto/CommonResponse';
 import CheckEmailResponseDto from '../dto/CheckEmailResponseDto';
 import CheckPhoneNumberResponseDto from '../dto/CheckPhoneNumberResponseDto';
-import CheckUserIdResponseDto from '../dto/CheckUserIdResponseDto';
-import GroupingUserDto from '../dto/GroupingUserDto';
 import { ResponseCode } from '../constant/ResponseCode';
+import GroupingUserDto from '../dto/GroupingUserDto';
 
 const TARGET_URL = SERVER_URL + '/sign';
 
 export default class SignRepository {
-  async checkEmail(email) {
-    console.log(email);
+  async checkEmail(email, failedCallback) {
     const response = await axios.get(TARGET_URL + '/email', {
       params: { email },
     });
 
-    console.log("response");
-    console.log(response);
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
       return;
     }
 
     return new CheckEmailResponseDto(commonResponse.data);
   }
 
-  async enrollEmail(email) {
+  async enrollEmail(email, failedCallback) {
     const response = await axios.post(TARGET_URL + '/email', { email });
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
-      return;
+      failedCallback(commonResponse.code);
+      return false;
     }
-
-    return new GroupingUserDto(commonResponse.data);
+    return true;
   }
 
-  async checkPhoneNumber(id, phoneNumber) {
-    const response = await axios.get(TARGET_URL + "/phone-number", {
-      params: { 'phone-number': phoneNumber }
+  async checkPhoneNumber(phoneNumber, failedCallback) {
+    const response = await axios.get(TARGET_URL + '/phone-number', {
+      params: { 'phone-number': phoneNumber },
     });
 
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
       return;
     }
 
     return new CheckPhoneNumberResponseDto(commonResponse.data);
   }
 
-  async enrollPhoneNumber(id, phoneNumber) {
-    const response = await axios.post(TARGET_URL + "/phone-number", {
-      "phoneNumber": phoneNumber,
-      id: id
+  async enrollPhoneNumber(phoneNumber, failedCallback) {
+    const response = await axios.post(TARGET_URL + '/phone-number', {
+      phoneNumber,
     });
 
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
+      return false;
+    }
+
+    return true;
+  }
+
+  async cancelSignUp(email, phoneNumber, failedCallback) {
+    const response = await axios.post(TARGET_URL + '/cancel', {
+      email,
+      phoneNumber,
+    });
+
+    const commonResponse = new CommonResponse(response.data);
+
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
+      return;
+    }
+  }
+
+  async cancelSignUpEmail(email, failedCallback) {
+    console.log("email");
+    console.log(email);
+    const response = await axios.post(TARGET_URL + '/cancel/email', {
+      email,
+    });
+
+    const commonResponse = new CommonResponse(response.data);
+
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
+      return;
+    }
+  }
+
+  async cancelSignUpPhoneNumber(phoneNumber, failedCallback) {
+    const response = await axios.post(TARGET_URL + '/cancel/phone-number', {
+      phoneNumber,
+    });
+
+    const commonResponse = new CommonResponse(response.data);
+
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
+      return;
+    }
+  }
+
+  async completeSignUp(
+    email,
+    password,
+    name,
+    gender,
+    birthday,
+    phoneNumber,
+    failedCallback
+  ) {
+    const response = await axios.post(TARGET_URL + '/complete', {
+      email,
+      password,
+      name,
+      gender,
+      birthday,
+      phoneNumber,
+    });
+
+    const commonResponse = new CommonResponse(response.data);
+
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
+      return;
+    }
+
+    return new GroupingUserDto(commonResponse.data);
+  }
+
+  async signIn(email, password, failedCallback) {
+    const response = await axios.post(TARGET_URL + '/login', {
+      email,
+      password,
+    });
+
+    const commonResponse = new CommonResponse(response.data);
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
       return;
     }
 

@@ -8,7 +8,6 @@ export default class SignUpNextButton extends Component {
   }
 
   buttonStyle = function() {
-    console.log('bottomContainer');
     return {
       width: '90%',
       alignItems: 'center',

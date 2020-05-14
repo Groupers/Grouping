@@ -1,5 +1,4 @@
 export default class GroupingUserDto {
-  id;
   userStatus;
   email;
   nationCode;
