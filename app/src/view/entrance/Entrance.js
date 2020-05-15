@@ -78,10 +78,7 @@ class Entrance extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome">
-          <Stack.Screen name="Welcome" options={{ headerShown: false }}>
-            {props => <Welcome {...props} />}
-          </Stack.Screen>
+        <Stack.Navigator initialRouteName="SignIn">
           <Stack.Screen
             name="SignIn"
             options={{
@@ -91,8 +88,9 @@ class Entrance extends React.Component {
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold'
+                fontWeight: 'bold',
               },
+              headerShown: false,
             }}
           >
             {props => <SignIn {...props} />}

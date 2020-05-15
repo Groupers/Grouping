@@ -9,7 +9,7 @@ import { SIGN_UP_PHONE_STATUS } from '../../constant/SignUpPhoneStatus';
 import SignUpPhoneSentBefore from './SignUpPhoneSentBefore';
 import SignUpPhoneSentAfter from './SignUpPhoneSentAfter';
 import SignUpPhoneValidationSucceed from './SignUpPhoneValidationSucceed';
-import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
+import { INPUT_EMAIL_STATUS } from '../../constant/InputEmailStatus';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -34,6 +34,10 @@ class SignUpPhone extends React.Component {
       'focus',
       this.props.signUpPhoneStore.clearPhoneNumber.bind(this)
     );
+  }
+
+  componentWillUnmount() {
+    this.focusListener();
   }
 
   async signUpNextButtonClicked() {

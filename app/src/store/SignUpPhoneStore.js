@@ -21,8 +21,6 @@ export default class SignUpPhoneStore {
   signRepository = new SignRepository();
   firebaseRepository = new FirebaseRepository();
 
-  signProcessStore;
-
   constructor(signProcessStore: SignProcessStore) {
     this.signProcessStore = signProcessStore;
   }

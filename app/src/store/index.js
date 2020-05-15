@@ -4,6 +4,7 @@ import SignUpEmailStore from './SignUpEmailStore';
 import SignUpPasswordStore from './SignUpPasswordStore';
 import SignUpPhoneStore from './SignUpPhoneStore';
 import SignUpBasicInfoStore from './SignUpBasicInfoStore';
+import SignInStore from './SignInStore';
 
 const splashStore = new SplashStore();
 const signProcessStore = new SignProcessStore();
@@ -12,6 +13,8 @@ const signUpPasswordStore = new SignUpPasswordStore(signProcessStore);
 const signUpPhoneStore = new SignUpPhoneStore(signProcessStore);
 const signUpBasicInfoStore = new SignUpBasicInfoStore(signProcessStore);
 
+const signInStore = new SignInStore();
+
 export default {
   splashStore: splashStore,
   signProcessStore: signProcessStore,
@@ -19,4 +22,5 @@ export default {
   signUpPasswordStore: signUpPasswordStore,
   signUpPhoneStore: signUpPhoneStore,
   signUpBasicInfoStore: signUpBasicInfoStore,
+  signInStore: signInStore,
 };

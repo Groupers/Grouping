@@ -2,8 +2,6 @@ import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { Icon } from 'react-native-elements'
-
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
 // 컴포넌트를 제거 할 때는 componentWillUnmount 메소드만 실행됩니다.
@@ -12,7 +10,7 @@ import { Icon } from 'react-native-elements'
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-export default class PasswordInputTextView extends React.Component {
+export default class SignLabelView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -27,53 +25,27 @@ export default class PasswordInputTextView extends React.Component {
   // 예: return nextProps.id !== this.props.id;
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
-    console.log(this.props.text);
     return (
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.password}
-          maxLength={20}
-          autoCompleteType="password"
-          placeholder="ex. 8자리 이상 입력해 주세요."
-          secureTextEntry={true}
-          autoCorrect={false}
-          clearTextOnFocus={true}
-          textContentType="password"
-          placeholderTextColor="#ddd"
-          value={this.props.text}
-          onChangeText={
-            this.props.onChangeText != null
-              ? text => this.props.onChangeText(text)
-              : null
-          }
-        />
-        <Icon
-            raised
-            name='heartbeat'
-            type='font-awesome'
-            color='#f50'
-            onPress={() => console.log('hello')} />
+      <View style={styles.labelContainer}>
+        <Text style={styles.label}>{this.props.text}</Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  passwordContainer: {
+  labelContainer: {
     borderColor: Colors.white,
-    borderBottomWidth: 1,
     width: '90%',
-    margin: 10,
+    marginTop: 20,
   },
 
-  password: {
+  label: {
     width: '90%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
-    marginLeft: 10,
-    marginBottom: 10,
     color: Colors.white,
-    fontSize: 15,
+    fontSize: 17,
+    fontWeight: '600'
   },
 });

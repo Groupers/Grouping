@@ -1,32 +1,31 @@
 import { action, observable } from 'mobx';
-import { SIGN_UP_PASSWORD_STATUS } from '../constant/SignUpPasswordStatus';
+import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
 import SignProcessStore from './SignProcessStore';
+import PasswordValidator from '../component/PasswordValidator';
 
 export default class SignUpPasswordStore {
   @observable passwordText = '';
-  @observable passwordValidation = SIGN_UP_PASSWORD_STATUS.NONE;
+  @observable passwordValidation = INPUT_PASSWORD_STATUS.NONE;
 
-  signProcessStore;
+  passwordValidator = new PasswordValidator();
 
   constructor(signProcessStore: SignProcessStore) {
     this.signProcessStore = signProcessStore;
   }
 
   @action passwordTextChanged = async text => {
-    console.log('passwordStore: ' + text + this.passwordValidation);
-
-    const expression = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
     if (String(text).length === 0) {
-      this.passwordValidation = SIGN_UP_PASSWORD_STATUS.NONE;
+      this.passwordValidation = INPUT_PASSWORD_STATUS.NONE;
+      return;
     }
 
-    if (!expression.test(String(text))) {
-      this.passwordValidation = SIGN_UP_PASSWORD_STATUS.INVALID;
+    if (!this.passwordValidator.validatePassword(text)) {
+      this.passwordValidation = INPUT_PASSWORD_STATUS.INVALID;
       this.passwordText = text;
-      return this.passwordText;
+      return;
     }
 
-    this.passwordValidation = SIGN_UP_PASSWORD_STATUS.SUCCEED;
+    this.passwordValidation = INPUT_PASSWORD_STATUS.SUCCEED;
     this.passwordText = text;
     return this.passwordText;
   };

@@ -12,7 +12,7 @@ import {
 import EmailInputTextView from './EmailInputTextView';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
-import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
+import { INPUT_EMAIL_STATUS } from '../../constant/InputEmailStatus';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -25,7 +25,6 @@ import { SIGN_UP_EMAIL_STATUS } from '../../constant/SignUpEmailStatus';
 @inject('signUpEmailStore', 'signProcessStore')
 @observer
 class SignUpEmail extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -41,7 +40,7 @@ class SignUpEmail extends React.Component {
   }
 
   componentWillUnmount() {
-    this.focusListener.remove();
+    this.focusListener();
   }
 
   emailTextChanged(text) {
@@ -77,7 +76,7 @@ class SignUpEmail extends React.Component {
             </View>
             <View style={styles.bottomContainer}>
               {this.props.signUpEmailStore.emailValidation ===
-              SIGN_UP_EMAIL_STATUS.SUCCEED ? (
+              INPUT_EMAIL_STATUS.SUCCEED ? (
                 <SignUpNextButton
                   isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
                   keyboardHeight={this.props.signProcessStore.keyboardHeight}

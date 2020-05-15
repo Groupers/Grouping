@@ -12,7 +12,7 @@ import {
 import SignUpNextButton from './SignUpNextButton';
 import PasswordInputTextView from './PasswordInputTextView';
 import { inject, observer } from 'mobx-react';
-import { SIGN_UP_PASSWORD_STATUS } from '../../constant/SignUpPasswordStatus';
+import { INPUT_PASSWORD_STATUS } from '../../constant/InputPasswordStatus';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -66,7 +66,7 @@ class SignUpPassword extends React.Component {
             </View>
             <View style={styles.bottomContainer}>
               {this.props.signUpPasswordStore.passwordValidation ===
-              SIGN_UP_PASSWORD_STATUS.SUCCEED ? (
+              INPUT_PASSWORD_STATUS.SUCCEED ? (
                 <SignUpNextButton
                   isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
                   keyboardHeight={this.props.signProcessStore.keyboardHeight}
