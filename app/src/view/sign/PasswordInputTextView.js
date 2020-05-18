@@ -2,7 +2,7 @@ import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -35,9 +35,7 @@ export default class PasswordInputTextView extends React.Component {
           maxLength={20}
           autoCompleteType="password"
           placeholder="ex. 8자리 이상 입력해 주세요."
-          secureTextEntry={true}
-          autoCorrect={false}
-          clearTextOnFocus={true}
+          secureTextEntry={!this.props.isShowPassword}
           textContentType="password"
           placeholderTextColor="#ddd"
           value={this.props.text}
@@ -48,11 +46,12 @@ export default class PasswordInputTextView extends React.Component {
           }
         />
         <Icon
-            raised
-            name='heartbeat'
-            type='font-awesome'
-            color='#f50'
-            onPress={() => console.log('hello')} />
+          style={styles.passwordToggleButton}
+          name={this.props.isShowPassword ? 'eye-off' : 'eye'}
+          type="feather"
+          color="#fff"
+          onPress={() => this.props.toggleShowPassword()}
+        />
       </View>
     );
   }
@@ -63,6 +62,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.white,
     borderBottomWidth: 1,
     width: '90%',
+    flexDirection: 'row',
     margin: 10,
   },
 
@@ -70,10 +70,11 @@ const styles = StyleSheet.create({
     width: '90%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
     marginLeft: 10,
     marginBottom: 10,
     color: Colors.white,
     fontSize: 15,
   },
+
+  passwordToggleButton: {}
 });

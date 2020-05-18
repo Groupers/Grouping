@@ -6,7 +6,7 @@ export default class GroupingUserDto {
   name;
   userId;
   gender;
-  birthDay;
+  birthday;
   representProfileImage;
 
   constructor(data = {}) {

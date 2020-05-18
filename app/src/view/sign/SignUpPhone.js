@@ -1,15 +1,22 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
-import { SIGN_UP_PHONE_STATUS } from '../../constant/SignUpPhoneStatus';
-import SignUpPhoneSentBefore from './SignUpPhoneSentBefore';
-import SignUpPhoneSentAfter from './SignUpPhoneSentAfter';
-import SignUpPhoneValidationSucceed from './SignUpPhoneValidationSucceed';
-import { INPUT_EMAIL_STATUS } from '../../constant/InputEmailStatus';
+import SignLabelView from './SignLabelView';
+import PhoneNumberInputTextView from './PhoneNumberInputTextView';
+import SignErrorMessageView from './SignErrorMessageView';
+import { SIGN_UP_PHONE_VIEW_STATUS } from '../../constant/SignUpPhoneStatus';
+import PhoneCodeInputTextView from './PhoneCodeInputTextView';
+import PhoneCodeNextButton from './PhoneCodeNextButton';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -19,7 +26,7 @@ import { INPUT_EMAIL_STATUS } from '../../constant/InputEmailStatus';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signProcessStore', 'signUpPhoneStore', 'splashStore')
+@inject('signUpPhoneStore')
 @observer
 class SignUpPhone extends React.Component {
   constructor(props) {
@@ -41,11 +48,8 @@ class SignUpPhone extends React.Component {
   }
 
   async signUpNextButtonClicked() {
-    await this.props.signProcessStore.phoneCompleted(
-      this.props.signUpPhoneStore.phoneNumber
-    );
-
-    this.props.splashStore.signUpCompleted();
+    await this.props.signUpPhoneStore.completePhoneNumber();
+    this.props.navigation.navigate('SignUpTermsAgreement');
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
@@ -53,39 +57,66 @@ class SignUpPhone extends React.Component {
   // 예: return nextProps.id !== this.props.id;
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
-    let view;
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        style={styles.body}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <View style={styles.contentContainer}>
+              <SignLabelView text="Phone Number" />
+              <PhoneNumberInputTextView
+                isActive={!this.props.signUpPhoneStore.isAllCompleted}
+                text={this.props.signUpPhoneStore.phoneNumber}
+                onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(
+                  this
+                )}
+              />
+              <SignUpNextButton
+                isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
+                text={
+                  this.props.signUpPhoneStore.phoneValidationViewStatus ===
+                  SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                    ? '인증번호 재발송'
+                    : '인증번호 발송'
+                }
+                onClick={this.props.signUpPhoneStore.sendPhoneCode.bind(this)}
+              />
+              {this.props.signUpPhoneStore.phoneValidationViewStatus ===
+              SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? (
+                <View style={styles.phoneCodeContainer}>
+                  <PhoneCodeInputTextView
+                    onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(
+                      this
+                    )}
+                    text={this.props.signUpPhoneStore.phoneCode}
+                  />
+                  <PhoneCodeNextButton
+                    text="인증"
+                    isActive={this.props.signUpPhoneStore.isValidPhoneCode}
+                    onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(
+                      this
+                    )}
+                  />
+                </View>
+              ) : null}
+              <SignErrorMessageView
+                text={this.props.signUpPhoneStore.errorMessage}
+              />
+            </View>
 
-    if (
-      this.props.signUpPhoneStore.phoneValidationStatus ===
-      SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_BEFORE
-    ) {
-      view = (
-        <SignUpPhoneSentBefore
-          isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
-          keyboardHeight={this.props.signProcessStore.keyboardHeight}
-        />
-      );
-    } else if (
-      this.props.signUpPhoneStore.phoneValidationStatus ===
-      SIGN_UP_PHONE_STATUS.PHONE_NUMBER_SENT_AFTER
-    ) {
-      view = (
-        <SignUpPhoneSentAfter
-          isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
-          keyboardHeight={this.props.signProcessStore.keyboardHeight}
-        />
-      );
-    } else {
-      view = (
-        <SignUpPhoneValidationSucceed
-          isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
-          keyboardHeight={this.props.signProcessStore.keyboardHeight}
-          signUpCompleted={this.signUpNextButtonClicked.bind(this)}
-        />
-      );
-    }
-
-    return <View style={styles.body}>{view}</View>;
+            <View style={styles.bottomContainer}>
+              <SignUpNextButton
+                isActive={this.props.signUpPhoneStore.isAllCompleted}
+                text="Next"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
   }
 }
 
@@ -97,6 +128,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%'
+  },
+
+  inner: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
+  },
+
+  phoneCodeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 30,
+    justifyContent: 'center',
+    width: '95%'
   },
 
   contentContainer: {

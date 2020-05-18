@@ -12,7 +12,8 @@ import {
 import EmailInputTextView from './EmailInputTextView';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
-import { INPUT_EMAIL_STATUS } from '../../constant/InputEmailStatus';
+import SignLabelView from './SignLabelView';
+import SignErrorMessageView from './SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -22,7 +23,7 @@ import { INPUT_EMAIL_STATUS } from '../../constant/InputEmailStatus';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signUpEmailStore', 'signProcessStore')
+@inject('signUpEmailStore')
 @observer
 class SignUpEmail extends React.Component {
   constructor(props) {
@@ -43,15 +44,8 @@ class SignUpEmail extends React.Component {
     this.focusListener();
   }
 
-  emailTextChanged(text) {
-    console.log(text);
-    this.props.signUpEmailStore.emailTextChanged(text);
-  }
-
   async signUpNextButtonClicked() {
-    await this.props.signProcessStore.emailCompleted(
-      this.props.signUpEmailStore.emailText
-    );
+    await this.props.signUpEmailStore.completeEmail();
     this.props.navigation.navigate('SignUpPassword');
   }
 
@@ -63,27 +57,28 @@ class SignUpEmail extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
+              <SignLabelView text="Email" />
               <EmailInputTextView
                 text={this.props.signUpEmailStore.emailText}
-                onChangeText={this.emailTextChanged.bind(this)}
+                onChangeText={this.props.signUpEmailStore.emailTextChanged.bind(
+                  this
+                )}
+              />
+              <SignErrorMessageView
+                text={this.props.signUpEmailStore.errorMessage}
               />
             </View>
             <View style={styles.bottomContainer}>
-              {this.props.signUpEmailStore.emailValidation ===
-              INPUT_EMAIL_STATUS.SUCCEED ? (
-                <SignUpNextButton
-                  isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
-                  keyboardHeight={this.props.signProcessStore.keyboardHeight}
-                  text="Next"
-                  onClick={this.signUpNextButtonClicked.bind(this)}
-                />
-              ) : null}
+              <SignUpNextButton
+                isActive={this.props.signUpEmailStore.isValidInputData}
+                text="Next"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>

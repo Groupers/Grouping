@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
 import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
 import SignProcessStore from './SignProcessStore';
 import PasswordValidator from '../component/PasswordValidator';
@@ -6,6 +6,7 @@ import PasswordValidator from '../component/PasswordValidator';
 export default class SignUpPasswordStore {
   @observable passwordText = '';
   @observable passwordValidation = INPUT_PASSWORD_STATUS.NONE;
+  @observable isShowPassword = false;
 
   passwordValidator = new PasswordValidator();
 
@@ -13,14 +14,23 @@ export default class SignUpPasswordStore {
     this.signProcessStore = signProcessStore;
   }
 
-  @action passwordTextChanged = async text => {
+  @action completePassword = () => {
+    this.signProcessStore.passwordCompleted(this.passwordText);
+  };
+
+  @action toggleShowPassword = () => {
+    this.isShowPassword = !this.isShowPassword;
+  };
+
+  @action passwordTextChanged = text => {
     if (String(text).length === 0) {
       this.passwordValidation = INPUT_PASSWORD_STATUS.NONE;
+      this.passwordText = text;
       return;
     }
 
     if (!this.passwordValidator.validatePassword(text)) {
-      this.passwordValidation = INPUT_PASSWORD_STATUS.INVALID;
+      this.passwordValidation = INPUT_PASSWORD_STATUS.NOT_FORMATTED;
       this.passwordText = text;
       return;
     }
@@ -29,4 +39,16 @@ export default class SignUpPasswordStore {
     this.passwordText = text;
     return this.passwordText;
   };
+
+  @computed get isValidInputData() {
+    return this.passwordValidation === INPUT_PASSWORD_STATUS.SUCCEED;
+  }
+
+  @computed get errorMessage() {
+    if (this.passwordValidation === INPUT_PASSWORD_STATUS.NOT_FORMATTED) {
+      return "비밀번호 형식이 맞지 않습니다.";
+    }
+
+    return "";
+  }
 }

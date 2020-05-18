@@ -1,8 +1,6 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -15,7 +13,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 export default class PhoneCodeInputTextView extends React.Component {
   constructor(props) {
     super(props);
-    console.log("PhoneCodeInputTextView : " + this.props.myRef);
   }
 
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -32,29 +29,15 @@ export default class PhoneCodeInputTextView extends React.Component {
       <View style={styles.phoneCodeInputContainer}>
         <TextInput
           style={styles.phoneCode}
-          maxLength={1}
+          maxLength={6}
           autoCorrect={false}
           clearTextOnFocus={true}
-          returnKeyType="next"
-          ref={this.props.myRef}
           textContentType="creditCardNumber"
           placeholderTextColor={Colors.white}
           value={this.props.text}
           onChangeText={
             this.props.onChangeText != null
-              ? text => this.props.onChangeText(text, this.props.myRef)
-              : null
-          }
-          onKeyPress={({ nativeEvent }) => {
-            if (nativeEvent.key === 'Backspace') {
-              this.props.onBackSpacePressed != null
-                ? this.props.onBackSpacePressed(this.props.myRef)
-                : null;
-            }
-          }}
-          onFocus={
-            this.props.onFocus != null
-              ? () => this.props.onFocus(this.props.myRef)
+              ? text => this.props.onChangeText(text)
               : null
           }
         />
@@ -67,12 +50,13 @@ const styles = StyleSheet.create({
   phoneCodeInputContainer: {
     borderColor: Colors.white,
     borderBottomWidth: 1,
-    width: '10%',
+    width: '55%',
     margin: 10,
+
   },
 
   phoneCode: {
-  	color: Colors.white,
+    color: Colors.white,
     fontSize: 25,
     alignItems: 'center',
     justifyContent: 'center',

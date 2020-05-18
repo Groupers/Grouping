@@ -11,14 +11,15 @@ export default class SignUpEmailStore {
   @observable emailText = '';
   @observable emailValidation = INPUT_EMAIL_STATUS.NONE;
 
-  signProcessStore;
-
   constructor(signProcessStore: SignProcessStore) {
     this.signProcessStore = signProcessStore;
   }
 
+  @action completeEmail = async () => {
+    await this.signProcessStore.emailCompleted(this.emailText);
+  };
+
   @action clearEmail = async () => {
-    console.log("clear!");
     if (this.emailText !== '') {
       await this.signRepository.cancelSignUpEmail(this.emailText, () => {});
     }
@@ -27,17 +28,17 @@ export default class SignUpEmailStore {
   @action emailTextChanged = async text => {
     if (String(text).length === 0) {
       this.emailValidation = INPUT_EMAIL_STATUS.NONE;
+      this.emailText = text;
       return;
     }
 
     if (!this.emailValidator.validateEmail(text)) {
-      this.emailValidation = INPUT_EMAIL_STATUS.INVALID;
+      this.emailValidation = INPUT_EMAIL_STATUS.NOT_FORMATTED;
       this.emailText = text;
       return;
     }
 
     let data = await this.signRepository.checkEmail(text, responseCode => {});
-    console.log(data);
 
     if (data.emailAvailable === true) {
       this.emailValidation = INPUT_EMAIL_STATUS.SUCCEED;
@@ -48,4 +49,20 @@ export default class SignUpEmailStore {
     this.emailValidation = INPUT_EMAIL_STATUS.ALREADY_REGISTERED;
     this.emailText = text;
   };
+
+  @computed get isValidInputData() {
+    return this.emailValidation === INPUT_EMAIL_STATUS.SUCCEED;
+  }
+
+  @computed get errorMessage() {
+    if (this.emailValidation === INPUT_EMAIL_STATUS.ALREADY_REGISTERED) {
+      return "이미 등록된 계정입니다.";
+    }
+
+    if (this.emailValidation === INPUT_EMAIL_STATUS.NOT_FORMATTED) {
+      return "이메일 형식이 맞지 않습니다.";
+    }
+
+    return "";
+  }
 }

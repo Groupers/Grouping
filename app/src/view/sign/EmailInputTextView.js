@@ -32,7 +32,6 @@ export default class EmailInputTextView extends React.Component {
         <TextInput
           style={styles.email}
           maxLength={30}
-          autoCompleteType="email"
           placeholder="ex. abc@def.com"
           autoCorrect={false}
           placeholderTextColor="#ddd"

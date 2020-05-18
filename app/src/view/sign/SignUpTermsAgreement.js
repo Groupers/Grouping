@@ -5,18 +5,12 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
-import PhoneCodeInputTextView from './PhoneCodeInputTextView';
-import PasswordInputTextView from './PasswordInputTextView';
-import { SIGN_UP_PHONE_STATUS } from '../../constant/SignUpPhoneStatus';
-import PhoneNumberInputTextView from './PhoneNumberInputTextView';
+import SignErrorMessageView from './SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -26,27 +20,23 @@ import PhoneNumberInputTextView from './PhoneNumberInputTextView';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signUpPhoneStore')
+@inject('signUpTermsAgreementStore')
 @observer
-class SignUpPhoneSentBefore extends React.Component {
+class SignUpTermsAgreement extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  phoneNumberChanged(text) {
-    console.log('phone number changed : ' + text);
-    this.props.signUpPhoneStore.phoneNumberChanged(text);
-  }
-
-  async sendPhoneCode() {
-    console.log('phone code sent');
-    await this.props.signUpPhoneStore.phoneCodeSent();
   }
 
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
+
+  componentWillUnmount() {}
+
+  async signUpNextButtonClicked() {
+    await this.props.signUpTermsAgreementStore.completeTermsAgreement();
+  }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
@@ -56,26 +46,22 @@ class SignUpPhoneSentBefore extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={this.props.keyboardHeight / 3}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <PhoneNumberInputTextView
-                text={this.props.signUpPhoneStore.phoneNumber}
-                onChangeText={this.phoneNumberChanged.bind(this)}
+              <SignErrorMessageView
+                text={this.props.signUpTermsAgreementStore.errorMessage}
               />
             </View>
+
             <View style={styles.bottomContainer}>
-              {this.props.signUpPhoneStore.isPhoneNumberCorrect ? (
-                <SignUpNextButton
-                  isKeyboardShow={this.props.isKeyboardShow}
-                  keyboardHeight={this.props.keyboardHeight}
-                  text="Send Phone Code."
-                  onClick={this.sendPhoneCode.bind(this)}
-                />
-              ) : null}
+              <SignUpNextButton
+                isActive={this.props.signUpTermsAgreementStore.isValidInputData}
+                text="Next"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -91,7 +77,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 30,
     width: '100%'
   },
 
@@ -104,6 +89,14 @@ const styles = StyleSheet.create({
     width: '100%'
   },
 
+  phoneCodeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 30,
+    justifyContent: 'center',
+    width: '95%'
+  },
+
   contentContainer: {
     flex: 5,
     width: '100%',
@@ -114,8 +107,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    paddingBottom: 30,
   },
 });
 
-export default SignUpPhoneSentBefore;
+export default SignUpTermsAgreement;

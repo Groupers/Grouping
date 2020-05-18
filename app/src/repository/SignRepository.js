@@ -107,23 +107,11 @@ export default class SignRepository {
     }
   }
 
-  async completeSignUp(
-    email,
-    password,
-    name,
-    gender,
-    birthday,
-    phoneNumber,
-    failedCallback
-  ) {
-    const response = await axios.post(TARGET_URL + '/complete', {
-      email,
-      password,
-      name,
-      gender,
-      birthday,
-      phoneNumber,
-    });
+  async completeSignUp(groupingUserDto, failedCallback) {
+    const response = await axios.post(
+      TARGET_URL + '/complete',
+      groupingUserDto
+    );
 
     const commonResponse = new CommonResponse(response.data);
 

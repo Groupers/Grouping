@@ -2,11 +2,10 @@ import { observable, action } from 'mobx';
 import { SIGN_VIEW_STATUS } from '../constant/SignViewStatus';
 import GroupingUserDto from '../dto/GroupingUserDto';
 import SignRepository from '../repository/SignRepository';
-import SignUpEmailStore from './SignUpEmailStore';
+import UserStore from './UserStore';
 
 export default class SignProcessStore {
   signRepository = new SignRepository();
-  signUpEmailStore = new SignUpEmailStore();
 
   @observable signViewStatus = SIGN_VIEW_STATUS.NONE;
 
@@ -16,6 +15,10 @@ export default class SignProcessStore {
   @observable keyboardHeight = 0;
   @observable normalHeight = 0;
   @observable shortHeight = 0;
+
+  constructor(userStore: UserStore) {
+    this.userStore = userStore;
+  }
 
   @action keyboardDidShow = (keyboardHeight, normalHeight, shortHeight) => {
     this.isKeyboardShow = true;
@@ -42,6 +45,7 @@ export default class SignProcessStore {
       responseCode => {}
     );
     if (isSucceed) {
+      this.groupingUserDto.email = email;
       this.signViewStatus = SIGN_VIEW_STATUS.EMAIL_COMPLETED;
     }
   };
@@ -51,20 +55,30 @@ export default class SignProcessStore {
     this.groupingUserDto.password = password;
   };
 
-  @action basicInfoCompleted = (name, gender, birthDay) => {
-    this.signViewStatus = SIGN_VIEW_STATUS.BASIC_INFO;
+  @action basicInfoCompleted = (name, gender, birthday) => {
+    this.signViewStatus = SIGN_VIEW_STATUS.BASIC_INFO_COMPLETED;
     this.groupingUserDto.name = name;
     this.groupingUserDto.gender = gender;
-    this.groupingUserDto.birthDay = birthDay;
+    this.groupingUserDto.birthday = birthday;
   };
 
   @action phoneCompleted = async phoneNumber => {
-    let isSucceed = (this.groupingUserDto = await this.signRepository.enrollPhoneNumber(
+    let isSucceed = await this.signRepository.enrollPhoneNumber(
       phoneNumber,
       () => {}
-    ));
+    );
+
     if (isSucceed === true) {
       this.signViewStatus = SIGN_VIEW_STATUS.PHONE_COMPLETED;
+      this.groupingUserDto.phoneNumber = phoneNumber;
     }
+  };
+
+  @action termsAgreementCompleted = async () => {
+    let groupingUserDto = await this.signRepository.completeSignUp(
+      this.groupingUserDto,
+      responseCode => {}
+    );
+    this.userStore.signUpCompleted(groupingUserDto);
   };
 }

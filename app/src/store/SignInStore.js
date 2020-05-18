@@ -4,6 +4,8 @@ import EmailValidator from '../component/EmailValidator';
 import PasswordValidator from '../component/PasswordValidator';
 import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
 import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
+import { ResponseCode } from '../constant/ResponseCode';
+import UserStore from './UserStore';
 
 export default class SignInStore {
   signRepository = new SignRepository();
@@ -16,9 +18,15 @@ export default class SignInStore {
   @observable emailStatus = INPUT_EMAIL_STATUS.NONE;
   @observable passwordStatus = INPUT_PASSWORD_STATUS.NONE;
 
+  constructor(userStore: UserStore) {
+    this.userStore = userStore;
+  }
+
+  @action toggleShowPassword = () => {
+    this.isShowPassword = !this.isShowPassword;
+  };
 
   @action clearData = () => {
-    console.log("sign in, clear data");
     this.emailText = "";
     this.passwordText = "";
     this.isShowPassword = false;
@@ -34,12 +42,11 @@ export default class SignInStore {
     }
 
     if (!this.passwordValidator.validatePassword(password)) {
-      this.passwordStatus = INPUT_PASSWORD_STATUS.INVALID;
+      this.passwordStatus = INPUT_PASSWORD_STATUS.NOT_FORMATTED;
       this.passwordText = password;
       console.log(this.passwordStatus);
       return;
     }
-    console.log("valid password");
     this.passwordStatus = INPUT_PASSWORD_STATUS.SUCCEED;
     this.passwordText = password;
   };
@@ -52,13 +59,12 @@ export default class SignInStore {
     }
 
     if (!this.emailValidator.validateEmail(email)) {
-      this.emailStatus = INPUT_EMAIL_STATUS.INVALID;
+      this.emailStatus = INPUT_EMAIL_STATUS.NOT_FORMATTED;
       this.emailText = email;
       console.log(this.emailStatus);
       return;
     }
 
-    console.log("valid email");
     this.emailStatus = INPUT_EMAIL_STATUS.SUCCEED;
     this.emailText = email;
   };
@@ -70,16 +76,43 @@ export default class SignInStore {
     );
   }
 
-  @computed get errorMessage(){
+  @computed get errorMessage() {
+    if (this.emailStatus === INPUT_EMAIL_STATUS.NOT_FORMATTED) {
+      return "이메일 형식이 맞지 않습니다.";
+    }
 
+    if (this.passwordStatus === INPUT_PASSWORD_STATUS.NOT_FORMATTED) {
+      return "비밀번호 형식이 맞지 않습니다.";
+    }
+
+    if (this.emailStatus === INPUT_EMAIL_STATUS.INVALID) {
+      return "존재하지 않는 이메일입니다.";
+    }
+
+    if (this.passwordStatus === INPUT_PASSWORD_STATUS.INVALID) {
+      return "비밀번호가 일치하지 않습니다.";
+    }
   }
 
   @action signIn = async () => {
-    await this.signRepository.signIn(
+    let groupingUserDto = await this.signRepository.signIn(
       this.emailText,
       this.passwordText,
-      (responseCode) => {
+      responseCode => {
+        console.log(responseCode);
+        if (responseCode === ResponseCode.INVALID_PASSWORD) {
+          this.passwordStatus = INPUT_PASSWORD_STATUS.INVALID;
+          return;
+        }
+
+        if (responseCode === ResponseCode.USER_NOT_EXISTED) {
+          this.emailStatus = INPUT_EMAIL_STATUS.INVALID;
+          return;
+        }
       }
     );
+    console.log("hello!!!");
+    console.log(groupingUserDto);
+    this.userStore.signInCompleted(groupingUserDto);
   };
 }

@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import SignInButton from '../entrance/SignInButton';
 import EmailInputTextView from './EmailInputTextView';
@@ -7,6 +16,7 @@ import PasswordInputTextView from './PasswordInputTextView';
 import SignUpButton from '../entrance/SignUpButton';
 import { inject, observer } from 'mobx-react';
 import SignLabelView from './SignLabelView';
+import SignErrorMessageView from './SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -16,7 +26,7 @@ import SignLabelView from './SignLabelView';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signInStore')
+@inject('signInStore', 'signProcessStore')
 @observer
 class SignIn extends React.Component {
   constructor(props) {
@@ -34,7 +44,7 @@ class SignIn extends React.Component {
   }
 
   async signInButtonClicked() {
-    // await this.props.signInStore.
+    await this.props.signInStore.signIn();
   }
 
   signUpButtonClicked() {
@@ -50,30 +60,49 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.logoContainer}>
-          <Text style={styles.logo}>Grouping</Text>
-        </View>
-        <View style={styles.contentContainer}>
-          <SignLabelView text="Email" />
-          <EmailInputTextView
-            onChangeText={this.props.signInStore.emailTextChanged.bind(this)}
-            text={this.props.signInStore.emailText}
-          />
-          <SignLabelView text="Password" />
-          <PasswordInputTextView
-            onChangeText={this.props.signInStore.passwordTextChanged.bind(this)}
-            text={this.props.signInStore.passwordText}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <SignInButton
-            isActive={this.props.signInStore.isValidInputData}
-            onClick={this.signInButtonClicked.bind(this)}
-          />
-          <SignUpButton onClick={this.signUpButtonClicked.bind(this)} />
-        </View>
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        // keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
+        style={styles.body}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <View style={styles.logoContainer}>
+              <Text style={styles.logo}>Grouping</Text>
+            </View>
+            <View style={styles.contentContainer}>
+              <SignLabelView text="Email" />
+              <EmailInputTextView
+                onChangeText={this.props.signInStore.emailTextChanged.bind(
+                  this
+                )}
+                text={this.props.signInStore.emailText}
+              />
+              <SignLabelView text="Password" />
+              <PasswordInputTextView
+                toggleShowPassword={this.props.signInStore.toggleShowPassword.bind(
+                  this
+                )}
+                isShowPassword={this.props.signInStore.isShowPassword}
+                onChangeText={this.props.signInStore.passwordTextChanged.bind(
+                  this
+                )}
+                text={this.props.signInStore.passwordText}
+              />
+              <SignErrorMessageView
+                text={this.props.signInStore.errorMessage}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <SignInButton
+                isActive={this.props.signInStore.isValidInputData}
+                onClick={this.signInButtonClicked.bind(this)}
+              />
+              <SignUpButton onClick={this.signUpButtonClicked.bind(this)} />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -81,13 +110,24 @@ class SignIn extends React.Component {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
+    backgroundColor: Colors.primary,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '100%'
+  },
+
+  inner: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
   },
 
   logoContainer: {
-    flex: 2,
+    flex: 3,
     backgroundColor: Colors.primary,
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -101,7 +141,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   contentContainer: {
-    flex: 3,
+    flex: 6,
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: Colors.primary,
@@ -113,8 +153,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 30,
+    justifyContent: 'flex-end',
+    paddingBottom: 15,
   },
 });
 

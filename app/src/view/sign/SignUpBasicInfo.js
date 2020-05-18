@@ -11,8 +11,11 @@ import {
 } from 'react-native';
 import SignUpNextButton from './SignUpNextButton';
 import { inject, observer } from 'mobx-react';
-import { SIGN_UP_NAME_STATUS } from '../../constant/SignUpNameStatus';
 import NameInputTextView from './NameInputTextView';
+import SignLabelView from './SignLabelView';
+import SignErrorMessageView from './SignErrorMessageView';
+import GenderInputView from './GenderInputView';
+import BirthdayInputView from './BirthdayInputView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -22,7 +25,7 @@ import NameInputTextView from './NameInputTextView';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signProcessStore', 'signUpBasicInfoStore')
+@inject('signUpBasicInfoStore')
 @observer
 class SignUpBasicInfo extends Component {
   constructor(props) {
@@ -34,14 +37,8 @@ class SignUpBasicInfo extends Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  nameTextChanged(text) {
-    this.props.signUpBasicInfoStore.nameTextChanged(text);
-  }
-
   signUpNextButtonClicked() {
-    this.props.signProcessStore.basicInfoCompleted(
-      this.props.signUpBasicInfoStore.nameText
-    );
+    this.props.signUpBasicInfoStore.completeBasicInfo();
     this.props.navigation.navigate('SignUpPhone');
   }
 
@@ -53,27 +50,46 @@ class SignUpBasicInfo extends Component {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
+              <SignLabelView text="Name" />
               <NameInputTextView
                 text={this.props.signUpBasicInfoStore.nameText}
-                onChangeText={this.nameTextChanged.bind(this)}
+                onChangeText={this.props.signUpBasicInfoStore.nameTextChanged.bind(
+                  this
+                )}
+              />
+
+              <SignLabelView text="Gender" />
+              <GenderInputView
+                isMaleSelected={this.props.signUpBasicInfoStore.isMaleSelected}
+                isFemaleSelected={
+                  this.props.signUpBasicInfoStore.isFemaleSelected
+                }
+                genderSelected={this.props.signUpBasicInfoStore.genderSelected.bind(
+                  this
+                )}
+              />
+              <SignLabelView text="Birthday" />
+              <BirthdayInputView
+                text={this.props.signUpBasicInfoStore.birthdayText}
+                onChangeText={this.props.signUpBasicInfoStore.birthdayChanged.bind(
+                  this
+                )}
+              />
+              <SignErrorMessageView
+                text={this.props.signUpBasicInfoStore.errorMessage}
               />
             </View>
             <View style={styles.bottomContainer}>
-              {this.props.signUpBasicInfoStore.nameValidation ===
-              SIGN_UP_NAME_STATUS.SUCCEED ? (
-                <SignUpNextButton
-                  isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
-                  keyboardHeight={this.props.signProcessStore.keyboardHeight}
-                  text="Next"
-                  onClick={this.signUpNextButtonClicked.bind(this)}
-                />
-              ) : null}
+              <SignUpNextButton
+                isActive={this.props.signUpBasicInfoStore.isValidInputData}
+                text="Next"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>

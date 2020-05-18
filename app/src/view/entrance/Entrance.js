@@ -4,12 +4,12 @@ import { inject, observer } from 'mobx-react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from '../sign/SignIn';
-import Welcome from './Welcome';
 import SignUpEmail from '../sign/SignUpEmail';
 import SignUpPassword from '../sign/SignUpPassword';
 import SignUpPhone from '../sign/SignUpPhone';
 import SignUpBasicInfo from '../sign/SignUpBasicInfo';
 import { Dimensions, Keyboard } from 'react-native';
+import SignUpTermsAgreement from '../sign/SignUpTermsAgreement';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -21,8 +21,6 @@ import { Dimensions, Keyboard } from 'react-native';
 
 const Stack = createStackNavigator();
 
-@inject('signProcessStore')
-@observer
 class Entrance extends React.Component {
   constructor(props) {
     super(props);
@@ -45,15 +43,15 @@ class Entrance extends React.Component {
   }
 
   _keyboardDidShow(e) {
-    this.props.signProcessStore.keyboardDidShow(
-      e.endCoordinates.height,
-      Dimensions.get('window').height,
-      Dimensions.get('window').height - e.endCoordinates.height
-    );
+    // this.props.signProcessStore.keyboardDidShow(
+    //   e.endCoordinates.height,
+    //   Dimensions.get('window').height,
+    //   Dimensions.get('window').height - e.endCoordinates.height
+    // );
   }
 
   _keyboardDidHide() {
-    this.props.signProcessStore.keyboardDidHide();
+    // this.props.signProcessStore.keyboardDidHide();
   }
 
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -78,7 +76,7 @@ class Entrance extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Navigator initialRouteName="signIn">
           <Stack.Screen
             name="SignIn"
             options={{
@@ -88,7 +86,7 @@ class Entrance extends React.Component {
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontWeight: 'bold'
               },
               headerShown: false,
             }}
@@ -155,6 +153,21 @@ class Entrance extends React.Component {
             }}
           >
             {props => <SignUpPhone {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="SignUpTermsAgreement"
+            options={{
+              title: 'Sign Up Phone',
+              headerStyle: {
+                backgroundColor: Colors.primary,
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold'
+              },
+            }}
+          >
+            {props => <SignUpTermsAgreement {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

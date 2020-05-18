@@ -13,6 +13,7 @@ import SignUpNextButton from './SignUpNextButton';
 import PasswordInputTextView from './PasswordInputTextView';
 import { inject, observer } from 'mobx-react';
 import { INPUT_PASSWORD_STATUS } from '../../constant/InputPasswordStatus';
+import SignLabelView from './SignLabelView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -22,7 +23,7 @@ import { INPUT_PASSWORD_STATUS } from '../../constant/InputPasswordStatus';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signProcessStore', 'signUpPasswordStore')
+@inject('signUpPasswordStore')
 @observer
 class SignUpPassword extends React.Component {
   constructor(props) {
@@ -34,14 +35,8 @@ class SignUpPassword extends React.Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  passwordTextChanged(text) {
-    this.props.signUpPasswordStore.passwordTextChanged(text);
-  }
-
   signUpNextButtonClicked() {
-    this.props.signProcessStore.passwordCompleted(
-      this.props.signUpPasswordStore.passwordText
-    );
+    this.props.signUpPasswordStore.completePassword();
     this.props.navigation.navigate('SignUpBasicInfo');
   }
 
@@ -53,27 +48,29 @@ class SignUpPassword extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
+              <SignLabelView text="Password" />
               <PasswordInputTextView
+                toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(
+                  this
+                )}
+                isShowPassword={this.props.signUpPasswordStore.isShowPassword}
                 text={this.props.signUpPasswordStore.passwordText}
-                onChangeText={this.passwordTextChanged.bind(this)}
+                onChangeText={this.props.signUpPasswordStore.passwordTextChanged.bind(
+                  this
+                )}
               />
             </View>
             <View style={styles.bottomContainer}>
-              {this.props.signUpPasswordStore.passwordValidation ===
-              INPUT_PASSWORD_STATUS.SUCCEED ? (
-                <SignUpNextButton
-                  isKeyboardShow={this.props.signProcessStore.isKeyboardShow}
-                  keyboardHeight={this.props.signProcessStore.keyboardHeight}
-                  text="Next"
-                  onClick={this.signUpNextButtonClicked.bind(this)}
-                />
-              ) : null}
+              <SignUpNextButton
+                isActive={this.props.signUpPasswordStore.isValidInputData}
+                text="Next"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -93,12 +90,12 @@ const styles = StyleSheet.create({
   },
 
   inner: {
-    flex:1,
+    flex: 1,
     backgroundColor: Colors.primary,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width:'100%'
+    width: '100%'
   },
 
   contentContainer: {

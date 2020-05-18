@@ -1,8 +1,6 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -30,11 +28,11 @@ export default class PhoneNumberInputTextView extends React.Component {
     return (
       <View style={styles.passwordContainer}>
         <TextInput
+          editable={this.props.isActive}
           style={styles.password}
           maxLength={16}
           placeholder="폰 번호를 입력하세요."
           autoCorrect={false}
-          clearTextOnFocus={true}
           textContentType="telephoneNumber"
           placeholderTextColor={Colors.white}
           value={this.props.text}
@@ -61,6 +59,7 @@ const styles = StyleSheet.create({
     width: '90%',
     alignItems: 'center',
     fontSize: 25,
+    color: Colors.white,
     justifyContent: 'center',
     margin: 10,
   },
