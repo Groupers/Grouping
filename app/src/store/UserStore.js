@@ -2,14 +2,16 @@ import { observable, action, computed } from 'mobx';
 import UserRepository from '../repository/UserRepository';
 import { USER_STATUS } from '../constant/UserStatus';
 import GroupingUserDto from '../dto/GroupingUserDto';
+import UserTable from '../table/UserTable';
 
 export default class UserStore {
   userRepository = new UserRepository();
+  userTable = new UserTable();
   groupingUser = null;
   @observable userStatus = USER_STATUS.READY;
 
   @action ready = async () => {
-    console.log("ready!");
+    await this.userTable.findByEmail('chdaos123@baver.comn');
     await this.userRepository.initialize();
     this.userStatus = USER_STATUS.GUEST;
   };
@@ -29,7 +31,6 @@ export default class UserStore {
   };
 
   @computed get isGroupingUser() {
-    console.log("----------");
     console.log(this.userStatus);
     console.log(this.groupingUser);
     return this.userStatus === USER_STATUS.USER && this.groupingUser !== null;

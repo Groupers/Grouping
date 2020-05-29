@@ -99,7 +99,6 @@ export default class SignInStore {
       this.emailText,
       this.passwordText,
       responseCode => {
-        console.log(responseCode);
         if (responseCode === ResponseCode.INVALID_PASSWORD) {
           this.passwordStatus = INPUT_PASSWORD_STATUS.INVALID;
           return;
@@ -111,8 +110,9 @@ export default class SignInStore {
         }
       }
     );
-    console.log("hello!!!");
-    console.log(groupingUserDto);
-    this.userStore.signInCompleted(groupingUserDto);
+
+    if (groupingUserDto !== undefined) {
+      this.userStore.signInCompleted(groupingUserDto);
+    }
   };
 }

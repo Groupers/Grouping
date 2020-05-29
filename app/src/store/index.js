@@ -6,6 +6,7 @@ import SignUpPhoneStore from './SignUpPhoneStore';
 import SignUpBasicInfoStore from './SignUpBasicInfoStore';
 import SignInStore from './SignInStore';
 import SignUpTermsAgreementStore from './SignUpTermsAgreementStore';
+import GroupingStore from './GroupingStore';
 
 const userStore = new UserStore();
 const signInStore = new SignInStore(userStore);
@@ -18,6 +19,8 @@ const signUpTermsAgreementStore = new SignUpTermsAgreementStore(
   signProcessStore
 );
 
+const groupingStore = new GroupingStore();
+
 export default {
   userStore: userStore,
   signUpTermsAgreementStore: signUpTermsAgreementStore,
@@ -27,4 +30,5 @@ export default {
   signUpPhoneStore: signUpPhoneStore,
   signUpBasicInfoStore: signUpBasicInfoStore,
   signInStore: signInStore,
+  groupingStore: groupingStore,
 };

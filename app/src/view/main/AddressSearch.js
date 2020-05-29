@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import InputSearch from '../InputSearch';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 
-class GroupingMainHeader extends Component {
+class AddressSearch extends Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
@@ -21,12 +27,9 @@ class GroupingMainHeader extends Component {
 
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.upperContentWrapper}>
-          <View style={styles.inputSearchWrapper}>
-            <InputSearch />
-          </View>
-        </View>
+      <View style={styles.bottomContentWrapper}>
+        <Icon size={16} name="map-pin" type="feather" color="#fff" />
+        <Text>서울특별시 구로구 구로동</Text>
       </View>
     );
   }
@@ -35,21 +38,25 @@ class GroupingMainHeader extends Component {
 const styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.primary,
-    borderBottomWidth: 0.5,
-    borderBottomColor: Colors.white,
-    flexDirection: 'column',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 10,
-    marginLeft: 10,
-  },
-  upperContentWrapper: {
-    flexDirection: 'row'
-  },
-  inputSearchWrapper: {
     flex: 1,
+  },
+
+  scrollView: {
+    backgroundColor: Colors.primary,
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
   },
 });
 
-export default GroupingMainHeader;
+export default AddressSearch;
