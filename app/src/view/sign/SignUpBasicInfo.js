@@ -12,7 +12,7 @@ import {
 import SignUpNextButton from './SignUpNextButton';
 import { inject, observer } from 'mobx-react';
 import NameInputTextView from './NameInputTextView';
-import SignLabelView from './SignLabelView';
+import LabelView from './LabelView';
 import SignErrorMessageView from './SignErrorMessageView';
 import GenderInputView from './GenderInputView';
 import BirthdayInputView from './BirthdayInputView';
@@ -55,7 +55,7 @@ class SignUpBasicInfo extends Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <SignLabelView text="Name" />
+              <LabelView text="Name" />
               <NameInputTextView
                 text={this.props.signUpBasicInfoStore.nameText}
                 onChangeText={this.props.signUpBasicInfoStore.nameTextChanged.bind(
@@ -63,7 +63,7 @@ class SignUpBasicInfo extends Component {
                 )}
               />
 
-              <SignLabelView text="Gender" />
+              <LabelView text="Gender" />
               <GenderInputView
                 isMaleSelected={this.props.signUpBasicInfoStore.isMaleSelected}
                 isFemaleSelected={
@@ -73,7 +73,7 @@ class SignUpBasicInfo extends Component {
                   this
                 )}
               />
-              <SignLabelView text="Birthday" />
+              <LabelView text="Birthday" />
               <BirthdayInputView
                 text={this.props.signUpBasicInfoStore.birthdayText}
                 onChangeText={this.props.signUpBasicInfoStore.birthdayChanged.bind(

@@ -12,7 +12,7 @@ import {
 import EmailInputTextView from './EmailInputTextView';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
-import SignLabelView from './SignLabelView';
+import LabelView from './LabelView';
 import SignErrorMessageView from './SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -62,7 +62,7 @@ class SignUpEmail extends React.Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <SignLabelView text="Email" />
+              <LabelView text="Email" />
               <EmailInputTextView
                 text={this.props.signUpEmailStore.emailText}
                 onChangeText={this.props.signUpEmailStore.emailTextChanged.bind(

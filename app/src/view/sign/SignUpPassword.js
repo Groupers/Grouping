@@ -13,7 +13,7 @@ import SignUpNextButton from './SignUpNextButton';
 import PasswordInputTextView from './PasswordInputTextView';
 import { inject, observer } from 'mobx-react';
 import { INPUT_PASSWORD_STATUS } from '../../constant/InputPasswordStatus';
-import SignLabelView from './SignLabelView';
+import LabelView from './LabelView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -53,7 +53,7 @@ class SignUpPassword extends React.Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <SignLabelView text="Password" />
+              <LabelView text="Password" />
               <PasswordInputTextView
                 toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(
                   this

@@ -7,7 +7,8 @@ import UserTable from '../table/UserTable';
 export default class UserStore {
   userRepository = new UserRepository();
   userTable = new UserTable();
-  groupingUser = null;
+  groupingUser: GroupingUserDto;
+
   @observable userStatus = USER_STATUS.READY;
 
   @action ready = async () => {
@@ -31,8 +32,6 @@ export default class UserStore {
   };
 
   @computed get isGroupingUser() {
-    console.log(this.userStatus);
-    console.log(this.groupingUser);
     return this.userStatus === USER_STATUS.USER && this.groupingUser !== null;
   }
 }

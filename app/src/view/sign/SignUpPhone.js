@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import SignUpNextButton from './SignUpNextButton';
-import SignLabelView from './SignLabelView';
+import LabelView from './LabelView';
 import PhoneNumberInputTextView from './PhoneNumberInputTextView';
 import SignErrorMessageView from './SignErrorMessageView';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../constant/SignUpPhoneStatus';
@@ -65,7 +65,7 @@ class SignUpPhone extends React.Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <SignLabelView text="Phone Number" />
+              <LabelView text="Phone Number" />
               <PhoneNumberInputTextView
                 isActive={!this.props.signUpPhoneStore.isAllCompleted}
                 text={this.props.signUpPhoneStore.phoneNumber}

@@ -15,7 +15,7 @@ import EmailInputTextView from './EmailInputTextView';
 import PasswordInputTextView from './PasswordInputTextView';
 import SignUpButton from '../entrance/SignUpButton';
 import { inject, observer } from 'mobx-react';
-import SignLabelView from './SignLabelView';
+import LabelView from './LabelView';
 import SignErrorMessageView from './SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -71,14 +71,14 @@ class SignIn extends React.Component {
               <Text style={styles.logo}>Grouping</Text>
             </View>
             <View style={styles.contentContainer}>
-              <SignLabelView text="Email" />
+              <LabelView text="Email" />
               <EmailInputTextView
                 onChangeText={this.props.signInStore.emailTextChanged.bind(
                   this
                 )}
                 text={this.props.signInStore.emailText}
               />
-              <SignLabelView text="Password" />
+              <LabelView text="Password" />
               <PasswordInputTextView
                 toggleShowPassword={this.props.signInStore.toggleShowPassword.bind(
                   this

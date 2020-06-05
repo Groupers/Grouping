@@ -1,0 +1,4 @@
+export const GROUPING_CREATION_VIEW_STATUS = {
+  TITLE: 'TITLE',
+  KEYWORD: 'KEYWORD'
+};

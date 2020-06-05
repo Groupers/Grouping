@@ -31,7 +31,12 @@ class InputSearch extends Component {
           />
         </View>
         <View style={styles.searchWrapper}>
-          <TextInput placeholder="검색" style={styles.search} />
+          <TextInput
+            onTouchStart={() => this.props.onFocus()}
+            editable={this.props.isActivated}
+            placeholder="검색"
+            style={styles.search}
+          />
         </View>
       </View>
     );
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    fontSize:24,
+    fontSize: 24,
   },
 });
 
