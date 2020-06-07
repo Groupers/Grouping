@@ -9,7 +9,6 @@ import SignUpTermsAgreementStore from './SignUpTermsAgreementStore';
 import GroupingStore from './GroupingStore';
 import MainStore from './MainStore';
 import GroupingCreationMainStore from './GroupingCreationMainStore';
-import GroupingCreationTitleStore from './GroupingCreationTitleStore';
 
 const userStore = new UserStore();
 const signInStore = new SignInStore(userStore);
@@ -27,10 +26,6 @@ const mainStore = new MainStore();
 const groupingStore = new GroupingStore(mainStore);
 const groupingCreationMainStore = new GroupingCreationMainStore();
 
-const groupingCreationTitleStore = new GroupingCreationTitleStore(
-  groupingCreationMainStore
-);
-
 export default {
   userStore: userStore,
   signUpTermsAgreementStore: signUpTermsAgreementStore,
@@ -43,5 +38,4 @@ export default {
   mainStore: mainStore,
   groupingStore: groupingStore,
   groupingCreationMainStore: groupingCreationMainStore,
-  groupingCreationTitleStore: groupingCreationTitleStore,
 };

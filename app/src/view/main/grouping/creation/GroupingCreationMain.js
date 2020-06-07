@@ -5,8 +5,10 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import GroupingCreationKeyword from './GroupingCreationKeyword';
-import GroupingCreationTitle from './GroupingCreationTitle';
+import GroupingCreationDescription from './GroupingCreationDescription';
+import GroupingCreationMainInfo from './GroupingCreationMainInfo';
+import GroupingCreationExtraInfo from './GroupingCreationExtraInfo';
+import GroupingCreationAddressInfo from './GroupingCreationAddressInfo';
 
 const Stack = createStackNavigator();
 
@@ -25,44 +27,13 @@ class GroupingCreationMain extends Component {
     snapshot: SS
   ) {}
 
-  // 친구목록, 채팅, 모임찾기, 마이페이지
-  onTitleNextButtonClicked(navigation) {
-    navigation.navigate('groupingCreationKeyword');
-  }
-
-  onKeywordNextButtonClicked(navigation) {}
-
-  onKeywordBackButtonClicked(navigation) {
-    navigation.navigate('groupingCreationTitle');
-  }
-
-  rightIconStyle = function() {
-    return {
-      marginRight: 15,
-      fontSize: 18,
-      color: this.props.groupingCreationMainStore.isHeaderRightIconActivated
-        ? Colors.white
-        : '#999'
-      // width: '90%',
-      // alignItems: 'center',
-      // justifyContent: 'center',
-      // margin: 10,
-      // height: 50,
-      // backgroundColor: this.props.isActive === true ? Colors.white : '#888',
-      // borderRadius: 5,
-      // marginBottom: this.props.isKeyboardShow
-      //   ? this.props.keyboardHeight - 15
-      //   : 0,
-    };
-  };
-
   render() {
     return (
       <SafeAreaView style={styles.body}>
         <NavigationContainer independent={true}>
-          <Stack.Navigator initialRouteName="groupingCreationTitle">
+          <Stack.Navigator initialRouteName="groupingCreationMainInfo">
             <Stack.Screen
-              name="groupingCreationTitle"
+              name="groupingCreationMainInfo"
               options={({ navigation }) => ({
                 title: '그룹 이름',
                 headerTitleAlign: 'center',
@@ -77,37 +48,20 @@ class GroupingCreationMain extends Component {
                   fontSize: 22,
                 },
                 headerShown: true,
-                headerLeft: () => (
-                  <Icon
-                    style={styles.leftIconStyle}
-                    size={26}
-                    name="x"
-                    type="feather"
-                    color="#fff"
-                    onPress={() => {
-                      this.props.backButtonClicked();
-                    }}
-                  />
-                ),
-                headerRight: () => (
-                  <Text
-                    onPress={() => {
-                      this.onTitleNextButtonClicked(navigation);
-                    }}
-                    style={this.rightIconStyle()}
-                  >
-                    다음
-                  </Text>
-                ),
               })}
             >
-              {props => <GroupingCreationTitle {...props} />}
+              {props => (
+                <GroupingCreationMainInfo
+                  backButtonClicked={this.props.backButtonClicked}
+                  {...props}
+                />
+              )}
             </Stack.Screen>
 
             <Stack.Screen
-              name="groupingCreationKeyword"
+              name="groupingCreationDescription"
               options={({ navigation }) => ({
-                title: '그룹 키워드',
+                title: '그룹 정보',
                 headerTitleAlign: 'center',
                 headerStatusBarHeight: 0,
                 headerStyle: {
@@ -120,31 +74,39 @@ class GroupingCreationMain extends Component {
                   fontSize: 22,
                 },
                 headerShown: true,
-                headerLeft: () => (
-                  <Icon
-                    style={styles.leftIconStyle}
-                    size={26}
-                    name="chevron-left"
-                    type="feather"
-                    color="#fff"
-                    onPress={() => {
-                      this.onKeywordBackButtonClicked(navigation);
-                    }}
-                  />
-                ),
-                headerRight: () => (
-                  <Text
-                    onPress={() => {
-                      this.onKeywordNextButtonClicked(navigation);
-                    }}
-                    style={this.rightIconStyle()}
-                  >
-                    다음
-                  </Text>
-                ),
               })}
             >
-              {props => <GroupingCreationKeyword {...props} />}
+              {props => <GroupingCreationDescription {...props} />}
+            </Stack.Screen>
+
+            <Stack.Screen
+              name="groupingCreationExtraInfo"
+              options={({ navigation }) => ({
+                title: '그룹 정보',
+                headerTitleAlign: 'center',
+                headerStatusBarHeight: 0,
+                headerStyle: {
+                  height: 60,
+                  backgroundColor: Colors.primary,
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  fontSize: 22,
+                },
+                headerShown: true,
+              })}
+            >
+              {props => <GroupingCreationExtraInfo {...props} />}
+            </Stack.Screen>
+
+            <Stack.Screen
+              name="groupingCreationMapInfo"
+              options={({ navigation }) => ({
+                headerShown: false,
+              })}
+            >
+              {props => <GroupingCreationAddressInfo {...props} />}
             </Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
@@ -157,9 +119,6 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.primary,
     flex: 1,
-  },
-  leftIconStyle: {
-    marginLeft: 15,
   },
 });
 
