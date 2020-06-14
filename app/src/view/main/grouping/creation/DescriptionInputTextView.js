@@ -1,6 +1,20 @@
-import React from 'react';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { Component } from 'react';
+import {
+  View,
+  StyleSheet,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
+
+import CNRichTextEditor, {
+  CNToolbar,
+  getInitialObject,
+  getDefaultStyles,
+} from 'react-native-cn-richtext-editor';
+
+const defaultStyles = getDefaultStyles();
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -13,43 +27,176 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 export default class DescriptionInputTextView extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      selectedTag: 'body',
+      selectedStyles: [],
+      value: [getInitialObject()],
+    };
+
+    this.editor = null;
   }
 
-  // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
-  // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
-  // SetTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  componentDidMount() {}
+  onStyleKeyPress = toolType => {
+    this.editor.applyToolbar(toolType);
+  };
 
-  // Prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
-  // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
-  // 예: return nextProps.id !== this.props.id;
-  // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
+  onSelectedTagChanged = tag => {
+    this.setState({
+      selectedTag: tag,
+    });
+  };
+
+  onSelectedStyleChanged = styles => {
+    this.setState({
+      selectedStyles: styles,
+    });
+  };
+
+  onValueChanged = value => {
+    this.setState({
+      value: value,
+    });
+  };
+
   render() {
-    return <View style={styles.descriptionContainer} />;
+    return (
+      <KeyboardAvoidingView
+        behavior="padding"
+        enabled
+        keyboardVerticalOffset={0}
+        style={{
+          flex: 1,
+          paddingTop: 20,
+          backgroundColor: '#eee',
+          flexDirection: 'column',
+          justifyContent: 'flex-end'
+        }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.main}>
+            <CNRichTextEditor
+              ref={input => (this.editor = input)}
+              onSelectedTagChanged={this.onSelectedTagChanged}
+              onSelectedStyleChanged={this.onSelectedStyleChanged}
+              value={this.state.value}
+              style={{ backgroundColor: '#fff' }}
+              styleList={defaultStyles}
+              onValueChanged={this.onValueChanged}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+
+        <View
+          style={{
+            minHeight: 35,
+          }}
+        >
+          <CNToolbar
+            style={{
+              height: 35,
+            }}
+            iconSetContainerStyle={{
+              flexGrow: 1,
+              justifyContent: 'space-evenly',
+              alignItems: 'center'
+            }}
+            size={30}
+            iconSet={[
+              {
+                type: 'tool',
+                iconArray: [
+                  {
+                    toolTypeText: 'image',
+                    iconComponent: (
+                      <Text style={styles.toolbarButton}>image</Text>
+                    ),
+                  },
+                ],
+              },
+              {
+                type: 'tool',
+                iconArray: [
+                  {
+                    toolTypeText: 'bold',
+                    buttonTypes: 'style',
+                    iconComponent: (
+                      <Text style={styles.toolbarButton}>bold</Text>
+                    ),
+                  },
+                ],
+              },
+              {
+                type: 'seperator'
+              },
+              {
+                type: 'tool',
+                iconArray: [
+                  {
+                    toolTypeText: 'body',
+                    buttonTypes: 'tag',
+                    iconComponent: (
+                      <Text style={styles.toolbarButton}>body</Text>
+                    ),
+                  },
+                ],
+              },
+              {
+                type: 'tool',
+                iconArray: [
+                  {
+                    toolTypeText: 'ul',
+                    buttonTypes: 'tag',
+                    iconComponent: <Text style={styles.toolbarButton}>ul</Text>,
+                  },
+                ],
+              },
+              {
+                type: 'tool',
+                iconArray: [
+                  {
+                    toolTypeText: 'ol',
+                    buttonTypes: 'tag',
+                    iconComponent: <Text style={styles.toolbarButton}>ol</Text>,
+                  },
+                ],
+              },
+            ]}
+            selectedTag={this.state.selectedTag}
+            selectedStyles={this.state.selectedStyles}
+            onStyleKeyPress={this.onStyleKeyPress}
+          />
+        </View>
+      </KeyboardAvoidingView>
+    );
   }
 }
 
-const styles = StyleSheet.create({
-  descriptionContainer: {
-    borderColor: Colors.white,
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    width: '90%',
-    margin: 10,
-  },
-
-  description: {
+var styles = StyleSheet.create({
+  main: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 10,
-    marginLeft: 10,
-    marginBottom: 10,
-    color: Colors.white,
-    fontSize: 15,
+    marginTop: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom: 1,
+    alignItems: 'stretch'
   },
-
-  counter: {
-    color: Colors.white,
-  }
+  toolbarButton: {
+    fontSize: 20,
+    width: 28,
+    height: 28,
+    textAlign: 'center'
+  },
+  italicButton: {
+    fontStyle: 'italic'
+  },
+  boldButton: {
+    fontWeight: 'bold'
+  },
+  underlineButton: {
+    textDecorationLine: 'underline'
+  },
+  lineThroughButton: {
+    textDecorationLine: 'line-through'
+  },
 });

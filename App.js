@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('hello!', this.props.userStore.userStatus);
     let view;
     if (this.props.userStore.userStatus === USER_STATUS.READY) {
       view = <Splash />;
@@ -29,6 +28,7 @@ class App extends Component {
     return (
       <View style={styles.body}>
         <Main />
+        {/*{view}*/}
       </View>
     );
   }
