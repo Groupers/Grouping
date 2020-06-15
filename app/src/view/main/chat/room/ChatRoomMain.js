@@ -90,23 +90,9 @@ function Item({message, user_name, flag, image}) {
 
 @inject('groupingStore')
 @observer
-class ChatRoomTop extends React.Component {
+class ChatRoomMain extends React.Component {
 
     componentDidMount() {
-        this.props.navigation.setOptions({
-            headerLeft: () => (
-                <Icon
-                    style={styles.leftIconStyle}
-                    size={26}
-                    name="chevron-left"
-                    type="feather"
-                    color="#fff"
-                    onPress={() => {
-                        this.onHeaderBackButtonClicked();
-                    }}
-                />
-            ),
-        });
     }
 
     componentDidUpdate(
@@ -114,13 +100,6 @@ class ChatRoomTop extends React.Component {
         prevState: Readonly<S>,
         snapshot: SS
     ) {
-    }
-
-    onHeaderBackButtonClicked() {
-        this.props.groupingCreationMainStore.groupingCreationViewChanged(
-            GROUPING_CREATION_VIEW_STATUS.KEYWORD
-        );
-        this.props.navigation.navigate('groupingCreationKeyword');
     }
 
     onKeywordSearchClicked() {
@@ -138,47 +117,50 @@ class ChatRoomTop extends React.Component {
     render() {
         let view = (
             <View style={styles.container}>
-                <ChatRoomHeader
-                    onSearchViewBackButtonClicked={this.onSearchViewBackButtonClicked.bind(
-                        this
-                    )}
-                    isActivated={this.props.groupingStore.isKeywordSearchActivated}
-                    onKeywordSearchClicked={this.onKeywordSearchClicked.bind(this)}
-                />
-                <FlatList
-                    onScrollBeginDrag={event => console.log('hello drag')}
-                    data={DATA}
-                    renderItem={({item}) => <Item
-                        message={item.message}
-                        flag={item.flag}
-                        user_name={item.user_name}
-                    />}
-                    keyExtractor={item => item.id}
-                />
+                <ChatRoomHeader/>
+                {/*    isActivated={this.props.groupingStore.isKeywordSearchActivated}*/}
+                {/*    onKeywordSearchClicked={this.onKeywordSearchClicked.bind(this)}*/}
+                {/*/>*/}
+                {/*<FlatList*/}
+                {/*    onScrollBeginDrag={event => console.log('hello drag')}*/}
+                {/*    data={DATA}*/}
+                {/*    renderItem={({item}) => <Item*/}
+                {/*        message={item.message}*/}
+                {/*        flag={item.flag}*/}
+                {/*        user_name={item.user_name}*/}
+                {/*    />}*/}
+                {/*    keyExtractor={item => item.id}*/}
+
+                {/*/>*/}
                 <ChatRoomFooter/>
+                <Text style={styles.user_name}>
+                    FUCKING REACT NATIVE
+                </Text>
             </View>
         );
 
-        if (
-            this.props.groupingStore.groupingViewStatus ===
-            GROUPING_VIEW_STATUS.SETTING
-        ) {
-            view = (
-                <GroupingChatRoomSetting
-                    backButtonClicked={this.onGroupingChatRoomSettingButtonClicked.bind(
-                        this
-                    )}
-                />
-            );
-        }
+        // if (
+        //     this.props.groupingStore.groupingViewStatus ===
+        //     GROUPING_VIEW_STATUS.SETTING
+        // ) {
+        //     view = (
+        //         <GroupingChatRoomSetting
+        //             backButtonClicked={this.onGroupingChatRoomSettingButtonClicked.bind(
+        //                 this
+        //             )}
+        //         />
+        //     );
+        // }
         return <SafeAreaView>{view}</SafeAreaView>;
     }
 }
 
+export default ChatRoomMain;
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        flex: 10,
+        flex: 1,
         backgroundColor: '#B0C4DE',
     },
     receive_message_view: {
@@ -192,5 +174,3 @@ const styles = StyleSheet.create({
     },
     send_message_view: {},
 });
-
-

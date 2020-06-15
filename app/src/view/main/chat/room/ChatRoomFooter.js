@@ -33,7 +33,7 @@ class ChatRoomFooter extends React.Component {
                         <View style={styles.header_inner}>
                             <View>
                                 <Image
-                                    source={require('../Assets/back.png')}
+                                    //source={require('../Assets/back.png')}
                                     style={{width: 25, height: 25}}
                                 />
                             </View>
@@ -47,13 +47,13 @@ class ChatRoomFooter extends React.Component {
                             </View>
                             <View>
                                 <Image
-                                    source={require('../Assets/back.png')}
+                                    //source={require('../Assets/back.png')}
                                     style={{width: 25, height: 25}}
                                 />
                             </View>
                             <View>
                                 <Image
-                                    source={require('../Assets/back.png')}
+                                    //source={require('../Assets/back.png')}
                                     style={{width: 25, height: 25}}
                                 />
                             </View>

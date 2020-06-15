@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, Image} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 class ChatRoomHeader extends React.Component {
@@ -28,7 +28,7 @@ class ChatRoomHeader extends React.Component {
                         <View style={styles.header_inner}>
                             <View>
                                 <Image
-                                    source={require('../Assets/back.png')}
+                                    //source={require('../Assets/back.png')}
                                     style={{width: 25, height: 25}}
                                 />
                             </View>
@@ -39,13 +39,13 @@ class ChatRoomHeader extends React.Component {
                             </View>
                             <View>
                                 <Image
-                                    source={require('../Assets/back.png')}
+                                    //source={require('../Assets/back.png')}
                                     style={{width: 25, height: 25}}
                                 />
                             </View>
                             <View>
                                 <Image
-                                    source={require('../Assets/back.png')}
+                                    //source={require('../Assets/back.png')}
                                     style={{width: 25, height: 25}}
                                 />
                             </View>

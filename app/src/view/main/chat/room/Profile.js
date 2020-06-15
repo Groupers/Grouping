@@ -6,7 +6,7 @@ class Profile extends React.Component {
         return (
             <View style={styles.item}>
                 <Image
-                    source={require('../Assets/olaf.jpg')}
+                    //source={require('../Assets/olaf.jpg')}
                     style={styles.image}
                 />
             </View>
