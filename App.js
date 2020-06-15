@@ -28,9 +28,9 @@ class App extends Component {
         }
         return (
             <View style={styles.body}>
-                {/*<Main/>*/}
+                <Main/>
                 {/*{view}*/}
-                <ChatRoomMain/>
+                {/*<ChatRoomMain/>*/}
             </View>
         );
     }
