@@ -3,6 +3,7 @@ import {inject, observer} from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import {StyleSheet, Text, SafeAreaView, View, ScrollView} from 'react-native';
 import ChatMainHeader from './ChatMainHeader';
+import {Main} from "./list/chatListMain";
 
 class ChatMain extends Component {
     // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -23,7 +24,8 @@ class ChatMain extends Component {
     render() {
         return (
             <SafeAreaView style={styles.body}>
-                <ChatMainHeader/>
+                {/*<ChatMainHeader/>*/}
+                <Main />
                 <ScrollView style={styles.scrollView}/>
             </SafeAreaView>
         );
