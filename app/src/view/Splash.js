@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import LinearGradient from 'react-native-linear-gradient';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -35,26 +36,71 @@ export default class Splash extends Component {
 
     render() {
         return (
-            <View style={styles.body}>
+            <LinearGradient
+                colors={["purple", "#CC3300", "#FF3300"]}
+                style={styles.body}
+            >
+                <Text style={styles.placard}>
+                    <Text>이번 주 금요일에</Text>
+                    <Text style={styles.inner_text}> 와인 </Text>
+                    <Text>어떠세요?</Text>
+                </Text>
+                <Text style={styles.group_name}>강남구 와이와인</Text>
                 <Text style={styles.logo}>Grouping</Text>
-            </View>
+            </LinearGradient>
         );
     }
 }
 
 const styles = StyleSheet.create({
     body: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        // borderWidth: 1,
+        // borderColor: 'black',
         flex: 1,
-        backgroundColor: Colors.primary,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
+    },
+
+    placard: {
+        width: 220,
+        marginLeft: 35,
+        marginTop: 130,
+        // borderWidth: 1,
+        // borderColor: 'black',
+        flex: 2,
+        fontSize: 27,
+        // color: '#d70000',
+        color : 'white',
+        alignItems: 'stretch',
+    },
+
+    inner_text: {
+        fontSize: 27,
+        // color: '#d70000',
+        color : 'white',
+        fontWeight: 'bold',
+    },
+
+    group_name: {
+        marginLeft: 35,
+        // borderWidth: 1,
+        // borderColor: 'black',
+        flex: 2,
+        fontSize: 13,
+        marginBottom: 300,
+        // color: '#d70000',
+        color : 'white',
+        alignItems: 'stretch',
     },
 
     logo: {
-        fontSize: 40,
-        marginBottom: 100,
-        fontWeight: '700',
-        color: Colors.white,
+        // borderWidth: 1,
+        // borderColor: 'black',
+        flex: 2,
+        fontSize: 20,
+        fontWeight: 'bold',
+        // color: '#d70000',
+        color : 'white',
+        textAlign: 'center',
     },
 });
