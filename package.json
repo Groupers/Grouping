@@ -46,12 +46,14 @@
     "axios": "^0.19.2",
     "babel-jest": "^24.9.0",
     "eslint": "^7.0.0",
+    "faker": "^4.1.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "patch-package": "^6.1.4",
     "react-native-size-matters": "^0.3.0",
     "react-native-svg": "^12.1.0",
-    "react-test-renderer": "16.9.0"
+    "react-test-renderer": "16.9.0",
+    "recyclerlistview": "^3.0.0"
   },
   "jest": {
     "preset": "react-native"
