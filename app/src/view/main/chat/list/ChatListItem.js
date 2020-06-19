@@ -2,36 +2,17 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  Dimensions,
   Image,
-  FlatList,
-  ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-// import {DetailsScreen} from './src/detail';
-import 'react-native-gesture-handler';
 
-function AdArea() {
-  return (
-    <>
-      <View style={styles.adArea}>
-        <Image
-          style={styles.ad}
-          source={{
-            uri:
-              'https://ssl.pstatic.net/tveta/libs/1281/1281372/38a98b76cb5b87ad613d_20200611113550630.jpg',
-          }}
-        />
-      </View>
-    </>
-  );
-}
+import 'react-native-gesture-handler';
+export {Item} ;
+
 
 function Item({rowInfo}) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity >
       {/*<Text style={styles.title}>{rowInfo}</Text>*/}
       <View style={styles.container}>
         <Image
@@ -54,7 +35,7 @@ function Item({rowInfo}) {
             <Text style={styles.numOfParti}>5</Text>
             <Text style={styles.lastMessageTime}>
               {/*{rowInfo.lastMessageTime}*/}
-              Hello
+              12:00
             </Text>
           </View>
           <View flexDirection="row" alignItems={'center'}>
@@ -118,82 +99,6 @@ function ChatListRow({rowInfo}) {
   );
 }
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-const Stack = createStackNavigator();
-
-class First extends React.Component {
-  state = {
-    data: [],
-    page: 0,
-    loading: false,
-  };
-
-  componentWillMount() {
-    this.fetchData();
-  }
-
-  fetchData = async () => {
-    const response = await fetch('https://randomuser.me/api?results=500');
-    const json = await response.json();
-    this.setState({data: json.results});
-  };
-
-  handleEnd = () => {
-    this.setState(
-      state => ({page: this.state.page + 1}, () => this.fetchData()),
-    );
-  };
-
-  render() {
-    return (
-      <>
-        <View
-          padding={5}
-          flexDirection={'column'}
-          width={windowWidth}
-          height={windowHeight}>
-          {/*<TitleBar />*/}
-          <FlatList
-            style={styles.flexlist}
-            data={this.state.data}
-            // data={chatItem}
-            keyExtractor={(x, i) => i}
-            onEndReached={() => this.handleEnd()}
-            onEndReachedThreshold={0}
-            ListFooterComponent={() =>
-              this.state.loading ? null : (
-                <ActivityIndicator size="large" animating />
-              )
-            }
-            renderItem={
-              ({item}) => (
-                <Item rowInfo={`${item}`} />
-                // <Text style={styles.container}>{`${item.name.first} ${
-                //   item.name.last
-                // }`}</Text>
-              )
-              // <ChatListRow rowInfo={} />
-            }
-          />
-        </View>
-      </>
-    );
-  }
-}
-
-export class ChatList extends React.Component {
-  render() {
-    return (
-      <>
-        <AdArea />
-        <First />
-      </>
-    );
-  }
-}
-
 const styles = {
   container: {
     flex: 1,
@@ -202,32 +107,6 @@ const styles = {
     backgroundColor: '#FFF',
     flexDirection: 'row',
     height: 80,
-  },
-  titleBar: {
-    height: 40,
-    flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRigth: 10,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 20,
-    color: 'black',
-    flex: 1,
-    fontWeight: 'bold',
-  },
-  titleImg: {
-    width: 26,
-    height: 26,
-    marginRight: 8,
-  },
-  adArea: {
-    height: 70,
-  },
-  ad: {
-    height: 70,
-    borderRadius: 10,
-    margin: 5,
   },
   flexlist: {
     flex: 1,
