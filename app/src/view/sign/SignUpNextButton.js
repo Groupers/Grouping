@@ -14,7 +14,7 @@ export default class SignUpNextButton extends Component {
             justifyContent: 'center',
             margin: 10,
             height: 50,
-            backgroundColor: this.props.isActive === true ? Colors.white : '#888',
+            backgroundColor: this.props.isActive === true ? Colors.white : Colors.wine_red,
             borderRadius: 5,
             // marginBottom: this.props.isKeyboardShow
             //   ? this.props.keyboardHeight - 15
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 23,
-        fontWeight: '600'
+        fontWeight: '600',
+        color: Colors.primary,
     },
 });

@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
         flex: 2,
         fontSize: 27,
         // color: '#d70000',
-        color : 'white',
+        color : Colors.gray,
         alignItems: 'stretch',
     },
 
     inner_text: {
         fontSize: 27,
         // color: '#d70000',
-        color : 'white',
+        color : Colors.gray,
         fontWeight: 'bold',
     },
 
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
         marginBottom: 300,
         // color: '#d70000',
-        color : 'white',
+        color : Colors.gray,
         alignItems: 'stretch',
     },
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         // color: '#d70000',
-        color : 'white',
+        color : Colors.gray,
         textAlign: 'center',
     },
 });

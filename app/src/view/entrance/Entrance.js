@@ -8,7 +8,7 @@ import SignUpEmail from '../sign/SignUpEmail';
 import SignUpPassword from '../sign/SignUpPassword';
 import SignUpPhone from '../sign/SignUpPhone';
 import SignUpBasicInfo from '../sign/SignUpBasicInfo';
-import {Dimensions, Keyboard} from 'react-native';
+import {Dimensions, Keyboard, StyleSheet, Text} from 'react-native';
 import SignUpTermsAgreement from '../sign/SignUpTermsAgreement';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -102,9 +102,10 @@ class Entrance extends React.Component {
                             headerStyle: {
                                 backgroundColor: Colors.primary,
                             },
-                            headerTintColor: '#fff',
+                            headerTintColor: Colors.gray,
                             headerTitleStyle: {
-                                fontWeight: 'bold'
+                                fontWeight: 'bold',
+                                color: 'black',
                             },
                         }}
                     >

@@ -56,7 +56,7 @@ class SignUpEmail extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView
-                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.body}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         flex: 5,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     bottomContainer: {
         flex: 1,

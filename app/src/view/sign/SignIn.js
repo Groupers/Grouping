@@ -62,7 +62,7 @@ class SignIn extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView
-                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 // keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
                 style={styles.body}
             >
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         fontSize: 40,
         marginBottom: 50,
         fontWeight: '700',
-        color: Colors.white,
+        color: Colors.wine_red,
     },
     contentContainer: {
         flex: 6,

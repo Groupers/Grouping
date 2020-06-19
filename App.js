@@ -1,11 +1,11 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React, {Component} from 'react';
 import Splash from './app/src/view/Splash';
 import {inject, observer, Provider} from 'mobx-react';
 import {USER_STATUS} from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
-import ChatRoomMain from './app/src/view/main/chat/room/ChatRoomMain'
+import ChatRoomMain from './app/src/view/main/chat/room/ChatRoomMain';
 
 @inject('userStore')
 @observer
@@ -28,7 +28,7 @@ class App extends Component {
         }
         return (
             <View style={styles.body}>
-                <Splash/>
+                <Entrance/>
                 {/*{view}*/}
                 {/*<ChatRoomMain/>*/}
             </View>
