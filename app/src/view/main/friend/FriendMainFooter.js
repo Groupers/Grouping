@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, Image, SafeAreaView} from 'react-native';
 
 class FriendMainFooter extends Component {
     // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -20,10 +20,10 @@ class FriendMainFooter extends Component {
     render() {
         return (
             <View style={styles.footer}>
-                <Text style={styles.footerImage}>이미지</Text>
-                <Text style={styles.footerImage}>이미지</Text>
-                <Text style={styles.footerImage}>이미지</Text>
-                <Text style={styles.footerImage}>이미지</Text>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}} style={styles.footerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}} style={styles.footerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}} style={styles.footerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}} style={styles.footerImage}/>
             </View>
         );
     }
@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
         height: 60,
         flexDirection: 'row',
         backgroundColor: '#cccccc',
-        paddingBottom: 15,
     },
     footerImage: {
         flex: 1,
-        height: 50,
-        margin: 10,
-        borderRadius: 25,
+        marginTop:5,
+        marginBottom:5,
+        marginLeft:20,
+        marginRight:20,
     },
 });
 

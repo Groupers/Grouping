@@ -1,70 +1,124 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
-import faker from 'faker';
-import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
+import {ScrollView, StyleSheet, Text, View, Dimensions, Image} from 'react-native';
 
 export default class FriendListData extends React.Component {
-    constructor(props) {
-        super(props);
+    state = {
+        info: [
 
-        const fakeData = [];
-        for (let i = 0; i < 100; i++) {
-            fakeData.push({
-                type: 'NORMAL',
-                item: {
-                    id: i,
-                    //image:'./src/Image/cat.png',
-                    name: faker.name.firstName(),
-                    description: faker.random.words(1),
-                },
-            });
-        }
-        this.state = {
-            list: new DataProvider((r1, r2) => r1 != r2).cloneWithRows(fakeData),
-        };
-        this.layoutProvider = new LayoutProvider((i) => {
-            return this.state.list.getDataForIndex(i).type;
-        }, (type, dim) => {
-            switch (type) {
-                case 'NORMAL':
-                    dim.width = SCREEN_WIDTH;
-                    dim.height = 100;
-                    break;
-                default:
-                    dim.width = 0;
-                    dim.heigh = 0;
-                    break;
-            }
-            ;
-        })
-    }
-
-    rowRenderer = (type, data) => {
-        const {image, name, description} = data.item;
-        return (
-            <View style={styles.friendContainer}>
-                <Text style={styles.friendImage}>이미지</Text>
-                <View style={styles.friendBody}>
-                    <Text style={styles.name}>{name}</Text>
-                    <Text style={styles.icon}>아이콘</Text>
-                </View>
-                <View style={styles.friendMusic}>
-                    <Text style={styles.description}>{description}</Text>
-                </View>
-            </View>
-        );
+            {
+                'name': '이름1',
+                'song': '노래1',
+                'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Search_Noun_project_15028.svg/47px-Search_Noun_project_15028.svg.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 1
+            },
+            {
+                'name': '이름2',
+                'song': '노래2',
+                'src': 'https://img.pngio.com/chat-icon-png-image-free-download-searchpngcom-chat-icon-png-715_657.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 2
+            },
+            {
+                'name': '이름3',
+                'song': '노래3',
+                'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Simple_Music.svg/600px-Simple_Music.svg.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 3
+            },
+            {
+                'name': '이름4',
+                'song': '노래4',
+                'src': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 4
+            },
+            {
+                'name': '이름5',
+                'song': '노래5',
+                'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Search_Noun_project_15028.svg/47px-Search_Noun_project_15028.svg.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 5
+            },
+            {
+                'name': '이름6',
+                'song': '노래6',
+                'src': 'https://img.pngio.com/chat-icon-png-image-free-download-searchpngcom-chat-icon-png-715_657.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 6
+            },
+            {
+                'name': '이름7',
+                'song': '노래7',
+                'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Simple_Music.svg/600px-Simple_Music.svg.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 7
+            },
+            {
+                'name': '이름8',
+                'song': '노래8',
+                'src': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 8
+            },
+            {
+                'name': '이름9',
+                'song': '노래9',
+                'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Search_Noun_project_15028.svg/47px-Search_Noun_project_15028.svg.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 9
+            },
+            {
+                'name': '이름10',
+                'song': '노래10',
+                'src': 'https://img.pngio.com/chat-icon-png-image-free-download-searchpngcom-chat-icon-png-715_657.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 10
+            },
+            {
+                'name': '이름11',
+                'song': '노래11',
+                'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Simple_Music.svg/600px-Simple_Music.svg.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 11
+            },
+            {
+                'name': '이름12',
+                'song': '노래12',
+                'src': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 12
+            },
+            {
+                'name': '이름13',
+                'song': '노래13',
+                'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Search_Noun_project_15028.svg/47px-Search_Noun_project_15028.svg.png',
+                'iconSrc': 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
+                'id': 13
+            },
+        ]
     }
 
     render() {
         return (
             <View style={styles.contentContainer}>
-                <RecyclerListView style={{flex: 1}}
-                                  rowRenderer={this.rowRenderer}
-                                  dataProvider={this.state.list}
-                                  layoutProvider={this.layoutProvider}
-                />
+                <ScrollView style={{flex: 1}}>
+                    {
+                        this.state.info.map((item, index) => (
+                            <View key={item.id} style={styles.friendContainer}>
+                                <Image source={{uri: item.src}} style={styles.friendImage}/>
+                                <View style={styles.friendBody}>
+                                    <Text style={styles.name}>{item.name}</Text>
+                                    <Image source={{uri: item.iconSrc}} style={styles.icon}/>
+                                </View>
+                                <View style={styles.friendMusic}>
+                                    <Text style={styles.description}>{item.song}</Text>
+                                </View>
+                            </View>
+                        ))
+                    }
+
+                </ScrollView>
             </View>
         );
     }
@@ -84,11 +138,13 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         backgroundColor: 'white',
+
     },
     friendImage: {
         flex: 1,
         backgroundColor: 'lightgray',
         height: 60,
+        width:60,
         borderRadius: 20,
         padding: 5,
         marginLeft: 5,
@@ -109,9 +165,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'lightgray',
         width: 30,
+        height:30,
         borderRadius: 15,
         fontSize: 10,
-
     },
     friendMusic: {
         flex: 2,

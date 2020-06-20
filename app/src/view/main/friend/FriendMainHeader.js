@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, Image, SafeAreaView} from 'react-native';
 
 class FriendMainHeader extends Component {
     // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -21,9 +21,9 @@ class FriendMainHeader extends Component {
         return (
             <View style={styles.body}>
                 <Text style={styles.title}>Friend</Text>
-                <Text style={styles.headerImage}>이미지</Text>
-                <Text style={styles.headerImage}>이미지</Text>
-                <Text style={styles.headerImage}>이미지</Text>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}}  style={styles.headerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}}  style={styles.headerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}}  style={styles.headerImage}/>
             </View>
         );
     }
@@ -47,11 +47,8 @@ const styles = StyleSheet.create({
     },
     headerImage: {
         flex: 1,
-        margin: 5,
-        marginTop: 20,
-        height: 30,
-        borderRadius: 30,
-        fontSize: 10,
+        marginTop:20,
+        margin:7,
     },
 });
 
