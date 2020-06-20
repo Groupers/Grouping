@@ -1,52 +1,56 @@
 export default class AddressApiDto {
-  meta: AddressMetaDto;
-  documents: [AddressDetailApiDto];
-  constructor(data = {}) {
-    Object.assign(this, data);
-  }
+	status: STATUS;
+	predictions: [PredictionDto];
+
+	constructor(data = {}) {
+		Object.assign(this, data);
+	}
+
+	isSucceed() {
+		return this.status === STATUS.OK;
+	}
+
+	getAddressList() {
+		let addressList = [];
+		this.predictions.forEach(value => {
+			let address = '';
+			if (value.terms.length !== 5) {
+				return;
+			}
+			value.terms
+				.sort((a, b) => {
+					return a.offset > b.offset;
+				})
+				.forEach((value, index, array) => {
+					address = address + value.value + ' ';
+				});
+			addressList.push(new AddressVo(value.place_id, address));
+		});
+		return addressList;
+	}
 }
 
-class AddressMetaDto {
-  total_count;
-  pageable_count;
-  is_end;
+class PredictionDto {
+	place_id: String;
+	terms: [TermsDto];
 }
 
-class AddressDetailApiDto {
-  address_name;
-  y;
-  x;
-  address_type: Address;
-  address;
-  road_address: RoadAddress;
+class TermsDto {
+	offset: Number;
+	value: String;
 }
 
-class Address {
-  address_name;
-  region_1depth_name;
-  region_2depth_name;
-  region_3depth_name;
-  region_3depth_h_name;
-  h_code;
-  b_code;
-  mountain_yn;
-  main_address_no;
-  sub_address_no;
-  x;
-  y;
+class AddressVo {
+	id: String;
+	address: String;
+
+	constructor(id, address) {
+		this.id = id;
+		this.address = address;
+	}
 }
 
-class RoadAddress {
-  address_name;
-  region_1depth_name;
-  region_2depth_name;
-  region_3depth_name;
-  road_name;
-  underground_yn;
-  main_building_no;
-  sub_building_no;
-  building_name;
-  zone_no;
-  y;
-  x;
-}
+const STATUS = {
+	INVALID_REQUEST: 'INVALID_REQUEST',
+	OK: 'OK',
+};

@@ -14,7 +14,7 @@ import {
 import {Icon} from 'react-native-elements';
 import {GROUPING_CREATION_VIEW_STATUS} from '../../../../constant/GroupingCreationViewStatus';
 import LabelView from '../../../sign/LabelView';
-import KeywordInputTextView from './KeywordInputTextView';
+import KeywordInputTextView from '../../KeywordInputTextView';
 
 @inject('groupingCreationMainStore')
 @observer
@@ -67,7 +67,7 @@ class GroupingCreationExtraInfo extends Component {
 	}
 
 	onSetLocationButtonClicked() {
-		this.props.navigation.navigate('groupingCreationMapInfo');
+		this.props.navigation.navigate('groupingCreationAddressInfo');
 	}
 
 	// 친구목록, 채팅, 모임찾기, 마이페이지
@@ -85,7 +85,10 @@ class GroupingCreationExtraInfo extends Component {
 								<Text>최대 인원</Text>
 							</View>
 							<View style={styles.registerLocationContainer}>
-								<Text>위치</Text>
+								<Text>위치 </Text>
+								<Text style={styles.address}>
+									{this.props.groupingCreationMainStore.groupingAddress}
+								</Text>
 								<Icon
 									style={styles.registerLocationIcon}
 									size={26}
@@ -134,6 +137,11 @@ const styles = StyleSheet.create({
 	},
 	leftIconStyle: {
 		marginLeft: 15,
+	},
+	address: {
+		flex: 1,
+		textAlign: 'right',
+		color: '#fff',
 	},
 	numberOfMemberContainer: {
 		flexDirection: 'row',

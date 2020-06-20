@@ -14,7 +14,7 @@ import {
 import {Icon} from 'react-native-elements';
 import {GROUPING_CREATION_VIEW_STATUS} from '../../../../constant/GroupingCreationViewStatus';
 import LabelView from '../../../sign/LabelView';
-import KeywordInputTextView from './KeywordInputTextView';
+import KeywordInputTextView from '../../KeywordInputTextView';
 import DescriptionInputTextView from './DescriptionInputTextView';
 
 @inject('groupingCreationMainStore')
