@@ -4,11 +4,20 @@ import GroupingCreationDto from '../dto/GroupingCreationDto';
 import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
 import KoreanChecker from '../component/KoreanChecker';
+import AgeValidator, {
+	MAX_AVAILABLE_AGE,
+	MIN_AVAILABLE_AGE,
+} from '../component/AgeValidator';
 
 const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
 
 export default class GroupingCreationMainStore {
+	keywordParser = new KeywordParser();
+	mapRepository = new MapRepository();
+	koreanChecker = new KoreanChecker();
+	ageValidator = new AgeValidator();
+
 	@observable groupingCreationViewStatus =
 		GROUPING_CREATION_VIEW_STATUS.MAIN_INFO;
 	@observable groupingCreationDto = new GroupingCreationDto();
@@ -18,10 +27,9 @@ export default class GroupingCreationMainStore {
 	@observable groupingAddressSearchKeyword = '';
 	@observable groupingAddressSearchResult = [];
 	@observable groupingAddress = '';
-
-	keywordParser = new KeywordParser();
-	mapRepository = new MapRepository();
-	koreanChecker = new KoreanChecker();
+	@observable groupingGender = '';
+	@observable groupingAvailableMinAge = Number(MIN_AVAILABLE_AGE);
+	@observable groupingAvailableMaxAge = Number(MAX_AVAILABLE_AGE);
 
 	@action groupingTitleChanged = title => {
 		this.groupingTitle = title;
@@ -58,6 +66,18 @@ export default class GroupingCreationMainStore {
 		this.groupingAddress = address;
 	};
 
+	@action groupingGenderSelected = gender => {
+		this.groupingGender = gender;
+	};
+
+	@action groupingAvailableMinAgeChanged = minAge => {
+		this.groupingAvailableMinAge = minAge;
+	};
+
+	@action groupingAvailableMaxAgeChanged = maxAge => {
+		this.groupingAvailableMaxAge = maxAge;
+	};
+
 	@action isHeaderRightIconActivated = groupingCreationView => {
 		if (
 			this.groupingCreationViewStatus === groupingCreationView &&
@@ -74,6 +94,20 @@ export default class GroupingCreationMainStore {
 			this.groupingCreationViewStatus ===
 			GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
 			this.groupingDescription.length > MIN_DESCRIPTION_LENGTH
+		) {
+			return true;
+		}
+
+		if (
+			this.groupingCreationViewStatus === groupingCreationView &&
+			this.groupingCreationViewStatus ===
+			GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
+			this.ageValidator.validateAge(
+				Number(this.groupingAvailableMinAge),
+				Number(this.groupingAvailableMaxAge),
+			) &&
+			this.groupingGender !== '' &&
+			this.groupingAddress !== ''
 		) {
 			return true;
 		}
