@@ -63,7 +63,7 @@ class GroupingCreationMain extends Component {
                         <Stack.Screen
                             name="groupingCreationDescription"
                             options={({navigation}) => ({
-                                title: '그룹 정보',
+                                title: '그룹 소개',
                                 headerTitleAlign: 'center',
                                 headerStatusBarHeight: 0,
                                 headerStyle: {
@@ -103,13 +103,27 @@ class GroupingCreationMain extends Component {
                         </Stack.Screen>
 
                         <Stack.Screen
-                            name="groupingCreationMapInfo"
+                            name="groupingCreationAddressInfo"
                             options={({navigation}) => ({
-                                headerShown: false,
+                                title: '그룹 주소',
+                                headerTitleAlign: 'center',
+                                headerStatusBarHeight: 0,
+                                headerStyle: {
+                                    height: 60,
+                                    backgroundColor: Colors.primary,
+                                },
+                                headerTintColor: '#fff',
+                                headerTitleStyle: {
+                                    fontWeight: 'bold',
+                                    fontSize: 22,
+                                },
+                                headerShown: true,
                             })}
                         >
                             {props => <GroupingCreationAddressInfo {...props} />}
                         </Stack.Screen>
+
+
                     </Stack.Navigator>
                 </NavigationContainer>
             </SafeAreaView>
