@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -48,7 +48,7 @@ export default class BirthdayInputView extends React.Component {
 
 const styles = StyleSheet.create({
     birthdayContainer: {
-        borderColor: Colors.white,
+        borderColor: '#FFF',
         borderBottomWidth: 1,
         width: '90%',
         margin: 10,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         marginBottom: 10,
-        color: Colors.white,
+        color: COLORS.MAIN_COLOR,
         fontSize: 15,
     },
 });

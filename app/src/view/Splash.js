@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import LinearGradient from 'react-native-linear-gradient';
+import {COLORS} from "../assets/Colors";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
         flex: 2,
         fontSize: 27,
         // color: '#d70000',
-        color : Colors.gray,
+        color : COLORS.MAIN_COLOR,
         alignItems: 'stretch',
     },
 
     inner_text: {
         fontSize: 27,
         // color: '#d70000',
-        color : Colors.gray,
+        color : COLORS.MAIN_COLOR,
         fontWeight: 'bold',
     },
 
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
         marginBottom: 300,
         // color: '#d70000',
-        color : Colors.gray,
+        color : COLORS.MAIN_COLOR,
         alignItems: 'stretch',
     },
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         // color: '#d70000',
-        color : Colors.gray,
+        color : COLORS.MAIN_COLOR,
         textAlign: 'center',
     },
 });

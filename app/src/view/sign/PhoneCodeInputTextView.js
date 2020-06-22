@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -34,7 +34,7 @@ export default class PhoneCodeInputTextView extends React.Component {
                     autoCorrect={false}
                     clearTextOnFocus={true}
                     textContentType="creditCardNumber"
-                    placeholderTextColor={Colors.white}
+                    placeholderTextColor={COLORS.MAIN_COLOR}
                     value={this.props.text}
                     onChangeText={
                         this.props.onChangeText != null
@@ -49,7 +49,7 @@ export default class PhoneCodeInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     phoneCodeInputContainer: {
-        borderColor: Colors.white,
+        borderColor: '#FFF',
         borderBottomWidth: 1,
         width: '55%',
         margin: 10,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
 
     phoneCode: {
-        color: Colors.white,
+        color: COLORS.MAIN_COLOR,
         fontSize: 25,
         alignItems: 'center',
         justifyContent: 'center',

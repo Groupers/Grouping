@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import {COLORS} from '../../assets/Colors';
 
 export default class PhoneCodeNextButton extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export default class PhoneCodeNextButton extends Component {
             justifyContent: 'center',
             margin: 10,
             height: 50,
-            backgroundColor: this.props.isActive === true ? Colors.white : '#888',
+            backgroundColor: this.props.isActive === true ? COLORS.SUB_COLOR : '#FFF',
             borderRadius: 5,
             // marginBottom: this.props.isKeyboardShow
             //   ? this.props.keyboardHeight - 15

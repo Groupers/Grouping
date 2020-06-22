@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import {COLORS} from '../../assets/Colors';
 
 export default class SignUpNextButton extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export default class SignUpNextButton extends Component {
             justifyContent: 'center',
             margin: 10,
             height: 50,
-            backgroundColor: this.props.isActive === true ? Colors.white : Colors.wine_red,
+            backgroundColor: this.props.isActive === true ? '#FFF' : COLORS.SUB_COLOR,
             borderRadius: 5,
             // marginBottom: this.props.isKeyboardShow
             //   ? this.props.keyboardHeight - 15
@@ -40,13 +40,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
-        backgroundColor: Colors.white,
+        backgroundColor: COLORS.MAIN_COLOR,
         borderRadius: 5,
         height: 50,
     },
     title: {
         fontSize: 23,
         fontWeight: '600',
-        color: Colors.primary,
+        color: COLORS.SUB_COLOR,
     },
 });

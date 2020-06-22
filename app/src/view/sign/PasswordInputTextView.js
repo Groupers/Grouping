@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 import {Icon} from 'react-native-elements';
@@ -60,7 +60,7 @@ export default class PasswordInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     passwordContainer: {
-        borderColor: Colors.white,
+        borderColor: '#FFF',
         borderBottomWidth: 1,
         width: '90%',
         flexDirection: 'row',
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginLeft: 10,
         marginBottom: 10,
-        color: Colors.white,
+        color: COLORS.MAIN_COLOR,
         fontSize: 15,
     },
 

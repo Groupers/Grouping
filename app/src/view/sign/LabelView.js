@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -36,7 +36,7 @@ export default class LabelView extends React.Component {
 
 const styles = StyleSheet.create({
     labelContainer: {
-        borderColor: Colors.white,
+        borderColor: COLORS.MAIN_COLOR,
         width: '90%',
         marginTop: 20,
     },
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        color: Colors.white,
+        color: COLORS.MAIN_COLOR,
         fontSize: 17,
         fontWeight: '600'
     },

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {
     StyleSheet,
     Text,
@@ -28,7 +28,7 @@ export default class GenderInputView extends React.Component {
             justifyContent: 'center',
             marginRight: 10,
             marginLeft: 10,
-            backgroundColor: isActive === true ? Colors.white : "#888",
+            backgroundColor: isActive === true ? '#FFF' : COLORS.MAIN_COLOR,
             padding: 15,
         };
     };
@@ -72,12 +72,12 @@ const styles = StyleSheet.create({
 
     gender: {
         width: '45%',
-        backgroundColor: Colors.white,
+        backgroundColor: '#FFF',
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 10,
         marginLeft: 10,
-        color: Colors.white,
+        color: COLORS.MAIN_COLOR,
         padding: 15,
     },
 

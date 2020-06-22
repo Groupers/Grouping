@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import {COLORS} from "../../assets/Colors";
 
 export default class SignInButton extends Component {
     constructor(props) {
@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 10,
         height: 50,
-        backgroundColor: Colors.wine_red,
+        backgroundColor: COLORS.SUB_COLOR,
         borderRadius: 5,
     },
     title: {
         fontSize: 20,
         fontWeight: '600',
-        color: Colors.primary,
+        color: COLORS.MAIN_COLOR,
     },
 });
