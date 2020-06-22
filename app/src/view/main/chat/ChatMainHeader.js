@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import {StyleSheet, Text, View} from 'react-native';
+import {ChatListHeader} from "./list/ChatListHeader";
 
 class ChatMainHeader extends Component {
     // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -22,7 +23,8 @@ class ChatMainHeader extends Component {
     render() {
         return (
             <View style={styles.body}>
-                <Text>Chat</Text>
+                {/*<Text>Chat</Text>*/}
+                <ChatListHeader/>
             </View>
         );
     }
