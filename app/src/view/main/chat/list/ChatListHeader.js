@@ -1,13 +1,15 @@
 import {Image, Text, View} from "react-native";
 import * as React from "react";
+
 export {ChatListHeader};
+
 function ChatListHeader() {
     return (
         <>
             <View paddingRigth={8} paddingLeft={8}>
                 <View style={styles.titleBar}>
                     <Text style={styles.title}>채팅</Text>
-                    <View flex={1} />
+                    <View flex={1}/>
                     <Image
                         style={styles.titleImg}
                         source={{

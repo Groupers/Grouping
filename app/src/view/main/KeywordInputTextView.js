@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         marginBottom: 10,
-        color: Colors.white,
+        color: 'black',
         fontSize: 15,
     },
 

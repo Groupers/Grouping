@@ -36,7 +36,7 @@ export default class TitleInputTextView extends React.Component {
                     maxLength={50}
                     placeholder="ex. 카.책.사. (카페에서 책을 읽는 사람들)"
                     autoCorrect={false}
-                    placeholderTextColor="#ddd"
+                    placeholderTextColor='#ddd'
                     value={this.props.groupingTitle}
                     onChangeText={
                         this.props.onChangeText != null
@@ -52,7 +52,7 @@ export default class TitleInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     titleContainer: {
-        borderColor: Colors.white,
+        borderColor: 'black',
         borderBottomWidth: 1,
         flexDirection: 'row',
         width: '90%',
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
     },
 
     counter: {
-        color: Colors.white,
+        color: 'black',
     }
 });

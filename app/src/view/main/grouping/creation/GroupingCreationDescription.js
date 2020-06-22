@@ -106,7 +106,7 @@ class GroupingCreationDescription extends Component {
 	render() {
 		return (
 			<KeyboardAvoidingView
-				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				style={styles.body}
 			>
 				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>

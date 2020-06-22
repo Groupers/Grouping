@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -50,7 +50,7 @@ export default class EmailInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     emailContainer: {
-        borderColor: Colors.white,
+        borderColor: '#FFF',
         borderBottomWidth: 1,
         width: '90%',
         margin: 10,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         marginBottom: 10,
-        color: Colors.white,
+        color: 'black',
         fontSize: 15,
     },
 });

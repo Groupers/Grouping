@@ -9,7 +9,7 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import SignInButton from '../entrance/SignInButton';
 import EmailInputTextView from './EmailInputTextView';
 import PasswordInputTextView from './PasswordInputTextView';
@@ -62,7 +62,7 @@ class SignIn extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView
-                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 // keyboardVerticalOffset={this.props.signProcessStore.keyboardHeight / 3}
                 style={styles.body}
             >
@@ -111,7 +111,7 @@ class SignIn extends React.Component {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -120,16 +120,16 @@ const styles = StyleSheet.create({
 
     inner: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%'
+        width: '100%',
     },
 
     logoContainer: {
         flex: 3,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         alignItems: 'center',
         justifyContent: 'flex-end',
         width: '100%'
@@ -139,18 +139,18 @@ const styles = StyleSheet.create({
         fontSize: 40,
         marginBottom: 50,
         fontWeight: '700',
-        color: Colors.white,
+        color: COLORS.SUB_COLOR,
     },
     contentContainer: {
         flex: 6,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         width: '100%'
     },
 
     buttonContainer: {
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flex: 1,
         width: '100%',
         alignItems: 'center',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -34,7 +34,7 @@ export default class NameInputTextView extends React.Component {
                     placeholder="이름"
                     autoCorrect={false}
                     clearTextOnFocus={false}
-                    placeholderTextColor={Colors.white}
+                    placeholderTextColor={COLORS.MAIN_COLOR}
                     value={this.props.text}
                     onChangeText={
                         this.props.onChangeText != null
@@ -49,7 +49,7 @@ export default class NameInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     nameContainer: {
-        borderColor: Colors.white,
+        borderColor: '#FFF',
         borderBottomWidth: 1,
         width: '90%',
         margin: 10,
@@ -60,5 +60,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
+        color: 'black',
     },
 });

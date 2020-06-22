@@ -35,7 +35,7 @@ class GroupingMainHeader extends Component {
                             size={26}
                             name="search"
                             type="feather"
-                            color="#fff"
+                            color='black'
                             onPress={() => this.props.onKeywordSearchClicked()}
                         />
                         <Icon
@@ -43,7 +43,7 @@ class GroupingMainHeader extends Component {
                             size={26}
                             name="target"
                             type="feather"
-                            color="#fff"
+                            color='black'
                             onPress={() => this.props.onGroupingCreationClicked()}
                         />
                     </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 
     border: {
         height: 1,
-        backgroundColor: Colors.white,
+        backgroundColor: 'black',
         alignItems: 'flex-end',
         justifyContent: 'flex-end'
     },
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 32,
-        color: Colors.white,
+        color: 'black',
         fontWeight: '700'
     },
 

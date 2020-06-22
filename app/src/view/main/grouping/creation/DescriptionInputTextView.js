@@ -17,7 +17,7 @@ export default class DescriptionInputTextView extends Component {
 	render() {
 		return (
 			<KeyboardAvoidingView
-				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				style={styles.body}
 			>
 				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 	},
 
 	description: {
-		borderColor: '#fff',
+		borderColor: 'black',
 		borderWidth: 1,
 		height: 200,
 		color: '#fff',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -36,7 +36,7 @@ export default class SignErrorMessageView extends React.Component {
 
 const styles = StyleSheet.create({
     errorMessageContainer: {
-        borderColor: Colors.white,
+        borderColor: '#FFF',
         width: '90%',
         marginTop: 20,
     },
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        color: Colors.white,
+        color: 'black',
         fontSize: 17,
         fontWeight: '600'
     },

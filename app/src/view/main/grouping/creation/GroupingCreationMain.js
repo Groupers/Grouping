@@ -44,7 +44,7 @@ class GroupingCreationMain extends Component {
 									height: 60,
 									backgroundColor: Colors.primary,
 								},
-								headerTintColor: '#fff',
+								headerTintColor: '#999',
 								headerTitleStyle: {
 									fontWeight: 'bold',
 									fontSize: 22,
@@ -70,7 +70,7 @@ class GroupingCreationMain extends Component {
 									height: 60,
 									backgroundColor: Colors.primary,
 								},
-								headerTintColor: '#fff',
+								headerTintColor: 'black',
 								headerTitleStyle: {
 									fontWeight: 'bold',
 									fontSize: 22,
@@ -91,7 +91,7 @@ class GroupingCreationMain extends Component {
 									height: 60,
 									backgroundColor: Colors.primary,
 								},
-								headerTintColor: '#fff',
+								headerTintColor: 'black',
 								headerTitleStyle: {
 									fontWeight: 'bold',
 									fontSize: 22,
@@ -112,7 +112,7 @@ class GroupingCreationMain extends Component {
 									height: 60,
 									backgroundColor: Colors.primary,
 								},
-								headerTintColor: '#fff',
+								headerTintColor: 'black',
 								headerTitleStyle: {
 									fontWeight: 'bold',
 									fontSize: 22,
@@ -131,6 +131,7 @@ class GroupingCreationMain extends Component {
 
 const styles = StyleSheet.create({
 	body: {
+		color: 'black',
 		backgroundColor: Colors.primary,
 		flex: 1,
 	},
