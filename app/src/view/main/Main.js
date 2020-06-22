@@ -54,7 +54,7 @@ class Main extends React.Component {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: COLORS.PRIMARY,
+        backgroundColor: COLORS.MAIN_COLOR,
         flex: 1,
     },
 });

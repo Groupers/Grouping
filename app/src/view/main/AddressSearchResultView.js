@@ -33,7 +33,7 @@ export default class AddressSearchResultView extends Component {
 		console.log(this.props.addressList);
 		return (
 			<KeyboardAvoidingView
-				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				style={styles.body}
 			>
 				<FlatList

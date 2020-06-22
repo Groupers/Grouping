@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        color: COLORS.MAIN_COLOR,
+        color: 'black',
         fontSize: 17,
         fontWeight: '600'
     },

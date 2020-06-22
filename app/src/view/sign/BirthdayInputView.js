@@ -48,7 +48,7 @@ export default class BirthdayInputView extends React.Component {
 
 const styles = StyleSheet.create({
     birthdayContainer: {
-        borderColor: '#FFF',
+        borderColor: 'black',
         borderBottomWidth: 1,
         width: '90%',
         margin: 10,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         marginBottom: 10,
-        color: COLORS.MAIN_COLOR,
+        color: 'black',
         fontSize: 15,
     },
 });

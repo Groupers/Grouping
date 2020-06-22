@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
 
     phoneCode: {
-        color: COLORS.MAIN_COLOR,
+        color: 'black',
         fontSize: 25,
         alignItems: 'center',
         justifyContent: 'center',

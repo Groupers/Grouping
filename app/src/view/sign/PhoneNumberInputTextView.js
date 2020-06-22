@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         width: '90%',
         alignItems: 'center',
         fontSize: 25,
-        color: COLORS.MAIN_COLOR,
+        color: 'black',
         justifyContent: 'center',
         margin: 10,
     },

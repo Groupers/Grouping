@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         marginBottom: 10,
-        color: COLORS.MAIN_COLOR,
+        color: 'black',
         fontSize: 15,
     },
 });

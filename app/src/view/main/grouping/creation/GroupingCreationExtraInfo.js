@@ -151,7 +151,7 @@ class GroupingCreationExtraInfo extends Component {
 	render() {
 		return (
 			<KeyboardAvoidingView
-				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				style={styles.body}
 			>
 				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
 	address: {
 		flex: 1,
 		textAlign: 'right',
-		color: '#fff',
+		color: 'black',
 	},
 
 	registerLocationContainer: {
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
 
 	label: {
 		fontSize: 15,
-		color: '#fff',
+		color: 'black',
 	},
 
 	genderSelectionView: {

@@ -85,7 +85,7 @@ class Entrance extends React.Component {
                             headerStyle: {
                                 backgroundColor: Colors.primary,
                             },
-                            headerTintColor: '#fff',
+                            headerTintColor: 'black',
                             headerTitleStyle: {
                                 fontWeight: 'bold'
                             },
@@ -118,7 +118,7 @@ class Entrance extends React.Component {
                             headerStyle: {
                                 backgroundColor: Colors.primary,
                             },
-                            headerTintColor: '#fff',
+                            headerTintColor: 'black',
                             headerTitleStyle: {
                                 fontWeight: 'bold'
                             },
@@ -133,7 +133,7 @@ class Entrance extends React.Component {
                             headerStyle: {
                                 backgroundColor: Colors.primary,
                             },
-                            headerTintColor: '#fff',
+                            headerTintColor: 'black',
                             headerTitleStyle: {
                                 fontWeight: 'bold'
                             },
@@ -148,7 +148,7 @@ class Entrance extends React.Component {
                             headerStyle: {
                                 backgroundColor: Colors.primary,
                             },
-                            headerTintColor: '#fff',
+                            headerTintColor: 'black',
                             headerTitleStyle: {
                                 fontWeight: 'bold'
                             },
@@ -163,7 +163,7 @@ class Entrance extends React.Component {
                             headerStyle: {
                                 backgroundColor: Colors.primary,
                             },
-                            headerTintColor: '#fff',
+                            headerTintColor: 'black',
                             headerTitleStyle: {
                                 fontWeight: 'bold'
                             },

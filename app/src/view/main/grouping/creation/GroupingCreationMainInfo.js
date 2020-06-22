@@ -37,7 +37,7 @@ class GroupingCreationMainInfo extends Component {
                     size={26}
                     name="x"
                     type="feather"
-                    color="#fff"
+                    color='#999'
                     onPress={() => {
                         this.props.backButtonClicked();
                     }}
@@ -109,7 +109,7 @@ class GroupingCreationMainInfo extends Component {
     render() {
         return (
             <KeyboardAvoidingView
-                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.body}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -154,13 +154,15 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%'
+        width: '100%',
+        color: 'black',
     },
     contentContainer: {
         flex: 5,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        color: 'black',
     },
     bottomContainer: {
         flex: 1,

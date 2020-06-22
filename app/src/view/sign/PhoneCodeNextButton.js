@@ -37,6 +37,7 @@ export default class PhoneCodeNextButton extends Component {
 const styles = StyleSheet.create({
     title: {
         fontSize: 23,
-        fontWeight: '600'
+        fontWeight: '600',
+        color: 'black',
     },
 });
