@@ -22,37 +22,35 @@ class ChatRoomHeader extends React.Component {
 
     render() {
         return (
-            <>
-                <SafeAreaView style={styles.header_safe_area}>
-                    <View style={styles.header}>
-                        <View style={styles.header_inner}>
-                            <View>
-                                <Image
-                                    //source={require('../Assets/back.png')}
-                                    style={{width: 25, height: 25}}
-                                />
-                            </View>
-                            <View>
-                                <Text style={styles.chat_room_name}>
-                                    Olaf
-                                </Text>
-                            </View>
-                            <View>
-                                <Image
-                                    //source={require('../Assets/back.png')}
-                                    style={{width: 25, height: 25}}
-                                />
-                            </View>
-                            <View>
-                                <Image
-                                    //source={require('../Assets/back.png')}
-                                    style={{width: 25, height: 25}}
-                                />
-                            </View>
+            <SafeAreaView style={styles.header_safe_area}>
+                <View style={styles.header}>
+                    <View style={styles.header_inner}>
+                        <View>
+                            <Image
+                                //source={require('../Assets/back.png')}
+                                style={{width: 25, height: 25}}
+                            />
+                        </View>
+                        <View>
+                            <Text style={styles.chat_room_name}>
+                                Olaf
+                            </Text>
+                        </View>
+                        <View>
+                            <Image
+                                //source={require('../Assets/back.png')}
+                                style={{width: 25, height: 25}}
+                            />
+                        </View>
+                        <View>
+                            <Image
+                                //source={require('../Assets/back.png')}
+                                style={{width: 25, height: 25}}
+                            />
                         </View>
                     </View>
-                </SafeAreaView>
-            </>
+                </View>
+            </SafeAreaView>
         );
     }
 }

@@ -5,11 +5,16 @@ import {StyleSheet, Text, SafeAreaView, View, ScrollView} from 'react-native';
 import ChatMainHeader from './ChatMainHeader';
 import {ChatListMain} from "./list/ChatListMain";
 import {ChatListHeader} from "./list/ChatListHeader";
+import ChatRoomHeader from "./room/ChatRoomHeader";
+import ChatRoomMain from "./room/ChatRoomMain";
+import ChatRoomFooter from "./room/ChatRoomFooter";
 
+@inject('groupingStore')
+@observer
 class ChatMain extends Component {
     // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
     // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
-    // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.s
+    // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
     componentDidMount() {
     }
 
@@ -25,10 +30,11 @@ class ChatMain extends Component {
     render() {
         return (
             <SafeAreaView style={styles.body}>
-                {/*<ChatMainHeader/>*/}
-                <ChatListHeader/>
-                <ChatListMain />
-                {/*<ScrollView style={styles.scrollView}/>*/}
+                {/*<ChatListHeader/>*/}
+                {/*<ChatListMain />*/}
+                <ChatRoomHeader/>
+                <ChatRoomMain/>
+                <ChatRoomFooter/>
             </SafeAreaView>
         );
     }
