@@ -46,7 +46,7 @@ export default class SignUpPasswordStore {
 
   @computed get errorMessage() {
     if (this.passwordValidation === INPUT_PASSWORD_STATUS.NOT_FORMATTED) {
-      return "비밀번호 형식이 맞지 않습니다.";
+      return "8자 이상이어야 합니다.";
     }
 
     return "";

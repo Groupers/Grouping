@@ -33,7 +33,7 @@ export default class EmailInputTextView extends React.Component {
                 <TextInput
                     style={styles.email}
                     maxLength={30}
-                    placeholder="ex. abc@def.com"
+                    placeholder="email"
                     autoCorrect={false}
                     placeholderTextColor="#ddd"
                     value={this.props.text}
@@ -50,20 +50,19 @@ export default class EmailInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     emailContainer: {
-        borderColor: '#FFF',
-        borderBottomWidth: 1,
-        width: '90%',
-        margin: 10,
+        width: '100%',
+        borderRadius:4,
+        alignItems: 'center',
     },
 
     email: {
-        width: '90%',
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 10,
-        marginLeft: 10,
-        marginBottom: 10,
         color: 'black',
-        fontSize: 15,
+        fontSize: 12,
+        borderBottomWidth: 1,
+        borderColor: COLORS.FONT_GRAY,
+
     },
 });

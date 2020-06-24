@@ -37,16 +37,17 @@ export default class LabelView extends React.Component {
 const styles = StyleSheet.create({
     labelContainer: {
         borderColor: COLORS.MAIN_COLOR,
-        width: '90%',
-        marginTop: 20,
+        width: '100%',
+        // marginTop: 20,
     },
 
     label: {
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'black',
-        fontSize: 17,
-        fontWeight: '600'
+        color: COLORS.FONT_GRAY,
+        fontSize: 14,
+        // fontWeight: '600',
+        fontFamily:'NotoSansKR-Medium'
     },
 });
