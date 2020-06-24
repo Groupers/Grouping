@@ -25,8 +25,8 @@ class ChatListArea extends React.Component {
         loading: false,
     };
 
-    componentWillMount() {
-        this.fetchData();
+    async componentWillMount() {
+        await this.fetchData();
     }
 
     fetchData = async () => {
@@ -43,7 +43,7 @@ class ChatListArea extends React.Component {
 
     render() {
         return (
-            <View
+            <View style={styles.sex}
                 padding={5}
                 flexDirection={'column'}
                 flex={1}>
@@ -93,7 +93,7 @@ const styles = {
     },
     adArea: {
         height: 70,
-        backgroundColor: 'white',
+        backgroundColor: 'black',
     },
     ad: {
         height: 70,
@@ -104,4 +104,10 @@ const styles = {
         flex: 1,
         marginTop: 5,
     },
+
+    sex: {
+        backgroundColor: 'red',
+        flex: 1,
+        height: '100%',
+    }
 };

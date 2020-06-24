@@ -36,9 +36,9 @@ class ChatMain extends Component {
         this.props.chatStore.changeView(CHAT_VIEW_STATUS.NONE);
     }
 
-    // onChatContentEnterButtonClicked() {
-    //     this.props.chatStore.changeView(CHAT_VIEW_STATUS.ENTERING_CHAT_ROOM);
-    // }
+    onChatContentEnterButtonClicked() {
+        this.props.chatStore.changeView(CHAT_VIEW_STATUS.ENTERING_CHAT_ROOM);
+    }
 
     onChatContentsBackButtonClicked() {
         this.props.chatStore.changeView(CHAT_VIEW_STATUS.NONE);
@@ -46,23 +46,24 @@ class ChatMain extends Component {
 
     render() {
         let view = (
-            <View>
+            <View style={styles.sex2}>
                 <ChatMainHeader
                     onSearchViewBackButtonClicked={this.onSearchViewBackButtonClicked.bind(this)}
                 />
-                <FlatList
-                    onScrollBeginDrag={event => console.log('hello drag')}
-                    data={DATA}
-                    renderItem={({item}) =>
-                        <TouchableOpacity
-                            onPress={() => this.props.onChatContentEnterButtonClicked()}
-                            style={styles.item}
-                        >
-                            <Text style={styles.title}>{item.title}</Text>
-                        </TouchableOpacity>
-                    }
-                    keyExtractor={item => item.id}
-                />
+                <ChatListMain/>
+                {/*<FlatList*/}
+                {/*    onScrollBeginDrag={event => console.log('hello drag')}*/}
+                {/*    data={DATA}*/}
+                {/*    renderItem={({item}) =>*/}
+                {/*        <Item*/}
+                {/*            style={styles.item}*/}
+                {/*            onChatContentEnterButtonClicked={this.onChatContentEnterButtonClicked.bind(this)}*/}
+                {/*        >*/}
+                {/*            <Text style={styles.title}>{item.title}</Text>*/}
+                {/*        </Item>*/}
+                {/*    }*/}
+                {/*    keyExtractor={item => item.id}*/}
+                {/*/>*/}
             </View>
         )
         if (this.props.chatStore.chatViewStatus === CHAT_VIEW_STATUS.ENTERING_CHAT_ROOM) {
@@ -130,10 +131,10 @@ const DATA = [
     },
 ];
 
-function Item({title}) {
+function Item({title, onChatContentEnterButtonClicked}) {
     return (
         <TouchableOpacity
-            onPress={() => this.props.onChatContentEnterButtonClicked()}
+            onPress={() => onChatContentEnterButtonClicked()}
             style={styles.item}
         >
             <Text style={styles.title}>{title}</Text>
@@ -142,9 +143,14 @@ function Item({title}) {
 }
 
 const styles = StyleSheet.create({
+    sex2: {
+        flex: 1,
+        backgroundColor: 'blue',
+    },
     body: {
         backgroundColor: Colors.primary,
-        alignItems: 'stretch',
+        flex: 1,
+        height: '100%',
     },
     container: {
         flex: 1,
