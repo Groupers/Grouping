@@ -43,32 +43,30 @@ class ChatListArea extends React.Component {
 
     render() {
         return (
-            <>
-                <View
-                    padding={5}
-                    flexDirection={'column'}
-                    flex={1}>
-                    <FlatList
-                        style={styles.flex_list}
-                        data={this.state.data}
-                        // data={chatItem}
-                        keyExtractor={(x, i) => i}
-                        onEndReached={() => this.fetchChatRoomInfo()}
-                        onEndReachedThreshold={0}
-                        ListFooterComponent={() =>
-                            this.state.loading ? null : (
-                                <ActivityIndicator size="large" animating/>
-                            )
-                        }
-                        renderItem={
-                            ({item}) => (
-                                <Item rowInfo={`${item}`}/>
-                            )
-                            // <ChatListRow rowInfo={} />
-                        }
-                    />
-                </View>
-            </>
+            <View
+                padding={5}
+                flexDirection={'column'}
+                flex={1}>
+                <FlatList
+                    style={styles.flex_list}
+                    data={this.state.data}
+                    // data={chatItem}
+                    keyExtractor={(x, i) => i}
+                    onEndReached={() => this.fetchChatRoomInfo()}
+                    onEndReachedThreshold={0}
+                    ListFooterComponent={() =>
+                        this.state.loading ? null : (
+                            <ActivityIndicator size="large" animating/>
+                        )
+                    }
+                    renderItem={
+                        ({item}) => (
+                            <Item rowInfo={`${item}`}/>
+                        )
+                        // <ChatListRow rowInfo={} />
+                    }
+                />
+            </View>
         );
     }
 }

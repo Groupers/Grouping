@@ -26,9 +26,15 @@ class ChatRoomHeader extends React.Component {
                 <View style={styles.header}>
                     <View style={styles.header_inner}>
                         <View>
-                            <Image
-                                //source={require('../Assets/back.png')}
-                                style={{width: 25, height: 25}}
+                            <Icon
+                                style={styles.leftIconStyle}
+                                size={26}
+                                name="chevron-left"
+                                type="feather"
+                                color='black'
+                                onPress={() => {
+                                    this.props.backButtonClicked();
+                                }}
                             />
                         </View>
                         <View>
@@ -36,16 +42,26 @@ class ChatRoomHeader extends React.Component {
                                 Olaf
                             </Text>
                         </View>
-                        <View>
-                            <Image
-                                //source={require('../Assets/back.png')}
-                                style={{width: 25, height: 25}}
+                        <View style={styles.option}>
+                            <Icon
+                                style={styles.leftIconStyle}
+                                size={23}
+                                name="search"
+                                type="feather"
+                                color='black'
+                                onPress={() => {
+                                    this.props.backButtonClicked();
+                                }}
                             />
-                        </View>
-                        <View>
-                            <Image
-                                //source={require('../Assets/back.png')}
-                                style={{width: 25, height: 25}}
+                            <Icon
+                                style={styles.leftIconStyle}
+                                size={26}
+                                name="menu"
+                                type="feather"
+                                color='black'
+                                onPress={() => {
+                                    this.props.backButtonClicked();
+                                }}
                             />
                         </View>
                     </View>
@@ -59,8 +75,8 @@ export default ChatRoomHeader;
 
 const styles = StyleSheet.create({
     header_safe_area: {
-        zIndex: 1000,
         backgroundColor: '#B0C4DE',
+        elevation: 3,
     },
     header: {
         height: 50,
@@ -78,5 +94,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
+    option: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    }
 });
 

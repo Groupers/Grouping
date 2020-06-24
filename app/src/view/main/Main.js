@@ -10,10 +10,12 @@ import MyMain from './my/MyMain';
 import GroupingMain from './grouping/GroupingMain';
 import FeedMain from './feed/FeedMain';
 import {observable} from 'mobx';
+import {CHAT_VIEW_STATUS} from "../../constant/ChatViewStatus";
 
 const Tab = createBottomTabNavigator();
 
 @inject('mainStore')
+@inject('chatStore')
 @observer
 class Main extends React.Component {
     // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -31,12 +33,32 @@ class Main extends React.Component {
 
     // 친구목록, 채팅, 모임찾기, 마이페이지
 
+    onKeywordSearchClicked() {
+        this.props.chatStore.changeView(CHAT_VIEW_STATUS.KEYWORD_SEARCH);
+    }
+
+    onSearchViewBackButtonClicked() {
+        this.props.chatStore.changeView(CHAT_VIEW_STATUS.NONE);
+    }
+
+    onChatContentEnterButtonClicked() {
+        this.props.chatStore.changeView(CHAT_VIEW_STATUS.ENTERING_CHAT_ROOM);
+    }
+
+    onChatContentsBackButtonClicked() {
+        this.props.chatStore.changeView(CHAT_VIEW_STATUS.NONE);
+    }
+
     render() {
         return (
             <NavigationContainer>
                 <Tab.Navigator>
                     <Tab.Screen name="Friend" component={FriendMain}/>
-                    <Tab.Screen name="Chat" component={ChatMain} />
+                    <Tab.Screen
+                        name="Chat"
+                        component={ChatMain}
+                        onChatContentEnterButtonClicked={this.onChatContentEnterButtonClicked.bind(this)}
+                    />
                     <Tab.Screen name="Feed" component={FeedMain}/>
                     <Tab.Screen
                         options={{
