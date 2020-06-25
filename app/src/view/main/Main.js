@@ -54,11 +54,7 @@ class Main extends React.Component {
             <NavigationContainer>
                 <Tab.Navigator>
                     <Tab.Screen name="Friend" component={FriendMain}/>
-                    <Tab.Screen
-                        name="Chat"
-                        component={ChatMain}
-                        onChatContentEnterButtonClicked={this.onChatContentEnterButtonClicked.bind(this)}
-                    />
+                    <Tab.Screen name="Chat" component={ChatMain}/>
                     <Tab.Screen name="Feed" component={FeedMain}/>
                     <Tab.Screen
                         options={{

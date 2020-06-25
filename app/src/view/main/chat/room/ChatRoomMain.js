@@ -85,7 +85,6 @@ const DATA = [
         id: '58694a0f-3da1-471f-bd96-145571a29d72',
         message: 'sixth Item',
     },
-
     {
         flag: true,
         user_name: 'Olaf',
@@ -159,7 +158,7 @@ const DATA = [
     },
 ];
 
-function Item({message, user_name, flag}) {
+function Item({message, user_name}) {
     return (
         <View style={styles.receive_message_view}>
             <Profile/>

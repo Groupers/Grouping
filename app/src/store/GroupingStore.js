@@ -30,7 +30,6 @@ export default class GroupingStore {
         if (this.groupingViewStatus === GROUPING_VIEW_STATUS.ADDRESS_SEARCH) {
             return true;
         }
-
         return false;
     }
 }

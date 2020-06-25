@@ -10,6 +10,7 @@ import GroupingStore from './GroupingStore';
 import MainStore from './MainStore';
 import GroupingCreationMainStore from './GroupingCreationMainStore';
 import ChatStore from './ChatStore';
+import ChatRoomStore from './ChatRoomStore';
 
 const userStore = new UserStore();
 const signInStore = new SignInStore(userStore);
@@ -22,19 +23,21 @@ const signUpTermsAgreementStore = new SignUpTermsAgreementStore(signProcessStore
 const mainStore = new MainStore();
 const groupingStore = new GroupingStore(mainStore);
 const groupingCreationMainStore = new GroupingCreationMainStore();
+const chatRoomStore = new ChatRoomStore();
 const chatStore = new ChatStore(mainStore);
 
 export default {
-  userStore: userStore,
-  signUpTermsAgreementStore: signUpTermsAgreementStore,
-  signProcessStore: signProcessStore,
-  signUpEmailStore: signUpEmailStore,
-  signUpPasswordStore: signUpPasswordStore,
-  signUpPhoneStore: signUpPhoneStore,
-  signUpBasicInfoStore: signUpBasicInfoStore,
-  signInStore: signInStore,
-  mainStore: mainStore,
-  groupingStore: groupingStore,
-  groupingCreationMainStore: groupingCreationMainStore,
-  chatStore: chatStore,
+    userStore: userStore,
+    signUpTermsAgreementStore: signUpTermsAgreementStore,
+    signProcessStore: signProcessStore,
+    signUpEmailStore: signUpEmailStore,
+    signUpPasswordStore: signUpPasswordStore,
+    signUpPhoneStore: signUpPhoneStore,
+    signUpBasicInfoStore: signUpBasicInfoStore,
+    signInStore: signInStore,
+    mainStore: mainStore,
+    groupingStore: groupingStore,
+    groupingCreationMainStore: groupingCreationMainStore,
+    chatRoomStore: chatRoomStore,
+    chatStore: chatStore,
 };

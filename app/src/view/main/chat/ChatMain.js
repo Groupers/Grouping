@@ -51,19 +51,19 @@ class ChatMain extends Component {
                     onSearchViewBackButtonClicked={this.onSearchViewBackButtonClicked.bind(this)}
                 />
                 <ChatListMain/>
-                {/*<FlatList*/}
-                {/*    onScrollBeginDrag={event => console.log('hello drag')}*/}
-                {/*    data={DATA}*/}
-                {/*    renderItem={({item}) =>*/}
-                {/*        <Item*/}
-                {/*            style={styles.item}*/}
-                {/*            onChatContentEnterButtonClicked={this.onChatContentEnterButtonClicked.bind(this)}*/}
-                {/*        >*/}
-                {/*            <Text style={styles.title}>{item.title}</Text>*/}
-                {/*        </Item>*/}
-                {/*    }*/}
-                {/*    keyExtractor={item => item.id}*/}
-                {/*/>*/}
+                <FlatList
+                    onScrollBeginDrag={event => console.log('hello drag')}
+                    data={DATA}
+                    renderItem={({item}) =>
+                        <Item
+                            style={styles.item}
+                            onChatContentEnterButtonClicked={this.onChatContentEnterButtonClicked.bind(this)}
+                        >
+                            <Text style={styles.title}>{item.title}</Text>
+                        </Item>
+                    }
+                    keyExtractor={item => item.id}
+                />
             </View>
         )
         if (this.props.chatStore.chatViewStatus === CHAT_VIEW_STATUS.ENTERING_CHAT_ROOM) {

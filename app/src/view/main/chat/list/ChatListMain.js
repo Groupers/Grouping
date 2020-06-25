@@ -1,6 +1,9 @@
 import * as React from 'react';
-import {Button, View, Text, Image, FlatList, ActivityIndicator} from 'react-native';
+import {Button, View, Text, Image, FlatList, ActivityIndicator, SafeAreaView} from 'react-native';
 import {Item} from './ChatListItem';
+import {GROUPING_VIEW_STATUS} from "../../../../constant/GroupingViewStatus";
+import {inject, observer} from "mobx-react";
+import {Icon} from "react-native-elements";
 
 function AdArea() {
     return (
@@ -43,7 +46,7 @@ class ChatListArea extends React.Component {
 
     render() {
         return (
-            <View style={styles.sex}
+            <View style={styles.test}
                 padding={5}
                 flexDirection={'column'}
                 flex={1}>
@@ -74,10 +77,18 @@ class ChatListArea extends React.Component {
 export class ChatListMain extends React.Component {
     render() {
         return (
-            <>
+            <SafeAreaView>
                 <AdArea/>
+                <Icon
+                    style={styles.icon}
+                    size={50}
+                    name="chevron-left"
+                    type="feather"
+                    color='black'
+                    onPress={() => this.props.onGroupingCreationClicked()}
+                />
                 <ChatListArea/>
-            </>
+            </SafeAreaView>
         );
     }
 }
@@ -104,10 +115,9 @@ const styles = {
         flex: 1,
         marginTop: 5,
     },
-
-    sex: {
+    test: {
         backgroundColor: 'red',
         flex: 1,
         height: '100%',
-    }
+    },
 };
