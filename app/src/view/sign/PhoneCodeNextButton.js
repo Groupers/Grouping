@@ -9,13 +9,12 @@ export default class PhoneCodeNextButton extends Component {
 
     buttonStyle = function () {
         return {
-            width: '35%',
+            width: 50,
             alignItems: 'center',
             justifyContent: 'center',
-            margin: 10,
-            height: 50,
+            height: 25,
             backgroundColor: this.props.isActive === true ? COLORS.SUB_COLOR : '#FFF',
-            borderRadius: 5,
+            borderRadius: 8,
             // marginBottom: this.props.isKeyboardShow
             //   ? this.props.keyboardHeight - 15
             //   : 0,
@@ -36,8 +35,9 @@ export default class PhoneCodeNextButton extends Component {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 23,
+        fontSize: 12,
         fontWeight: '600',
-        color: 'black',
+        color: 'white',
+        fontFamily:'NotoSansKR-Medium'
     },
 });

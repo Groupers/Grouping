@@ -188,6 +188,6 @@ export default class SignUpPhoneStore {
       return '인증 코드가 틀렸습니다.';
     }
 
-    return '';
+    return '인증번호를 받지 못 하셨다면 다시 인증버튼을 눌러주세요';
   }
 }

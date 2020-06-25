@@ -37,16 +37,17 @@ export default class SignErrorMessageView extends React.Component {
 const styles = StyleSheet.create({
     errorMessageContainer: {
         borderColor: '#FFF',
-        width: '90%',
+        width: '100%',
         marginTop: 20,
     },
 
     errorMessage: {
-        width: '90%',
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'black',
-        fontSize: 17,
-        fontWeight: '600'
+        color: COLORS.SUB_COLOR,
+        fontSize: 10,
+        fontWeight: '600',
+        fontFamily:'NotoSansKR-Regular',
     },
 });

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, Image, ImageBackground, View,Platform} from 'react-native';
 import {COLORS} from "../../assets/Colors";
+import Component_1 from '../../../../Img/drawable-xhdpi/component_1.png';
 
 export default class SignInButton extends Component {
     constructor(props) {
@@ -10,13 +11,20 @@ export default class SignInButton extends Component {
     buttonStyle() {
         console.log('bottomContainer');
         return {
-            width: '90%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: 10,
-            height: 50,
-            backgroundColor: this.props.isActive === true ? '#888' : '#d70000',
+            width: '100%',
+            height: 40,
+            // backgroundColor: this.props.isActive === true ? '#888' : '#d70000',
             borderRadius: 5,
+            ...Platform.select({
+                ios: {
+                    shadowColor: '#000',
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.2,
+                },
+                android: {
+                    elevation: 8
+                },
+            }),
         };
     }
 
@@ -26,7 +34,10 @@ export default class SignInButton extends Component {
                 style={this.buttonStyle()}
                 onPress={() => this.props.onClick()}
             >
-                <Text style={styles.title}>Sign In</Text>
+                <Image style={styles.button}
+                       source={require('../../../../Img/drawable-xhdpi/component_1.png')}
+                />
+
             </TouchableOpacity>
         );
     }
@@ -34,17 +45,14 @@ export default class SignInButton extends Component {
 
 const styles = StyleSheet.create({
     button: {
-        width: '90%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 10,
-        height: 50,
-        backgroundColor: COLORS.SUB_COLOR,
+        width:"100%",
+        height: 40,
         borderRadius: 5,
     },
     title: {
-        fontSize: 20,
-        fontWeight: '600',
-        color: COLORS.MAIN_COLOR,
+    fontFamily:'NotoSansKR-Medium'
+        // fontSize: 20,
+        // fontWeight: '600',
+        // color: COLORS.MAIN_COLOR,
     },
 });

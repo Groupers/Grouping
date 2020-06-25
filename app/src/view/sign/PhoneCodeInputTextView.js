@@ -34,7 +34,8 @@ export default class PhoneCodeInputTextView extends React.Component {
                     autoCorrect={false}
                     clearTextOnFocus={true}
                     textContentType="creditCardNumber"
-                    placeholderTextColor={COLORS.MAIN_COLOR}
+                    placeholderTextColor={COLORS.FONT_GRAY}
+                    placeholder={"인증번호를 입력하세요"}
                     value={this.props.text}
                     onChangeText={
                         this.props.onChangeText != null
@@ -49,18 +50,17 @@ export default class PhoneCodeInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     phoneCodeInputContainer: {
-        borderColor: '#FFF',
-        borderBottomWidth: 1,
-        width: '55%',
-        margin: 10,
-
+        flex:1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: COLORS.FONT_GRAY,
     },
 
     phoneCode: {
-        color: 'black',
-        fontSize: 25,
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 10,
+        color: 'black',
+        fontSize: 12,
     },
 });

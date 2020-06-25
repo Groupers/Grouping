@@ -62,7 +62,7 @@ class SignUpEmail extends React.Component {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.inner}>
                         <View style={styles.contentContainer}>
-                            <LabelView text="Email"/>
+                            <LabelView text="이메일"/>
                             <EmailInputTextView
                                 text={this.props.signUpEmailStore.emailText}
                                 onChangeText={this.props.signUpEmailStore.emailTextChanged.bind(
@@ -72,14 +72,16 @@ class SignUpEmail extends React.Component {
                             <SignErrorMessageView
                                 text={this.props.signUpEmailStore.errorMessage}
                             />
+                            <View flex={1}/>
+                            <View style={styles.bottomContainer}>
+                                <SignUpNextButton
+                                    isActive={this.props.signUpEmailStore.isValidInputData}
+                                    text="다 음"
+                                    onClick={this.signUpNextButtonClicked.bind(this)}
+                                />
+                            </View>
                         </View>
-                        <View style={styles.bottomContainer}>
-                            <SignUpNextButton
-                                isActive={this.props.signUpEmailStore.isValidInputData}
-                                text="Next"
-                                onClick={this.signUpNextButtonClicked.bind(this)}
-                            />
-                        </View>
+
                     </View>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
@@ -102,22 +104,25 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%'
+        // justifyContent: 'center',
+        width: '85%',
+        paddingTop:30
     },
 
     contentContainer: {
-        flex: 5,
-        width: '100%',
+        flex: 1,
+        paddingTop: 150,
         alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: COLORS.MAIN_COLOR,
+        width:'100%'
     },
     bottomContainer: {
-        flex: 1,
+        backgroundColor: COLORS.MAIN_COLOR,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        marginBottom: 30,
+        justifyContent: 'flex-start',
+        marginBottom:60,
+
     },
 });
 

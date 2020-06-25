@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 30,
         justifyContent: 'center',
-        width: '95%'
+        width: '85%'
     },
 
     contentContainer: {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     },
     bottomContainer: {
         flex: 1,
-        width: '100%',
+        width: '85%',
         alignItems: 'center',
         justifyContent: 'flex-end',
         paddingBottom: 30,
