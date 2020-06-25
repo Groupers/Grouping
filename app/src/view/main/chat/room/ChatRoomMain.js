@@ -88,8 +88,6 @@ function Item({message, user_name, flag, image}) {
     }
 }
 
-@inject('groupingStore')
-@observer
 class ChatRoomMain extends React.Component {
 
     componentDidMount() {
@@ -102,36 +100,20 @@ class ChatRoomMain extends React.Component {
     ) {
     }
 
-    onKeywordSearchClicked() {
-        this.props.groupingStore.changeView(GROUPING_VIEW_STATUS.KEYWORD_SEARCH);
-    }
-
-    onSearchViewBackButtonClicked() {
-        this.props.groupingStore.changeView(GROUPING_VIEW_STATUS.NONE);
-    }
-
-    onGroupingChatRoomSettingButtonClicked() {
-        this.props.groupingStore.changeView(GROUPING_VIEW_STATUS.SETTING);
-    }
-
     render() {
         let view = (
             <View style={styles.container}>
                 <ChatRoomHeader/>
-                {/*    isActivated={this.props.groupingStore.isKeywordSearchActivated}*/}
-                {/*    onKeywordSearchClicked={this.onKeywordSearchClicked.bind(this)}*/}
-                {/*/>*/}
-                {/*<FlatList*/}
-                {/*    onScrollBeginDrag={event => console.log('hello drag')}*/}
-                {/*    data={DATA}*/}
-                {/*    renderItem={({item}) => <Item*/}
-                {/*        message={item.message}*/}
-                {/*        flag={item.flag}*/}
-                {/*        user_name={item.user_name}*/}
-                {/*    />}*/}
-                {/*    keyExtractor={item => item.id}*/}
-
-                {/*/>*/}
+                <FlatList
+                    onScrollBeginDrag={event => console.log('hello drag')}
+                    data={DATA}
+                    renderItem={({item}) => <Item
+                        message={item.message}
+                        flag={item.flag}
+                        user_name={item.user_name}
+                    />}
+                    keyExtractor={item => item.id}
+                />
                 <ChatRoomFooter/>
                 <Text style={styles.user_name}>
                     FUCKING REACT NATIVE
@@ -139,18 +121,6 @@ class ChatRoomMain extends React.Component {
             </View>
         );
 
-        // if (
-        //     this.props.groupingStore.groupingViewStatus ===
-        //     GROUPING_VIEW_STATUS.SETTING
-        // ) {
-        //     view = (
-        //         <GroupingChatRoomSetting
-        //             backButtonClicked={this.onGroupingChatRoomSettingButtonClicked.bind(
-        //                 this
-        //             )}
-        //         />
-        //     );
-        // }
         return <SafeAreaView>{view}</SafeAreaView>;
     }
 }

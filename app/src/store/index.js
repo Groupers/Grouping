@@ -9,6 +9,7 @@ import SignUpTermsAgreementStore from './SignUpTermsAgreementStore';
 import GroupingStore from './GroupingStore';
 import MainStore from './MainStore';
 import GroupingCreationMainStore from './GroupingCreationMainStore';
+import ChatRoomStore from './ChatRoomStore';
 
 const userStore = new UserStore();
 const signInStore = new SignInStore(userStore);
@@ -17,25 +18,23 @@ const signUpEmailStore = new SignUpEmailStore(signProcessStore);
 const signUpPasswordStore = new SignUpPasswordStore(signProcessStore);
 const signUpPhoneStore = new SignUpPhoneStore(signProcessStore);
 const signUpBasicInfoStore = new SignUpBasicInfoStore(signProcessStore);
-const signUpTermsAgreementStore = new SignUpTermsAgreementStore(
-  signProcessStore
-);
-
+const signUpTermsAgreementStore = new SignUpTermsAgreementStore(signProcessStore);
 const mainStore = new MainStore();
-
 const groupingStore = new GroupingStore(mainStore);
 const groupingCreationMainStore = new GroupingCreationMainStore();
+const chatRoomStore = new ChatRoomStore();
 
 export default {
-  userStore: userStore,
-  signUpTermsAgreementStore: signUpTermsAgreementStore,
-  signProcessStore: signProcessStore,
-  signUpEmailStore: signUpEmailStore,
-  signUpPasswordStore: signUpPasswordStore,
-  signUpPhoneStore: signUpPhoneStore,
-  signUpBasicInfoStore: signUpBasicInfoStore,
-  signInStore: signInStore,
-  mainStore: mainStore,
-  groupingStore: groupingStore,
-  groupingCreationMainStore: groupingCreationMainStore,
+    userStore: userStore,
+    signUpTermsAgreementStore: signUpTermsAgreementStore,
+    signProcessStore: signProcessStore,
+    signUpEmailStore: signUpEmailStore,
+    signUpPasswordStore: signUpPasswordStore,
+    signUpPhoneStore: signUpPhoneStore,
+    signUpBasicInfoStore: signUpBasicInfoStore,
+    signInStore: signInStore,
+    mainStore: mainStore,
+    groupingStore: groupingStore,
+    groupingCreationMainStore: groupingCreationMainStore,
+    chatRoomStore: chatRoomStore,
 };
