@@ -21,9 +21,10 @@ class FriendMainHeader extends Component {
         return (
             <View style={styles.body}>
                 <Text style={styles.title}>Friend</Text>
-                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}}  style={styles.headerImage}/>
-                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}}  style={styles.headerImage}/>
-                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}}  style={styles.headerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-search-strong-512.png'}}  style={styles.headerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/feather/24/message-circle-512.png'}}  style={styles.headerImage}/>
+                <Image source={{uri:'https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/music-256.png'}} style={styles.headerImage}/>
+                <Image source={{uri:'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png'}} style={styles.headerImage}/>
             </View>
         );
     }
@@ -40,15 +41,15 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        marginLeft: 15,
         marginTop: 15,
-        marginRight: 80,
-        flex: 5,
+        flex: 7,
     },
     headerImage: {
         flex: 1,
-        marginTop:20,
-        margin:7,
+        padding:5,
+        marginLeft:8,
+        marginTop:10,
+        marginBottom:5,
     },
 });
 
