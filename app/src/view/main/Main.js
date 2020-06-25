@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import {StyleSheet, View} from 'react-native';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import {COLORS} from '../../assets/Colors';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FriendMain from './friend/FriendMain';
@@ -36,7 +36,7 @@ class Main extends React.Component {
             <NavigationContainer>
                 <Tab.Navigator>
                     <Tab.Screen name="Friend" component={FriendMain}/>
-                    <Tab.Screen name="Chat" component={ChatMain}/>
+                    <Tab.Screen name="Chat" component={ChatMain} />
                     <Tab.Screen name="Feed" component={FeedMain}/>
                     <Tab.Screen
                         options={{
@@ -54,7 +54,7 @@ class Main extends React.Component {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flex: 1,
     },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {
     StyleSheet,
     Text,
@@ -56,13 +56,13 @@ class SignUpEmail extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView
-                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.body}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.inner}>
                         <View style={styles.contentContainer}>
-                            <LabelView text="Email"/>
+                            <LabelView text="이메일"/>
                             <EmailInputTextView
                                 text={this.props.signUpEmailStore.emailText}
                                 onChangeText={this.props.signUpEmailStore.emailTextChanged.bind(
@@ -72,14 +72,16 @@ class SignUpEmail extends React.Component {
                             <SignErrorMessageView
                                 text={this.props.signUpEmailStore.errorMessage}
                             />
+                            <View flex={1}/>
+                            <View style={styles.bottomContainer}>
+                                <SignUpNextButton
+                                    isActive={this.props.signUpEmailStore.isValidInputData}
+                                    text="다 음"
+                                    onClick={this.signUpNextButtonClicked.bind(this)}
+                                />
+                            </View>
                         </View>
-                        <View style={styles.bottomContainer}>
-                            <SignUpNextButton
-                                isActive={this.props.signUpEmailStore.isValidInputData}
-                                text="Next"
-                                onClick={this.signUpNextButtonClicked.bind(this)}
-                            />
-                        </View>
+
                     </View>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
@@ -90,7 +92,7 @@ class SignUpEmail extends React.Component {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -99,25 +101,28 @@ const styles = StyleSheet.create({
 
     inner: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%'
+        // justifyContent: 'center',
+        width: '85%',
+        paddingTop:30
     },
 
     contentContainer: {
-        flex: 5,
-        width: '100%',
+        flex: 1,
+        paddingTop: 150,
         alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: COLORS.MAIN_COLOR,
+        width:'100%'
     },
     bottomContainer: {
-        flex: 1,
+        backgroundColor: COLORS.MAIN_COLOR,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        marginBottom: 30,
+        justifyContent: 'flex-start',
+        marginBottom:60,
+
     },
 });
 

@@ -17,6 +17,7 @@ import SignErrorMessageView from './SignErrorMessageView';
 import {SIGN_UP_PHONE_VIEW_STATUS} from '../../constant/SignUpPhoneStatus';
 import PhoneCodeInputTextView from './PhoneCodeInputTextView';
 import PhoneCodeNextButton from './PhoneCodeNextButton';
+import {COLORS} from "../../assets/Colors";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -65,7 +66,8 @@ class SignUpPhone extends React.Component {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.inner}>
                         <View style={styles.contentContainer}>
-                            <LabelView text="Phone Number"/>
+                            <LabelView text="핸드폰 인증"/>
+                            <View style={styles.phoneCodeContainer}>
                             <PhoneNumberInputTextView
                                 isActive={!this.props.signUpPhoneStore.isAllCompleted}
                                 text={this.props.signUpPhoneStore.phoneNumber}
@@ -73,16 +75,17 @@ class SignUpPhone extends React.Component {
                                     this
                                 )}
                             />
-                            <SignUpNextButton
+                            <PhoneCodeNextButton
                                 isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
                                 text={
                                     this.props.signUpPhoneStore.phoneValidationViewStatus ===
                                     SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                                        ? '인증번호 재발송'
-                                        : '인증번호 발송'
+                                        ? '재인증'
+                                        : '인 증'
                                 }
                                 onClick={this.props.signUpPhoneStore.sendPhoneCode.bind(this)}
                             />
+                            </View>
                             {this.props.signUpPhoneStore.phoneValidationViewStatus ===
                             SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? (
                                 <View style={styles.phoneCodeContainer}>
@@ -92,26 +95,26 @@ class SignUpPhone extends React.Component {
                                         )}
                                         text={this.props.signUpPhoneStore.phoneCode}
                                     />
-                                    <PhoneCodeNextButton
-                                        text="인증"
-                                        isActive={this.props.signUpPhoneStore.isValidPhoneCode}
-                                        onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(
-                                            this
-                                        )}
-                                    />
+                                    {/*<PhoneCodeNextButton*/}
+                                    {/*    text="인증"*/}
+                                    {/*    isActive={this.props.signUpPhoneStore.isValidPhoneCode}*/}
+                                    {/*    onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(*/}
+                                    {/*        this*/}
+                                    {/*    )}*/}
+                                    {/*/>*/}
+                                    <Text>3:00</Text>
                                 </View>
                             ) : null}
                             <SignErrorMessageView
                                 text={this.props.signUpPhoneStore.errorMessage}
                             />
-                        </View>
-
-                        <View style={styles.bottomContainer}>
-                            <SignUpNextButton
-                                isActive={this.props.signUpPhoneStore.isAllCompleted}
-                                text="Next"
-                                onClick={this.signUpNextButtonClicked.bind(this)}
-                            />
+                            <View style={styles.bottomContainer}>
+                                <SignUpNextButton
+                                    isActive={this.props.signUpPhoneStore.isAllCompleted}
+                                    text="시 작 하 기"
+                                    onClick={this.signUpNextButtonClicked.bind(this)}
+                                />
+                            </View>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -123,7 +126,7 @@ class SignUpPhone extends React.Component {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -132,33 +135,40 @@ const styles = StyleSheet.create({
 
     inner: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%'
+        // justifyContent: 'center',
+        width: '85%',
+        // paddingTop:30
     },
 
     phoneCodeContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 30,
+        marginTop: 20,
         justifyContent: 'center',
-        width: '95%'
+        width: '100%',
+        borderBottomWidth:1,
+        borderColor:COLORS.FONT_GRAY
     },
 
     contentContainer: {
-        flex: 5,
-        width: '100%',
+        flex:1,
+        paddingTop: 150,
         alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: COLORS.MAIN_COLOR,
+        width:'100%',
+        justifyContent: 'center',
+        // borderWidth: 2
     },
     bottomContainer: {
-        flex: 1,
+        // borderWidth:2,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        paddingBottom: 30,
+        paddingBottom: 60,
+        flex:1
     },
 });
 

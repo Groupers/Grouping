@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from "../../assets/Colors";
 import {
     Keyboard,
     KeyboardAvoidingView,
@@ -47,7 +47,7 @@ class SignUpTermsAgreement extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView
-                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.body}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -75,7 +75,7 @@ class SignUpTermsAgreement extends React.Component {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
     inner: {
         flex: 1,
-        backgroundColor: Colors.primary,
+        backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 30,
         justifyContent: 'center',
-        width: '95%'
+        width: '85%'
     },
 
     contentContainer: {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     },
     bottomContainer: {
         flex: 1,
-        width: '100%',
+        width: '85%',
         alignItems: 'center',
         justifyContent: 'flex-end',
         paddingBottom: 30,

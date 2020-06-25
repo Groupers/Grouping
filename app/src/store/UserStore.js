@@ -12,7 +12,7 @@ export default class UserStore {
   @observable userStatus = USER_STATUS.READY;
 
   @action ready = async () => {
-    await this.userTable.findByEmail('chdaos123@baver.comn');
+    await this.userTable.findByEmail('chdaos123@naver.comn');
     await this.userRepository.initialize();
     this.userStatus = USER_STATUS.GUEST;
   };

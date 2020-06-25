@@ -3,18 +3,15 @@ import {inject, observer} from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import {
     StyleSheet,
-    Text,
     View,
-    SafeAreaView,
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
     Keyboard,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import AddressSearchTextView from '../../AddressSearchTextView';
+import AddressSearchResultView from '../../AddressSearchResultView';
 import {GROUPING_CREATION_VIEW_STATUS} from '../../../../constant/GroupingCreationViewStatus';
-import LabelView from '../../../sign/LabelView';
-import KeywordInputTextView from './KeywordInputTextView';
 
 @inject('groupingCreationMainStore')
 @observer
@@ -33,17 +30,46 @@ class GroupingCreationAddressInfo extends Component {
     ) {
     }
 
-    // 친구목록, 채팅, 모임찾기, 마이페이지
+    async onAddressKeywordChanged(keyword) {
+        await this.props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(
+            keyword
+        );
+    }
+
+    onAddressSelected(address) {
+        this.props.groupingCreationMainStore.groupingAddressSelected(address);
+        this.props.groupingCreationMainStore.groupingCreationViewChanged(
+            GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
+        );
+        this.props.navigation.navigate('groupingCreationExtraInfo');
+    }
 
     render() {
         return (
             <KeyboardAvoidingView
-                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.body}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.inner}>
-                        <View style={styles.contentContainer}/>
+                        <View style={styles.searchContainer}>
+                            <AddressSearchTextView
+                                onChangeText={this.onAddressKeywordChanged.bind(this)}
+                                value={
+                                    this.props.groupingCreationMainStore
+                                        .groupingAddressSearchKeyword
+                                }
+                            />
+                        </View>
+                        <View style={styles.contentContainer}>
+                            <AddressSearchResultView
+                                onClick={this.onAddressSelected.bind(this)}
+                                addressList={
+                                    this.props.groupingCreationMainStore
+                                        .groupingAddressSearchResult
+                                }
+                            />
+                        </View>
                     </View>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
@@ -65,37 +91,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.primary,
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop: 50,
         width: '100%'
     },
     contentContainer: {
-        flex: 5,
         width: '100%'
     },
-    bottomContainer: {
-        flex: 1,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        marginBottom: 30,
+    searchContainer: {
+        width: '100%'
     },
+
     leftIconStyle: {
         marginLeft: 15,
     },
-    numberOfMemberContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    numberOfMemberIcon: {},
-
-    registerLocationContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    registerLocationIcon: {}
 });
 
 export default GroupingCreationAddressInfo;

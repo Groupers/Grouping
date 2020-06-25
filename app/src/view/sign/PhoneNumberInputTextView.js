@@ -1,5 +1,5 @@
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -27,15 +27,15 @@ export default class PhoneNumberInputTextView extends React.Component {
     // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
     render() {
         return (
-            <View style={styles.passwordContainer}>
+            <View style={styles.phoneNumberContainer}>
                 <TextInput
                     editable={this.props.isActive}
-                    style={styles.password}
+                    style={styles.phoneNumber}
                     maxLength={16}
-                    placeholder="폰 번호를 입력하세요."
+                    placeholder="번호를 입력하세요."
                     autoCorrect={false}
                     textContentType="telephoneNumber"
-                    placeholderTextColor={Colors.white}
+                    placeholderTextColor={COLORS.FONT_GRAY}
                     value={this.props.text}
                     onChangeText={
                         this.props.onChangeText != null
@@ -49,19 +49,21 @@ export default class PhoneNumberInputTextView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    passwordContainer: {
-        borderColor: Colors.white,
-        borderBottomWidth: 1,
-        width: '90%',
-        margin: 10,
+    phoneNumberContainer: {
+        flex:1,
+        // width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        // borderBottomWidth: 1,
+        borderColor: COLORS.FONT_GRAY,
     },
 
-    password: {
-        width: '90%',
+    phoneNumber: {
+        width: '100%',
         alignItems: 'center',
-        fontSize: 25,
-        color: Colors.white,
         justifyContent: 'center',
-        margin: 10,
+        // margin:5,
+        color: 'black',
+        fontSize: 12,
     },
 });

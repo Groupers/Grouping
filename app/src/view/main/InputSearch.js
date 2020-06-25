@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, View, SafeAreaView, TextInput} from 'react-native';
 import {Icon} from 'react-native-elements';
 
@@ -29,7 +29,7 @@ class InputSearch extends Component {
                         size={24}
                         name="search"
                         type="feather"
-                        color={Colors.primary}
+                        color={COLORS.MAIN_COLOR}
                     />
                 </View>
                 <View style={styles.searchWrapper}>
@@ -47,7 +47,7 @@ class InputSearch extends Component {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: Colors.white,
+        backgroundColor: '#FFF',
         flexDirection: 'row',
         marginRight: 5,
         borderRadius: 10,
@@ -57,14 +57,14 @@ const styles = StyleSheet.create({
     icon: {
         padding: 5,
         borderEndWidth: 1,
-        borderEndColor: Colors.primary,
+        borderEndColor: COLORS.MAIN_COLOR,
     },
 
     searchWrapper: {
         flex: 1,
         borderBottomEndRadius: 10,
         borderTopEndRadius: 10,
-        backgroundColor: Colors.white,
+        backgroundColor: '#FFF',
     },
     search: {
         alignItems: 'center',
