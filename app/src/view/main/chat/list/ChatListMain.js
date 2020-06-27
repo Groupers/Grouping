@@ -1,6 +1,9 @@
 import * as React from 'react';
-import {Button, View, Text, Image, FlatList, ActivityIndicator} from 'react-native';
+import {Button, View, Text, Image, FlatList, ActivityIndicator, SafeAreaView} from 'react-native';
 import {Item} from './ChatListItem';
+import {GROUPING_VIEW_STATUS} from "../../../../constant/GroupingViewStatus";
+import {inject, observer} from "mobx-react";
+import {Icon} from "react-native-elements";
 
 function AdArea() {
     return (
@@ -25,8 +28,8 @@ class ChatListArea extends React.Component {
         loading: false,
     };
 
-    componentWillMount() {
-        this.fetchData();
+    async componentWillMount() {
+        await this.fetchData();
     }
 
     fetchData = async () => {
@@ -43,32 +46,33 @@ class ChatListArea extends React.Component {
 
     render() {
         return (
-            <>
-                <View
-                    padding={5}
-                    flexDirection={'column'}
-                    flex={1}>
-                    <FlatList
-                        style={styles.flex_list}
-                        data={this.state.data}
-                        // data={chatItem}
-                        keyExtractor={(x, i) => i}
-                        onEndReached={() => this.fetchChatRoomInfo()}
-                        onEndReachedThreshold={0}
-                        ListFooterComponent={() =>
-                            this.state.loading ? null : (
-                                <ActivityIndicator size="large" animating/>
-                            )
-                        }
-                        renderItem={
-                            ({item}) => (
-                                <Item rowInfo={`${item}`}/>
-                            )
-                            // <ChatListRow rowInfo={} />
-                        }
-                    />
-                </View>
-            </>
+            <View style={styles.test}
+                padding={5}
+                flexDirection={'column'}
+                flex={1}>
+                <FlatList
+                    style={styles.flex_list}
+                    data={this.state.data}
+                    // data={chatItem}
+                    keyExtractor={(x, i) => i}
+                    onEndReached={() => this.fetchChatRoomInfo()}
+                    onEndReachedThreshold={0}
+                    ListFooterComponent={() =>
+                        this.state.loading ? null : (
+                            <ActivityIndicator size="large" animating/>
+                        )
+                    }
+                    renderItem={
+                        ({item}) => (
+                            <Item
+                                rowInfo={`${item}`}
+
+                            />
+                        )
+                        // <ChatListRow rowInfo={} />
+                    }
+                />
+            </View>
         );
     }
 }
@@ -76,10 +80,10 @@ class ChatListArea extends React.Component {
 export class ChatListMain extends React.Component {
     render() {
         return (
-            <>
+            <SafeAreaView>
                 <AdArea/>
                 <ChatListArea/>
-            </>
+            </SafeAreaView>
         );
     }
 }
@@ -95,7 +99,7 @@ const styles = {
     },
     adArea: {
         height: 70,
-        backgroundColor: 'white',
+        backgroundColor: 'black',
     },
     ad: {
         height: 70,
@@ -105,5 +109,10 @@ const styles = {
     flex_list: {
         flex: 1,
         marginTop: 5,
+    },
+    test: {
+        backgroundColor: 'red',
+        flex: 1,
+        height: '100%',
     },
 };

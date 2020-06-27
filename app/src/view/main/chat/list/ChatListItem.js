@@ -13,7 +13,9 @@ export {Item} ;
 
 function Item({rowInfo}) {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => this.props.onChatContentEnterButtonClicked()}
+        >
             {/*<Text style={styles.title}>{rowInfo}</Text>*/}
             <View style={styles.container}>
                 <Image
@@ -101,7 +103,7 @@ function ChatListRow({rowInfo}) {
 }
 
 const styles = {
-    container: {
+    list_container: {
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',

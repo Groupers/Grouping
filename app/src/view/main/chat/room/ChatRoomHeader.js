@@ -22,37 +22,51 @@ class ChatRoomHeader extends React.Component {
 
     render() {
         return (
-            <>
-                <SafeAreaView style={styles.header_safe_area}>
-                    <View style={styles.header}>
-                        <View style={styles.header_inner}>
-                            <View>
-                                <Image
-                                    //source={require('../Assets/back.png')}
-                                    style={{width: 25, height: 25}}
-                                />
-                            </View>
-                            <View>
-                                <Text style={styles.chat_room_name}>
-                                    Olaf
-                                </Text>
-                            </View>
-                            <View>
-                                <Image
-                                    //source={require('../Assets/back.png')}
-                                    style={{width: 25, height: 25}}
-                                />
-                            </View>
-                            <View>
-                                <Image
-                                    //source={require('../Assets/back.png')}
-                                    style={{width: 25, height: 25}}
-                                />
-                            </View>
+            <SafeAreaView style={styles.header_safe_area}>
+                <View style={styles.header}>
+                    <View style={styles.header_inner}>
+                        <View>
+                            <Icon
+                                style={styles.leftIconStyle}
+                                size={26}
+                                name="chevron-left"
+                                type="feather"
+                                color='black'
+                                onPress={() => {
+                                    this.props.backButtonClicked();
+                                }}
+                            />
+                        </View>
+                        <View>
+                            <Text style={styles.chat_room_name}>
+                                Olaf
+                            </Text>
+                        </View>
+                        <View style={styles.option}>
+                            <Icon
+                                style={styles.leftIconStyle}
+                                size={23}
+                                name="search"
+                                type="feather"
+                                color='black'
+                                onPress={() => {
+                                    this.props.backButtonClicked();
+                                }}
+                            />
+                            <Icon
+                                style={styles.leftIconStyle}
+                                size={26}
+                                name="menu"
+                                type="feather"
+                                color='black'
+                                onPress={() => {
+                                    this.props.backButtonClicked();
+                                }}
+                            />
                         </View>
                     </View>
-                </SafeAreaView>
-            </>
+                </View>
+            </SafeAreaView>
         );
     }
 }
@@ -61,8 +75,8 @@ export default ChatRoomHeader;
 
 const styles = StyleSheet.create({
     header_safe_area: {
-        zIndex: 1000,
         backgroundColor: '#B0C4DE',
+        elevation: 3,
     },
     header: {
         height: 50,
@@ -80,5 +94,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
+    option: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    }
 });
 
