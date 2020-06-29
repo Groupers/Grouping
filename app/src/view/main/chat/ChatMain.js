@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import {
     StyleSheet,
     Text,
     SafeAreaView,
     View,
-    ScrollView,
     FlatList,
     TouchableOpacity,
     Image,
@@ -15,11 +13,7 @@ import {
 import ChatMainHeader from './ChatMainHeader';
 import ChatRoomHeader from "./room/ChatRoomHeader";
 import ChatRoomMain from "./room/ChatRoomMain";
-import ChatRoomFooter from "./room/ChatRoomFooter";
-import {GROUPING_VIEW_STATUS} from "../../../constant/GroupingViewStatus";
-import GroupingCreationMain from "../grouping/creation/GroupingCreationMain";
 import {CHAT_VIEW_STATUS} from "../../../constant/ChatViewStatus";
-import {Icon} from "react-native-elements";
 import 'react-native-gesture-handler';
 
 @inject('chatStore')
@@ -75,17 +69,16 @@ class ChatMain extends Component {
 
     render() {
         let view = (
-            <View style={styles.main}>
+            <View style={styles.container}>
                 <ChatMainHeader
                     onSearchViewBackButtonClicked={this.onSearchViewBackButtonClicked.bind(this)}
                 />
                 <AdArea/>
-                <View style={styles.test}
+                <View style={styles.listContainer}
                       padding={5}
                       flexDirection={'column'}
                       flex={1}>
                     <FlatList
-                        style={styles.flexList}
                         data={this.state.data}
                         keyExtractor={(x, i) => i}
                         onEndReached={() => this.fetchChatRoomInfo()}
@@ -126,9 +119,8 @@ function Item({onChatContentEnterButtonClicked}) {
         <TouchableOpacity
             onPress={() => onChatContentEnterButtonClicked()}
         >
-            {/*<Text style={styles.title}>{rowInfo}</Text>*/}
-            <View style={styles.container}>
-                <Image style={styles.chatRoomImg}/>
+            <View style={styles.itemContainer}>
+                <Image style={styles.chatRoomImage}/>
                 <View flexDirection="column" flex={1} padding={5}>
                     <View flexDirection="row">
                         <Text
@@ -179,7 +171,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
     },
-    main: {
+    container: {
         flex: 1,
         backgroundColor: 'gold',
     },
@@ -194,23 +186,19 @@ const styles = StyleSheet.create({
     },
     adArea: {
         height: 70,
-        backgroundColor: 'black',
+        backgroundColor: 'tomato',
     },
     ad: {
         height: 70,
         borderRadius: 10,
         margin: 5,
     },
-    flex_list: {
-        flex: 1,
-        marginTop: 5,
-    },
-    test: {
+    listContainer: {
         backgroundColor: 'tomato',
         flex: 1,
         height: '100%',
     },
-    container: {
+    itemContainer: {
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -218,11 +206,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 80,
     },
-    flexList: {
-        flex: 1,
-        marginTop: 5,
-    },
-    chatRoomImg: {
+    chatRoomImage: {
         width: 65,
         height: 65,
         backgroundColor: '#eee',
@@ -263,7 +247,6 @@ const styles = StyleSheet.create({
         padding: 3,
         fontSize: 12,
     },
-    imagesForTitleBar: {},
 });
 
 export default ChatMain;
