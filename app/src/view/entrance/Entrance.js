@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {inject, observer} from 'mobx-react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
 import SignIn from '../sign/SignIn';
 import SignUpEmail from '../sign/SignUpEmail';
 import SignUpPassword from '../sign/SignUpPassword';
@@ -10,6 +10,10 @@ import SignUpPhone from '../sign/SignUpPhone';
 import SignUpBasicInfo from '../sign/SignUpBasicInfo';
 import {Dimensions, Keyboard, StyleSheet, Text} from 'react-native';
 import SignUpTermsAgreement from '../sign/SignUpTermsAgreement';
+import {Image} from "react-native-svg";
+import {Icon} from 'react-native-elements';
+import {COLORS} from "../../assets/Colors";
+
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -77,13 +81,14 @@ class Entrance extends React.Component {
     render() {
         return (
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="signIn">
+                <Stack.Navigator initialRouteName="SignUpPhone">
                     <Stack.Screen
                         name="SignIn"
                         options={{
-                            title: 'Sign In',
+
+                            // title: 'Sign In',
                             headerStyle: {
-                                backgroundColor: Colors.primary,
+                                backgroundColor:"#f9f9f9" ,
                             },
                             headerTintColor: 'black',
                             headerTitleStyle: {
@@ -98,15 +103,20 @@ class Entrance extends React.Component {
                     <Stack.Screen
                         name="SignUpEmail"
                         options={{
-                            title: 'Sign Up Email',
                             headerStyle: {
-                                backgroundColor: Colors.primary,
+                                backgroundColor: COLORS.MAIN_COLOR,
+                                elevation:0
                             },
-                            headerTintColor: Colors.gray,
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                                color: 'black',
-                            },
+                            headerTitle:"",
+                            // headerBackTitle:"<",
+                            headerBackImage: ()=>{
+                                return <Icon
+                                    name="chevron-left"
+                                    type="feather"
+                                    size={26}
+                                    color="lightgray"
+                                />
+                            }
                         }}
                     >
                         {props => <SignUpEmail {...props} />}
@@ -114,13 +124,19 @@ class Entrance extends React.Component {
                     <Stack.Screen
                         name="SignUpPassword"
                         options={{
-                            title: 'Sign Up Password',
+                            // title: 'Sign Up Password',
                             headerStyle: {
-                                backgroundColor: Colors.primary,
+                                backgroundColor: COLORS.MAIN_COLOR,
+                                elevation:0
                             },
-                            headerTintColor: 'black',
-                            headerTitleStyle: {
-                                fontWeight: 'bold'
+                            headerTitle:"",
+                            headerBackImage: ()=>{
+                                return <Icon
+                                    name="chevron-left"
+                                    type="feather"
+                                    size={26}
+                                    color="lightgray"
+                                />
                             },
                         }}
                     >
@@ -144,14 +160,20 @@ class Entrance extends React.Component {
                     <Stack.Screen
                         name="SignUpPhone"
                         options={{
-                            title: 'Sign Up Phone',
                             headerStyle: {
-                                backgroundColor: Colors.primary,
+                                backgroundColor: COLORS.MAIN_COLOR,
+                                elevation:0
                             },
-                            headerTintColor: 'black',
-                            headerTitleStyle: {
-                                fontWeight: 'bold'
-                            },
+                            headerTitle:"",
+                            // headerBackTitle:"<",
+                            headerBackImage: ()=>{
+                                return <Icon
+                                    name="chevron-left"
+                                    type="feather"
+                                    size={26}
+                                    color="lightgray"
+                                />
+                            }
                         }}
                     >
                         {props => <SignUpPhone {...props} />}
@@ -159,14 +181,20 @@ class Entrance extends React.Component {
                     <Stack.Screen
                         name="SignUpTermsAgreement"
                         options={{
-                            title: 'Sign Up Phone',
                             headerStyle: {
-                                backgroundColor: Colors.primary,
+                                backgroundColor: COLORS.MAIN_COLOR,
+                                elevation:0
                             },
-                            headerTintColor: 'black',
-                            headerTitleStyle: {
-                                fontWeight: 'bold'
-                            },
+                            headerTitle:"",
+                            // headerBackTitle:"<",
+                            headerBackImage: ()=>{
+                                return <Icon
+                                    name="chevron-left"
+                                    type="feather"
+                                    size={26}
+                                    color="lightgray"
+                                />
+                            }
                         }}
                     >
                         {props => <SignUpTermsAgreement {...props} />}

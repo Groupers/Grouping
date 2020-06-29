@@ -27,15 +27,15 @@ export default class PhoneNumberInputTextView extends React.Component {
     // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
     render() {
         return (
-            <View style={styles.passwordContainer}>
+            <View style={styles.phoneNumberContainer}>
                 <TextInput
                     editable={this.props.isActive}
-                    style={styles.password}
+                    style={styles.phoneNumber}
                     maxLength={16}
-                    placeholder="폰 번호를 입력하세요."
+                    placeholder="번호를 입력하세요."
                     autoCorrect={false}
                     textContentType="telephoneNumber"
-                    placeholderTextColor={COLORS.MAIN_COLOR}
+                    placeholderTextColor={COLORS.FONT_GRAY}
                     value={this.props.text}
                     onChangeText={
                         this.props.onChangeText != null
@@ -49,19 +49,21 @@ export default class PhoneNumberInputTextView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    passwordContainer: {
-        borderColor: '#FFF',
-        borderBottomWidth: 1,
-        width: '90%',
-        margin: 10,
+    phoneNumberContainer: {
+        flex:1,
+        // width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        // borderBottomWidth: 1,
+        borderColor: COLORS.FONT_GRAY,
     },
 
-    password: {
-        width: '90%',
+    phoneNumber: {
+        width: '100%',
         alignItems: 'center',
-        fontSize: 25,
-        color: 'black',
         justifyContent: 'center',
-        margin: 10,
+        // margin:5,
+        color: 'black',
+        fontSize: 12,
     },
 });

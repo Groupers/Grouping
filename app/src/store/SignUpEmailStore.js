@@ -60,7 +60,7 @@ export default class SignUpEmailStore {
     }
 
     if (this.emailValidation === INPUT_EMAIL_STATUS.NOT_FORMATTED) {
-      return "이메일 형식이 맞지 않습니다.";
+      return "올바르지 않은 메일형식입니다.";
     }
 
     return "";

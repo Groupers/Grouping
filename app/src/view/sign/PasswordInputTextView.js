@@ -50,7 +50,7 @@ export default class PasswordInputTextView extends React.Component {
                     style={styles.passwordToggleButton}
                     name={this.props.isShowPassword ? 'eye-off' : 'eye'}
                     type="feather"
-                    color="#fff"
+                    color={COLORS.FONT_GRAY}
                     onPress={() => this.props.toggleShowPassword()}
                 />
             </View>
@@ -60,22 +60,22 @@ export default class PasswordInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     passwordContainer: {
-        borderColor: '#FFF',
-        borderBottomWidth: 1,
-        width: '90%',
+        width: '100%',
         flexDirection: 'row',
-        margin: 10,
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderColor: COLORS.FONT_GRAY,
     },
 
     password: {
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 10,
-        marginBottom: 10,
+        // margin:5,
         color: 'black',
-        fontSize: 15,
+        fontSize: 12,
     },
 
     passwordToggleButton: {}
 });
+

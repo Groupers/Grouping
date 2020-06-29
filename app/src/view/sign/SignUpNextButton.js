@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, Platform} from 'react-native';
 import {COLORS} from '../../assets/Colors';
 
 export default class SignUpNextButton extends Component {
@@ -9,13 +9,22 @@ export default class SignUpNextButton extends Component {
 
     buttonStyle = function () {
         return {
-            width: '90%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: 10,
-            height: 50,
-            backgroundColor: this.props.isActive === true ? '#FFF' : COLORS.SUB_COLOR,
+            width: '100%',
+            height: 40,
+            // backgroundColor: this.props.isActive === true ? '#888' : '#d70000',
             borderRadius: 5,
+            backgroundColor:COLORS.SUB_COLOR,
+            justifyContent:'center',
+            ...Platform.select({
+                ios: {
+                    shadowColor: '#000',
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.2,
+                },
+                android: {
+                    elevation: 8
+                },
+            }),
             // marginBottom: this.props.isKeyboardShow
             //   ? this.props.keyboardHeight - 15
             //   : 0,
@@ -45,8 +54,10 @@ const styles = StyleSheet.create({
         height: 50,
     },
     title: {
-        fontSize: 23,
+        fontSize: 14,
         fontWeight: '600',
-        color: COLORS.SUB_COLOR,
+        color: 'white',
+        alignSelf:'center',
+        fontFamily:'NotoSansKR-Medium'
     },
 });
