@@ -80,25 +80,12 @@ class ChatMain extends Component {
                     onSearchViewBackButtonClicked={this.onSearchViewBackButtonClicked.bind(this)}
                 />
                 <AdArea/>
-                {/*<FlatList
-                    onScrollBeginDrag={event => console.log('hello drag')}
-                    data={DATA}
-                    renderItem={({item}) =>
-                        <Item
-                            style={styles.item}
-                            onChatContentEnterButtonClicked={this.onChatContentEnterButtonClicked.bind(this)}
-                        >
-                            <Text style={styles.title}>{item.title}</Text>
-                        </Item>
-                    }
-                    keyExtractor={item => item.id}
-                />*/}
                 <View style={styles.test}
                       padding={5}
                       flexDirection={'column'}
                       flex={1}>
                     <FlatList
-                        style={styles.flex_list}
+                        style={styles.flexList}
                         data={this.state.data}
                         keyExtractor={(x, i) => i}
                         onEndReached={() => this.fetchChatRoomInfo()}
@@ -115,7 +102,6 @@ class ChatMain extends Component {
                                     onChatContentEnterButtonClicked={this.onChatContentEnterButtonClicked.bind(this)}
                                 />
                             )
-                            // <ChatListRow rowInfo={} />
                         }
                     />
                 </View>
@@ -135,58 +121,7 @@ class ChatMain extends Component {
     }
 }
 
-const DATA = [
-    {
-        id: 'bd7ac2bea-c1b11-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Second Item'
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Third Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item'
-    },
-];
-
-function Item({rowInfo, onChatContentEnterButtonClicked}) {
+function Item({onChatContentEnterButtonClicked}) {
     return (
         <TouchableOpacity
             onPress={() => onChatContentEnterButtonClicked()}
@@ -283,7 +218,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 80,
     },
-    flexlist: {
+    flexList: {
         flex: 1,
         marginTop: 5,
     },
