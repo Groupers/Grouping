@@ -1,6 +1,7 @@
 import React from 'react';
 import {COLORS} from '../../assets/Colors';
 import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
+import {FontSize} from "../../assets/FontSize";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         color: COLORS.FONT_GRAY,
-        fontSize: Width*0.035,
+        fontSize: FontSize.LABEL,
         // fontWeight: '600',
         fontFamily:'NotoSansKR-Medium'
     },

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {COLORS} from '../../assets/Colors';
+import {FontSize} from "../../assets/FontSize";
 import {
     Dimensions,
     Keyboard,
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         // justifyContent: 'center',
-        width: '85%',
+        width: Width*0.83,
     },
     titleContainer:{
         width:'100%',
@@ -132,12 +133,12 @@ const styles = StyleSheet.create({
         marginTop:Height*0.093
     },
     title:{
-        fontSize:Width*0.06,
+        fontSize:FontSize.TITLE,
         color:COLORS.SUB_COLOR,
         marginBottom: 10
     },
     subTitle:{
-        fontSize:Width*0.03,
+        fontSize:FontSize.SUB_TITLE,
         color:COLORS.DARK_GRAY,
     },
     contentContainer: {
