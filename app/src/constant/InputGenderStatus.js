@@ -1,4 +1,4 @@
 export const INPUT_GENDER_STATUS = {
   NONE: 'NONE',
-  SELECTED: 'SELECTED'
+  SELECTED: 'SELECTED',
 };

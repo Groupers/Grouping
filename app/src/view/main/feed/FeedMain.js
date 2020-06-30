@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {inject, observer} from 'mobx-react';
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import {ScrollView, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import FeedMainHeader from './FeedMainHeader';
 
 class FeedMain extends Component {
@@ -10,11 +10,7 @@ class FeedMain extends Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  componentDidUpdate(
-    prevProps: Readonly<P>,
-    prevState: Readonly<S>,
-    snapshot: SS,
-  ) {}
+  componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
 
   // 친구목록, 채팅, 모임찾기, 마이페이지
 

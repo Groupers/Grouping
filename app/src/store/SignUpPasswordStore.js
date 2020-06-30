@@ -5,7 +5,9 @@ import PasswordValidator from '../component/PasswordValidator';
 
 export default class SignUpPasswordStore {
   @observable passwordText = '';
+
   @observable passwordValidation = INPUT_PASSWORD_STATUS.NONE;
+
   @observable isShowPassword = false;
 
   passwordValidator = new PasswordValidator();
@@ -22,7 +24,7 @@ export default class SignUpPasswordStore {
     this.isShowPassword = !this.isShowPassword;
   };
 
-  @action passwordTextChanged = text => {
+  @action passwordTextChanged = (text) => {
     if (String(text).length === 0) {
       this.passwordValidation = INPUT_PASSWORD_STATUS.NONE;
       this.passwordText = text;
@@ -46,9 +48,9 @@ export default class SignUpPasswordStore {
 
   @computed get errorMessage() {
     if (this.passwordValidation === INPUT_PASSWORD_STATUS.NOT_FORMATTED) {
-      return "8자 이상이어야 합니다.";
+      return '8자 이상이어야 합니다.';
     }
 
-    return "";
+    return '';
   }
 }

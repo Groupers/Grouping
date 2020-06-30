@@ -8,13 +8,17 @@ import BirthdayValidator from '../component/BirthdayValidator';
 
 export default class SignUpBasicInfoStore {
   birthdayValidator = new BirthdayValidator();
+
   @observable nameText = '';
+
   @observable nameValidation = SIGN_UP_NAME_STATUS.NONE;
 
   @observable gender = null;
+
   @observable genderValidation = INPUT_GENDER_STATUS.NONE;
 
   @observable birthdayText = '';
+
   @observable birthdayValidation = INPUT_BIRTHDAY_STATUS.NONE;
 
   constructor(signProcessStore: SignProcessStore) {
@@ -22,14 +26,10 @@ export default class SignUpBasicInfoStore {
   }
 
   @action completeBasicInfo = () => {
-    this.signProcessStore.basicInfoCompleted(
-      this.nameText,
-      this.gender,
-      this.birthdayText
-    );
+    this.signProcessStore.basicInfoCompleted(this.nameText, this.gender, this.birthdayText);
   };
 
-  @action nameTextChanged = text => {
+  @action nameTextChanged = (text) => {
     this.nameText = text;
     if (String(this.nameText).length === 0) {
       this.nameValidation = SIGN_UP_NAME_STATUS.NONE;
@@ -40,7 +40,7 @@ export default class SignUpBasicInfoStore {
     this.nameValidation = SIGN_UP_NAME_STATUS.SUCCEED;
   };
 
-  @action genderSelected = isMale => {
+  @action genderSelected = (isMale) => {
     if (isMale) {
       this.gender = GENDER.MALE;
     } else {
@@ -50,14 +50,14 @@ export default class SignUpBasicInfoStore {
     this.genderValidation = INPUT_GENDER_STATUS.SELECTED;
   };
 
-  @action birthdayChanged = birthday => {
+  @action birthdayChanged = (birthday) => {
     if (String(birthday).length === 0) {
       this.birthdayValidation = INPUT_BIRTHDAY_STATUS.NONE;
       this.birthdayText = birthday;
       return;
     }
 
-    if (birthday[birthday.length - 1] === ".") {
+    if (birthday[birthday.length - 1] === '.') {
       birthday = birthday.toString().slice(0, birthday.length - 1);
     }
 
@@ -68,12 +68,11 @@ export default class SignUpBasicInfoStore {
     this.birthdayText = birthday;
 
     if (this.birthdayText.length === 5 || this.birthdayText.length === 8) {
-      this.birthdayText =
-        this.birthdayText.toString().slice(0, birthday.length - 1) +
-        '.' +
-        this.birthdayText
-          .toString()
-          .slice(birthday.length - 1, birthday.length);
+      this.birthdayText = `${this.birthdayText
+        .toString()
+        .slice(0, birthday.length - 1)}.${this.birthdayText
+        .toString()
+        .slice(birthday.length - 1, birthday.length)}`;
     }
 
     console.log(this.birthdayValidator.validateBirthday(this.birthdayText));
@@ -84,23 +83,18 @@ export default class SignUpBasicInfoStore {
     }
 
     this.birthdayValidation = INPUT_BIRTHDAY_STATUS.NOT_FORMATTED;
-    console.log(
-      this.nameValidation +
-        ':' +
-        this.genderValidation +
-        ':' +
-        this.birthdayValidation
-    );
+    console.log(`${this.nameValidation}:${this.genderValidation}:${this.birthdayValidation}`);
   };
+
   @computed get errorMessage() {
-    if(this.nameValidation === SIGN_UP_NAME_STATUS.NOT_FORMATTED){
-      return "이름 형식이 맞지 않습니다.";
+    if (this.nameValidation === SIGN_UP_NAME_STATUS.NOT_FORMATTED) {
+      return '이름 형식이 맞지 않습니다.';
     }
 
-    if(this.birthdayValidation === INPUT_BIRTHDAY_STATUS.NOT_FORMATTED){
-      return "생년월일 형식이 올바르지 않습니다.";
+    if (this.birthdayValidation === INPUT_BIRTHDAY_STATUS.NOT_FORMATTED) {
+      return '생년월일 형식이 올바르지 않습니다.';
     }
-    return "";
+    return '';
   }
 
   @computed get isValidInputData() {
@@ -112,16 +106,10 @@ export default class SignUpBasicInfoStore {
   }
 
   @computed get isMaleSelected() {
-    return (
-      this.genderValidation === INPUT_GENDER_STATUS.SELECTED &&
-      this.gender === GENDER.MALE
-    );
+    return this.genderValidation === INPUT_GENDER_STATUS.SELECTED && this.gender === GENDER.MALE;
   }
 
   @computed get isFemaleSelected() {
-    return (
-      this.genderValidation === INPUT_GENDER_STATUS.SELECTED &&
-      this.gender === GENDER.FEMALE
-    );
+    return this.genderValidation === INPUT_GENDER_STATUS.SELECTED && this.gender === GENDER.FEMALE;
   }
 }

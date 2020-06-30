@@ -17,6 +17,6 @@ export default class SignUpTermsAgreementStore {
   }
 
   @computed get errorMessage() {
-    return "";
+    return '';
   }
 }
