@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {COLORS} from '../../assets/Colors';
 import {
+    Dimensions,
     Keyboard,
     KeyboardAvoidingView,
     Platform,
@@ -24,6 +25,8 @@ import BirthdayInputView from './BirthdayInputView';
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
+const Width = Dimensions.get('window').width
+const Height = Dimensions.get('window').height
 
 @inject('signUpBasicInfoStore')
 @observer
@@ -56,15 +59,20 @@ class SignUpBasicInfo extends Component {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.inner}>
                         <View style={styles.contentContainer}>
-                            <LabelView text="Name"/>
+                            <View style={styles.titleContainer}>
+                                <Text style={styles.title}>필수 정보 입력</Text>
+                                <Text style={styles.subTitle}>그루핑 활동 시 사용될 정보를 입력해주세요</Text>
+                            </View>
+                            <View height={Width*0.0781}/>
+                            <LabelView text="닉네임"/>
                             <NameInputTextView
                                 text={this.props.signUpBasicInfoStore.nameText}
                                 onChangeText={this.props.signUpBasicInfoStore.nameTextChanged.bind(
                                     this
                                 )}
                             />
-
-                            <LabelView text="Gender"/>
+                            <View height={Width*0.081}/>
+                            <LabelView text="성별"/>
                             <GenderInputView
                                 isMaleSelected={this.props.signUpBasicInfoStore.isMaleSelected}
                                 isFemaleSelected={
@@ -74,7 +82,8 @@ class SignUpBasicInfo extends Component {
                                     this
                                 )}
                             />
-                            <LabelView text="Birthday"/>
+                            <View height={Width*0.06}/>
+                            <LabelView text="생년월일"/>
                             <BirthdayInputView
                                 text={this.props.signUpBasicInfoStore.birthdayText}
                                 onChangeText={this.props.signUpBasicInfoStore.birthdayChanged.bind(
@@ -88,7 +97,7 @@ class SignUpBasicInfo extends Component {
                         <View style={styles.bottomContainer}>
                             <SignUpNextButton
                                 isActive={this.props.signUpBasicInfoStore.isValidInputData}
-                                text="Next"
+                                text="등 록"
                                 onClick={this.signUpNextButtonClicked.bind(this)}
                             />
                         </View>
@@ -106,7 +115,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%'
+        width: '100%',
     },
 
     inner: {
@@ -114,22 +123,34 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.MAIN_COLOR,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
+        // justifyContent: 'center',
+        width: '85%',
     },
-
+    titleContainer:{
+        width:'100%',
+        justifyContent:'flex-start',
+        marginTop:Height*0.093
+    },
+    title:{
+        fontSize:Width*0.06,
+        color:COLORS.SUB_COLOR,
+        marginBottom: 10
+    },
+    subTitle:{
+        fontSize:Width*0.03,
+        color:COLORS.DARK_GRAY,
+    },
     contentContainer: {
-        flex: 5,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     bottomContainer: {
         flex: 1,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        marginBottom: 30,
+        marginBottom: Height*0.082,
     },
 });
 

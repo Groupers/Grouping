@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, Text, StyleSheet, Platform} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, Platform, Dimensions} from 'react-native';
 import {COLORS} from '../../assets/Colors';
 
+const Width = Dimensions.get('window').width
+const Height = Dimensions.get('window').height
 export default class SignUpNextButton extends Component {
     constructor(props) {
         super(props);
@@ -45,16 +47,16 @@ export default class SignUpNextButton extends Component {
 
 const styles = StyleSheet.create({
     button: {
-        width: '90%',
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
         backgroundColor: COLORS.MAIN_COLOR,
         borderRadius: 5,
-        height: 50,
+        height: Width*0.068,
     },
     title: {
-        fontSize: 14,
+        fontSize: Width*0.035,
         fontWeight: '600',
         color: 'white',
         alignSelf:'center',

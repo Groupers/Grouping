@@ -4,5 +4,6 @@ export const COLORS = {
     //mainRed
     SUB_COLOR: '#d70000',
     BORDER_GRAY: 'gray',
-    FONT_GRAY:'#c9c9c9'
+    FONT_GRAY:'#c9c9c9',
+    DARK_GRAY:'#707070'
 };
