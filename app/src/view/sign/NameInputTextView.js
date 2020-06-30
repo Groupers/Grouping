@@ -1,6 +1,8 @@
 import React from 'react';
 import {COLORS} from '../../assets/Colors';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View,Dimensions} from 'react-native';
+import {INPUT_BIRTHDAY_STATUS} from "../../constant/InputBirthdayStatus";
+import {Icon} from "react-native-elements";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -9,7 +11,8 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-
+const Width = Dimensions.get('window').width
+const Height = Dimensions.get('window').height
 export default class NameInputTextView extends React.Component {
     constructor(props) {
         super(props);
@@ -31,16 +34,21 @@ export default class NameInputTextView extends React.Component {
                 <TextInput
                     style={styles.name}
                     maxLength={10}
-                    placeholder="이름"
+                    // placeholder="닉네임"
                     autoCorrect={false}
                     clearTextOnFocus={false}
-                    placeholderTextColor={COLORS.MAIN_COLOR}
+                    placeholderTextColor={COLORS.FONT_GRAY}
                     value={this.props.text}
                     onChangeText={
                         this.props.onChangeText != null
                             ? text => this.props.onChangeText(text)
                             : null
                     }
+                />
+                <Icon
+                    size={Width*0.045}
+                    color={this.props.birthdayValidation ===INPUT_BIRTHDAY_STATUS.SUCCEED ? COLORS.SUB_COLOR : COLORS.FONT_GRAY}
+                    name="check-circle"
                 />
             </View>
         );
@@ -49,17 +57,19 @@ export default class NameInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
     nameContainer: {
-        borderColor: '#FFF',
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
         borderBottomWidth: 1,
-        width: '90%',
-        margin: 10,
+        borderColor: COLORS.FONT_GRAY,
     },
 
     name: {
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 10,
+        // margin:5,
         color: 'black',
+        fontSize: 12,
     },
 });
