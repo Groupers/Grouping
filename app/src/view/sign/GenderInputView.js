@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
 import { COLORS } from '../../assets/Colors';
+import { GENDER } from '../../constant/Gender';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -9,7 +10,8 @@ import { COLORS } from '../../assets/Colors';
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
 export default class GenderInputView extends React.Component {
   constructor(props) {
     super(props);
@@ -17,13 +19,15 @@ export default class GenderInputView extends React.Component {
 
   buttonStyle = function (isActive) {
     return {
-      width: '45%',
+      width: '48%',
       alignItems: 'center',
       justifyContent: 'center',
-      marginRight: 10,
-      marginLeft: 10,
-      backgroundColor: isActive === true ? '#FFF' : COLORS.MAIN_COLOR,
-      padding: 15,
+      paddingTop: 10,
+      paddingBottom: 10,
+      borderRadius: 20,
+      // backgroundColor: isActive === true ? COLORS.FONT_GRAY : COLORS.MAIN_COLOR,
+      borderColor: isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
+      borderWidth: 1,
     };
   };
 
@@ -43,13 +47,13 @@ export default class GenderInputView extends React.Component {
           onPress={() => this.props.genderSelected(true)}
           style={this.buttonStyle(this.props.isMaleSelected)}
         >
-          <Text style={styles.text}>Male</Text>
+          <Text style={styles.text}>남자</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.props.genderSelected(false)}
           style={this.buttonStyle(this.props.isFemaleSelected)}
         >
-          <Text style={styles.text}>Female</Text>
+          <Text style={styles.text}>여자</Text>
         </TouchableOpacity>
       </View>
     );
@@ -59,23 +63,20 @@ export default class GenderInputView extends React.Component {
 const styles = StyleSheet.create({
   genderContainer: {
     flexDirection: 'row',
-    width: '90%',
-    margin: 10,
+    justifyContent: 'space-between',
+    width: '100%',
+    margin: Height * 0.013,
   },
 
   gender: {
-    width: '45%',
-    backgroundColor: '#FFF',
+    width: '48%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
-    marginLeft: 10,
     color: COLORS.MAIN_COLOR,
-    padding: 15,
   },
 
   text: {
-    color: 'black',
-    fontSize: 20,
+    // color: COLORS.FONT_GRAY,
+    fontSize: Width * 0.025,
   },
 });

@@ -75,12 +75,13 @@ class Entrance extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Navigator initialRouteName="SignUpBasicInfo">
           <Stack.Screen
             name="SignIn"
             options={{
+              // title: 'Sign In',
               headerStyle: {
-                backgroundColor: '#f9f9f9',
+                backgroundColor: COLORS.MAIN_COLOR,
               },
               headerTintColor: 'black',
               headerTitleStyle: {
@@ -91,6 +92,7 @@ class Entrance extends React.Component {
           >
             {(props) => <SignIn {...props} />}
           </Stack.Screen>
+
           <Stack.Screen
             name="SignUpEmail"
             options={{
@@ -128,12 +130,13 @@ class Entrance extends React.Component {
             options={{
               title: 'Sign Up basic info',
               headerStyle: {
-                backgroundColor: Colors.primary,
+                backgroundColor: COLORS.MAIN_COLOR,
               },
               headerTintColor: 'black',
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
+              headerShown: false,
             }}
           >
             {(props) => <SignUpBasicInfo {...props} />}
@@ -162,6 +165,7 @@ class Entrance extends React.Component {
                 elevation: 0,
               },
               headerTitle: '',
+              headerShown: false,
               // headerBackTitle:"<",
               headerBackImage: () => {
                 return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;

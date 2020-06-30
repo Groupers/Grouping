@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
 import { COLORS } from '../../assets/Colors';
+import { FontSize } from '../../assets/FontSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -9,7 +10,8 @@ import { COLORS } from '../../assets/Colors';
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
 export default class LabelView extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     color: COLORS.FONT_GRAY,
-    fontSize: 14,
+    fontSize: FontSize.LABEL,
     // fontWeight: '600',
     fontFamily: 'NotoSansKR-Medium',
   },
