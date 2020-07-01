@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../assets/Colors';
-import { FontSize } from '../../assets/FontSize';
+import { FontSize } from '../../constant/FontSize';
 import SignUpNextButton from './SignUpNextButton';
 import NameInputTextView from './NameInputTextView';
 import LabelView from './LabelView';
