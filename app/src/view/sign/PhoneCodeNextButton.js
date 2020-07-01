@@ -13,7 +13,7 @@ export default class PhoneCodeNextButton extends Component {
       alignItems: 'center',
       justifyContent: 'center',
       height: 25,
-      backgroundColor: this.props.isActive === true ? COLORS.SUB_COLOR : '#FFF',
+      backgroundColor: this.props.isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
       borderRadius: 8,
       // marginBottom: this.props.isKeyboardShow
       //   ? this.props.keyboardHeight - 15
