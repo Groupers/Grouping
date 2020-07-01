@@ -131,3 +131,9 @@ samples/ios/Continote/Continote/FCNContinue.m
 
 # Misc.
 *.swp
+
+.watchmanconfig
+.gitattributes
+# .eslintrc.js
+.buckconfig
+.flowconfig

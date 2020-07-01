@@ -12,8 +12,11 @@ export default class SignProcessStore {
   @observable groupingUserDto = new GroupingUserDto();
 
   @observable isKeyboardShow = false;
+
   @observable keyboardHeight = 0;
+
   @observable normalHeight = 0;
+
   @observable shortHeight = 0;
 
   constructor(userStore: UserStore) {
@@ -39,18 +42,15 @@ export default class SignProcessStore {
     this.signViewStatus = SIGN_VIEW_STATUS.SIGN_UP_STARTED;
   };
 
-  @action emailCompleted = async email => {
-    let isSucceed = await this.signRepository.enrollEmail(
-      email,
-      responseCode => {}
-    );
+  @action emailCompleted = async (email) => {
+    const isSucceed = await this.signRepository.enrollEmail(email, (responseCode) => {});
     if (isSucceed) {
       this.groupingUserDto.email = email;
       this.signViewStatus = SIGN_VIEW_STATUS.EMAIL_COMPLETED;
     }
   };
 
-  @action passwordCompleted = password => {
+  @action passwordCompleted = (password) => {
     this.signViewStatus = SIGN_VIEW_STATUS.PASSWORD_COMPLETED;
     this.groupingUserDto.password = password;
   };
@@ -62,11 +62,8 @@ export default class SignProcessStore {
     this.groupingUserDto.birthday = birthday;
   };
 
-  @action phoneCompleted = async phoneNumber => {
-    let isSucceed = await this.signRepository.enrollPhoneNumber(
-      phoneNumber,
-      () => {}
-    );
+  @action phoneCompleted = async (phoneNumber) => {
+    const isSucceed = await this.signRepository.enrollPhoneNumber(phoneNumber, () => {});
 
     if (isSucceed === true) {
       this.signViewStatus = SIGN_VIEW_STATUS.PHONE_COMPLETED;
@@ -75,9 +72,9 @@ export default class SignProcessStore {
   };
 
   @action termsAgreementCompleted = async () => {
-    let groupingUserDto = await this.signRepository.completeSignUp(
+    const groupingUserDto = await this.signRepository.completeSignUp(
       this.groupingUserDto,
-      responseCode => {}
+      (responseCode) => {}
     );
     this.userStore.signUpCompleted(groupingUserDto);
   };

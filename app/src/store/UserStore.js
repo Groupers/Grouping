@@ -6,7 +6,9 @@ import UserTable from '../table/UserTable';
 
 export default class UserStore {
   userRepository = new UserRepository();
+
   userTable = new UserTable();
+
   groupingUser: GroupingUserDto;
 
   @observable userStatus = USER_STATUS.READY;

@@ -1,5 +1,5 @@
-import { GROUPING_VIEW_STATUS } from '../constant/GroupingViewStatus';
 import { action, computed, observable } from 'mobx';
+import { GROUPING_VIEW_STATUS } from '../constant/GroupingViewStatus';
 import MainStore from './MainStore';
 
 export default class GroupingStore {
@@ -30,7 +30,6 @@ export default class GroupingStore {
     if (this.groupingViewStatus === GROUPING_VIEW_STATUS.ADDRESS_SEARCH) {
       return true;
     }
-
     return false;
   }
 }
