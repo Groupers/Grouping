@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
 import { COLORS } from '../../assets/Colors';
-import { FontSize } from '../../assets/FontSize';
+import { FontSize } from '../../constant/FontSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -36,6 +37,7 @@ export default class LabelView extends React.Component {
 }
 
 const styles = StyleSheet.create({
+
   labelContainer: {
     borderColor: COLORS.MAIN_COLOR,
     width: '100%',

@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-
   inner: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
