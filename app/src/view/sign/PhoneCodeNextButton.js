@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {COLORS} from '../../assets/Colors';
+import {inject, observer} from "mobx-react";
+import {FontSize} from "../../constant/FontSize";
 
 export default class PhoneCodeNextButton extends Component {
     constructor(props) {
@@ -13,7 +15,7 @@ export default class PhoneCodeNextButton extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             height: 25,
-            backgroundColor: this.props.isActive === true ? COLORS.SUB_COLOR : '#FFF',
+            backgroundColor: this.props.isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
             borderRadius: 8,
             // marginBottom: this.props.isKeyboardShow
             //   ? this.props.keyboardHeight - 15
@@ -35,9 +37,10 @@ export default class PhoneCodeNextButton extends Component {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 12,
+        fontSize: FontSize.SUB_TITLE,
         fontWeight: '600',
         color: 'white',
-        fontFamily:'NotoSansKR-Medium'
+        alignSelf:'center',
+        // fontFamily:'NotoSansKR-Medium'
     },
 });

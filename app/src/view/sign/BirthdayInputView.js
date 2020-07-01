@@ -3,6 +3,8 @@ import {COLORS} from '../../assets/Colors';
 import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 import {Icon} from "react-native-elements";
 import {INPUT_BIRTHDAY_STATUS} from "../../constant/InputBirthdayStatus";
+import {inject, observer} from "mobx-react";
+import {observe} from "mobx";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -13,6 +15,9 @@ import {INPUT_BIRTHDAY_STATUS} from "../../constant/InputBirthdayStatus";
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 const Width = Dimensions.get('window').width
 const Height = Dimensions.get('window').height
+
+@inject('signUpBasicInfoStore')
+@observer
 export default class BirthdayInputView extends React.Component {
     constructor(props) {
         super(props);
@@ -46,7 +51,7 @@ export default class BirthdayInputView extends React.Component {
                 />
                 <Icon
                     size={Width*0.045}
-                    color={this.props.birthdayValidation ===INPUT_BIRTHDAY_STATUS.SUCCEED ? COLORS.SUB_COLOR : COLORS.FONT_GRAY}
+                    color={this.props.signUpBasicInfoStore.birthdayValidation ===INPUT_BIRTHDAY_STATUS.SUCCEED ? COLORS.SUB_COLOR : COLORS.FONT_GRAY}
                     name="check-circle"
                 />
             </View>

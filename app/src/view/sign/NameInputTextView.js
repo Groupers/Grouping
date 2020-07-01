@@ -3,6 +3,8 @@ import {COLORS} from '../../assets/Colors';
 import {StyleSheet, Text, TextInput, View,Dimensions} from 'react-native';
 import {INPUT_BIRTHDAY_STATUS} from "../../constant/InputBirthdayStatus";
 import {Icon} from "react-native-elements";
+import {SIGN_UP_NAME_STATUS} from "../../constant/SignUpNameStatus";
+import {inject, observer} from "mobx-react";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -13,6 +15,9 @@ import {Icon} from "react-native-elements";
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 const Width = Dimensions.get('window').width
 const Height = Dimensions.get('window').height
+
+@inject('signUpBasicInfoStore')
+@observer
 export default class NameInputTextView extends React.Component {
     constructor(props) {
         super(props);
@@ -29,12 +34,13 @@ export default class NameInputTextView extends React.Component {
     // 예: return nextProps.id !== this.props.id;
     // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
     render() {
+
         return (
             <View style={styles.nameContainer}>
                 <TextInput
                     style={styles.name}
                     maxLength={10}
-                    // placeholder="닉네임"
+                    placeholder="닉네임"
                     autoCorrect={false}
                     clearTextOnFocus={false}
                     placeholderTextColor={COLORS.FONT_GRAY}
@@ -47,7 +53,7 @@ export default class NameInputTextView extends React.Component {
                 />
                 <Icon
                     size={Width*0.045}
-                    color={this.props.birthdayValidation ===INPUT_BIRTHDAY_STATUS.SUCCEED ? COLORS.SUB_COLOR : COLORS.FONT_GRAY}
+                    color={this.props.signUpBasicInfoStore.nameValidation ===SIGN_UP_NAME_STATUS.SUCCEED ? COLORS.SUB_COLOR : COLORS.FONT_GRAY}
                     name="check-circle"
                 />
             </View>

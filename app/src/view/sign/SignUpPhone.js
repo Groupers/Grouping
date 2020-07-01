@@ -88,6 +88,7 @@ class SignUpPhone extends React.Component {
                             </View>
                             {this.props.signUpPhoneStore.phoneValidationViewStatus ===
                             SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? (
+                                <View>
                                 <View style={styles.phoneCodeContainer}>
                                     <PhoneCodeInputTextView
                                         onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(
@@ -104,10 +105,12 @@ class SignUpPhone extends React.Component {
                                     {/*/>*/}
                                     <Text>3:00</Text>
                                 </View>
+                                <SignErrorMessageView
+                                    text={this.props.signUpPhoneStore.errorMessage}
+                                />
+                                </View>
                             ) : null}
-                            <SignErrorMessageView
-                                text={this.props.signUpPhoneStore.errorMessage}
-                            />
+
                             <View style={styles.bottomContainer}>
                                 <SignUpNextButton
                                     isActive={this.props.signUpPhoneStore.isAllCompleted}
