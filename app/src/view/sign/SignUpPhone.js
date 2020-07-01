@@ -52,6 +52,10 @@ class SignUpPhone extends React.Component {
     this.props.navigation.navigate('SignUpTermsAgreement');
   }
 
+  async authorizeButtonClicked() {
+    await this.props.signUpPhoneStore.sendPhoneCode();
+  }
+
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
   // 예: return nextProps.id !== this.props.id;
@@ -80,7 +84,7 @@ class SignUpPhone extends React.Component {
                       ? '재인증'
                       : '인 증'
                   }
-                  onClick={this.props.signUpPhoneStore.sendPhoneCode.bind(this)}
+                  onClick={this.authorizeButtonClicked.bind(this)}
                 />
               </View>
               {this.props.signUpPhoneStore.phoneValidationViewStatus ===
