@@ -1,5 +1,4 @@
 import React from 'react';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -60,7 +59,7 @@ class SignUpPhone extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

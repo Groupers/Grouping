@@ -5,7 +5,6 @@ import Splash from './app/src/view/Splash';
 import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
-import ChatRoomMain from './app/src/view/main/chat/room/ChatRoomMain';
 
 @inject('userStore')
 @observer
@@ -29,10 +28,10 @@ class App extends Component {
     }
     return (
       <View style={styles.body}>
-        {/* <Entrance/> */}
+        <Entrance />
         {/* {view} */}
         {/* <ChatRoomMain/> */}
-        <Main />
+        {/* <Main /> */}
       </View>
     );
   }
