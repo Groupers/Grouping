@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {inject, observer} from 'mobx-react';
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 class FeedMainHeader extends Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -9,11 +9,7 @@ class FeedMainHeader extends Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  componentDidUpdate(
-    prevProps: Readonly<P>,
-    prevState: Readonly<S>,
-    snapshot: SS,
-  ) {}
+  componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
 
   // 친구목록, 채팅, 모임찾기, 마이페이지
 
@@ -34,6 +30,5 @@ const styles = StyleSheet.create({
     height: 60,
   },
 });
-
 
 export default FeedMainHeader;

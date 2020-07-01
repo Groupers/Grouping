@@ -40,9 +40,7 @@ export default class AddressSearchTextView extends Component {
               placeholderTextColor="#ddd"
               value={this.props.value}
               onChangeText={
-                this.props.onChangeText != null
-                  ? text => this.props.onChangeText(text)
-                  : null
+                this.props.onChangeText != null ? (text) => this.props.onChangeText(text) : null
               }
             />
           </View>
@@ -66,11 +64,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 
-  searchIcon:{
-  },
+  searchIcon: {},
 
   search: {
-    flex:1,
+    flex: 1,
     fontSize: 20,
     marginLeft: 15,
     color: '#fff',

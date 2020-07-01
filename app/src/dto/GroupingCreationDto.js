@@ -1,5 +1,6 @@
 export default class GroupingCreationDto {
-  title ='';
+  title = '';
+
   keyword: [];
 
   constructor(data = {}) {

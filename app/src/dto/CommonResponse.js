@@ -1,7 +1,10 @@
 export default class CommonResponse {
   code;
+
   message;
+
   data;
+
   errorInfo;
 
   constructor(data = {}) {

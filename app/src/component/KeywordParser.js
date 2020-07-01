@@ -1,8 +1,8 @@
 export default class KeywordParser {
-  parseKeyword = keywordString => {
+  parseKeyword = (keywordString) => {
     const expression = /^\#{2,}$/;
 
-    let keywordList = String(keywordString).split('#');
+    const keywordList = String(keywordString).split('#');
 
     const refinedKeywordList = [];
 
@@ -12,8 +12,7 @@ export default class KeywordParser {
       }
     });
     if (
-      (refinedKeywordList.length === 1 &&
-        expression.test(String(keywordString))) ||
+      (refinedKeywordList.length === 1 && expression.test(String(keywordString))) ||
       refinedKeywordList.length > 0
     ) {
       return true;
