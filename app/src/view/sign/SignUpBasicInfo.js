@@ -26,7 +26,6 @@ import BirthdayInputView from './BirthdayInputView';
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
@@ -108,6 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+
   inner: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
