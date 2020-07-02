@@ -2,7 +2,7 @@ import { action, computed, observable } from 'mobx';
 import SignProcessStore from './SignProcessStore';
 
 export default class SignUpTermsAgreementStore {
-  @observable termsAgreementValidation = true;
+  @observable termsAgreementValidation = false;
 
   constructor(signProcessStore: SignProcessStore) {
     this.signProcessStore = signProcessStore;

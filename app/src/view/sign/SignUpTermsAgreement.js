@@ -64,6 +64,8 @@ class SignUpTermsAgreement extends React.Component {
                   title="이용약관, 개인정보 수집 및 이용, 프로모션 안내메일 수신(선택)에 모두 동의합니다."
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  // onValueChange={setSelection}
+                  // value={isSelected}
                   // checked={this.state.checked}
                 />
               </View>
@@ -96,6 +98,9 @@ class SignUpTermsAgreement extends React.Component {
                   title="이벤트 등 프로모션 알림 메일 수신 (선택)"
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  // onPress={()=> {}}
+                  // checked={false}
+                    value={false}
                   // checked={this.state.checked}
                 />
               </View>
