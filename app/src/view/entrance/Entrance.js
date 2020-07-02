@@ -75,7 +75,7 @@ class Entrance extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignUpPassword">
+        <Stack.Navigator initialRouteName="SignUpBasicInfo">
           <Stack.Screen
             name="SignIn"
             options={{

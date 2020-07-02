@@ -9,13 +9,12 @@ export default class SignUpNextButton extends Component {
     super(props);
   }
 
-  buttonStyle = function () {
+  buttonStyle = function (isActive) {
     return {
       width: '100%',
       height: 40,
-      // backgroundColor: this.props.isActive === true ? '#888' : '#d70000',
       borderRadius: 5,
-      backgroundColor: COLORS.SUB_COLOR,
+      backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
       justifyContent: 'center',
       ...Platform.select({
         ios: {
@@ -36,7 +35,7 @@ export default class SignUpNextButton extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={this.buttonStyle()}
+        style={this.buttonStyle(this.props.isActive)}
         onPress={this.props.isActive ? () => this.props.onClick() : null}
       >
         <Text style={styles.title}>{this.props.text}</Text>
@@ -60,6 +59,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: 'white',
     alignSelf: 'center',
-    fontFamily: 'NotoSansKR-Medium',
   },
 });
