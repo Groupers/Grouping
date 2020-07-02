@@ -17,6 +17,7 @@ import { SIGN_UP_PHONE_VIEW_STATUS } from '../../constant/SignUpPhoneStatus';
 import PhoneCodeInputTextView from './PhoneCodeInputTextView';
 import PhoneCodeNextButton from './PhoneCodeNextButton';
 import { COLORS } from '../../assets/Colors';
+import PhoneAuthTimer from '../../component/PhoneAuthTimer';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -84,6 +85,7 @@ class SignUpPhone extends React.Component {
                       ? '재인증'
                       : '인 증'
                   }
+                  onPress={() => alert("인증번호 발송")}
                   onClick={this.authorizeButtonClicked.bind(this)}
                 />
               </View>
@@ -101,7 +103,8 @@ class SignUpPhone extends React.Component {
                   {/*        this */}
                   {/*    )} */}
                   {/* /> */}
-                  <Text>3:00</Text>
+                  <PhoneAuthTimer />
+                  {/* <Text>3:00</Text> */}
                 </View>
               ) : null}
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />

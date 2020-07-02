@@ -23,6 +23,7 @@
     "mobx-react": "^6.2.2",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-background-timer": "^2.2.0",
     "react-native-cn-richtext-editor": "^2.0.0-rc3",
     "react-native-elements": "^2.0.0",
     "react-native-gesture-handler": "^1.6.1",
@@ -59,6 +60,7 @@
     "metro-react-native-babel-preset": "^0.56.0",
     "patch-package": "^6.1.4",
     "prettier": "^2.0.5",
+    "prop-types": "^15.7.2",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-size-matters": "^0.3.0",
     "react-native-svg": "^12.1.0",
@@ -67,5 +69,4 @@
   "jest": {
     "preset": "react-native"
   }
-
 }

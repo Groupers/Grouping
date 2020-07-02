@@ -46,6 +46,8 @@ target 'Grouping' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 
+  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
+
   target 'GroupingTests' do
     inherit! :search_paths
     # Pods for testing
