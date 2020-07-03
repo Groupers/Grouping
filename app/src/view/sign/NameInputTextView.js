@@ -14,8 +14,8 @@ import {FontSize} from "../../constant/FontSize";
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-const Width = Dimensions.get('window').width
-const Height = Dimensions.get('window').height
+const WINDOW_WIDTH = Dimensions.get('window').width
+const WINDOW_HEIGHT = Dimensions.get('window').height
 @inject('signUpBasicInfoStore')
 @observer
 export default class NameInputTextView extends React.Component {
@@ -51,7 +51,7 @@ export default class NameInputTextView extends React.Component {
                     }
                 />
                 <Icon
-                    size={Width*0.045}
+                    size={WINDOW_WIDTH*0.045}
                     color={this.props.signUpBasicInfoStore.nameValidation ===SIGN_UP_NAME_STATUS.SUCCEED? COLORS.SUB_COLOR : COLORS.FONT_GRAY}
                     name="check-circle"
                 />
@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
         // margin:5,
         color: 'black',
         fontSize: FontSize.SUB_TITLE,
-        paddingVertical:Height*0.015
+        paddingVertical:WINDOW_HEIGHT*0.015
     },
 });

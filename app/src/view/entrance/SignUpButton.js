@@ -31,6 +31,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 23,
     fontWeight: '600',
-    fontFamily:'NotoSansKR-Medium'
   },
 });
