@@ -31,6 +31,13 @@ export default class GenderInputView extends React.Component {
     };
   };
 
+  textStyle= function (isActive){
+    return{
+      color: isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
+      fontSize: Width * 0.025,
+    }
+  }
+
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // SetTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
@@ -47,13 +54,13 @@ export default class GenderInputView extends React.Component {
           onPress={() => this.props.genderSelected(true)}
           style={this.buttonStyle(this.props.isMaleSelected)}
         >
-          <Text style={styles.text}>남자</Text>
+          <Text style={this.textStyle(this.props.isMaleSelected)}>남자</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.props.genderSelected(false)}
           style={this.buttonStyle(this.props.isFemaleSelected)}
         >
-          <Text style={styles.text}>여자</Text>
+          <Text style={this.textStyle(this.props.isFemaleSelected)}>여자</Text>
         </TouchableOpacity>
       </View>
     );
