@@ -4,7 +4,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -85,7 +84,6 @@ class SignUpPhone extends React.Component {
                       ? '재인증'
                       : '인 증'
                   }
-                  onPress={() => alert("인증번호 발송")}
                   onClick={this.authorizeButtonClicked.bind(this)}
                 />
               </View>
@@ -104,7 +102,6 @@ class SignUpPhone extends React.Component {
                   {/*    )} */}
                   {/* /> */}
                   <PhoneAuthTimer />
-                  {/* <Text>3:00</Text> */}
                 </View>
               ) : null}
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
