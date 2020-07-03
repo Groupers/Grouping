@@ -26,9 +26,8 @@ import BirthdayInputView from './BirthdayInputView';
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-
-const Width = Dimensions.get('window').width;
-const Height = Dimensions.get('window').height;
+const WINDOW_WIDTH = Dimensions.get('window').width;
+const WINDOW_HEIGHT = Dimensions.get('window').height;
 
 @inject('signUpBasicInfoStore')
 @observer
@@ -64,20 +63,20 @@ class SignUpBasicInfo extends Component {
                 <Text style={styles.title}>필수 정보 입력</Text>
                 <Text style={styles.subTitle}>그루핑 활동 시 사용될 정보를 입력해주세요</Text>
               </View>
-              <View height={Width * 0.0781} />
+              <View height={WINDOW_WIDTH * 0.0781} />
               <LabelView text="닉네임" />
               <NameInputTextView
                 text={this.props.signUpBasicInfoStore.nameText}
                 onChangeText={this.props.signUpBasicInfoStore.nameTextChanged.bind(this)}
               />
-              <View height={Width * 0.081} />
+              <View height={WINDOW_WIDTH * 0.081} />
               <LabelView text="성별" />
               <GenderInputView
                 isMaleSelected={this.props.signUpBasicInfoStore.isMaleSelected}
                 isFemaleSelected={this.props.signUpBasicInfoStore.isFemaleSelected}
                 genderSelected={this.props.signUpBasicInfoStore.genderSelected.bind(this)}
               />
-              <View height={Width * 0.06} />
+              <View height={WINDOW_WIDTH * 0.06} />
               <LabelView text="생년월일" />
               <BirthdayInputView
                 text={this.props.signUpBasicInfoStore.birthdayText}
@@ -108,18 +107,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+
   inner: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
     // justifyContent: 'center',
-    width: Width * 0.83,
+    width: WINDOW_WIDTH * 0.83,
   },
   titleContainer: {
     width: '100%',
     justifyContent: 'flex-start',
-    marginTop: Height * 0.093,
+    marginTop: WINDOW_HEIGHT * 0.093,
   },
   title: {
     fontSize: FontSize.TITLE,
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    marginBottom: Height * 0.082,
+    marginBottom: WINDOW_HEIGHT * 0.082,
   },
 });
 

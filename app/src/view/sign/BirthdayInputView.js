@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { COLORS } from '../../assets/Colors';
 import { INPUT_BIRTHDAY_STATUS } from '../../constant/InputBirthdayStatus';
+import {inject, observer} from "mobx-react";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -14,6 +15,8 @@ import { INPUT_BIRTHDAY_STATUS } from '../../constant/InputBirthdayStatus';
 
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
+@inject('signUpBasicInfoStore')
+@observer
 export default class BirthdayInputView extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +26,6 @@ export default class BirthdayInputView extends React.Component {
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // SetTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
-
 
   // Prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
@@ -46,7 +48,7 @@ export default class BirthdayInputView extends React.Component {
         <Icon
           size={Width * 0.045}
           color={
-            this.props.birthdayValidation === INPUT_BIRTHDAY_STATUS.SUCCEED
+            this.props.signUpBasicInfoStore.birthdayValidation === INPUT_BIRTHDAY_STATUS.SUCCEED
               ? COLORS.SUB_COLOR
               : COLORS.FONT_GRAY
           }
