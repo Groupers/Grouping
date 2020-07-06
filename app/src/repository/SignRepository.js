@@ -13,7 +13,7 @@ export default class SignRepository {
     const response = await axios.get(`${TARGET_URL}/email`, {
       params: { email },
     });
-
+    console.log(response);
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {

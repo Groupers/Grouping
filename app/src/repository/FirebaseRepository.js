@@ -11,10 +11,10 @@ export default class FirebaseRepository {
     return confirmation;
   }
    */
-  sendSignUpPhoneCode = async (phoneNumber, timeOut, forceResend) => {
+  sendSignUpPhoneCode = async (phoneNumber, timeOut) => {
     const confirmation = await auth()
-      .verifyPhoneNumber(phoneNumber)
-      .on('state_changed', (phoneAuthSnapshot, timeOut, forceResend) => {
+      .verifyPhoneNumber(phoneNumber, timeOut)
+      .on('state_changed', (phoneAuthSnapshot, timeOut) => {
         if (phoneAuthSnapshot.state === auth.PhoneAuthState.CODE_SENT) {
           return Promise.resolve();
         }
@@ -28,6 +28,7 @@ export default class FirebaseRepository {
           console.error(error.message);
         }
       );
+    console.log(confirmation);
     return confirmation;
   };
 }

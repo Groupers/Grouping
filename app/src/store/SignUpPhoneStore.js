@@ -75,17 +75,15 @@ export default class SignUpPhoneStore {
   };
 
   @action sendPhoneCode = async () => {
-    /*  Error: Network Error
     const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
     if (data.phoneNumberAvailable !== true) {
       this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
       return;
     }
-     */
+    // 아래 코드 다시 예전 코드로 변경
     this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(
       this.phoneNumber,
-      2,
-      false
+      180
     );
     console.log(this.codeConfirmation);
     this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
