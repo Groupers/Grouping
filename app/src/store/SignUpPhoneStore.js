@@ -75,16 +75,20 @@ export default class SignUpPhoneStore {
   };
 
   @action sendPhoneCode = async () => {
-    /* const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
+    /*  Error: Network Error
+    const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
     if (data.phoneNumberAvailable !== true) {
       this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
       return;
-    } */
-    this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
-    // 아래 코드 firebase 연결 안됌
-    this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
+    }
+     */
+    this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(
+      this.phoneNumber,
+      2,
+      false
+    );
     console.log(this.codeConfirmation);
-    // this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
+    this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
   };
 
   @action phoneCodeChanged = (phoneCode) => {
