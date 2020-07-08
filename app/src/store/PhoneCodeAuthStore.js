@@ -9,5 +9,12 @@ export default class PhoneCodeAuthStore {
 
   @observable userInputPhoneCode = '';
 
+  @observable timeOut = 3;
+
+  @action startTimer() {
+    if (this.timeOut > 0) {
+      this.timeOut -= 1;
+    }
+  }
   //
 }
