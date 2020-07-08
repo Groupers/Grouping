@@ -133,6 +133,8 @@ export default class SignUpPhoneStore {
         this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_VALIDATION_SUCCEED;
       }
     }
+    console.log("성공여부 : ");
+    console.log(isSucceed);
   };
 
   @computed get isValidPhoneNumber() {
