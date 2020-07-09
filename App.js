@@ -16,7 +16,7 @@ class App extends Component {
   async componentDidMount() {
     // eslint-disable-next-line react/prop-types,react/destructuring-assignment
     await this.props.userStore.ready();
-    await this.props.friendListStore.fetchFriend();
+    await this.props.friendListStore.ready();
   }
 
   render() {
