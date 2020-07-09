@@ -1,95 +1,139 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { ScrollView, StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import {ScrollView, StyleSheet, Text, View, Dimensions, Image, FlatList, TouchableOpacity} from 'react-native';
 import { observable } from 'mobx';
 import { SERVER_URL } from '../../../constant/HttpProperty';
+import {inject, observer} from "mobx-react";
+import UserStore from "../../../store/UserStore";
+import UserRepository from "../../../repository/UserRepository";
+import GroupingUserDto from "../../../dto/GroupingUserDto";
+import UserTable from "../../../table/UserTable";
 
-const TARGET_URL = `${SERVER_URL}/users`;
+// const TARGET_URL = `http://ec2-3-34-97-95.ap-northeast-2.compute.amazonaws.com/v1/users/`;
 
-export default class FriendListData extends React.Component {
-  @observable state = {
-    info: [],
-  };
+@inject('friendListStore')
+@observer
+class FriendListData extends React.Component {
 
-  componentDidMount() {
-    axios.get(`${TARGET_URL}/auth`, {}).then((res) => {
-      this.setState({ info: res.data });
-    });
+  constructor(props) {
+    super(props);
   }
 
-  iconSrc = 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png';
+  // iconSrc = 'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png';
+
 
   render() {
     return (
       <View style={styles.contentContainer}>
-        <ScrollView style={{ flex: 1 }}>
-          {this.state.info.map((item) => (
-            <View key={item.userId} style={styles.friendContainer}>
-              <Image source={{ uri: item.representProfileImage }} style={styles.friendImage} />
-              <View style={styles.friendBody}>
-                <Text style={styles.name}>{item.name}</Text>
-                <Image source={{ uri: this.iconSrc }} style={styles.icon} />
-              </View>
-              <View style={styles.friendMusic}>
-                <Text style={styles.description}>{item.email}</Text>
-              </View>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+            data={this.props.friendListStore.userList}
+            keyExtractor={(x, i) => i}
+            renderItem={({item})=>(
+                <TouchableOpacity onPress={() => {}}>
+                  <View style={styles.itemContainer}>
+                    <Text>{item.name}</Text>
+                  </View>
+                </TouchableOpacity>
+          )} />
       </View>
     );
   }
+
+  // Item({ item }) {
+  //   return (
+  //       <TouchableOpacity onPress={() => {}}>
+  //         <View style={styles.itemContainer}>
+  //           <Text>{item.name}</Text>
+  //         </View>
+  //       </TouchableOpacity>
+  //   );
+  // }
+
 }
+
+
 
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     minWidth: 1,
     minHeight: 1,
-  },
-  friendContainer: {
+  },container: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'gold',
   },
-  friendImage: {
-    flex: 1,
-    backgroundColor: 'lightgray',
-    height: 60,
-    width: 60,
-    borderRadius: 20,
-    padding: 5,
-    marginLeft: 5,
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
-  friendBody: {
-    flex: 2,
-    paddingLeft: 20,
-    flexDirection: 'column',
-    marginTop: 10,
-    marginBottom: 15,
-    padding: 10,
+  title: {
+    fontSize: 32,
   },
-  name: {
-    flex: 2,
-    paddingTop: 10,
+  adArea: {
+    height: 70,
+    backgroundColor: 'tomato',
   },
-  icon: {
-    flex: 1,
-    backgroundColor: 'lightgray',
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    fontSize: 10,
-  },
-  friendMusic: {
-    flex: 2,
-    borderColor: 'green',
-    borderWidth: 3,
+  ad: {
+    height: 70,
     borderRadius: 10,
-    marginRight: 10,
-    paddingLeft: 10,
+    margin: 5,
+  },
+  listContainer: {
+    backgroundColor: 'tomato',
+    flex: 1,
+    height: '100%',
+  },
+  itemContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    flexDirection: 'row',
+    height: 80,
+  },
+  chatRoomImage: {
+    width: 65,
+    height: 65,
+    backgroundColor: '#eee',
+    alignItems: 'flex-start',
+    borderRadius: 25,
+    marginRight: 5,
+    borderWidth: 1,
+    borderColor: 'black',
+  },
+  chatRoomTitle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    flex: 1,
+  },
+  numberOfParticipants: {
+    fontSize: 14,
+    backgroundColor: '#eee',
+    borderRadius: 20,
+    padding: 3,
+    marginRight: 5,
+    marginLeft: 5,
+    height: 28,
+  },
+  lastMessageTime: {
+    color: 'gray',
+    fontSize: 12,
+    marginTop: 3,
+  },
+  lastMessage: {
+    color: 'gray',
+    flex: 1,
+  },
+  numOfNewMessages: {
+    color: 'white',
+    backgroundColor: 'red',
+    borderRadius: 15,
+    justifyContent: 'center',
+    padding: 3,
+    fontSize: 12,
   },
 });
+
+export default FriendListData;
