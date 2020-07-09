@@ -6,23 +6,9 @@ import UserTable from '../table/UserTable';
 import axios from "axios";
 
 export default class FriendListStore {
-    // userRepository = new UserRepository();
-    //
-    // userTable = new UserTable();
-    //
-    // groupingUser: GroupingUserDto;
+
     @observable userList=[];
     @observable connectStatus = false;
-
-    // @observable userStatus = USER_STATUS.READY;
-
-    // @action ready = async () => {
-    //     await this.userTable.findByEmail('ljh5033@naver.com');
-    //     await this.userRepository.initialize();
-    //     this.userStatus = USER_STATUS.GUEST;
-    // };
-
-
 
     @action fetchFriend = async () => {
         console.log(this.USER_ID);
