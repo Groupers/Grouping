@@ -26,7 +26,7 @@ import PhoneAuthTimer from '../../component/PhoneAuthTimer';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signUpPhoneStore')
+@inject('signUpPhoneStore', 'phoneCodeAuthStore')
 @observer
 class SignUpPhone extends React.Component {
   constructor(props) {
@@ -54,6 +54,7 @@ class SignUpPhone extends React.Component {
 
   async authorizeButtonClicked() {
     await this.props.signUpPhoneStore.sendPhoneCode();
+    this.props.phoneCodeAuthStore.initialize();
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.

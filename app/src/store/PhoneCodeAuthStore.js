@@ -1,10 +1,8 @@
 import { action, computed, observable } from 'mobx';
+import { inject, observer } from 'mobx-react';
 import { PHONE_CODE_AUTH_STATUS } from '../constant/PhoneCodeAuthStatus';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../constant/SignUpPhoneStatus';
-import {inject, observer} from "mobx-react";
 
-@inject('signUpPhoneStore')
-@observer
 export default class PhoneCodeAuthStore {
   @observable phoneCodeAuthStatus = PHONE_CODE_AUTH_STATUS.NONE;
 
@@ -22,6 +20,10 @@ export default class PhoneCodeAuthStore {
 
   @action changeView(signUpPhoneViewStatus) {
     this.signUpPhoneViewStatus = signUpPhoneViewStatus;
+  }
+
+  @action initialize() {
+    this.timeOut = 180;
   }
 
   @computed get isPhoneCodeAuthSucceed() {
