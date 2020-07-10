@@ -11,7 +11,6 @@ import MainStore from './MainStore';
 import GroupingCreationMainStore from './GroupingCreationMainStore';
 import ChatStore from './ChatStore';
 import ChatRoomStore from './ChatRoomStore';
-import PhoneCodeAuthStore from './PhoneCodeAuthStore';
 
 const userStore = new UserStore();
 const signInStore = new SignInStore(userStore);
@@ -26,7 +25,6 @@ const groupingStore = new GroupingStore(mainStore);
 const groupingCreationMainStore = new GroupingCreationMainStore();
 const chatRoomStore = new ChatRoomStore();
 const chatStore = new ChatStore(mainStore);
-const phoneCodeAuthStore = new PhoneCodeAuthStore();
 
 export default {
   userStore,
@@ -42,5 +40,4 @@ export default {
   groupingCreationMainStore,
   chatRoomStore,
   chatStore,
-  phoneCodeAuthStore,
 };

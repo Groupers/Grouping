@@ -1,10 +1,12 @@
 import { action, computed, observable } from 'mobx';
+import BackgroundTimer from 'react-native-background-timer';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../constant/SignUpPhoneStatus';
 import SignRepository from '../repository/SignRepository';
 import FirebaseRepository from '../repository/FirebaseRepository';
 import SignProcessStore from './SignProcessStore';
 import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import PhoneValidator from '../component/PhoneValidator';
+import { TIME_OUT } from '../constant/TimeOut';
 
 export default class SignUpPhoneStore {
   koreaPhonePrefixConditionFirst = '010';
@@ -23,6 +25,8 @@ export default class SignUpPhoneStore {
 
   @observable phoneValidationStatus = INPUT_PHONE_STATUS.NONE;
 
+  @observable timeOut = TIME_OUT.START_TIME;
+
   signRepository = new SignRepository();
 
   firebaseRepository = new FirebaseRepository();
@@ -31,6 +35,22 @@ export default class SignUpPhoneStore {
 
   constructor(signProcessStore: SignProcessStore) {
     this.signProcessStore = signProcessStore;
+  }
+
+  @action countDown() {
+    if (this.timeOut > 0) {
+      this.timeOut -= 1;
+    }
+  }
+
+  @action initialize() {
+    this.timeOut = TIME_OUT.START_TIME;
+  }
+
+  @action startTimer() {
+    BackgroundTimer.setTimeout(() => {
+      this.countDown();
+    }, 1000);
   }
 
   @action completePhoneNumber = async () => {
@@ -133,9 +153,17 @@ export default class SignUpPhoneStore {
         this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_VALIDATION_SUCCEED;
       }
     }
-    console.log("성공여부 : ");
+    console.log('성공여부 : ');
     console.log(isSucceed);
   };
+
+  @computed get getFormatTimer() {
+    let time = this.timeOut;
+    const minutes = Math.floor(time / 60);
+    time -= minutes * 60;
+    const seconds = parseInt(time % 60, 10);
+    return `${minutes < 10 ? `0${minutes}` : minutes} : ${seconds < 10 ? `0${seconds}` : seconds}`;
+  }
 
   @computed get isValidPhoneNumber() {
     return (
