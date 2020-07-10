@@ -1,11 +1,9 @@
 import React from 'react';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -18,6 +16,7 @@ import { SIGN_UP_PHONE_VIEW_STATUS } from '../../constant/SignUpPhoneStatus';
 import PhoneCodeInputTextView from './PhoneCodeInputTextView';
 import PhoneCodeNextButton from './PhoneCodeNextButton';
 import { COLORS } from '../../assets/Colors';
+import PhoneAuthTimer from '../../component/PhoneAuthTimer';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -53,6 +52,10 @@ class SignUpPhone extends React.Component {
     this.props.navigation.navigate('SignUpTermsAgreement');
   }
 
+  async authorizeButtonClicked() {
+    await this.props.signUpPhoneStore.sendPhoneCode();
+  }
+
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
   // 예: return nextProps.id !== this.props.id;
@@ -60,7 +63,7 @@ class SignUpPhone extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -81,7 +84,7 @@ class SignUpPhone extends React.Component {
                       ? '재인증'
                       : '인 증'
                   }
-                  onClick={this.props.signUpPhoneStore.sendPhoneCode.bind(this)}
+                  onClick={this.authorizeButtonClicked.bind(this)}
                 />
               </View>
               {this.props.signUpPhoneStore.phoneValidationViewStatus ===
@@ -98,7 +101,7 @@ class SignUpPhone extends React.Component {
                   {/*        this */}
                   {/*    )} */}
                   {/* /> */}
-                  <Text>3:00</Text>
+                  <PhoneAuthTimer />
                 </View>
               ) : null}
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />

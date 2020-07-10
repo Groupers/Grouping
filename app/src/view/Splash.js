@@ -32,7 +32,7 @@ export default class Splash extends Component {
     return (
       <LinearGradient colors={['purple', '#CC3300', '#FF3300']} style={styles.body}>
         <Text style={styles.placard}>
-          <Text>이번 주 금요일에</Text>
+          <Text>이번 주 금요일에{'\n'}</Text>
           <Text style={styles.inner_text}> 와인 </Text>
           <Text>어떠세요?</Text>
         </Text>
