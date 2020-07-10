@@ -39,7 +39,7 @@ export default class SignUpPhoneStore {
 
   @action countDown() {
     if (this.timeOut > 0) {
-      this.timeOut -= 1;
+      this.timeOut -= TIME_OUT.A_SECOND;
     }
   }
 
@@ -50,7 +50,7 @@ export default class SignUpPhoneStore {
   @action startTimer() {
     BackgroundTimer.setTimeout(() => {
       this.countDown();
-    }, 1000);
+    }, TIME_OUT.THOUSAND_MILLI_SECONDS);
   }
 
   @action completePhoneNumber = async () => {
