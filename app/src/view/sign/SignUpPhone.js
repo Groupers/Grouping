@@ -54,7 +54,6 @@ class SignUpPhone extends React.Component {
 
   async authorizeButtonClicked() {
     await this.props.signUpPhoneStore.sendPhoneCode();
-    this.props.signUpPhoneStore.initialize();
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.

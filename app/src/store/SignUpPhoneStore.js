@@ -95,13 +95,23 @@ export default class SignUpPhoneStore {
   };
 
   @action sendPhoneCode = async () => {
+    let isSucceed = false;
     const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
     if (data.phoneNumberAvailable !== true) {
       this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
       return;
     }
-    this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
-    console.log(this.codeConfirmation);
+    try {
+      this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
+      console.log(this.codeConfirmation);
+      isSucceed = true;
+    } catch (e) {
+      console.log('연속 5번 이상 인증번호 요청 에러');
+      isSucceed = false;
+    }
+    if (isSucceed) {
+      this.initialize();
+    }
     this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
   };
 
