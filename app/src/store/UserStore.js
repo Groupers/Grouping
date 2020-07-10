@@ -14,7 +14,7 @@ export default class UserStore {
   @observable userStatus = USER_STATUS.READY;
 
   @action ready = async () => {
-    await this.userTable.findByEmail('ljh5033@naver.com');
+    await this.userTable.findByEmail('test@naver.com');
     await this.userRepository.initialize();
     this.userStatus = USER_STATUS.GUEST;
   };

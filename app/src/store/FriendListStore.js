@@ -16,7 +16,7 @@ export default class FriendListStore {
 
     @action ready = async () =>{
          this.friendList = await this.friendRepository.fetchFriend();
-         console.log(this.friendList)
+         // console.log(this.friendList)
     }
     // @computed get isSuccessLoadingFriednList(){
     //     this.connectStatus===true ? this.getFriend : console.log('fail connect and fetch FriendList')
