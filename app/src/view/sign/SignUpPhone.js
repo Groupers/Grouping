@@ -88,19 +88,18 @@ class SignUpPhone extends React.Component {
                 />
               </View>
               {this.props.signUpPhoneStore.phoneValidationViewStatus ===
+              SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? (
+                <View>
+                  {/*<ShowErrorModal />*/}
+                </View>
+              ) : null}
+              {this.props.signUpPhoneStore.phoneValidationViewStatus ===
               SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? (
                 <View style={styles.phoneCodeContainer}>
                   <PhoneCodeInputTextView
                     onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
                     text={this.props.signUpPhoneStore.phoneCode}
                   />
-                  {/* <PhoneCodeNextButton */}
-                  {/*    text="인증" */}
-                  {/*    isActive={this.props.signUpPhoneStore.isValidPhoneCode} */}
-                  {/*    onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind( */}
-                  {/*        this */}
-                  {/*    )} */}
-                  {/* /> */}
                   <PhoneAuthTimer />
                 </View>
               ) : null}
