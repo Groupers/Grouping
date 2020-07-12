@@ -152,6 +152,7 @@ export default class SignUpPhoneStore {
       this.codeConfirmation != null
     ) {
       try {
+        console.log(this.phoneCode.trim());
         isSucceed = await this.codeConfirmation.confirm(this.phoneCode.trim());
       } catch {
         this.phoneCode = '';
