@@ -47,6 +47,5 @@ const styles = StyleSheet.create({
     color: COLORS.SUB_COLOR,
     fontSize: 10,
     fontWeight: '600',
-    fontFamily: 'NotoSansKR-Regular',
   },
 });

@@ -183,8 +183,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-background-timer')
-    implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'com.google.firebase:firebase-auth:19.1.0'
