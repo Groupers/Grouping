@@ -69,5 +69,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>UIAppFonts</key>
+	<array>
+	</array>
 </dict>
 </plist>
