@@ -89,9 +89,7 @@ class SignUpPhone extends React.Component {
               </View>
               {this.props.signUpPhoneStore.phoneValidationViewStatus ===
               SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? (
-                <View>
-                  {/*<ShowErrorModal />*/}
-                </View>
+                <View>{/* <ShowErrorModal /> */}</View>
               ) : null}
               {this.props.signUpPhoneStore.phoneValidationViewStatus ===
               SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? (
@@ -100,7 +98,13 @@ class SignUpPhone extends React.Component {
                     onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
                     text={this.props.signUpPhoneStore.phoneCode}
                   />
-                  <PhoneAuthTimer />
+                  <PhoneAuthTimer style={styles.authTimer} />
+                  <PhoneCodeNextButton
+                    style={styles.authButton}
+                    text="인 증"
+                    isActive={this.props.signUpPhoneStore.isValidPhoneCode}
+                    onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)}
+                  />
                 </View>
               ) : null}
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
@@ -158,6 +162,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // borderWidth: 2
   },
+
   bottomContainer: {
     // borderWidth:2,
     width: '100%',
@@ -166,6 +171,10 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
     flex: 1,
   },
+
+  authTimer: {},
+
+  authButton: {},
 });
 
 export default SignUpPhone;
