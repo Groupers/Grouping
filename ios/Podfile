@@ -10,6 +10,9 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 # $RNFirebaseAsStaticFramework = true
 
 target 'Grouping' do
+
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
   # Pods for Grouping
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
