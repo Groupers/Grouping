@@ -1,26 +1,17 @@
 import React from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
+  StyleSheet,
+  Text,
   TouchableWithoutFeedback,
-  Keyboard,
-  Image,
-  TouchableOpacity,
+  View,
 } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../assets/Colors';
 import SignInButton from '../entrance/SignInButton';
-import EmailInputTextView from './EmailInputTextView';
-import PasswordInputTextView from './PasswordInputTextView';
-import SignUpButton from '../entrance/SignUpButton';
-import LabelView from './LabelView';
-import SignErrorMessageView from './SignErrorMessageView';
-// import {Roboto} from '../../assets/fonts/Roboto-Bold.ttf';
 import EmailInputTextViewForSignIn from './EmailInputTextViewForSignIn';
 import PasswordInputTextViewForSignIn from './PasswordInputTextViewForSignIn';
 
@@ -167,7 +158,6 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     color: COLORS.SUB_COLOR,
     paddingBottom: 10,
-    fontFamily: 'Roboto-Bold',
   },
   contentContainer: {
     alignItems: 'center',
@@ -210,14 +200,12 @@ const styles = StyleSheet.create({
     fontSize: 10,
     includeFontPadding: false,
     color: COLORS.FONT_GRAY,
-    fontFamily: 'NotoSansKR-Light',
   },
   signupText: {
     height: 14,
     fontSize: 10,
     marginTop: 8,
     color: COLORS.SUB_COLOR,
-    fontFamily: 'NotoSansKR-Bold',
     fontWeight: 'bold',
     includeFontPadding: false,
   },
