@@ -38,6 +38,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
     color: 'white',
-    fontFamily: 'NotoSansKR-Medium',
   },
 });

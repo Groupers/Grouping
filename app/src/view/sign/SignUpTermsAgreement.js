@@ -154,7 +154,6 @@ const styles = StyleSheet.create({
   logo: {
     fontSize: 40,
     color: COLORS.SUB_COLOR,
-    fontFamily: 'Roboto-Bold',
   },
   contentContainer: {
     alignItems: 'center',
