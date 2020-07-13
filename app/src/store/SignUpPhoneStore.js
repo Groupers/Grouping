@@ -1,5 +1,6 @@
 import { action, computed, observable } from 'mobx';
 import BackgroundTimer from 'react-native-background-timer';
+import * as Alert from 'react-native';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../constant/SignUpPhoneStatus';
 import SignRepository from '../repository/SignRepository';
 import FirebaseRepository from '../repository/FirebaseRepository';
@@ -107,12 +108,12 @@ export default class SignUpPhoneStore {
       isSucceed = true;
     } catch (e) {
       console.log('연속 5번 이상 인증번호 요청 에러');
-      isSucceed = false;
+      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR;
     }
     if (isSucceed) {
+      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
       this.initialize();
     }
-    this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
   };
 
   @action phoneCodeChanged = (phoneCode) => {
@@ -151,6 +152,7 @@ export default class SignUpPhoneStore {
       this.codeConfirmation != null
     ) {
       try {
+        console.log(this.phoneCode.trim());
         isSucceed = await this.codeConfirmation.confirm(this.phoneCode.trim());
       } catch {
         this.phoneCode = '';
