@@ -28,8 +28,8 @@ class App extends Component {
     }
     return (
       <View style={styles.body}>
-        <Entrance />
-        {/* {view} */}
+        {/* <Entrance /> */}
+        {view}
         {/* <ChatRoomMain/> */}
         {/* <Main /> */}
       </View>
