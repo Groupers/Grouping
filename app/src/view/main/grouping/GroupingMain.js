@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, FlatList } from 'reac
 import GroupingMainHeader from './GroupingMainHeader';
 import { GROUPING_VIEW_STATUS } from '../../../constant/GroupingViewStatus';
 import GroupingCreationMain from './creation/GroupingCreationMain';
+import Main from '../Main';
 
 @inject('groupingStore')
 @observer
