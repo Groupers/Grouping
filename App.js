@@ -29,8 +29,13 @@ class App extends Component {
     }
     return (
       <View style={styles.body}>
+<<<<<<< HEAD
         {/*<Entrance />*/}
         {/* {view} */}
+=======
+        {/* <Entrance /> */}
+        {view}
+>>>>>>> 9b9c7501fc18ccbb9fd4666090d30d71594730e6
         {/* <ChatRoomMain/> */}
          <Main />
       </View>

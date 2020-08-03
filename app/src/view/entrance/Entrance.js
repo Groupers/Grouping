@@ -7,6 +7,7 @@ import { Dimensions, Keyboard, StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native-svg';
 import { Icon } from 'react-native-elements';
 import SignIn from '../sign/SignIn';
+import EntranceMain from '../entrance/EntranceMain';
 import SignUpEmail from '../sign/SignUpEmail';
 import SignUpPassword from '../sign/SignUpPassword';
 import SignUpPhone from '../sign/SignUpPhone';
@@ -75,7 +76,23 @@ class Entrance extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Navigator initialRouteName="EntranceMain">
+          <Stack.Screen
+            name="EntranceMain"
+            options={{
+              // title: 'Sign In',
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerShown: false,
+            }}
+          >
+            {(props) => <EntranceMain {...props} />}
+          </Stack.Screen>
           <Stack.Screen
             name="SignIn"
             options={{
