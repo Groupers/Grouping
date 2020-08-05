@@ -132,6 +132,9 @@ samples/ios/Continote/Continote/FCNContinue.m
 # Misc.
 *.swp
 
+package-lock.json
+yarn.lock
+ios/Podfile.lock
 .watchmanconfig
 .gitattributes
  .eslintrc.js
