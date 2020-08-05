@@ -13,6 +13,7 @@ import SignUpPhone from '../sign/SignUpPhone';
 import SignUpBasicInfo from '../sign/SignUpBasicInfo';
 import SignUpTermsAgreement from '../sign/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
+import EntranceMain from './EntranceMain';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -24,7 +25,7 @@ import { COLORS } from '../../assets/Colors';
 
 const Stack = createStackNavigator();
 
-class Entrance extends React.Component {
+class Index extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -75,7 +76,23 @@ class Entrance extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Navigator initialRouteName="EntranceMain">
+          <Stack.Screen
+            name="EntranceMain"
+            options={{
+              // title: 'Sign In',
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerShown: false,
+            }}
+          >
+            {(props) => <EntranceMain {...props} />}
+          </Stack.Screen>
           <Stack.Screen
             name="SignIn"
             options={{
@@ -180,4 +197,4 @@ class Entrance extends React.Component {
   }
 }
 
-export default Entrance;
+export default Index;
