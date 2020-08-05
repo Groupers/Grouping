@@ -5,7 +5,7 @@ import { ScrollView, SafeAreaView, StyleSheet, Text, View, Image } from 'react-n
 import ChatMainHeader from '../chat/ChatMainHeader';
 import FriendMainHeader from './FriendMainHeader';
 import FriendMainFooter from './FriendMainFooter';
-import FriendListData from './FriendListData';
+import FriendListItem from './FriendListItem';
 
 class FriendMain extends Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -21,7 +21,7 @@ class FriendMain extends Component {
     return (
       <SafeAreaView style={styles.body}>
         <FriendMainHeader />
-        <FriendListData style={styles.scrollView} />
+        <FriendListItem style={styles.scrollView} />
         <FriendMainFooter style={styles.footer} />
       </SafeAreaView>
     );

@@ -14,7 +14,7 @@ export default class UserStore {
   @observable userStatus = USER_STATUS.READY;
 
   @action ready = async () => {
-    await this.userTable.findByEmail('chdaos123@naver.comn');
+    await this.userTable.findByEmail('test@naver.com');
     await this.userRepository.initialize();
     this.userStatus = USER_STATUS.GUEST;
   };
@@ -35,5 +35,9 @@ export default class UserStore {
 
   @computed get isGroupingUser() {
     return this.userStatus === USER_STATUS.USER && this.groupingUser !== null;
+  }
+
+  @computed get getUserId() {
+    return this.groupingUser.userId
   }
 }
