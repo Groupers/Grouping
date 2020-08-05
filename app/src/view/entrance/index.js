@@ -7,7 +7,6 @@ import { Dimensions, Keyboard, StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native-svg';
 import { Icon } from 'react-native-elements';
 import SignIn from '../sign/SignIn';
-import EntranceMain from '../entrance/EntranceMain';
 import SignUpEmail from '../sign/SignUpEmail';
 import SignUpPassword from '../sign/SignUpPassword';
 import SignUpPhone from '../sign/SignUpPhone';

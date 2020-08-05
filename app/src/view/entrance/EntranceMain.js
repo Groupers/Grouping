@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component, useEffect, useState } from 'react';
 import {
   Button,
@@ -63,8 +62,7 @@ function EntraceMain(props) {
               }}
               style={{ width: Width, flex: 1 }}
             />
-            <TouchableOpacity
-            onPress={()=>props.navigation.navigate('SignIn')}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')}>
               <View style={styles.loginButton}>
                 <Text style={styles.loginButtonText}>로그인</Text>
               </View>
@@ -84,23 +82,10 @@ function EntraceMain(props) {
           </View>
         </View>
       </SafeAreaView>
-=======
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import SignUpNextButton from '../sign/SignUpNextButton';
-import {SignIn} from '../sign/SignIn';
-
-function EntranceMain(props) {
-  return (
-    <View>
-      <Text>EntranceMain</Text>
-      <SignUpNextButton isActive text="가입" onClick={() => props.navigation.navigate('SignIn')} />
->>>>>>> a754a7cbafe607d5474f71b6960a0b16c4df473a
     </View>
   );
 }
 
-<<<<<<< HEAD
 export default EntraceMain;
 
 const styles = StyleSheet.create({
@@ -133,6 +118,3 @@ const styles = StyleSheet.create({
     // backgroundColor: 'white'
   },
 });
-=======
-export default EntranceMain;
->>>>>>> a754a7cbafe607d5474f71b6960a0b16c4df473a
