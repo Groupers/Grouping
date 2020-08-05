@@ -4,7 +4,7 @@ import { inject, observer, Provider } from 'mobx-react';
 import Splash from './app/src/view/Splash';
 import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
-import Entrance from './app/src/view/entrance/Entrance';
+import Entrance from './app/src/view/entrance';
 
 @inject('userStore', 'friendListStore')
 @observer
@@ -29,12 +29,19 @@ class App extends Component {
     }
     return (
       <View style={styles.body}>
+<<<<<<< HEAD
+        <Entrance />
+        {/* {view} */}
+        {/* <ChatRoomMain/> */}
+        {/* <Main /> */}
+=======
         {/* <Entrance /> */}
         {/* {view} */}
         {/* <Entrance /> */}
         {/*{view}*/}
         {/* <ChatRoomMain/> */}
         <Main />
+>>>>>>> a754a7cbafe607d5474f71b6960a0b16c4df473a
       </View>
     );
   }

@@ -16,16 +16,16 @@ export default class SignUpNextButton extends Component {
       borderRadius: 5,
       backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
       justifyContent: 'center',
-      ...Platform.select({
-        ios: {
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.2,
-        },
-        android: {
-          elevation: 8,
-        },
-      }),
+      // ...Platform.select({
+      //   ios: {
+      //     shadowColor: '#000',
+      //     shadowOffset: { width: 0, height: 2 },
+      //     shadowOpacity: 0.2,
+      //   },
+      //   android: {
+      //     elevation: 8,
+      //   },
+      // }),
       // marginBottom: this.props.isKeyboardShow
       //   ? this.props.keyboardHeight - 15
       //   : 0,

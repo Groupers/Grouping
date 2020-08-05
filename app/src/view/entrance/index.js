@@ -14,6 +14,7 @@ import SignUpPhone from '../sign/SignUpPhone';
 import SignUpBasicInfo from '../sign/SignUpBasicInfo';
 import SignUpTermsAgreement from '../sign/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
+import EntranceMain from './EntranceMain';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -25,7 +26,7 @@ import { COLORS } from '../../assets/Colors';
 
 const Stack = createStackNavigator();
 
-class Entrance extends React.Component {
+class Index extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -197,4 +198,4 @@ class Entrance extends React.Component {
   }
 }
 
-export default Entrance;
+export default Index;
