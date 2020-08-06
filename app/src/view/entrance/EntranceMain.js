@@ -12,43 +12,32 @@ import {
   Animated,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-import SignUpNextButton from '../sign/SignUpNextButton';
+import SignUpNextButton from '../sign/components/SignUpNextButton';
 import Carousel from './Carousel';
+import MoreInfoButton from '../sign/components/MoreInfoButton';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
-function EntraceMain(props) {
+const MoveNextScreen = ({ navigation }, screen) => {
+  navigation.navigate(screen);
+};
+
+const EntraceMain = (props) => {
   return (
     <View>
       <SafeAreaView style={styles.container}>
-        <Carousel />
-        <View style={{ marginTop: 20, width: '90%' }}>
-          <View style={{ height: 60, alignItems: 'center' }}>
+        <Carousel flex={1}/>
+        <View style={styles.inner}>
+          <View style={styles.termsAgreementContainer}>
             <View style={styles.rowContainer}>
               <Text>가입을 누르시면 </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate('SignUpTermsAgreement');
-                }}
-              >
-                <Text
-                  style={{ borderBottomColor: 'black', borderBottomWidth: 1, fontWeight: 'bold' }}
-                >
-                  이용약관
-                </Text>
+              <TouchableOpacity onPress={() => MoveNextScreen(props, 'SignUpTermsAgreement')}>
+                <Text style={styles.linkedText}>이용약관</Text>
               </TouchableOpacity>
               <Text>과</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate('SignUpTermsAgreement');
-                }}
-              >
-                <Text
-                  style={{ borderBottomColor: 'black', borderBottomWidth: 1, fontWeight: 'bold' }}
-                >
-                  개인정보 취급 방침
-                </Text>
+              <TouchableOpacity onPress={() => MoveNextScreen(props, 'SignUpTermsAgreement')}>
+                <Text style={styles.linkedText}>개인정보 취급 방침</Text>
               </TouchableOpacity>
               <Text>에</Text>
             </View>
@@ -57,10 +46,7 @@ function EntraceMain(props) {
             <SignUpNextButton
               isActive
               text="가입"
-              onClick={() => {
-                props.navigation.navigate('SignUpTermsAgreement');
-              }}
-              style={{ width: Width, flex: 1 }}
+              onClick={() => MoveNextScreen(props, 'SignUpPhone')}
             />
             <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')}>
               <View style={styles.loginButton}>
@@ -68,23 +54,19 @@ function EntraceMain(props) {
               </View>
             </TouchableOpacity>
             <View style={{ marginTop: 10 }}>
-              <TouchableOpacity
-                onPress={() => {
-                  console.log('Main 화면으로 이동');
-                }}
-              >
-                <View style={{ flexDirection: 'row' }}>
-                  <Text>먼저 둘러보시겠어요?</Text>
-                  <Icon name="chevron-right" />
-                </View>
-              </TouchableOpacity>
+              <MoreInfoButton
+                navigation={props.navigation}
+                screen="SignUpPhone"
+                title="먼저 둘러보시겠어요?"
+                /*  추후 navigation 구조 변경 후 메인화면으로 연결할 예정 */
+              />
             </View>
           </View>
         </View>
       </SafeAreaView>
     </View>
   );
-}
+};
 
 export default EntraceMain;
 
@@ -93,6 +75,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  inner: { flex:1 ,marginTop: 20, width: '90%' },
+  linkedText: { borderBottomColor: 'black', borderBottomWidth: 1, fontWeight: 'bold' },
   loginButton: {
     marginTop: 10,
     // elevation:8,
@@ -117,4 +101,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: 'white'
   },
+  termsAgreementContainer: { height: 60, alignItems: 'center' },
 });

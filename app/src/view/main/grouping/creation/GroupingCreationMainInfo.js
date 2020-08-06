@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/core';
-import LabelView from '../../../sign/LabelView';
+import LabelView from '../../../sign/components/LabelView';
 import TitleInputTextView from './TitleInputTextView';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../constant/GroupingCreationViewStatus';
 import KeywordInputTextView from '../../KeywordInputTextView';
@@ -21,10 +21,6 @@ import KeywordInputTextView from '../../KeywordInputTextView';
 @inject('groupingCreationMainStore')
 @observer
 class GroupingCreationMainInfo extends Component {
-  backAction = (func) => {
-    func();
-    return true;
-  };
 
   componentDidMount() {
     this.props.navigation.setOptions({

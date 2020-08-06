@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { COLORS } from '../../assets/Colors';
+
+import { Icon } from 'react-native-elements';
+import { COLORS } from '../../../assets/Colors';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -10,7 +12,7 @@ import { COLORS } from '../../assets/Colors';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-export default class SignErrorMessageView extends React.Component {
+export default class PasswordInputTextView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -25,27 +27,51 @@ export default class SignErrorMessageView extends React.Component {
   // 예: return nextProps.id !== this.props.id;
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
+    console.log(this.props.text);
     return (
-      <View style={styles.errorMessageContainer}>
-        <Text style={styles.errorMessage}>{this.props.text}</Text>
+      <View style={styles.passwordContainer}>
+        <TextInput
+          style={styles.password}
+          maxLength={20}
+          autoCompleteType="password"
+          placeholder="비밀번호"
+          secureTextEntry={!this.props.isShowPassword}
+          textContentType="password"
+          placeholderTextColor="#ddd"
+          value={this.props.text}
+          onChangeText={
+            this.props.onChangeText != null ? (text) => this.props.onChangeText(text) : null
+          }
+        />
+        <Icon
+          style={styles.passwordToggleButton}
+          name={this.props.isShowPassword ? 'eye-off' : 'eye'}
+          type="feather"
+          color={COLORS.FONT_GRAY}
+          onPress={() => this.props.toggleShowPassword()}
+        />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  errorMessageContainer: {
-    borderColor: '#FFF',
+  passwordContainer: {
     width: '100%',
-    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: COLORS.FONT_GRAY,
   },
 
-  errorMessage: {
-    width: '100%',
+  password: {
+    width: '90%',
     alignItems: 'center',
     justifyContent: 'center',
-    color: COLORS.SUB_COLOR,
-    fontSize: 10,
-    fontWeight: '600',
+    // margin:5,
+    color: 'black',
+    fontSize: 12,
   },
+
+  passwordToggleButton: {},
 });

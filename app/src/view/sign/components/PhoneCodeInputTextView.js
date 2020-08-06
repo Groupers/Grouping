@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { COLORS } from '../../assets/Colors';
+import { COLORS } from '../../../assets/Colors';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -47,9 +47,9 @@ export default class PhoneCodeInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
   phoneCodeInputContainer: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    borderBottomWidth: 1,
     borderColor: COLORS.FONT_GRAY,
   },
 

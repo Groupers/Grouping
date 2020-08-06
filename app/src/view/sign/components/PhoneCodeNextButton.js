@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { COLORS } from '../../assets/Colors';
+import { COLORS } from '../../../assets/Colors';
 
 export default class PhoneCodeNextButton extends Component {
   constructor(props) {

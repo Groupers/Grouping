@@ -6,14 +6,15 @@ import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack'
 import { Dimensions, Keyboard, StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native-svg';
 import { Icon } from 'react-native-elements';
-import SignIn from '../sign/SignIn';
-import SignUpEmail from '../sign/SignUpEmail';
-import SignUpPassword from '../sign/SignUpPassword';
-import SignUpPhone from '../sign/SignUpPhone';
-import SignUpBasicInfo from '../sign/SignUpBasicInfo';
-import SignUpTermsAgreement from '../sign/SignUpTermsAgreement';
+import SignIn from '../sign/SignIn/SignIn';
+import SignUpEmail from '../sign/SignUp/SignUpEmail';
+import SignUpPassword from '../sign/SignUp/SignUpPassword';
+import SignUpPhone from '../sign/SignUp/SignUpPhone';
+import SignUpBasicInfo from '../sign/SignUp/SignUpBasicInfo';
+import SignUpTermsAgreement from '../sign/SignUp/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
 import EntranceMain from './EntranceMain';
+import FindEmail from '../sign/SignIn/FindEmail';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -25,7 +26,7 @@ import EntranceMain from './EntranceMain';
 
 const Stack = createStackNavigator();
 
-class Index extends React.Component {
+class Entrance extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -96,7 +97,7 @@ class Index extends React.Component {
           <Stack.Screen
             name="SignIn"
             options={{
-              // title: 'Sign In',
+              title: '로그인',
               headerStyle: {
                 backgroundColor: COLORS.MAIN_COLOR,
               },
@@ -104,7 +105,11 @@ class Index extends React.Component {
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
-              headerShown: false,
+              headerBackImage: () => {
+                return (
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
+                );
+              },
             }}
           >
             {(props) => <SignIn {...props} />}
@@ -191,10 +196,25 @@ class Index extends React.Component {
           >
             {(props) => <SignUpTermsAgreement {...props} />}
           </Stack.Screen>
+          <Stack.Screen
+            name="FindEmail"
+            options={{
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
+              },
+              title: '이메일 찾기',
+              headerBackImage: () => {
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
+              },
+            }}
+          >
+            {(props) => <FindEmail {...props} />}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     );
   }
 }
 
-export default Index;
+export default Entrance;
