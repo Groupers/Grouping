@@ -140,3 +140,5 @@ ios/Podfile.lock
  .eslintrc.js
 .buckconfig
 .flowconfig
+sh.exe.stackdump
+vim.exe.stackdump

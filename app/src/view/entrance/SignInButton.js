@@ -23,16 +23,6 @@ export default class SignInButton extends Component {
       height: 40,
       // backgroundColor: this.props.isActive === true ? '#888' : '#d70000',
       borderRadius: 5,
-      ...Platform.select({
-        ios: {
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.2,
-        },
-        android: {
-          elevation: 8,
-        },
-      }),
     };
   }
 

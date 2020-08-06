@@ -1,11 +1,11 @@
 import React from 'react';
-import {COLORS} from '../../assets/Colors';
+import {COLORS} from '../../../assets/Colors';
 import {StyleSheet, Text, TextInput, View,Dimensions} from 'react-native';
-import {INPUT_BIRTHDAY_STATUS} from "../../constant/InputBirthdayStatus";
+import {INPUT_BIRTHDAY_STATUS} from "../../../constant/InputBirthdayStatus";
 import {Icon} from "react-native-elements";
 import {inject, observer} from "mobx-react";
-import {SIGN_UP_NAME_STATUS} from "../../constant/SignUpNameStatus";
-import {FontSize} from "../../constant/FontSize";
+import {SIGN_UP_NAME_STATUS} from "../../../constant/SignUpNameStatus";
+import {FontSize} from "../../../constant/FontSize";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 

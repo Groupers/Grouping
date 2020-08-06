@@ -10,14 +10,14 @@ import {
   View,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { COLORS } from '../../assets/Colors';
-import { FontSize } from '../../constant/FontSize';
-import SignUpNextButton from './SignUpNextButton';
-import NameInputTextView from './NameInputTextView';
-import LabelView from './LabelView';
-import SignErrorMessageView from './SignErrorMessageView';
-import GenderInputView from './GenderInputView';
-import BirthdayInputView from './BirthdayInputView';
+import { COLORS } from '../../../assets/Colors';
+import { FontSize } from '../../../constant/FontSize';
+import SignUpNextButton from '../components/SignUpNextButton';
+import NameInputTextView from '../components/NameInputTextView';
+import LabelView from '../components/LabelView';
+import SignErrorMessageView from '../components/SignErrorMessageView';
+import GenderInputView from '../components/GenderInputView';
+import BirthdayInputView from '../components/BirthdayInputView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 

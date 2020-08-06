@@ -1,19 +1,20 @@
 import React from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
   KeyboardAvoidingView,
   Platform,
+  StyleSheet,
+  Text,
   TouchableWithoutFeedback,
+  View,
   Keyboard,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { COLORS } from '../../assets/Colors';
-import EmailInputTextView from './EmailInputTextView';
-import SignUpNextButton from './SignUpNextButton';
-import LabelView from './LabelView';
-import SignErrorMessageView from './SignErrorMessageView';
+import { COLORS } from '../../../assets/Colors';
+import SignUpNextButton from '../components/SignUpNextButton';
+import PasswordInputTextView from '../components/PasswordInputTextView';
+import { INPUT_PASSWORD_STATUS } from '../../../constant/InputPasswordStatus';
+import LabelView from '../components/LabelView';
+import SignErrorMessageView from '../components/SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -23,9 +24,9 @@ import SignErrorMessageView from './SignErrorMessageView';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signUpEmailStore')
+@inject('signUpPasswordStore')
 @observer
-class SignUpEmail extends React.Component {
+class SignUpPassword extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -33,20 +34,11 @@ class SignUpEmail extends React.Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  async componentDidMount() {
-    this.focusListener = this.props.navigation.addListener(
-      'focus',
-      this.props.signUpEmailStore.clearEmail.bind(this)
-    );
-  }
+  componentDidMount() {}
 
-  componentWillUnmount() {
-    this.focusListener();
-  }
-
-  async signUpNextButtonClicked() {
-    await this.props.signUpEmailStore.completeEmail();
-    this.props.navigation.navigate('SignUpPassword');
+  signUpNextButtonClicked() {
+    this.props.signUpPasswordStore.completePassword();
+    this.props.navigation.navigate('SignUpBasicInfo');
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
@@ -62,20 +54,21 @@ class SignUpEmail extends React.Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <LabelView text="이메일" />
-              <EmailInputTextView
-                text={this.props.signUpEmailStore.emailText}
-                onChangeText={this.props.signUpEmailStore.emailTextChanged.bind(this)}
+              <LabelView text="비밀번호" />
+              <PasswordInputTextView
+                toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(this)}
+                isShowPassword={this.props.signUpPasswordStore.isShowPassword}
+                text={this.props.signUpPasswordStore.passwordText}
+                onChangeText={this.props.signUpPasswordStore.passwordTextChanged.bind(this)}
               />
-              <SignErrorMessageView text={this.props.signUpEmailStore.errorMessage} />
-              <View flex={1} />
-              <View style={styles.bottomContainer}>
-                <SignUpNextButton
-                  isActive={this.props.signUpEmailStore.isValidInputData}
-                  text="다 음"
-                  onClick={this.signUpNextButtonClicked.bind(this)}
-                />
-              </View>
+              <SignErrorMessageView text={this.props.signUpPasswordStore.errorMessage} />
+            </View>
+            <View style={styles.bottomContainer}>
+              <SignUpNextButton
+                isActive={this.props.signUpPasswordStore.isValidInputData}
+                text="확 인"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -100,7 +93,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     // justifyContent: 'center',
-    width: '85%',
+    width: '90%',
     paddingTop: 30,
   },
 
@@ -120,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpEmail;
+export default SignUpPassword;

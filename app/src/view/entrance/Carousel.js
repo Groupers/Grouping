@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Image, ScrollView, Dimensions, Text, StyleSheet } from 'react-native';
 
-const { width } = Dimensions.get('window');
-const height = width * 0.6;
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
 const images = [
   'https://images.pexels.com/photos/4775426/pexels-photo-4775426.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
   'https://images.pexels.com/photos/945966/pexels-photo-945966.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
@@ -51,9 +51,9 @@ export default class Carousel extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: { marginTop: 50, width, height },
-  scroll: { width, height, paddingBottom: 30 },
-  image: { width, height, resizeMode: 'cover' },
+  container: { marginTop: 50, width: Width * 0.9, height: 250 },
+  scroll: { width: Width * 0.9, height: 220, paddingBottom: 30 },
+  image: { width: Width * 0.9, height: 220, resizeMode: 'cover' },
   pagination: { flexDirection: 'row', position: 'absolute', bottom: 0, alignSelf: 'center' },
   pagingText: { color: '#888', margin: 3 },
   pagingActiveText: { color: '#fff', margin: 3 },
