@@ -8,9 +8,12 @@ import HomeMain from './home/HomeMain';
 import FeedMain from './feed/FeedMain';
 import GroupMain from './group/GroupMain';
 import MyPageMain from './myPage/MyPageMain';
-import GroupCreationMain from './home/components/creation/GroupCreationMain';
-import GroupCreationInfo from './home/components/creation/GroupCreationInfo';
-import GroupCreationDescription from './home/components/creation/GroupCreationDescription';
+import InputNewGroupNameView from './home/components/creation/InputNewGroupNameView';
+import InputNewGroupInterestsView from './home/components/creation/InputNewGroupInterestsView';
+import InputNewGroupMoreInfoView from './home/components/creation/InputNewGroupMoreInfoView';
+import InputNewGroupLocationView from './home/components/creation/InputNewGroupLocationView';
+import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
+import Preview from './home/components/creation/Preview';
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -23,9 +26,12 @@ function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeMain} />
-      <HomeStack.Screen name="GroupCreation" component={GroupCreationMain} />
-      <HomeStack.Screen name="GroupCreationInfo" component={GroupCreationInfo} />
-      <HomeStack.Screen name="GroupCreationDescription" component={GroupCreationDescription} />
+      <HomeStack.Screen name="InputNewGroupName" component={InputNewGroupNameView} />
+      <HomeStack.Screen name="InputNewGroupInterests" component={InputNewGroupInterestsView} />
+      <HomeStack.Screen name="InputNewGroupMoreInfo" component={InputNewGroupMoreInfoView} />
+      <HomeStack.Screen name="InputNewGroupLocation" component={InputNewGroupLocationView} />
+      <HomeStack.Screen name="InputNewGroupDescription" component={InputNewGroupDescriptionView} />
+      <HomeStack.Screen name="Preview" component={Preview} />
     </HomeStack.Navigator>
   );
 }
