@@ -9,12 +9,12 @@ import {
   Keyboard,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { COLORS } from '../../assets/Colors';
-import SignUpNextButton from './SignUpNextButton';
-import PasswordInputTextView from './PasswordInputTextView';
-import { INPUT_PASSWORD_STATUS } from '../../constant/InputPasswordStatus';
-import LabelView from './LabelView';
-import SignErrorMessageView from './SignErrorMessageView';
+import { COLORS } from '../../../assets/Colors';
+import SignUpNextButton from '../components/SignUpNextButton';
+import PasswordInputTextView from '../components/PasswordInputTextView';
+import { INPUT_PASSWORD_STATUS } from '../../../constant/InputPasswordStatus';
+import LabelView from '../components/LabelView';
+import SignErrorMessageView from '../components/SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 

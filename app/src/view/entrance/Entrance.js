@@ -6,13 +6,15 @@ import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack'
 import { Dimensions, Keyboard, StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native-svg';
 import { Icon } from 'react-native-elements';
-import SignIn from '../sign/SignIn';
-import SignUpEmail from '../sign/SignUpEmail';
-import SignUpPassword from '../sign/SignUpPassword';
-import SignUpPhone from '../sign/SignUpPhone';
-import SignUpBasicInfo from '../sign/SignUpBasicInfo';
-import SignUpTermsAgreement from '../sign/SignUpTermsAgreement';
+import SignIn from '../sign/SignIn/SignIn';
+import SignUpEmail from '../sign/SignUp/SignUpEmail';
+import SignUpPassword from '../sign/SignUp/SignUpPassword';
+import SignUpPhone from '../sign/SignUp/SignUpPhone';
+import SignUpBasicInfo from '../sign/SignUp/SignUpBasicInfo';
+import SignUpTermsAgreement from '../sign/SignUp/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
+import EntranceMain from './EntranceMain';
+import FindEmail from '../sign/SignIn/FindEmail';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -75,9 +77,9 @@ class Entrance extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Navigator initialRouteName="EntranceMain">
           <Stack.Screen
-            name="SignIn"
+            name="EntranceMain"
             options={{
               // title: 'Sign In',
               headerStyle: {
@@ -88,6 +90,26 @@ class Entrance extends React.Component {
                 fontWeight: 'bold',
               },
               headerShown: false,
+            }}
+          >
+            {(props) => <EntranceMain {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="SignIn"
+            options={{
+              title: '로그인',
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerBackImage: () => {
+                return (
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
+                );
+              },
             }}
           >
             {(props) => <SignIn {...props} />}
@@ -173,6 +195,21 @@ class Entrance extends React.Component {
             }}
           >
             {(props) => <SignUpTermsAgreement {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="FindEmail"
+            options={{
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
+              },
+              title: '이메일 찾기',
+              headerBackImage: () => {
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
+              },
+            }}
+          >
+            {(props) => <FindEmail {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

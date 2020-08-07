@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { CheckBox } from 'react-native-elements';
-import { COLORS } from '../../assets/Colors';
-import SignUpNextButton from './SignUpNextButton';
-import SignErrorMessageView from './SignErrorMessageView';
+import { COLORS } from '../../../assets/Colors';
+import SignUpNextButton from '../components/SignUpNextButton';
+import SignErrorMessageView from '../components/SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
