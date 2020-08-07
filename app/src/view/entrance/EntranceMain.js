@@ -27,7 +27,7 @@ const EntraceMain = (props) => {
   return (
     <View>
       <SafeAreaView style={styles.container}>
-        <Carousel flex={1}/>
+        <Carousel flex={1} />
         <View style={styles.inner}>
           <View style={styles.termsAgreementContainer}>
             <View style={styles.rowContainer}>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  inner: { flex:1 ,marginTop: 20, width: '90%' },
+  inner: { flex: 1, marginTop: 20, width: '90%' },
   linkedText: { borderBottomColor: 'black', borderBottomWidth: 1, fontWeight: 'bold' },
   loginButton: {
     marginTop: 10,

@@ -19,6 +19,7 @@ import PasswordInputTextViewForSignIn from '../components/PasswordInputTextViewF
 import EmailInputTextView from '../components/EmailInputTextView';
 import PasswordInputTextView from '../components/PasswordInputTextView';
 import MoreInfoButton from '../components/MoreInfoButton';
+import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -79,6 +80,7 @@ class SignIn extends React.Component {
                 onChangeText={this.props.signInStore.passwordTextChanged.bind(this)}
                 text={this.props.signInStore.passwordText}
               />
+              {/*<ActiveEmailInputTextView />*/}
               <View flex={1} />
               <MoreInfoButton
                 navigation={this.props.navigation}
