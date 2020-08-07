@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
-import { useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
 export default function GroupCreationMain({ navigation }) {
