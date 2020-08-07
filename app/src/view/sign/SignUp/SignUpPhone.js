@@ -8,15 +8,15 @@ import {
   View,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import SignUpNextButton from './SignUpNextButton';
-import LabelView from './LabelView';
-import PhoneNumberInputTextView from './PhoneNumberInputTextView';
-import SignErrorMessageView from './SignErrorMessageView';
-import { SIGN_UP_PHONE_VIEW_STATUS } from '../../constant/SignUpPhoneStatus';
-import PhoneCodeInputTextView from './PhoneCodeInputTextView';
-import PhoneCodeNextButton from './PhoneCodeNextButton';
-import { COLORS } from '../../assets/Colors';
-import PhoneAuthTimer from '../../component/PhoneAuthTimer';
+import SignUpNextButton from '../components/SignUpNextButton';
+import LabelView from '../components/LabelView';
+import PhoneNumberInputTextView from '../components/PhoneNumberInputTextView';
+import SignErrorMessageView from '../components/SignErrorMessageView';
+import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
+import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
+import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
+import { COLORS } from '../../../assets/Colors';
+import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 

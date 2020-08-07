@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../constant/GroupingCreationViewStatus';
-import LabelView from '../../../sign/LabelView';
+import LabelView from '../../../sign/components/LabelView';
 import KeywordInputTextView from '../../KeywordInputTextView';
 import DescriptionInputTextView from './DescriptionInputTextView';
 

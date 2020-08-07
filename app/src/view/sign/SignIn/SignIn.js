@@ -5,15 +5,20 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  Dimensions,
 } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { inject, observer } from 'mobx-react';
-import { COLORS } from '../../assets/Colors';
-import SignInButton from '../entrance/SignInButton';
-import EmailInputTextViewForSignIn from './EmailInputTextViewForSignIn';
-import PasswordInputTextViewForSignIn from './PasswordInputTextViewForSignIn';
+import { COLORS } from '../../../assets/Colors';
+import SignInButton from '../../entrance/SignInButton';
+import EmailInputTextViewForSignIn from '../components/EmailInputTextViewForSignIn';
+import PasswordInputTextViewForSignIn from '../components/PasswordInputTextViewForSignIn';
+import EmailInputTextView from '../components/EmailInputTextView';
+import PasswordInputTextView from '../components/PasswordInputTextView';
+import MoreInfoButton from '../components/MoreInfoButton';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -23,6 +28,7 @@ import PasswordInputTextViewForSignIn from './PasswordInputTextViewForSignIn';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
+const Width = Dimensions.get('window').width;
 @inject('signInStore', 'signProcessStore')
 @observer
 class SignIn extends React.Component {
@@ -60,56 +66,38 @@ class SignIn extends React.Component {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
-            <View alignSelf="flex-start">
-              <View flexDirection="row">
-                <View style={styles.dot} />
-                <View style={styles.dot} />
-                <View style={styles.dot} />
-              </View>
-            </View>
-            <Picker
-              style={{ height: 25, width: 120, color: COLORS.FONT_GRAY }}
-              mode="dropdown"
-              itemStyle={{ fontSize: 10 }}
-            >
-              <Picker.Item label="English" value="English" />
-              <Picker.Item label="한국어" value="한국어" />
-            </Picker>
-            <View style={styles.logoContainer}>
-              <Text style={styles.logo}>Grouping</Text>
-            </View>
             <View style={styles.contentContainer}>
               {/* <LabelView text="Email"/> */}
-              <EmailInputTextViewForSignIn
+              <EmailInputTextView
                 onChangeText={this.props.signInStore.emailTextChanged.bind(this)}
                 text={this.props.signInStore.emailText}
               />
               {/* <LabelView text="Password"/> */}
-              <PasswordInputTextViewForSignIn
+              <PasswordInputTextView
                 toggleShowPassword={this.props.signInStore.toggleShowPassword.bind(this)}
                 isShowPassword={this.props.signInStore.isShowPassword}
                 onChangeText={this.props.signInStore.passwordTextChanged.bind(this)}
                 text={this.props.signInStore.passwordText}
               />
+              <View flex={1} />
+              <MoreInfoButton
+                navigation={this.props.navigation}
+                screen="FindEmail"
+                title="이메일을 잊으셨나요?"
+              />
+              <MoreInfoButton
+                navigation={this.props.navigation}
+                screen="SignUpBasicInfo"
+                title="비밀번호를 잊으셨나요?"
+              />
               {/* <Image height={50} source={'../../../../Img/component_1.svg'} onClick={this.signUpButtonClicked.bind(this)}/> */}
               <View style={styles.buttonContainer}>
-                <SignInButton
-                  isActive={this.props.signInStore.isValidInputData}
-                  onClick={this.signInButtonClicked.bind(this)}
-                />
-                {/* <SignErrorMessageView */}
-                {/*    text={this.props.signInStore.errorMessage} */}
-                {/* /> */}
+                <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')}>
+                  <View style={styles.loginButton}>
+                    <Text style={styles.loginButtonText}>로그인</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
-              <Text style={styles.findIdText}>Find ID / Passward</Text>
-            </View>
-            <View style={styles.bottomContainer}>
-              <View flex={1} />
-              <Text style={styles.joinText}>Want to join?</Text>
-              <Text style={styles.signupText} onPress={this.signUpButtonClicked.bind(this)}>
-                Sign up
-              </Text>
-              {/* <SignUpButton onClick={this.signUpButtonClicked.bind(this)}/> */}
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -127,47 +115,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-
   inner: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
     // justifyContent: 'center',
-    width: '85%',
-    paddingTop: 30,
-  },
-  dot: {
-    backgroundColor: COLORS.FONT_GRAY,
-    borderRadius: 25,
-    width: 4,
-    height: 4,
-    marginLeft: 2,
-  },
-  logoContainer: {
-    marginTop: 82,
-    marginBottom: 50,
-    backgroundColor: COLORS.MAIN_COLOR,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    width: '100%',
-  },
-
-  logo: {
-    fontSize: 40,
-    // fontWeight: 'bold',
-    color: COLORS.SUB_COLOR,
-    paddingBottom: 10,
   },
   contentContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.MAIN_COLOR,
-    width: '100%',
-    // borderWidth:2,
-    // borderColor:'red',
-    // paddingBottom: 10
+    flex: 1,
+    width: Width * 0.9,
+    marginTop: 50,
   },
-
+  loginButton: {
+    marginTop: 10,
+    // elevation:8,
+    color: 'gray',
+    alignItems: 'center',
+    height: 40,
+    backgroundColor: COLORS.DARK_GRAY,
+    justifyContent: 'center',
+    width: Width,
+  },
+  loginButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
   buttonContainer: {
     backgroundColor: COLORS.MAIN_COLOR,
     width: '100%',
@@ -175,39 +150,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginBottom: 30,
   },
-  picker: {
-    fontSize: 6,
-    color: COLORS.SUB_COLOR,
-  },
   bottomContainer: {
     flex: 1,
     alignItems: 'center',
     marginBottom: 40,
     // borderWidth:2,
     width: '100%',
-  },
-  findIdText: {
-    height: 14,
-    alignSelf: 'flex-start',
-    fontSize: 10,
-    includeFontPadding: false,
-    textDecorationLine: 'underline',
-    color: COLORS.FONT_GRAY,
-    // marginLeft
-  },
-  joinText: {
-    height: 14,
-    fontSize: 10,
-    includeFontPadding: false,
-    color: COLORS.FONT_GRAY,
-  },
-  signupText: {
-    height: 14,
-    fontSize: 10,
-    marginTop: 8,
-    color: COLORS.SUB_COLOR,
-    fontWeight: 'bold',
-    includeFontPadding: false,
   },
 });
 

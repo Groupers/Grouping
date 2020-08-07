@@ -9,9 +9,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Text,
+  BackHandlerStatic as BackHandler,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-import LabelView from '../../../sign/LabelView';
+import { useFocusEffect } from '@react-navigation/core';
+import LabelView from '../../../sign/components/LabelView';
 import TitleInputTextView from './TitleInputTextView';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../constant/GroupingCreationViewStatus';
 import KeywordInputTextView from '../../KeywordInputTextView';
@@ -19,6 +21,7 @@ import KeywordInputTextView from '../../KeywordInputTextView';
 @inject('groupingCreationMainStore')
 @observer
 class GroupingCreationMainInfo extends Component {
+
   componentDidMount() {
     this.props.navigation.setOptions({
       headerRight: () => (
@@ -44,9 +47,17 @@ class GroupingCreationMainInfo extends Component {
         />
       ),
     });
+
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', ()=>{
+      this.props.GroupingCreationMainStore.groupingCreationViewStatus = GROUPING_CREATION_VIEW_STATUS.MAIN_INFO;
+    });
   }
 
   componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
 
   onTitleChanged(title) {
     this.props.groupingCreationMainStore.groupingTitleChanged(title);
