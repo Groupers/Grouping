@@ -8,7 +8,9 @@ import HomeMain from './home/HomeMain';
 import FeedMain from './feed/FeedMain';
 import GroupMain from './group/GroupMain';
 import MyPageMain from './myPage/MyPageMain';
-import GroupCreationMain from './group/components/creation/GroupCreationMain';
+import GroupCreationMain from './home/components/creation/GroupCreationMain';
+import GroupCreationInfo from './home/components/creation/GroupCreationInfo';
+import GroupCreationDescription from './home/components/creation/GroupCreationDescription';
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -22,6 +24,8 @@ function HomeStackScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeMain} />
       <HomeStack.Screen name="GroupCreation" component={GroupCreationMain} />
+      <HomeStack.Screen name="GroupCreationInfo" component={GroupCreationInfo} />
+      <HomeStack.Screen name="GroupCreationDescription" component={GroupCreationDescription} />
     </HomeStack.Navigator>
   );
 }

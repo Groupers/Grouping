@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 // eslint-disable-next-line react/prop-types
 export default function GroupMain({ navigation }) {

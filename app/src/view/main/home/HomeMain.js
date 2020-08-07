@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 // eslint-disable-next-line react/prop-types
 export default function HomeMain({ navigation }) {
