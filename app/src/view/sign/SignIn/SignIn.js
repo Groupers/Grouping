@@ -80,7 +80,8 @@ class SignIn extends React.Component {
                 onChangeText={this.props.signInStore.passwordTextChanged.bind(this)}
                 text={this.props.signInStore.passwordText}
               />
-              {/*<ActiveEmailInputTextView />*/}
+               <ActiveEmailInputTextView
+               title="아이디"/>
               <View flex={1} />
               <MoreInfoButton
                 navigation={this.props.navigation}
@@ -89,7 +90,7 @@ class SignIn extends React.Component {
               />
               <MoreInfoButton
                 navigation={this.props.navigation}
-                screen="SignUpBasicInfo"
+                screen="ModifyPassword"
                 title="비밀번호를 잊으셨나요?"
               />
               {/* <Image height={50} source={'../../../../Img/component_1.svg'} onClick={this.signUpButtonClicked.bind(this)}/> */}

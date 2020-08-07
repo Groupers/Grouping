@@ -55,7 +55,7 @@ const EntraceMain = (props) => {
             </TouchableOpacity>
             <View style={{ marginTop: 10 }}>
               <MoreInfoButton
-                navigation={props.navigation}
+                navigation={props.navigation.navigate('Friend')}
                 screen="SignUpPhone"
                 title="먼저 둘러보시겠어요?"
                 /*  추후 navigation 구조 변경 후 메인화면으로 연결할 예정 */
