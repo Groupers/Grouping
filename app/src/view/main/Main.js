@@ -1,32 +1,59 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { observable } from 'mobx';
-import { COLORS } from '../../assets/Colors';
-import FriendMain from './friend/FriendMain';
-import ChatMain from './chat/ChatMain';
-import MyMain from './my/MyMain';
-import GroupingMain from './grouping/GroupingMain';
-import FeedMain from './feed/FeedMain';
+import { createStackNavigator } from '@react-navigation/stack';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
+import HomeMain from './home/HomeMain';
+import FeedMain from './feed/FeedMain';
+import GroupMain from './group/GroupMain';
+import MyPageMain from './myPage/MyPageMain';
+import GroupCreationMain from './group/components/creation/GroupCreationMain';
+
+const HomeStack = createStackNavigator();
+const GroupStack = createStackNavigator();
+const FeedStack = createStackNavigator();
+const MyPageStack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeMain} />
+      <HomeStack.Screen name="GroupCreation" component={GroupCreationMain} />
+    </HomeStack.Navigator>
+  );
+}
+
+function GroupStackScreen() {
+  return (
+    <GroupStack.Navigator>
+      <GroupStack.Screen name="Home" component={GroupMain} />
+    </GroupStack.Navigator>
+  );
+}
+
+function FeedStackScreen() {
+  return (
+    <FeedStack.Navigator>
+      <FeedStack.Screen name="Home" component={FeedMain} />
+    </FeedStack.Navigator>
+  );
+}
+
+function MyPageScreen() {
+  return (
+    <MyPageStack.Navigator>
+      <MyPageStack.Screen name="Home" component={MyPageMain} />
+    </MyPageStack.Navigator>
+  );
+}
 
 @inject('mainStore')
 @inject('chatStore')
 @observer
-class Main extends React.Component {
-  // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
-  // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
-  // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
-
-  // 친구목록, 채팅, 모임찾기, 마이페이지
-
+class Main extends Component {
   onKeywordSearchClicked() {
     this.props.chatStore.changeView(CHAT_VIEW_STATUS.KEYWORD_SEARCH);
   }
@@ -47,28 +74,14 @@ class Main extends React.Component {
     return (
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Friend" component={FriendMain} />
-          <Tab.Screen name="Chat" component={ChatMain} />
-          <Tab.Screen name="Feed" component={FeedMain} />
-          <Tab.Screen
-            options={{
-              tabBarVisible: this.props.mainStore.shouldTabBarVisible,
-            }}
-            name="Grouping"
-            component={GroupingMain}
-          />
-          <Tab.Screen name="My" component={MyMain} />
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="Group" component={GroupStackScreen} />
+          <Tab.Screen name="Feed" component={FeedStackScreen} />
+          <Tab.Screen name="MyPage" component={MyPageScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  body: {
-    backgroundColor: COLORS.MAIN_COLOR,
-    flex: 1,
-  },
-});
 
 export default Main;
