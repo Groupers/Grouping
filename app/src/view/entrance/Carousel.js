@@ -14,7 +14,6 @@ export default class Carousel extends React.Component {
   state = { active: 0 };
 
   change = ({ nativeEvent }) => {
-    // contentOffset.x
     const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width);
     if (slide !== this.state.active) {
       this.setState({ active: slide });
