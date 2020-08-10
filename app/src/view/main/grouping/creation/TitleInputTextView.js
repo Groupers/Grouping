@@ -1,6 +1,9 @@
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Icon } from 'react-native-elements';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -30,7 +33,7 @@ export default class TitleInputTextView extends React.Component {
         <TextInput
           style={styles.title}
           maxLength={50}
-          placeholder="30자 이내로 입력해주세요."
+          placeholder="ex. 카.책.사. (카페에서 책을 읽는 사람들)"
           autoCorrect={false}
           placeholderTextColor="#ddd"
           value={this.props.groupingTitle}
