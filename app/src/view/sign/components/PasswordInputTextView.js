@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { Icon } from 'react-native-elements';
 import { COLORS } from '../../../assets/Colors';
+import {WINDOW_SIZE} from "../../../constant/WindowSize";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
     borderColor: COLORS.FONT_GRAY,
   },
 
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // margin:5,
     color: 'black',
-    fontSize: 12,
+    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 
   passwordToggleButton: {},
