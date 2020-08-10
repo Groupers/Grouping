@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 1,
+        borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
         borderColor: COLORS.FONT_GRAY,
     },
 
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // margin:5,
         color: 'black',
-        fontSize: 12 * (WINDOW_SIZE.WIDTH / WINDOW_SIZE.DEFAULT_WIDTH),
+        fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
         paddingVertical:WINDOW_SIZE.HEIGHT*0.015
     },
 });

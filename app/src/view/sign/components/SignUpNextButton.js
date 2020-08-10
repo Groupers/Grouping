@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: COLORS.MAIN_COLOR,
     borderRadius: 5,
-    height: WINDOW_SIZE.WIDTH * 0.068,
+    height: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   title: {
-    fontSize: WINDOW_SIZE.WIDTH * 0.035,
+    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontWeight: '600',
     color: 'white',
     alignSelf: 'center',

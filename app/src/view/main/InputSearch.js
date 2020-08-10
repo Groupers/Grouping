@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { COLORS } from '../../assets/Colors';
+import {WINDOW_SIZE} from "../../constant/WindowSize";
 
 class InputSearch extends Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: '#FFF',
     flexDirection: 'row',
-    marginRight: 5,
+    marginRight: 5 * WINDOW_SIZE.HEIGHT_WEIGHT,
     borderRadius: 10,
   },
 
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    fontSize: 24,
+    fontSize: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });
 

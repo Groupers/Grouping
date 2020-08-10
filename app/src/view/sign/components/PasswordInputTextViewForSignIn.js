@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { Icon } from 'react-native-elements';
 import { COLORS } from '../../../assets/Colors';
+import {WINDOW_SIZE} from "../../../constant/WindowSize";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -62,12 +63,12 @@ const styles = StyleSheet.create({
     // borderColor: '#FFF',
     width: '100%',
     flexDirection: 'row',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.5 * WINDOW_SIZE.WIDTH_WEIGHT,
     borderColor: 'lightgray',
     borderRadius: 4,
     alignItems: 'center',
     marginBottom: 10,
-    height: 40,
+    height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   password: {

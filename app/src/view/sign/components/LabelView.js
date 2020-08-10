@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     color: COLORS.FONT_GRAY,
-    fontSize: 14 * (WINDOW_SIZE.WIDTH / WINDOW_SIZE.DEFAULT_WIDTH),
+    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
     // fontWeight: '600',
   },
 });

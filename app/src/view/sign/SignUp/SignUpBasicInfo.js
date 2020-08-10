@@ -111,20 +111,20 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     // justifyContent: 'center',
-    width: WINDOW_SIZE.WIDTH * 0.83,
+    width: 290 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   titleContainer: {
     width: '100%',
     justifyContent: 'flex-start',
-    marginTop: WINDOW_SIZE.HEIGHT * 0.093,
+    marginTop: 70 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
   title: {
-    fontSize: 20 * (WINDOW_SIZE.WIDTH / WINDOW_SIZE.DEFAULT_WIDTH),
+    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
     color: COLORS.SUB_COLOR,
     marginBottom: 10,
   },
   subTitle: {
-    fontSize: 20 * (WINDOW_SIZE.WIDTH / WINDOW_SIZE.DEFAULT_WIDTH),
+    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
     color: COLORS.DARK_GRAY,
   },
   contentContainer: {
@@ -137,6 +137,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    marginBottom: WINDOW_SIZE.HEIGHT * 0.082,
+    marginBottom: 60 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });
