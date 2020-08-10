@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import InputTextView from './InputTextView';
+import {WINDOW_SIZE} from "../../../../../constant/WindowSize";
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupNameView = (props) => {
@@ -27,8 +28,8 @@ const InputNewGroupNameView = (props) => {
 
   const rightIconStyle = (groupingCreationView) => {
     return {
-      marginRight: 15,
-      fontSize: 18,
+      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
         ? Colors.white
         : '#999',
