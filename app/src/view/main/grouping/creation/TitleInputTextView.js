@@ -41,7 +41,7 @@ export default class TitleInputTextView extends React.Component {
             this.props.onChangeText != null ? (text) => this.props.onChangeText(text) : null
           }
         />
-        <Text style={styles.counter}>{this.props.groupingTitle.length}/30</Text>
+        <Text style={styles.counter}>{this.props.groupingTitle.length}/50</Text>
       </View>
     );
   }
