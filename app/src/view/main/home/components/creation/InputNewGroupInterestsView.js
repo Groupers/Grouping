@@ -57,7 +57,7 @@ const InputNewGroupInterestsView = (props) => {
     <View style={styles.groupNameInputContainer}>
       <Text>그룹의 관심사를 {'\n'} #해시태그로 소개해주세요.</Text>
       <InputTextView
-        textExample="30자 이내로 입력해 주세요."
+        textExample="#키워드,"
         onChangeText={onKeywordChanged.bind(this)}
         groupingTitle={props.groupingCreationMainStore.groupingKeyword}
       />
