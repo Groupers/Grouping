@@ -1,9 +1,10 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { COLORS } from '../../../assets/Colors';
 import { INPUT_BIRTHDAY_STATUS } from '../../../constant/InputBirthdayStatus';
 import {inject, observer} from "mobx-react";
+import {WINDOW_SIZE} from "../../../constant/WindowSize";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -12,9 +13,6 @@ import {inject, observer} from "mobx-react";
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-
-const Width = Dimensions.get('window').width;
-const Height = Dimensions.get('window').height;
 @inject('signUpBasicInfoStore')
 @observer
 export default class BirthdayInputView extends React.Component {
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
     borderColor: COLORS.FONT_GRAY,
   },
   // birthdayValid: {
@@ -77,6 +75,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // margin:5,
     color: 'black',
-    fontSize: Width * 0.03,
+    fontSize: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });

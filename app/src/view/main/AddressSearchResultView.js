@@ -10,6 +10,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import {WINDOW_SIZE} from "../../constant/WindowSize";
 
 class AddressResult extends Component {
   render() {
@@ -47,19 +48,19 @@ export default class AddressSearchResultView extends Component {
 
 const styles = StyleSheet.create({
   body: {
-    paddingTop: 20,
+    paddingTop: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: '100%',
-    paddingStart: 20,
-    paddingEnd: 20,
+    paddingStart: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingEnd: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   item: {
     borderBottomColor: '#fff',
-    borderBottomWidth: 1,
-    marginBottom: 10,
+    borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
   address: {
-    fontSize: 20,
+    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
     color: '#fff',
   },
 });

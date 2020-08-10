@@ -9,6 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import {WINDOW_SIZE} from "../../constant/WindowSize";
 
 export default class AddressSearchTextView extends Component {
   constructor(props) {
@@ -52,23 +53,23 @@ export default class AddressSearchTextView extends Component {
 
 const styles = StyleSheet.create({
   body: {
-    paddingTop: 20,
+    paddingTop: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: '100%',
-    paddingStart: 20,
-    paddingEnd: 20,
+    paddingStart: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingEnd: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   main: {
     flexDirection: 'row',
     borderBottomColor: '#fff',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 
   searchIcon: {},
 
   search: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginLeft: 15,
     color: '#fff',
   },
