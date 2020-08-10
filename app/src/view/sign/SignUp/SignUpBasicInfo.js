@@ -16,7 +16,6 @@ import SignErrorMessageView from '../components/SignErrorMessageView';
 import GenderInputView from '../components/GenderInputView';
 import BirthdayInputView from '../components/BirthdayInputView';
 import { COLORS } from '../../../assets/Colors';
-import { FONT_SIZE } from '../../../constant/FontSize';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -120,12 +119,12 @@ const styles = StyleSheet.create({
     marginTop: WINDOW_SIZE.HEIGHT * 0.093,
   },
   title: {
-    fontSize: FONT_SIZE.TITLE,
+    fontSize: 20 * (WINDOW_SIZE.WIDTH / WINDOW_SIZE.DEFAULT_WIDTH),
     color: COLORS.SUB_COLOR,
     marginBottom: 10,
   },
   subTitle: {
-    fontSize: FONT_SIZE.SUB_TITLE,
+    fontSize: 20 * (WINDOW_SIZE.WIDTH / WINDOW_SIZE.DEFAULT_WIDTH),
     color: COLORS.DARK_GRAY,
   },
   contentContainer: {

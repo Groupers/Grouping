@@ -4,7 +4,6 @@ import {StyleSheet, TextInput, View } from 'react-native';
 import {Icon} from "react-native-elements";
 import {inject, observer} from "mobx-react";
 import {SIGN_UP_NAME_STATUS} from "../../../constant/SignUpNameStatus";
-import {FONT_SIZE} from "../../../constant/FontSize";
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // margin:5,
         color: 'black',
-        fontSize: FONT_SIZE.SUB_TITLE,
+        fontSize: 12 * (WINDOW_SIZE.WIDTH / WINDOW_SIZE.DEFAULT_WIDTH),
         paddingVertical:WINDOW_SIZE.HEIGHT*0.015
     },
 });
