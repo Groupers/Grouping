@@ -15,6 +15,7 @@ import { Icon } from 'react-native-elements';
 import SignUpNextButton from '../sign/components/SignUpNextButton';
 import Carousel from './Carousel';
 import MoreInfoButton from '../sign/components/MoreInfoButton';
+import ActiveEmailInputTextView from '../sign/components/ActiveEmailInputTextView';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
@@ -55,8 +56,8 @@ const EntraceMain = (props) => {
             </TouchableOpacity>
             <View style={{ marginTop: 10 }}>
               <MoreInfoButton
-                navigation={props.navigation.navigate('Friend')}
-                screen="SignUpPhone"
+                navigation={props.navigation}
+                screen="Home"
                 title="먼저 둘러보시겠어요?"
                 /*  추후 navigation 구조 변경 후 메인화면으로 연결할 예정 */
               />
