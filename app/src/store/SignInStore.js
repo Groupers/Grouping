@@ -4,23 +4,36 @@ import EmailValidator from '../component/EmailValidator';
 import PasswordValidator from '../component/PasswordValidator';
 import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
 import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
+import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import { ResponseCode } from '../constant/ResponseCode';
 import UserStore from './UserStore';
+import PhoneValidator from '../component/PhoneValidator';
+import { INPUT_STATUS } from '../constant/InputStatus';
 
 export default class SignInStore {
   signRepository = new SignRepository();
 
   emailValidator = new EmailValidator();
 
+  phoneValidator = new PhoneValidator();
+
   passwordValidator = new PasswordValidator();
 
   @observable emailText = '';
+
+  @observable inputText = '';
+
+  @observable phoneNumberText = '';
 
   @observable passwordText = '';
 
   @observable isShowPassword = false;
 
+  @observable inputStatus = INPUT_STATUS.NONE;
+
   @observable emailStatus = INPUT_EMAIL_STATUS.NONE;
+
+  @observable phoneStatus = INPUT_PHONE_STATUS.NONE;
 
   @observable passwordStatus = INPUT_PASSWORD_STATUS.NONE;
 
@@ -34,10 +47,29 @@ export default class SignInStore {
 
   @action clearData = () => {
     this.emailText = '';
+    this.inputText = '';
+    this.phoneNumberText = '';
     this.passwordText = '';
     this.isShowPassword = false;
     this.emailStatus = INPUT_EMAIL_STATUS.NONE;
     this.passwordStatus = INPUT_PASSWORD_STATUS.NONE;
+  };
+
+  @action inputTextChanged = (inputText) => {
+    this.inputText = inputText;
+    // 입력된 값 이메일 형태일 때
+    if (this.emailValidator.validateEmail(inputText)) {
+      this.emailTextChanged(inputText);
+    } else if (this.phoneValidator.validatePhoneNumber(inputText))
+      // 입력된 값 핸드폰번호 형태일 때
+      this.phoneNumberTextChanged(inputText);
+
+    if (
+      this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED ||
+      this.phoneStatus === INPUT_PHONE_STATUS.SUCCEED
+    ) {
+      this.inputStatus = INPUT_STATUS.SUCCEED;
+    }
   };
 
   @action passwordTextChanged = (password) => {
@@ -50,7 +82,6 @@ export default class SignInStore {
     if (!this.passwordValidator.validatePassword(password)) {
       this.passwordStatus = INPUT_PASSWORD_STATUS.NOT_FORMATTED;
       this.passwordText = password;
-      console.log(this.passwordStatus);
       return;
     }
     this.passwordStatus = INPUT_PASSWORD_STATUS.SUCCEED;
@@ -67,31 +98,52 @@ export default class SignInStore {
     if (!this.emailValidator.validateEmail(email)) {
       this.emailStatus = INPUT_EMAIL_STATUS.NOT_FORMATTED;
       this.emailText = email;
-      console.log(this.emailStatus);
       return;
     }
 
     this.emailStatus = INPUT_EMAIL_STATUS.SUCCEED;
     this.emailText = email;
+    console.log(this.emailText.toString());
+  };
+
+  @action phoneNumberTextChanged = (phonenumber) => {
+    if (String(phonenumber).length === 0) {
+      this.phoneStatus = INPUT_PHONE_STATUS.NONE;
+      this.phoneNumberText = phonenumber;
+      return;
+    }
+
+    if (!this.phoneValidator.validatePhoneNumber(phonenumber)) {
+      this.phoneStatus = INPUT_PHONE_STATUS.NOT_FORMATTED;
+      this.phoneNumberText = phonenumber;
+      return;
+    }
+
+    this.phoneStatus = INPUT_PHONE_STATUS.SUCCEED;
+    this.phoneNumberText = phonenumber;
   };
 
   @computed get isValidInputData() {
     return (
-      this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED &&
+      this.inputStatus === INPUT_STATUS.SUCCEED &&
       this.passwordStatus === INPUT_PASSWORD_STATUS.SUCCEED
     );
   }
 
   @computed get errorMessage() {
-    if (this.emailStatus === INPUT_EMAIL_STATUS.NOT_FORMATTED) {
-      return '이메일 형식이 맞지 않습니다.';
+    if (this.inputStatus === INPUT_STATUS.NOT_FORMATTED) {
+      return '이메일 혹은 전화번호 형식이 맞지 않습니다.';
+    }
+
+    if (this.emailStatus === INPUT_STATUS.NOT_FORMATTED) {
+      return '이메일 혹은 전화번호 형식이 맞지 않습니다.';
     }
 
     if (this.passwordStatus === INPUT_PASSWORD_STATUS.NOT_FORMATTED) {
       return '비밀번호 형식이 맞지 않습니다.';
     }
 
-    if (this.emailStatus === INPUT_EMAIL_STATUS.INVALID) {
+    if (this.inputStatus === INPUT_STATUS.INVALID) {
       return '존재하지 않는 이메일입니다.';
     }
 
@@ -102,7 +154,7 @@ export default class SignInStore {
 
   @action signIn = async () => {
     const groupingUserDto = await this.signRepository.signIn(
-      this.emailText,
+      this.inputText,
       this.passwordText,
       (responseCode) => {
         if (responseCode === ResponseCode.INVALID_PASSWORD) {
@@ -111,13 +163,14 @@ export default class SignInStore {
         }
 
         if (responseCode === ResponseCode.USER_NOT_EXISTED) {
-          this.emailStatus = INPUT_EMAIL_STATUS.INVALID;
+          this.inputStatus = INPUT_STATUS.INVALID;
         }
       }
     );
 
     if (groupingUserDto !== undefined) {
       this.userStore.signInCompleted(groupingUserDto);
+      console.log('signInCompleted');
     }
   };
 }

@@ -15,6 +15,8 @@ import SignUpTermsAgreement from '../sign/SignUp/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
 import EntranceMain from './EntranceMain';
 import FindEmail from '../sign/SignIn/FindEmail';
+import ResetPasssword from '../sign/SignIn/ResetPasssword';
+import ResetPasswordPhone from "../sign/SignIn/ResetPasswordPhone";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -210,6 +212,36 @@ class Entrance extends React.Component {
             }}
           >
             {(props) => <FindEmail {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="ResetPassword"
+            options={{
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
+              },
+              title: '비밀번호 재설정',
+              headerBackImage: () => {
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
+              },
+            }}
+          >
+            {(props) => <ResetPasssword {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="ResetPasswordPhone"
+            options={{
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
+              },
+              title: '비밀번호 재설정',
+              headerBackImage: () => {
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
+              },
+            }}
+          >
+            {(props) => <ResetPasswordPhone {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

@@ -5,7 +5,7 @@ import Splash from './app/src/view/Splash';
 import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
-import {WINDOW_SIZE} from "./app/src/constant/WindowSize";
+import { WINDOW_SIZE } from './app/src/constant/WindowSize';
 
 @inject('userStore', 'friendListStore')
 @observer
@@ -15,8 +15,8 @@ class App extends Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   async componentDidMount() {
     // eslint-disable-next-line react/prop-types,react/destructuring-assignment
-    await this.props.userStore.ready();
-    await this.props.friendListStore.ready();
+    // await this.props.userStore.ready();
+    // await this.props.friendListStore.ready();
   }
 
   render() {
@@ -30,9 +30,9 @@ class App extends Component {
     }
     return (
       <View style={styles.body}>
-        {/* {view} */}
+        {view}
         {/* <ChatRoomMain/> */}
-        <Main />
+
         {/* {view} */}
       </View>
     );
