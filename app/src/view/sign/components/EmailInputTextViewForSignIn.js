@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { COLORS } from '../../../assets/Colors';
+import {WINDOW_SIZE} from "../../../constant/WindowSize";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -51,11 +52,11 @@ const styles = StyleSheet.create({
     width: '100%',
     // flexDirection: 'row',
     borderBottomColor: COLORS.FONT_DARK,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.5 * WINDOW_SIZE.WIDTH_WEIGHT,
     borderRadius: 4,
     alignItems: 'center',
-    marginBottom: 10,
-    height: 40,
+    marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   email: {
@@ -64,6 +65,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // margin:5,
     color: 'black',
-    fontSize: 15,
+    fontSize: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });

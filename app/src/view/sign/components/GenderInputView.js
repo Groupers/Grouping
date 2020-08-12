@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 import { GENDER } from '../../../constant/Gender';
+import {WINDOW_SIZE} from "../../../constant/WindowSize";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -10,8 +11,6 @@ import { GENDER } from '../../../constant/Gender';
 // 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
-const Width = Dimensions.get('window').width;
-const Height = Dimensions.get('window').height;
 export default class GenderInputView extends React.Component {
   constructor(props) {
     super(props);
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    margin: Height * 0.013,
+    margin: 7 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   gender: {
@@ -84,6 +83,6 @@ const styles = StyleSheet.create({
 
   text: {
     // color: COLORS.FONT_GRAY,
-    fontSize: Width * 0.025,
+    fontSize: 8 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });
