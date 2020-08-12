@@ -5,6 +5,7 @@ import Splash from './app/src/view/Splash';
 import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
+import { WINDOW_SIZE } from './app/src/constant/WindowSize';
 
 @inject('userStore', 'friendListStore')
 @observer
@@ -31,9 +32,8 @@ class App extends Component {
       <View style={styles.body}>
         {view}
         {/* <ChatRoomMain/> */}
-        {/* <Main /> */}
+
         {/* {view} */}
-        {/* <Entrance/> */}
       </View>
     );
   }

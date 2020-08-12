@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, StyleSheet, Platform, Dimensions } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
-const WINDOW_WIDTH = Dimensions.get('window').width;
-const WINDOW_HEIGHT = Dimensions.get('window').height;
 export default class SignUpNextButton extends Component {
   constructor(props) {
     super(props);
@@ -52,10 +51,10 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: COLORS.MAIN_COLOR,
     borderRadius: 5,
-    height: WINDOW_WIDTH * 0.068,
+    height: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   title: {
-    fontSize: WINDOW_WIDTH * 0.035,
+    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontWeight: '600',
     color: 'white',
     alignSelf: 'center',

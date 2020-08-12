@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
+import {WINDOW_SIZE} from "../../../constant/WindowSize";
 
 export default class PhoneCodeNextButton extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class PhoneCodeNextButton extends Component {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 12,
+    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontWeight: '600',
     color: 'white',
   },

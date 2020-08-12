@@ -143,3 +143,8 @@ ios/Podfile.lock
 sh.exe.stackdump
 vim.exe.stackdump
 
+gradlew
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+gradlew.bat
+
