@@ -9,7 +9,7 @@ const InputTextView = (props) => {
       <TextInput
         style={styles.title}
         maxLength={50}
-        placeholder={props.testExample}
+        placeholder={props.textExample}
         autoCorrect={false}
         placeholderTextColor="#ddd"
         value={props.groupingTitle}
