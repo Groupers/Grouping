@@ -13,7 +13,7 @@ import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
-import InputDescriptionTextView from "./InputDescriptionTextView";
+import InputDescriptionTextView from './InputDescriptionTextView';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupDescriptionView = (props) => {
@@ -21,6 +21,7 @@ const InputNewGroupDescriptionView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
+    props.navigation.pop();
   };
 
   const rightIconStyle = (groupingCreationView) => {
