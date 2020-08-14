@@ -31,7 +31,7 @@ const InputNewGroupNameView = (props) => {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
-        ? Colors.white
+        ? Colors.black
         : '#999',
     };
   };
@@ -44,7 +44,7 @@ const InputNewGroupNameView = (props) => {
           onPress={() => {
             onHeaderNextButtonClicked();
           }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.MAIN_INFO)}
+          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
         >
           다음
         </Text>
