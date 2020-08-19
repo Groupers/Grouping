@@ -72,41 +72,43 @@ class SignUpPhone extends React.Component {
               <LabelView text="핸드폰 인증" />
               <View style={styles.phoneCodeContainer}>
                 <PhoneNumberInputTextView
-                  isActive={!this.props.signUpPhoneStore.isAllCompleted}
+                  label="휴대폰 번호"
                   text={this.props.signUpPhoneStore.phoneNumber}
                   onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
+                />
+              </View>
+              <View style={{ height: 20 }} />
+              {/* {this.props.signUpPhoneStore.phoneValidationViewStatus === */}
+              {/* SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? ( */}
+              {/*  <View>/!* <ShowErrorModal /> *!/</View> */}
+              {/* ) : null} */}
+              {/* {this.props.signUpPhoneStore.phoneValidationViewStatus === */}
+              {/* SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? () : null} */}
+              <View style={styles.phoneCodeContainer} backgroundColor="yellow">
+                <PhoneCodeInputTextView
+                  onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
+                  text={this.props.signUpPhoneStore.phoneCode}
                 />
                 <PhoneCodeNextButton
                   isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
                   text={
                     this.props.signUpPhoneStore.phoneValidationViewStatus ===
                     SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                      ? '재인증'
-                      : '인 증'
+                      ? '재전송'
+                      : '전송'
                   }
                   onClick={this.authorizeButtonClicked.bind(this)}
                 />
+
+                {/* <PhoneCodeNextButton */}
+                {/*  style={styles.authButton} */}
+                {/*  text="인 증" */}
+                {/*  // isActive={this.props.signUpPhoneStore.isValidPhoneCode} */}
+                {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
+                {/* /> */}
               </View>
-              {this.props.signUpPhoneStore.phoneValidationViewStatus ===
-              SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? (
-                <View>{/* <ShowErrorModal /> */}</View>
-              ) : null}
-              {this.props.signUpPhoneStore.phoneValidationViewStatus ===
-              SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? (
-                <View style={styles.phoneCodeContainer}>
-                  <PhoneCodeInputTextView
-                    onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
-                    text={this.props.signUpPhoneStore.phoneCode}
-                  />
-                  <PhoneAuthTimer style={styles.authTimer} />
-                  <PhoneCodeNextButton
-                    style={styles.authButton}
-                    text="인 증"
-                    isActive={this.props.signUpPhoneStore.isValidPhoneCode}
-                    onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)}
-                  />
-                </View>
-              ) : null}
+              <View style={{ height: 20 }} />
+              <PhoneAuthTimer style={styles.authTimer} />
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
               <View style={styles.bottomContainer}>
                 <SignUpNextButton
@@ -129,7 +131,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
   },
 
@@ -138,28 +139,26 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    // justifyContent: 'center',
-    width: '85%',
-    // paddingTop:30
+    justifyContent: 'center',
+    width: '90%',
   },
 
   phoneCodeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
     justifyContent: 'center',
-    width: '100%',
-    borderBottomWidth: 1,
     borderColor: COLORS.FONT_GRAY,
+    margin: 0,
+    // backgroundColor:'yellow'
   },
 
   contentContainer: {
     flex: 1,
     paddingTop: 150,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: COLORS.MAIN_COLOR,
     width: '100%',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     // borderWidth: 2
   },
 

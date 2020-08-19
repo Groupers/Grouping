@@ -10,21 +10,14 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
-import SignInButton from '../../entrance/SignInButton';
-import EmailInputTextViewForSignIn from '../components/EmailInputTextViewForSignIn';
-import PasswordInputTextViewForSignIn from '../components/PasswordInputTextViewForSignIn';
-import PasswordInputTextView from '../components/PasswordInputTextView';
 import MoreInfoButton from '../components/MoreInfoButton';
-import {USER_STATUS} from "../../../constant/UserStatus";
-import FloatingLabelInput from '../components/ActiveEmailInputTextView';
 import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
 import ActivePasswordInputTextView from '../components/ActivePasswordInputTextView';
 import SignUpNextButton from '../components/SignUpNextButton';
 import SignErrorMessageView from '../components/SignErrorMessageView';
-import Main from '../../main/Main';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -68,23 +61,11 @@ class SignIn extends React.Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              {/* <LabelView text="Email"/> */}
-              {/* <EmailInputTextView */}
-              {/*  onChangeText={this.props.signInStore.emailTextChanged.bind(this)} */}
-              {/*  text={this.props.signInStore.emailText} */}
-              {/* /> */}
               <ActiveEmailInputTextView
                 label="이메일 또는 휴대폰번호"
                 value={this.props.signInStore.inputText}
                 onChangeText={this.props.signInStore.inputTextChanged.bind(this)}
               />
-              {/* <LabelView text="Password"/> */}
-              {/* <PasswordInputTextView */}
-              {/*  toggleShowPassword={this.props.signInStore.toggleShowPassword.bind(this)} */}
-              {/*  isShowPassword={this.props.signInStore.isShowPassword} */}
-              {/*  onChangeText={this.props.signInStore.passwordTextChanged.bind(this)} */}
-              {/*  text={this.props.signInStore.passwordText} */}
-              {/* /> */}
               <View style={{ height: 30 }} />
               <ActivePasswordInputTextView
                 label="비밀번호"
@@ -100,14 +81,6 @@ class SignIn extends React.Component {
                 title="비밀번호를 잊으셨나요?"
               />
               <SignErrorMessageView text={this.props.signInStore.errorMessage} />
-              {/* <Image height={50} source={'../../../../Img/component_1.svg'} onClick={this.signUpButtonClicked.bind(this)}/> */}
-              {/* <View style={styles.buttonContainer}> */}
-              {/*  <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')}> */}
-              {/*    <View style={styles.loginButton}> */}
-              {/*      <Text style={styles.loginButtonText}>로그인</Text> */}
-              {/*    </View> */}
-              {/*  </TouchableOpacity> */}
-              {/* </View> */}
               <SignUpNextButton
                 isActive={this.props.signInStore.isValidInputData}
                 text="로그인"

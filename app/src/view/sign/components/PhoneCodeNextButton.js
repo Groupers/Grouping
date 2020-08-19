@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
-import {WINDOW_SIZE} from "../../../constant/WindowSize";
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 export default class PhoneCodeNextButton extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ export default class PhoneCodeNextButton extends Component {
       alignItems: 'center',
       justifyContent: 'center',
       height: 25,
+      marginTop: 25,
       backgroundColor: this.props.isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
       borderRadius: 8,
       // marginBottom: this.props.isKeyboardShow
