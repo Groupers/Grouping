@@ -16,7 +16,7 @@ import { COLORS } from '../../assets/Colors';
 import EntranceMain from './EntranceMain';
 import FindEmail from '../sign/SignIn/FindEmail';
 import ResetPasssword from '../sign/SignIn/ResetPasssword';
-import ResetPasswordPhone from "../sign/SignIn/ResetPasswordPhone";
+// import ResetPasswordPhone from "../sign/SignIn/ResetPasswordPhone";
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
