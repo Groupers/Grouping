@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
-import EmailInputTextView from '../components/EmailInputTextView';
 import SignUpNextButton from '../components/SignUpNextButton';
 import LabelView from '../components/LabelView';
 import SignErrorMessageView from '../components/SignErrorMessageView';

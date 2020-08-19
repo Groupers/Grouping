@@ -15,8 +15,8 @@ class App extends Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   async componentDidMount() {
     // eslint-disable-next-line react/prop-types,react/destructuring-assignment
-    await this.props.userStore.ready();
-    await this.props.friendListStore.ready();
+    // await this.props.userStore.ready();
+    // await this.props.friendListStore.ready();
   }
 
   render() {
@@ -30,10 +30,10 @@ class App extends Component {
     }
     return (
       <View style={styles.body}>
-        {/* {view} */}
+        {view}
         {/* <ChatRoomMain/> */}
-        <Main />
         {/* <Entrance /> */}
+
       </View>
     );
   }

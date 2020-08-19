@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StatusBar, TextInput, Text, Animated } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 
-class PhoneNumberInputTextView extends Component {
+class ActiveEmailInputTextView extends Component {
   state = {
     isFocused: false,
   };
@@ -38,7 +38,6 @@ class PhoneNumberInputTextView extends Component {
             borderBottomColor: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
             padding: 1,
           }}
-          textContentType="telephoneNumber"
           onFocus={this.handleFocus}
           onBlur={this.props.value === null ? this.handleBlur : null}
           blurOnSubmit
@@ -48,4 +47,4 @@ class PhoneNumberInputTextView extends Component {
   }
 }
 
-export default PhoneNumberInputTextView;
+export default ActiveEmailInputTextView;

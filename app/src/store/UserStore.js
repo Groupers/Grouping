@@ -11,17 +11,19 @@ export default class UserStore {
 
   groupingUser: GroupingUserDto;
 
-  @observable userStatus = USER_STATUS.READY;
+  @observable userStatus = USER_STATUS.GUEST;
 
   @action ready = async () => {
-    await this.userTable.findByEmail('test@naver.com');
+    await this.userTable.findByEmail(this.groupingUser.email);
     await this.userRepository.initialize();
-    this.userStatus = USER_STATUS.GUEST;
+    // this.userStatus = USER_STATUS.GUEST;
   };
 
   @action signInCompleted = (groupingUserDto: GroupingUserDto) => {
     this.groupingUser = groupingUserDto;
     this.userStatus = USER_STATUS.USER;
+    console.log(this.groupingUser.email);
+    console.log(this.userStatus.toString());
   };
 
   @action signUpCompleted = (groupingUserDto: GroupingUserDto) => {
@@ -38,6 +40,6 @@ export default class UserStore {
   }
 
   @computed get getUserId() {
-    return this.groupingUser.userId
+    return this.groupingUser.userId;
   }
 }

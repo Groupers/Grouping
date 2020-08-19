@@ -15,6 +15,7 @@ import { Icon } from 'react-native-elements';
 import SignUpNextButton from '../sign/components/SignUpNextButton';
 import Carousel from './Carousel';
 import MoreInfoButton from '../sign/components/MoreInfoButton';
+import ActiveEmailInputTextView from '../sign/components/ActiveEmailInputTextView';
 
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
@@ -27,7 +28,7 @@ const EntraceMain = (props) => {
   return (
     <View>
       <SafeAreaView style={styles.container}>
-        <Carousel flex={1}/>
+        <Carousel flex={1} />
         <View style={styles.inner}>
           <View style={styles.termsAgreementContainer}>
             <View style={styles.rowContainer}>
@@ -56,7 +57,7 @@ const EntraceMain = (props) => {
             <View style={{ marginTop: 10 }}>
               <MoreInfoButton
                 navigation={props.navigation}
-                screen="SignUpPhone"
+                screen="Home"
                 title="먼저 둘러보시겠어요?"
                 /*  추후 navigation 구조 변경 후 메인화면으로 연결할 예정 */
               />
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  inner: { flex:1 ,marginTop: 20, width: '90%' },
+  inner: { flex: 1, marginTop: 20, width: '90%' },
   linkedText: { borderBottomColor: 'black', borderBottomWidth: 1, fontWeight: 'bold' },
   loginButton: {
     marginTop: 10,
