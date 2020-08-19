@@ -32,8 +32,8 @@ class App extends Component {
       <View style={styles.body}>
         {view}
         {/* <ChatRoomMain/> */}
+        {/* <Entrance /> */}
 
-        {/* {view} */}
       </View>
     );
   }
