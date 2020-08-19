@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { SwipeablePanel } from 'rn-swipeable-panel/dist';
 import { useState } from 'react';
 import { inject, observer } from 'mobx-react';
