@@ -6,6 +6,7 @@ import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import GenderSettingView from './settings/GenderSettingView';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupMoreInfoView = (props) => {
@@ -72,7 +73,12 @@ const InputNewGroupMoreInfoView = (props) => {
       <TouchableOpacity onPress={() => openPanel()}>
         <Text>OPEN PANEL</Text>
       </TouchableOpacity>
-      <SwipeablePanel {...panelProps} isActive={isPanelActive} />
+      <SwipeablePanel {...panelProps} isActive={isPanelActive}>
+        <GenderSettingView
+          exitPanel={closePanel.bind(this)}
+          completePanel={closePanel.bind(this)}
+        />
+      </SwipeablePanel>
     </View>
   );
 };
