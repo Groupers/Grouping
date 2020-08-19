@@ -61,6 +61,15 @@ const InputNewGroupMoreInfoView = (props) => {
     setIsPanelActive(false);
   };
 
+  const onGenderSelected = (gender) => {
+    props.groupingCreationMainStore.groupingGenderSelected(gender);
+  };
+
+  const initialize = () => {
+    props.groupingCreationMainStore.groupingInitializeGender();
+    closePanel();
+  };
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>more info</Text>
@@ -75,8 +84,10 @@ const InputNewGroupMoreInfoView = (props) => {
       </TouchableOpacity>
       <SwipeablePanel {...panelProps} isActive={isPanelActive}>
         <GenderSettingView
+          initialize={initialize.bind(this)}
           exitPanel={closePanel.bind(this)}
-          completePanel={closePanel.bind(this)}
+          onSelectGender={onGenderSelected.bind(this)}
+          groupingGender={props.groupingCreationMainStore.groupingGender}
         />
       </SwipeablePanel>
     </View>
