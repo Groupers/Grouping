@@ -10,7 +10,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import {WINDOW_SIZE} from "../../constant/WindowSize";
+import { WINDOW_SIZE } from '../../constant/WindowSize';
 
 class AddressResult extends Component {
   render() {

@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   View,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
+import { COLORS } from '../../../assets/Colors';
 import SignUpNextButton from '../components/SignUpNextButton';
-import NameInputTextView from '../components/NameInputTextView';
 import LabelView from '../components/LabelView';
 import SignErrorMessageView from '../components/SignErrorMessageView';
-import GenderInputView from '../components/GenderInputView';
-import BirthdayInputView from '../components/BirthdayInputView';
-import { COLORS } from '../../../assets/Colors';
-import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import EmailInputTextView from '../components/EmailInputTextView';
+import { SIGN_UP_NAME_STATUS } from '../../../constant/SignUpNameStatus';
+import NameInputTextView from '../components/NameInputTextView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -28,7 +27,7 @@ import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 @inject('signUpBasicInfoStore')
 @observer
-export class SignUpBasicInfo extends Component {
+class SignUpName extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -36,11 +35,20 @@ export class SignUpBasicInfo extends Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  componentDidMount() {}
+  async componentDidMount() {
+    // this.focusListener = this.props.navigation.addListener(
+    //   'focus'
+    //   this.props.signUpBasicInfoStore.clearEmail.bind(this)
+    // );
+  }
 
-  signUpNextButtonClicked() {
-    this.props.signUpBasicInfoStore.completeBasicInfo();
-    this.props.navigation.navigate('SignUpPhone');
+  componentWillUnmount() {
+    // this.focusListener();
+  }
+
+  async signUpNextButtonClicked() {
+    await this.props.signUpBasicInfoStore.completeName();
+    this.props.navigation.navigate('SignUpGender');
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
@@ -56,37 +64,21 @@ export class SignUpBasicInfo extends Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.title}>필수 정보 입력</Text>
-                <Text style={styles.subTitle}>그루핑 활동 시 사용될 정보를 입력해주세요</Text>
-              </View>
-              <View height={WINDOW_SIZE.WIDTH * 0.0781} />
-              <LabelView text="닉네임" />
+              <LabelView text="이름" />
               <NameInputTextView
                 text={this.props.signUpBasicInfoStore.nameText}
                 onChangeText={this.props.signUpBasicInfoStore.nameTextChanged.bind(this)}
               />
-              <View height={WINDOW_SIZE.WIDTH * 0.081} />
-              <LabelView text="성별" />
-              <GenderInputView
-                isMaleSelected={this.props.signUpBasicInfoStore.isMaleSelected}
-                isFemaleSelected={this.props.signUpBasicInfoStore.isFemaleSelected}
-                genderSelected={this.props.signUpBasicInfoStore.genderSelected.bind(this)}
-              />
-              <View height={WINDOW_SIZE.WIDTH * 0.06} />
-              <LabelView text="생년월일" />
-              <BirthdayInputView
-                text={this.props.signUpBasicInfoStore.birthdayText}
-                onChangeText={this.props.signUpBasicInfoStore.birthdayChanged.bind(this)}
-              />
               <SignErrorMessageView text={this.props.signUpBasicInfoStore.errorMessage} />
-            </View>
-            <View style={styles.bottomContainer}>
-              <SignUpNextButton
-                isActive={this.props.signUpBasicInfoStore.isValidInputData}
-                text="등 록"
-                onClick={this.signUpNextButtonClicked.bind(this)}
-              />
+              <View flex={1} />
+              <View style={styles.bottomContainer}>
+                <SignUpNextButton
+                  // isActive={this.props.signUpBasicInfoStore.isValidInputData}
+                  isActive={this.props.signUpBasicInfoStore.isValidName}
+                  text="다 음"
+                  onClick={this.signUpNextButtonClicked.bind(this)}
+                />
+              </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -111,32 +103,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     // justifyContent: 'center',
-    width: 290 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: '85%',
+    paddingTop: 30,
   },
-  titleContainer: {
-    width: '100%',
-    justifyContent: 'flex-start',
-    marginTop: 70 * WINDOW_SIZE.HEIGHT_WEIGHT,
-  },
-  title: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.SUB_COLOR,
-    marginBottom: 10,
-  },
-  subTitle: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.DARK_GRAY,
-  },
+
   contentContainer: {
-    width: '100%',
+    flex: 1,
+    paddingTop: 150,
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: COLORS.MAIN_COLOR,
+    width: '100%',
   },
   bottomContainer: {
-    flex: 1,
+    backgroundColor: COLORS.MAIN_COLOR,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginBottom: 60 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    justifyContent: 'flex-start',
+    marginBottom: 60,
   },
 });
+
+export default SignUpName;

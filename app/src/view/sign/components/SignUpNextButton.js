@@ -10,7 +10,7 @@ export default class SignUpNextButton extends Component {
 
   buttonStyle = function (isActive) {
     return {
-      width: '100%',
+      width: WINDOW_SIZE.WIDTH,
       height: 40,
       borderRadius: 5,
       backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     height: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   title: {
-    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 14,
     fontWeight: '600',
     color: 'white',
     alignSelf: 'center',

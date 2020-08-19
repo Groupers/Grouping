@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 import { GENDER } from '../../../constant/Gender';
-import {WINDOW_SIZE} from "../../../constant/WindowSize";
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -30,12 +30,12 @@ export default class GenderInputView extends React.Component {
     };
   };
 
-  textStyle= function (isActive){
-    return{
+  textStyle = function (isActive) {
+    return {
       color: isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
-      fontSize: Width * 0.025,
-    }
-  }
+      fontSize: WINDOW_SIZE.WIDTH * 0.025,
+    };
+  };
 
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,

@@ -25,8 +25,16 @@ export default class SignUpBasicInfoStore {
     this.signProcessStore = signProcessStore;
   }
 
-  @action completeBasicInfo = () => {
-    this.signProcessStore.basicInfoCompleted(this.nameText, this.gender, this.birthdayText);
+  @action completeName = () => {
+    this.signProcessStore.nameCompleted(this.nameText);
+  };
+
+  @action completeGender = () => {
+    this.signProcessStore.genderCompleted(this.gender);
+  };
+
+  @action completeBirthday = () => {
+    this.signProcessStore.birthdayCompleted(this.birthdayText);
   };
 
   @action nameTextChanged = (text) => {
@@ -51,34 +59,15 @@ export default class SignUpBasicInfoStore {
   };
 
   @action birthdayChanged = (birthday) => {
-    if (String(birthday).length === 0) {
-      this.birthdayValidation = INPUT_BIRTHDAY_STATUS.NONE;
-      this.birthdayText = birthday;
-      return;
-    }
-
-    if (birthday[birthday.length - 1] === '.') {
-      birthday = birthday.toString().slice(0, birthday.length - 1);
-    }
-
-    if (birthday.length > 10) {
-      return;
-    }
 
     this.birthdayText = birthday;
 
-    if (this.birthdayText.length === 5 || this.birthdayText.length === 8) {
-      this.birthdayText = `${this.birthdayText
-        .toString()
-        .slice(0, birthday.length - 1)}.${this.birthdayText
-        .toString()
-        .slice(birthday.length - 1, birthday.length)}`;
-    }
-
-    console.log(this.birthdayValidator.validateBirthday(this.birthdayText));
-
+    console.log(birthday);
     if (this.birthdayValidator.validateBirthday(this.birthdayText)) {
       this.birthdayValidation = INPUT_BIRTHDAY_STATUS.SUCCEED;
+      console.log(this.birthdayValidator.validateBirthday(this.birthdayText));
+      console.log(birthday);
+      console.log(this.birthdayValidator.validateBirthday(this.birthdayText));
       return;
     }
 
@@ -97,12 +86,25 @@ export default class SignUpBasicInfoStore {
     return '';
   }
 
+  // 각 단계에서는 각 데이터 유효성만 체크하고 next활성화, 가입 마지막단계에서 isValidation 판단하기로..
   @computed get isValidInputData() {
     return (
       this.nameValidation === SIGN_UP_NAME_STATUS.SUCCEED &&
       this.genderValidation === INPUT_GENDER_STATUS.SELECTED &&
       this.birthdayValidation === INPUT_BIRTHDAY_STATUS.SUCCEED
     );
+  }
+
+  @computed get isValidName() {
+    return this.nameValidation === SIGN_UP_NAME_STATUS.SUCCEED;
+  }
+
+  @computed get isValidGender() {
+    return this.genderValidation === INPUT_GENDER_STATUS.SELECTED;
+  }
+
+  @computed get isValidBirthday() {
+    return this.birthdayValidation === INPUT_BIRTHDAY_STATUS.SUCCEED;
   }
 
   @computed get isMaleSelected() {

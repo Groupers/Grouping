@@ -38,15 +38,16 @@ const styles = StyleSheet.create({
   labelContainer: {
     borderColor: COLORS.MAIN_COLOR,
     width: '100%',
-    // marginTop: 20,
+    marginTop: 20,
+    alignSelf:'flex-start'
   },
 
   label: {
-    width: '90%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    color: COLORS.FONT_GRAY,
-    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
-    // fontWeight: '600',
+    color: 'black',
+    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontWeight: 'bold',
   },
 });

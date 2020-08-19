@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { COLORS } from '../../../assets/Colors';
-import {WINDOW_SIZE} from "../../../constant/WindowSize";
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -13,7 +13,7 @@ import {WINDOW_SIZE} from "../../../constant/WindowSize";
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-export default class EmailInputTextView extends React.Component {
+class EmailInputTextView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -33,9 +33,9 @@ export default class EmailInputTextView extends React.Component {
         <TextInput
           style={styles.email}
           maxLength={30}
-          placeholder="이메일 주소"
+          placeholder="example@gmail.com"
           autoCorrect={false}
-          placeholderTextColor="#ddd"
+          placeholderTextColor={COLORS.FONT_GRAY}
           value={this.props.text}
           onChangeText={
             this.props.onChangeText != null ? (text) => this.props.onChangeText(text) : null
@@ -63,3 +63,5 @@ const styles = StyleSheet.create({
     borderColor: COLORS.FONT_GRAY,
   },
 });
+
+export default EmailInputTextView;

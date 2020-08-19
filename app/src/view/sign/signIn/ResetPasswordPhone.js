@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -28,7 +29,7 @@ import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 @inject('signUpPhoneStore')
 @observer
-class SignUpPhone extends React.Component {
+class ResetPasswordPhone extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -63,28 +64,21 @@ class SignUpPhone extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
+            <View style={styles.informTextContainer}>
+              <Text>계정 확인을 위해</Text>
+              <Text>휴대폰 번호를 입력해주세요</Text>
+            </View>
             <View style={styles.contentContainer}>
-              <LabelView text="핸드폰 인증" />
               <View style={styles.phoneCodeContainer}>
                 <PhoneNumberInputTextView
-                  isActive={!this.props.signUpPhoneStore.isAllCompleted}
+                  label="휴대폰 번호"
                   text={this.props.signUpPhoneStore.phoneNumber}
                   onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
-                />
-                <PhoneCodeNextButton
-                  isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
-                  text={
-                    this.props.signUpPhoneStore.phoneValidationViewStatus ===
-                    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                      ? '재인증'
-                      : '인 증'
-                  }
-                  onClick={this.authorizeButtonClicked.bind(this)}
                 />
               </View>
               {this.props.signUpPhoneStore.phoneValidationViewStatus ===
@@ -100,18 +94,28 @@ class SignUpPhone extends React.Component {
                   />
                   <PhoneAuthTimer style={styles.authTimer} />
                   <PhoneCodeNextButton
-                    style={styles.authButton}
-                    text="인 증"
-                    isActive={this.props.signUpPhoneStore.isValidPhoneCode}
-                    onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)}
+                    isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
+                    text={
+                      this.props.signUpPhoneStore.phoneValidationViewStatus ===
+                      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                        ? '재인증'
+                        : '인 증'
+                    }
+                    onClick={this.authorizeButtonClicked.bind(this)}
                   />
+                  {/* <PhoneCodeNextButton */}
+                  {/*  style={styles.authButton} */}
+                  {/*  text="인 증" */}
+                  {/*  isActive={this.props.signUpPhoneStore.isValidPhoneCode} */}
+                  {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
+                  {/* /> */}
                 </View>
               ) : null}
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
               <View style={styles.bottomContainer}>
                 <SignUpNextButton
                   isActive={this.props.signUpPhoneStore.isAllCompleted}
-                  text="시 작 하 기"
+                  text="다음"
                   onClick={this.signUpNextButtonClicked.bind(this)}
                 />
               </View>
@@ -129,7 +133,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
   },
 
@@ -138,18 +141,19 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    // justifyContent: 'center',
-    width: '85%',
+    justifyContent: 'center',
+    width: '90%',
     // paddingTop:30
   },
-
+  informTextContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
   phoneCodeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
     justifyContent: 'center',
-    width: '100%',
-    borderBottomWidth: 1,
     borderColor: COLORS.FONT_GRAY,
   },
 
@@ -168,7 +172,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingBottom: 60,
     flex: 1,
   },
 
@@ -177,4 +180,4 @@ const styles = StyleSheet.create({
   authButton: {},
 });
 
-export default SignUpPhone;
+export default ResetPasswordPhone;

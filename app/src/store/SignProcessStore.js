@@ -55,11 +55,24 @@ export default class SignProcessStore {
     this.groupingUserDto.password = password;
   };
 
-  @action basicInfoCompleted = (name, gender, birthday) => {
-    this.signViewStatus = SIGN_VIEW_STATUS.BASIC_INFO_COMPLETED;
+  @action nameCompleted = (name) => {
+    this.signViewStatus = SIGN_VIEW_STATUS.NAME_COMPLETED;
     this.groupingUserDto.name = name;
+  };
+
+  @action genderCompleted = (gender) => {
+    this.signViewStatus = SIGN_VIEW_STATUS.GENDER_COMPLETED;
     this.groupingUserDto.gender = gender;
+  };
+
+  @action birthdayCompleted = async (birthday) => {
+    this.signViewStatus = SIGN_VIEW_STATUS.BIRTHDAY_COMPLETED;
     this.groupingUserDto.birthday = birthday;
+    const groupingUserDto = await this.signRepository.completeSignUp(
+      this.groupingUserDto,
+      (responseCode) => {}
+    );
+    this.userStore.signUpCompleted(groupingUserDto);
   };
 
   @action phoneCompleted = async (phoneNumber) => {
@@ -72,10 +85,6 @@ export default class SignProcessStore {
   };
 
   @action termsAgreementCompleted = async () => {
-    const groupingUserDto = await this.signRepository.completeSignUp(
-      this.groupingUserDto,
-      (responseCode) => {}
-    );
-    this.userStore.signUpCompleted(groupingUserDto);
+
   };
 }

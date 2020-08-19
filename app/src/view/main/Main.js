@@ -22,7 +22,7 @@ const MyPageStack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-function HomeStackScreen() {
+const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeMain} />
@@ -34,52 +34,35 @@ function HomeStackScreen() {
       <HomeStack.Screen name="Preview" component={Preview} />
     </HomeStack.Navigator>
   );
-}
+};
 
-function GroupStackScreen() {
+const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
       <GroupStack.Screen name="Home" component={GroupMain} />
     </GroupStack.Navigator>
   );
-}
+};
 
-function FeedStackScreen() {
+const FeedStackScreen = () => {
   return (
     <FeedStack.Navigator>
       <FeedStack.Screen name="Home" component={FeedMain} />
     </FeedStack.Navigator>
   );
-}
+};
 
-function MyPageScreen() {
+const MyPageScreen = () => {
   return (
     <MyPageStack.Navigator>
       <MyPageStack.Screen name="Home" component={MyPageMain} />
     </MyPageStack.Navigator>
   );
-}
+};
 
 @inject('mainStore')
-@inject('chatStore')
 @observer
 class Main extends Component {
-  onKeywordSearchClicked() {
-    this.props.chatStore.changeView(CHAT_VIEW_STATUS.KEYWORD_SEARCH);
-  }
-
-  onSearchViewBackButtonClicked() {
-    this.props.chatStore.changeView(CHAT_VIEW_STATUS.NONE);
-  }
-
-  onChatContentEnterButtonClicked() {
-    this.props.chatStore.changeView(CHAT_VIEW_STATUS.ENTERING_CHAT_ROOM);
-  }
-
-  onChatContentsBackButtonClicked() {
-    this.props.chatStore.changeView(CHAT_VIEW_STATUS.NONE);
-  }
-
   render() {
     return (
       <NavigationContainer>

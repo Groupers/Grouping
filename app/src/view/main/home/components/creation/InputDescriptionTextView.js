@@ -1,21 +1,22 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
-const InputTextView = (props) => {
+const InputDescriptionTextView = (props) => {
   return (
     <View style={styles.titleContainer}>
       <TextInput
         style={styles.title}
-        maxLength={50}
+        maxLength={1000}
         placeholder={props.textExample}
         autoCorrect={false}
+        multiline
+        numberOfLines={5}
         placeholderTextColor="#ddd"
-        value={props.groupingTitle}
+        value={props.value}
         onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
       />
-      <Text style={styles.counter}>{props.groupingTitle.length}/30</Text>
     </View>
   );
 };
@@ -45,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputTextView;
+export default InputDescriptionTextView;

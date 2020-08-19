@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { View, StatusBar, TextInput, Text, Animated } from 'react-native';
+import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
+import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
+import PhoneCodeNextButton from './PhoneCodeNextButton';
 
 class PhoneNumberInputTextView extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     isFocused: false,
   };
@@ -18,25 +25,36 @@ class PhoneNumberInputTextView extends Component {
     const labelStyle = {
       position: 'absolute',
       left: 0, // left로부터 0떨어진
-      top: !isFocused ? 20 : 0,
+      top: !isFocused ? 25 : 0,
       fontSize: !isFocused ? 12 : 12,
       color: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
       margin: 0,
+      // backgroundColor: 'green',
     };
     return (
-      <Animated.View style={{ paddingTop: 18, width: '100%', height: 40 }}>
+      <Animated.View
+        style={{
+          paddingTop: 12,
+          width: '90%',
+          height: 40,
+          // backgroundColor: 'yellow',
+        }}
+      >
         <Text style={labelStyle}>{label}</Text>
         <TextInput
           {...props}
-          maxLength={30}
+          maxLength={20}
           autoCorrect={false}
           style={{
-            height: 30,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 40,
             fontSize: 14,
             color: '#111',
             borderBottomWidth: 1,
             borderBottomColor: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
-            padding: 1,
+            // backgroundColor: 'gray',
           }}
           textContentType="telephoneNumber"
           onFocus={this.handleFocus}
