@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { inject, observer } from 'mobx-react';
 
 // eslint-disable-next-line react/prop-types
-export default function InputNewGroupMoreInfoView({ navigation }) {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => <Text onPress={() => navigation.navigate('Preview')}>다음</Text>,
-    });
-  }, [navigation]);
-
+const InputNewGroupMoreInfoView = (props) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>more info</Text>
-      <Button title="GROUP LOCATION" onPress={() => navigation.navigate('InputNewGroupLocation')} />
+      <Text>조금만더 힘내세요:){'\n'}그룹에 대해 자세히 알려주세요</Text>
       <Button
-        title="GROUP DESCRIPTION"
-        onPress={() => navigation.navigate('InputNewGroupDescription')}
+        title="활동 위치"
+        onPress={() => props.navigation.navigate('InputNewGroupLocation')}
+      />
+      <Button
+        title="그룹 소개글"
+        onPress={() => props.navigation.navigate('InputNewGroupDescription')}
       />
     </View>
   );
-}
+};
+
+export default inject('groupingCreationMainStore')(observer(InputNewGroupMoreInfoView));

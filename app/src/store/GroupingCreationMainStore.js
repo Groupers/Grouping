@@ -18,7 +18,7 @@ export default class GroupingCreationMainStore {
 
   ageValidator = new AgeValidator();
 
-  @observable groupingCreationViewStatus = GROUPING_CREATION_VIEW_STATUS.MAIN_INFO;
+  @observable groupingCreationViewStatus = GROUPING_CREATION_VIEW_STATUS.NAME;
 
   @observable groupingCreationDto = new GroupingCreationDto();
 
@@ -86,8 +86,15 @@ export default class GroupingCreationMainStore {
   @action isHeaderRightIconActivated = (groupingCreationView) => {
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.MAIN_INFO &&
-      this.groupingTitle.length > MIN_TITLE_LENGTH &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.NAME &&
+      this.groupingTitle.length > MIN_TITLE_LENGTH
+    ) {
+      return true;
+    }
+
+    if (
+      this.groupingCreationViewStatus === groupingCreationView &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
       this.keywordParser.parseKeyword(this.groupingKeyword)
     ) {
       return true;
