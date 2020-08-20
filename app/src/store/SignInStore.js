@@ -153,20 +153,38 @@ export default class SignInStore {
   }
 
   @action signIn = async () => {
-    const groupingUserDto = await this.signRepository.signIn(
-      this.inputText,
-      this.passwordText,
-      (responseCode) => {
-        if (responseCode === ResponseCode.INVALID_PASSWORD) {
-          this.passwordStatus = INPUT_PASSWORD_STATUS.INVALID;
-          return;
-        }
+    const groupingUserDto = null;
+    if (this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED) {
+      this.groupingUserDto = await this.signRepository.signIn(
+        this.inputText,
+        this.passwordText,
+        (responseCode) => {
+          if (responseCode === ResponseCode.INVALID_PASSWORD) {
+            this.passwordStatus = INPUT_PASSWORD_STATUS.INVALID;
+            return;
+          }
 
-        if (responseCode === ResponseCode.USER_NOT_EXISTED) {
-          this.inputStatus = INPUT_STATUS.INVALID;
+          if (responseCode === ResponseCode.USER_NOT_EXISTED) {
+            this.inputStatus = INPUT_STATUS.INVALID;
+          }
         }
-      }
-    );
+      );
+    } else if (this.phoneStatus === INPUT_PHONE_STATUS.SUCCEED) {
+      this.groupingUserDto = await this.signRepository.signIn(
+        this.inputText,
+        this.passwordText,
+        (responseCode) => {
+          if (responseCode === ResponseCode.INVALID_PASSWORD) {
+            this.passwordStatus = INPUT_PASSWORD_STATUS.INVALID;
+            return;
+          }
+
+          if (responseCode === ResponseCode.USER_NOT_EXISTED) {
+            this.inputStatus = INPUT_STATUS.INVALID;
+          }
+        }
+      );
+    }
 
     if (groupingUserDto !== undefined) {
       this.userStore.signInCompleted(groupingUserDto);

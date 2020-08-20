@@ -96,6 +96,7 @@ export default class SignUpPhoneStore {
   };
 
   @action sendPhoneCode = async () => {
+    console.log('send code');
     let isSucceed = false;
     const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
     if (data.phoneNumberAvailable !== true) {
@@ -107,12 +108,12 @@ export default class SignUpPhoneStore {
       console.log(this.codeConfirmation);
       isSucceed = true;
     } catch (e) {
-      console.log('연속 5번 이상 인증번호 요청 에러');
+      console.log('인증번호 요청 에러');
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR;
     }
     if (isSucceed) {
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
-      this.initialize();
+      // this.initialize();
     }
   };
 

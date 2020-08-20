@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Animated, StyleSheet, Text, TextInput, View } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
-import {WINDOW_SIZE} from "../../../constant/WindowSize";
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -21,44 +21,68 @@ export default class PhoneCodeInputTextView extends React.Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
-  // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
-  // 예: return nextProps.id !== this.props.id;
-  // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
+  state = {
+    isFocused: false,
+  };
+
+  // 나중에 store에 연결
+  handleFocus = () => this.setState({ isFocused: true });
+
+  handleBlur = () => this.setState({ isFocused: false });
+
   render() {
+    const { label, ...props } = this.props;
+    const { isFocused } = this.state;
+    const labelStyle = {
+      position: 'absolute',
+      left: 0, // left로부터 0떨어진
+      top: !isFocused ? 20 : 0,
+      fontSize: !isFocused ? 12 : 12,
+      color: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
+      margin: 0,
+    };
     return (
-      <View style={styles.phoneCodeInputContainer}>
+      <Animated.View style={{ paddingTop: 18, width: '90%', height: 40 }}>
+        <Text style={labelStyle}>{label}</Text>
         <TextInput
-          style={styles.phoneCode}
+          {...props}
           maxLength={6}
           autoCorrect={false}
           clearTextOnFocus
+          style={{
+            height: 30,
+            fontSize: 14,
+            color: '#111',
+            borderBottomWidth: 1,
+            borderBottomColor: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
+            padding: 1,
+          }}
           textContentType="creditCardNumber"
-          placeholderTextColor={COLORS.FONT_GRAY}
-          placeholder="인증번호를 입력하세요"
-          value={this.props.text}
-          onChangeText={
-            this.props.onChangeText != null ? (text) => this.props.onChangeText(text) : null
-          }
+          onFocus={this.handleFocus}
+          onBlur={this.props.value === null ? this.handleBlur : null}
+          blurOnSubmit
         />
-      </View>
+      </Animated.View>
     );
   }
+
+  // render() {
+  //   return (
+  //     <View style={styles.phoneCodeInputContainer}>
+  //       <TextInput
+  //         style={styles.phoneCode}
+  //         maxLength={6}
+  //         autoCorrect={false}
+  //         clearTextOnFocus
+  //         textContentType="creditCardNumber"
+  //         placeholderTextColor={COLORS.FONT_GRAY}
+  //         placeholder="인증번호를 입력하세요"
+  //         value={this.props.text}
+  //         onChangeText={
+  //           this.props.onChangeText != null ? (text) => this.props.onChangeText(text) : null
+  //         }
+  //       />
+  //     </View>
+  //   );
+  // }
 }
-
-const styles = StyleSheet.create({
-  phoneCodeInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderColor: COLORS.FONT_GRAY,
-  },
-
-  phoneCode: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
-  },
-});

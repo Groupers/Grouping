@@ -36,7 +36,7 @@ export default class NameInputTextView extends React.Component {
                 <TextInput
                     style={styles.name}
                     maxLength={10}
-                    // placeholder="닉네임"
+                    placeholder="이름을 입력해주세요"
                     autoCorrect={false}
                     clearTextOnFocus={false}
                     placeholderTextColor={COLORS.FONT_GRAY}
@@ -47,11 +47,11 @@ export default class NameInputTextView extends React.Component {
                             : null
                     }
                 />
-                <Icon
-                    size={WINDOW_SIZE.WIDTH*0.045}
-                    color={this.props.signUpBasicInfoStore.nameValidation ===SIGN_UP_NAME_STATUS.SUCCEED? COLORS.SUB_COLOR : COLORS.FONT_GRAY}
-                    name="check-circle"
-                />
+                {/*<Icon*/}
+                {/*    size={WINDOW_SIZE.WIDTH*0.045}*/}
+                {/*    color={this.props.signUpBasicInfoStore.nameValidation ===SIGN_UP_NAME_STATUS.SUCCEED? COLORS.SUB_COLOR : COLORS.FONT_GRAY}*/}
+                {/*    name="check-circle"*/}
+                {/*/>*/}
             </View>
         );
     }

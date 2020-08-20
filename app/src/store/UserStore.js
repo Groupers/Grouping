@@ -22,8 +22,6 @@ export default class UserStore {
   @action signInCompleted = (groupingUserDto: GroupingUserDto) => {
     this.groupingUser = groupingUserDto;
     this.userStatus = USER_STATUS.USER;
-    console.log(this.groupingUser.email);
-    console.log(this.userStatus.toString());
   };
 
   @action signUpCompleted = (groupingUserDto: GroupingUserDto) => {
