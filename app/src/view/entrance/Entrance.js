@@ -11,17 +11,12 @@ import SignUpPhone from '../sign/signUp/SignUpPhone';
 import SignUpTermsAgreement from '../sign/signUp/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
 import EntranceMain from './EntranceMain';
-<<<<<<< HEAD
-import FindEmail from '../sign/SignIn/FindEmail';
-import ResetPasssword from '../sign/SignIn/ResetPasssword';
-=======
 import FindEmail from '../sign/signIn/FindEmail';
 import ResetPasssword from '../sign/signIn/ResetPasssword';
 import ResetPasswordPhone from '../sign/signIn/ResetPasswordPhone';
 import SignUpName from '../sign/signUp/SignUpName';
 import SignUpGender from '../sign/signUp/SignUpGender';
 import SignUpBirthday from '../sign/signUp/SignUpBirthday';
->>>>>>> bb60fa7fd7e59b2b48576fb5353394b351930c4c
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
