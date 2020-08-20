@@ -5,9 +5,7 @@ import { Text, View } from 'react-native';
 export default function Preview({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Text onPress={() => navigation.navigate('Home')}>완료</Text>
-      ),
+      headerRight: () => <Text onPress={() => navigation.navigate('Home')}>완료</Text>,
     });
   }, [navigation]);
 
