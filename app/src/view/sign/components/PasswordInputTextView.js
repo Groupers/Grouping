@@ -35,7 +35,7 @@ export default class PasswordInputTextView extends React.Component {
           style={styles.password}
           maxLength={20}
           autoCompleteType="password"
-          placeholder="비밀번호"
+          placeholder="6자리 이상 입력해주세요"
           secureTextEntry={!this.props.isShowPassword}
           textContentType="password"
           placeholderTextColor="#ddd"

@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { inject, observer } from 'mobx-react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import { Dimensions, Keyboard, StyleSheet, Text } from 'react-native';
-import { Image } from 'react-native-svg';
+
 import { Icon } from 'react-native-elements';
-import SignIn from '../sign/SignIn/SignIn';
-import SignUpEmail from '../sign/SignUp/SignUpEmail';
-import SignUpPassword from '../sign/SignUp/SignUpPassword';
-import SignUpPhone from '../sign/SignUp/SignUpPhone';
-import SignUpBasicInfo from '../sign/SignUp/SignUpBasicInfo';
-import SignUpTermsAgreement from '../sign/SignUp/SignUpTermsAgreement';
+import SignIn from '../sign/signIn/SignIn';
+import SignUpEmail from '../sign/signUp/SignUpEmail';
+import SignUpPassword from '../sign/signUp/SignUpPassword';
+import SignUpPhone from '../sign/signUp/SignUpPhone';
+import SignUpTermsAgreement from '../sign/signUp/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
 import EntranceMain from './EntranceMain';
-import FindEmail from '../sign/SignIn/FindEmail';
-import ResetPasssword from '../sign/SignIn/ResetPasssword';
-import ResetPasswordPhone from "../sign/SignIn/ResetPasswordPhone";
+import FindEmail from '../sign/signIn/FindEmail';
+import ResetPasssword from '../sign/signIn/ResetPasssword';
+import ResetPasswordPhone from '../sign/signIn/ResetPasswordPhone';
+import SignUpName from '../sign/signUp/SignUpName';
+import SignUpGender from '../sign/signUp/SignUpGender';
+import SignUpBirthday from '../sign/signUp/SignUpBirthday';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -150,29 +150,16 @@ class Entrance extends React.Component {
             {(props) => <SignUpPassword {...props} />}
           </Stack.Screen>
           <Stack.Screen
-            name="SignUpBasicInfo"
-            options={{
-              title: 'Sign Up basic info',
-              headerStyle: {
-                backgroundColor: COLORS.MAIN_COLOR,
-              },
-              headerTintColor: 'black',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-              headerShown: false,
-            }}
-          >
-            {(props) => <SignUpBasicInfo {...props} />}
-          </Stack.Screen>
-          <Stack.Screen
             name="SignUpPhone"
             options={{
               headerStyle: {
                 backgroundColor: COLORS.MAIN_COLOR,
                 elevation: 0,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
               },
-              headerTitle: '',
+              headerTitle: '회원가입',
               // headerBackTitle:"<",
               headerBackImage: () => {
                 return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
@@ -180,6 +167,67 @@ class Entrance extends React.Component {
             }}
           >
             {(props) => <SignUpPhone {...props} />}
+          </Stack.Screen>
+
+          <Stack.Screen
+            name="SignUpName"
+            options={{
+              headerTitle: '회원가입',
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerBackImage: () => {
+                return (
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
+                );
+              },
+            }}
+          >
+            {(props) => <SignUpName {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="SignUpGender"
+            options={{
+              headerTitle: '회원가입',
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerBackImage: () => {
+                return (
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
+                );
+              },
+            }}
+          >
+            {(props) => <SignUpGender {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="SignUpBirthday"
+            options={{
+              headerTitle: '회원가입',
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerBackImage: () => {
+                return (
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
+                );
+              },
+            }}
+          >
+            {(props) => <SignUpBirthday {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignUpTermsAgreement"

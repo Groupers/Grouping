@@ -28,14 +28,8 @@ class App extends Component {
     } else if (this.props.userStore.userStatus === USER_STATUS.USER) {
       view = <Main />;
     }
-    return (
-      <View style={styles.body}>
-        {view}
-        {/* <ChatRoomMain/> */}
-        {/* <Entrance /> */}
+    return <View style={styles.body}>{view}</View>;
 
-      </View>
-    );
   }
 }
 
