@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
-import InputTextView from './InputTextView';
+import InputTitleView from './InputTitleView';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
 // eslint-disable-next-line react/prop-types
@@ -59,7 +59,7 @@ const InputNewGroupNameView = (props) => {
         <Text>그룹의 이름을 입력해주세요.</Text>
       </View>
       <View style={styles.groupNameInputContainer}>
-        <InputTextView
+        <InputTitleView
           textExample="30자 이내로 입력해 주세요."
           onChangeText={onTitleChanged.bind(this)}
           groupingTitle={props.groupingCreationMainStore.groupingTitle}

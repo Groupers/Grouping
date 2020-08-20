@@ -3,25 +3,27 @@ import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
-const InputTextView = (props) => {
+const InputKeywordView = (props) => {
   return (
-    <View style={styles.titleContainer}>
+    <View style={styles.keywordContainer}>
       <TextInput
-        style={styles.title}
-        maxLength={50}
-        placeholder={props.textExample}
+        style={styles.keyword}
+        maxLength={100}
+        placeholder="ex. #카페 #커피 #책 #향기"
         autoCorrect={false}
+        blurOnSubmit
+        multiline
         placeholderTextColor="#ddd"
-        value={props.groupingTitle}
+        value={props.groupingKeyword}
         onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
       />
-      <Text style={styles.counter}>{props.groupingTitle.length}/30</Text>
+      <Text style={styles.counter}>{props.groupingKeyword.length}/100</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  keywordContainer: {
     borderColor: 'black',
     borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
     flexDirection: 'row',
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     margin: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 
-  title: {
+  keyword: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -45,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputTextView;
+export default InputKeywordView;

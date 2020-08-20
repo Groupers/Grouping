@@ -34,11 +34,16 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddress = '';
 
-  @observable groupingGender = '';
+  @observable groupingGender = 'both';
 
   @observable groupingAvailableMinAge = Number(MIN_AVAILABLE_AGE);
 
   @observable groupingAvailableMaxAge = Number(MAX_AVAILABLE_AGE);
+
+  @action groupingInitializeGender = () => {
+    this.groupingGender = 'both';
+    console.log(this.groupingGender);
+  };
 
   @action groupingTitleChanged = (title) => {
     this.groupingTitle = title;
@@ -73,6 +78,7 @@ export default class GroupingCreationMainStore {
 
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
+    console.log(this.groupingGender);
   };
 
   @action groupingAvailableMinAgeChanged = (minAge) => {

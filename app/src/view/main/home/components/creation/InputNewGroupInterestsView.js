@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
-import InputTextView from './InputTextView';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import InputKeywordView from './InputKeywordView';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupInterestsView = (props) => {
@@ -60,10 +60,10 @@ const InputNewGroupInterestsView = (props) => {
         <Text>그룹의 관심사를 {'\n'} #해시태그로 소개해주세요.</Text>
       </View>
       <View style={styles.groupNameInputContainer}>
-        <InputTextView
+        <InputKeywordView
           textExample="#키워드,"
           onChangeText={onKeywordChanged.bind(this)}
-          groupingTitle={props.groupingCreationMainStore.groupingKeyword}
+          groupingKeyword={props.groupingCreationMainStore.groupingKeyword}
         />
       </View>
       <View style={styles.hotKeywordContainer}>
