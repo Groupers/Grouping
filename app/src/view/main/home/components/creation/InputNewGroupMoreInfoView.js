@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SwipeablePanel } from 'rn-swipeable-panel/dist';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import GenderSettingView from './settings/GenderSettingView';
+import AgeSettingView from './settings/AgeSettingView';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupMoreInfoView = (props) => {
@@ -51,23 +52,37 @@ const InputNewGroupMoreInfoView = (props) => {
     // ...or any prop you want
   });
 
-  const [isPanelActive, setIsPanelActive] = useState(false);
+  const [genderPanelActive, setGenderPanelActive] = useState(false);
+  const [agePanelActive, setAgePanelActive] = useState(false);
 
-  const openPanel = () => {
-    setIsPanelActive(true);
+  const openGenderPanel = () => {
+    setGenderPanelActive(true);
   };
 
-  const closePanel = () => {
-    setIsPanelActive(false);
+  const openAgePanel = () => {
+    setAgePanelActive(true);
+  };
+
+  const closeGenderPanel = () => {
+    setGenderPanelActive(false);
+  };
+
+  const closeAgePanel = () => {
+    setAgePanelActive(false);
   };
 
   const onGenderSelected = (gender) => {
     props.groupingCreationMainStore.groupingGenderSelected(gender);
   };
 
-  const initialize = () => {
+  const initializeGender = () => {
     props.groupingCreationMainStore.groupingInitializeGender();
-    closePanel();
+    closeGenderPanel();
+  };
+
+  const initializeAge = () => {
+    props.groupingCreationMainStore.groupingInitializeAge();
+    closeAgePanel();
   };
 
   return (
@@ -79,15 +94,27 @@ const InputNewGroupMoreInfoView = (props) => {
       <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupDescription')}>
         <Text>GROUP DESCRIPTION</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => openPanel()}>
-        <Text>OPEN PANEL</Text>
+      <TouchableOpacity onPress={() => openGenderPanel()}>
+        <Text>OPEN GENDER PANEL</Text>
       </TouchableOpacity>
-      <SwipeablePanel {...panelProps} isActive={isPanelActive}>
+      <TouchableOpacity onPress={() => openAgePanel()}>
+        <Text>OPEN AGE PANEL</Text>
+      </TouchableOpacity>
+      <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
         <GenderSettingView
-          initialize={initialize.bind(this)}
-          exitPanel={closePanel.bind(this)}
+          initialize={initializeGender.bind(this)}
+          exitPanel={closeGenderPanel.bind(this)}
           onSelectGender={onGenderSelected.bind(this)}
           groupingGender={props.groupingCreationMainStore.groupingGender}
+        />
+      </SwipeablePanel>
+      <SwipeablePanel {...panelProps} isActive={agePanelActive}>
+        <AgeSettingView
+          initialize={initializeAge().bind(this)}
+          exitPanel={closeAgePanel.bind(this)}
+          onSelectAge={onAgeSelected.bind(this)}
+          groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
+          groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
         />
       </SwipeablePanel>
     </View>
