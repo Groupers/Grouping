@@ -3,33 +3,27 @@ import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchBar from './components/search/SearchBar';
-import Recommand from './components/recommand/Recommand';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import CommonRecommend from './components/recommends/CommonRecommend';
+import PersonalRecommend from './components/recommends/PersonalRecommend';
+import Header from './components/header/Header';
+
+// import Recommand from './components/recommand/Recommand';
 
 // eslint-disable-next-line react/prop-types
 export default function HomeMain({ navigation }) {
+  const navigateTo = (arrival) => {
+    navigation.navigate(arrival);
+  };
+
   return (
     <ScrollView style={style.Conatiner}>
-      {/* <Recommand /> */}
+      <View>{/* <Recommand /> */}</View>
       <SafeAreaView style={style.PaddingBlock}>
-        <View style={style.HeaderBlock}>
-          <View style={style.LogoBlock}>
-            <Text>LOOGO</Text>
-          </View>
-          <View style={{ alignItems: 'flex-end', width: '50%' }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('InputNewGroupName')}
-            >
-              <Text style={style.CreateGroupText}>+새 그룹</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => navigation.navigate('SearchView')}>
-            <SearchBar />
-          </TouchableOpacity>
-        </View>
-        {/* <Text>Home screen!!!</Text> */}
+        <Header navigateTo={navigateTo} />
+        <CommonRecommend />
+        <SearchBar navigateTo={navigateTo} />
+        <PersonalRecommend />
       </SafeAreaView>
     </ScrollView>
   );
@@ -37,8 +31,8 @@ export default function HomeMain({ navigation }) {
 
 const style = StyleSheet.create({
   Conatiner: {
-    flex: 1,
-    // zIndex: 1,
+    zIndex: 1,
+    backgroundColor: '#f5e4e4',
   },
   PaddingBlock: {
     padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
@@ -46,13 +40,7 @@ const style = StyleSheet.create({
     marginTop: 0,
     display: 'flex',
   },
-  HeaderBlock: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 56 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    width: '100%',
-  },
-  LogoBlock: { width: '50%' },
+
   CreateGroupText: {
     fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontWeight: 'bold',
