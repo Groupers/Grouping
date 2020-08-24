@@ -45,7 +45,6 @@ const style = StyleSheet.create({
     margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginTop: 0,
     display: 'flex',
-    backgroundColor: 'purple',
   },
   HeaderBlock: {
     flexDirection: 'row',
