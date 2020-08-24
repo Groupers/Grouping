@@ -24,15 +24,11 @@ export default function HomeMain({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('SearchView')}>
-          <SearchBar
-            style={{
-              position: 'absolute',
-              top: 298 * WINDOW_SIZE.HEIGHT_WEIGHT,
-              backgroundColor: 'blue',
-            }}
-          />
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate('SearchView')}>
+            <SearchBar />
+          </TouchableOpacity>
+        </View>
         {/* <Text>Home screen!!!</Text> */}
       </SafeAreaView>
     </ScrollView>
