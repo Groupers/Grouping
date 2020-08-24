@@ -63,6 +63,11 @@ const InputNewGroupMoreInfoView = (props) => {
     setAgePanelActive(true);
   };
 
+  const closePanel = () => {
+    setGenderPanelActive(false);
+    setAgePanelActive(false);
+  };
+
   const closeGenderPanel = () => {
     setGenderPanelActive(false);
   };
@@ -73,6 +78,14 @@ const InputNewGroupMoreInfoView = (props) => {
 
   const onGenderSelected = (gender) => {
     props.groupingCreationMainStore.groupingGenderSelected(gender);
+  };
+
+  const onMinAgeSelected = (minAge) => {
+    props.groupingCreationMainStore.groupingAvailableMinAgeChanged(minAge);
+  };
+
+  const onMaxAgeSelected = (maxAge) => {
+    props.groupingCreationMainStore.groupingAvailableMaxAgeChanged(maxAge);
   };
 
   const initializeGender = () => {
@@ -110,9 +123,10 @@ const InputNewGroupMoreInfoView = (props) => {
       </SwipeablePanel>
       <SwipeablePanel {...panelProps} isActive={agePanelActive}>
         <AgeSettingView
-          initialize={initializeAge().bind(this)}
+          initialize={initializeAge.bind(this)}
           exitPanel={closeAgePanel.bind(this)}
-          onSelectAge={onAgeSelected.bind(this)}
+          onMinAgeSelected={onMinAgeSelected.bind(this)}
+          onMaxAgeSelected={onMaxAgeSelected.bind(this)}
           groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
           groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
         />

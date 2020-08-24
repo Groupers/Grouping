@@ -45,6 +45,13 @@ export default class GroupingCreationMainStore {
     console.log(this.groupingGender);
   };
 
+  @action groupingInitializeAge = () => {
+    this.groupingAvailableMinAgeChanged(Number(MIN_AVAILABLE_AGE));
+    this.groupingAvailableMaxAgeChanged(Number(MAX_AVAILABLE_AGE));
+    console.log(this.groupingAvailableMinAge);
+    console.log(this.groupingAvailableMaxAge);
+  };
+
   @action groupingTitleChanged = (title) => {
     this.groupingTitle = title;
   };
@@ -82,11 +89,13 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAvailableMinAgeChanged = (minAge) => {
-    this.groupingAvailableMinAge = minAge;
+    this.groupingAvailableMinAge = Number(minAge);
+    console.log(this.groupingAvailableMinAge);
   };
 
   @action groupingAvailableMaxAgeChanged = (maxAge) => {
-    this.groupingAvailableMaxAge = maxAge;
+    this.groupingAvailableMaxAge = Number(maxAge);
+    console.log(this.groupingAvailableMaxAge);
   };
 
   @action isHeaderRightIconActivated = (groupingCreationView) => {

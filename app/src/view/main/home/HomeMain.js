@@ -10,7 +10,7 @@ export default function HomeMain({ navigation }) {
         <Text>+새 그룹</Text>
       </TouchableOpacity>
       <Text>Home screen!!!</Text>
-      <Recommand />
+      {/* <Recommand /> */}
     </View>
   );
 }
