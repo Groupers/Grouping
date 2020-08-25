@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View, StyleSheet } from 'react-native';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const PersonalRecommend = ({ navigation }) => {
+const PopularRecommend = () => {
   return (
     <View>
       <View style={style.TextBlock}>
         <TouchableOpacity>
-          <Text style={style.TextStyle}>연수님 맞춤 그룹 ></Text>
+          <Text style={style.TextStyle}>인기 키워드 ></Text>
         </TouchableOpacity>
       </View>
       <View style={style.CarouselBox}>
@@ -30,8 +30,9 @@ const style = StyleSheet.create({
   TextBlock: {},
   TextStyle: { fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT, fontWeight: 'bold' },
   SampleStyle: {
-    height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    width: 230 * WINDOW_SIZE.WIDTH_WEIGHT,
+    height: 70 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: 70 * WINDOW_SIZE.WIDTH_WEIGHT,
+    borderRadius: 35 * (WINDOW_SIZE.HEIGHT_WEIGHT / WINDOW_SIZE.WIDTH_WEIGHT),
     backgroundColor: 'purple',
   },
   CarouselBox: {
@@ -39,4 +40,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default PersonalRecommend;
+export default PopularRecommend;

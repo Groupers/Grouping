@@ -7,6 +7,7 @@ import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import CommonRecommend from './components/recommends/CommonRecommend';
 import PersonalRecommend from './components/recommends/PersonalRecommend';
 import Header from './components/header/Header';
+import PopularRecommend from './components/recommends/PopularRecommend';
 
 // import Recommand from './components/recommand/Recommand';
 
@@ -24,6 +25,7 @@ export default function HomeMain({ navigation }) {
         <CommonRecommend />
         <SearchBar navigateTo={navigateTo} />
         <PersonalRecommend />
+        <PopularRecommend />
       </SafeAreaView>
     </ScrollView>
   );
