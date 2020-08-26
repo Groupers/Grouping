@@ -14,6 +14,7 @@ import InputNewGroupMoreInfoView from './home/components/creation/InputNewGroupM
 import InputNewGroupLocationView from './home/components/creation/InputNewGroupLocationView';
 import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
 import Preview from './home/components/creation/Preview';
+import SearchView from './home/components/search/SearchView';
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -25,13 +26,39 @@ const Tab = createBottomTabNavigator();
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeMain} />
-      <HomeStack.Screen name="InputNewGroupName" component={InputNewGroupNameView} />
-      <HomeStack.Screen name="InputNewGroupInterests" component={InputNewGroupInterestsView} />
-      <HomeStack.Screen name="InputNewGroupMoreInfo" component={InputNewGroupMoreInfoView} />
-      <HomeStack.Screen name="InputNewGroupLocation" component={InputNewGroupLocationView} />
-      <HomeStack.Screen name="InputNewGroupDescription" component={InputNewGroupDescriptionView} />
+      <HomeStack.Screen
+        name="Home"
+        component={HomeMain}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupName"
+        component={InputNewGroupNameView}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupInterests"
+        component={InputNewGroupInterestsView}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupMoreInfo"
+        component={InputNewGroupMoreInfoView}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupLocation"
+        component={InputNewGroupLocationView}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupDescription"
+        component={InputNewGroupDescriptionView}
+      />
       <HomeStack.Screen name="Preview" component={Preview} />
+      <HomeStack.Screen
+        name="SearchView"
+        component={SearchView}
+        options={{
+          headerShown: false,
+        }}
+      />
     </HomeStack.Navigator>
   );
 };

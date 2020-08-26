@@ -150,6 +150,8 @@ export default class SignInStore {
     if (this.passwordStatus === INPUT_PASSWORD_STATUS.INVALID) {
       return '비밀번호가 일치하지 않습니다.';
     }
+
+    return '로그인 할 수 없습니다.';
   }
 
   @action signIn = async () => {

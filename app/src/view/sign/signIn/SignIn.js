@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  Dimensions,
 } from 'react-native';
 
 import { inject, observer } from 'mobx-react';
@@ -16,6 +15,7 @@ import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
 import ActivePasswordInputTextView from '../components/ActivePasswordInputTextView';
 import SignUpNextButton from '../components/SignUpNextButton';
 import SignErrorMessageView from '../components/SignErrorMessageView';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -25,7 +25,6 @@ import SignErrorMessageView from '../components/SignErrorMessageView';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-const Width = Dimensions.get('window').width;
 @inject('signInStore', 'signProcessStore', 'userStore', 'friendListStore')
 @observer
 class SignIn extends React.Component {
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: 'center',
     flex: 1,
-    width: Width * 0.9,
+    width: 0.9 * WINDOW_SIZE.WIDTH,
     marginTop: 50,
   },
   loginButton: {
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: COLORS.DARK_GRAY,
     justifyContent: 'center',
-    width: Width,
+    width: WINDOW_SIZE.WIDTH,
   },
   loginButtonText: {
     color: 'white',
