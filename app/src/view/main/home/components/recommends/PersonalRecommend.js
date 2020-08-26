@@ -6,14 +6,14 @@ import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 const PersonalRecommend = ({ navigation }) => {
   return (
     <View>
-      <View style={style.TextBlock}>
+      <View style={styles.textBlock}>
         <TouchableOpacity>
-          <Text style={style.TextStyle}>연수님 맞춤 그룹 ></Text>
+          <Text style={styles.textStyle}>연수님 맞춤 그룹 ></Text>
         </TouchableOpacity>
       </View>
-      <View style={style.CarouselBox}>
+      <View style={styles.carouselBox}>
         <View>
-          <View style={style.SampleStyle} />
+          <View style={styles.sampleStyle} />
         </View>
         <View>
           <Text>같이 다이어트해요</Text>
@@ -26,15 +26,15 @@ const PersonalRecommend = ({ navigation }) => {
   );
 };
 
-const style = StyleSheet.create({
-  TextBlock: {},
-  TextStyle: { fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT, fontWeight: 'bold' },
-  SampleStyle: {
+const styles = StyleSheet.create({
+  textBlock: {},
+  textStyle: { fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT, fontWeight: 'bold' },
+  sampleStyle: {
     height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: 230 * WINDOW_SIZE.WIDTH_WEIGHT,
     backgroundColor: 'purple',
   },
-  CarouselBox: {
+  carouselBox: {
     marginTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });

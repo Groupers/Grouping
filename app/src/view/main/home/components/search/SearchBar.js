@@ -6,9 +6,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const SearchBar = ({ navigateTo }) => {
   return (
-    <View style={style.SearchBarBlock}>
+    <View style={styles.searchBarBlock}>
       <TouchableOpacity onPress={() => navigateTo('SearchView')}>
-        <View style={style.ButtonBlock}>
+        <View style={styles.buttonBlock}>
           <Text># 키워드로 검색해보세요.</Text>
           <Text>돋보기 아이콘</Text>
         </View>
@@ -17,12 +17,12 @@ const SearchBar = ({ navigateTo }) => {
   );
 };
 
-const style = StyleSheet.create({
-  SearchBarBlock: {
+const styles = StyleSheet.create({
+  searchBarBlock: {
     zIndex: 2,
     transform: [{ translateY: -25 }],
   },
-  ButtonBlock: {
+  buttonBlock: {
     width: '100%',
     height: 42 * WINDOW_SIZE.HEIGHT_WEIGHT,
     borderRadius: 12,

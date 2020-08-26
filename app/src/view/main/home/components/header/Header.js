@@ -1,30 +1,31 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
 const Header = ({ navigateTo }) => {
   return (
-    <View style={style.HeaderBlock}>
-      <View style={style.LogoBlock}>
-        <Text>LOOGO</Text>
+    <View style={styles.headerBlock}>
+      <View style={styles.logoBlock}>
+        <Text>LOGO</Text>
       </View>
       <View style={{ alignItems: 'flex-end', width: '50%' }}>
         <TouchableOpacity onPress={() => navigateTo('InputNewGroupName')}>
-          <Text style={style.CreateGroupText}>+새 그룹</Text>
+          <Text style={styles.createGroupText}>+새 그룹</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-const style = StyleSheet.create({
-  HeaderBlock: {
+const styles = StyleSheet.create({
+  headerBlock: {
     flexDirection: 'row',
     alignItems: 'center',
     height: 56 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: '100%',
   },
-  LogoBlock: { width: '50%' },
+  logoBlock: { width: '50%' },
+  createGroupText: {},
 });
 export default Header;

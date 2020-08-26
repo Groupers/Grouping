@@ -6,14 +6,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const PopularRecommend = () => {
   return (
     <View>
-      <View style={style.TextBlock}>
+      <View style={styles.textBlock}>
         <TouchableOpacity>
-          <Text style={style.TextStyle}>인기 키워드 ></Text>
+          <Text style={styles.textStyle}>인기 키워드 ></Text>
         </TouchableOpacity>
       </View>
-      <View style={style.CarouselBox}>
+      <View style={styles.carouselBox}>
         <View>
-          <View style={style.SampleStyle} />
+          <View style={styles.sampleStyle} />
         </View>
         <View>
           <Text>같이 다이어트해요</Text>
@@ -26,16 +26,16 @@ const PopularRecommend = () => {
   );
 };
 
-const style = StyleSheet.create({
-  TextBlock: {},
-  TextStyle: { fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT, fontWeight: 'bold' },
-  SampleStyle: {
+const styles = StyleSheet.create({
+  textBlock: {},
+  textStyle: { fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT, fontWeight: 'bold' },
+  sampleStyle: {
     height: 70 * WINDOW_SIZE.WIDTH_WEIGHT,
     width: 70 * WINDOW_SIZE.WIDTH_WEIGHT,
     borderRadius: 35 * (WINDOW_SIZE.HEIGHT_WEIGHT / WINDOW_SIZE.WIDTH_WEIGHT),
     backgroundColor: 'purple',
   },
-  CarouselBox: {
+  carouselBox: {
     marginTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });
