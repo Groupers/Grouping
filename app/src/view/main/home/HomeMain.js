@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchBar from './components/search/SearchBar';
@@ -8,8 +8,7 @@ import CommonRecommend from './components/recommends/CommonRecommend';
 import PersonalRecommend from './components/recommends/PersonalRecommend';
 import Header from './components/header/Header';
 import PopularRecommend from './components/recommends/PopularRecommend';
-
-// import Recommand from './components/recommand/Recommand';
+import { COLORS } from '../../../assets/Colors';
 
 // eslint-disable-next-line react/prop-types
 export default function HomeMain({ navigation }) {
@@ -18,9 +17,8 @@ export default function HomeMain({ navigation }) {
   };
 
   return (
-    <ScrollView style={style.Conatiner}>
-      <View>{/* <Recommand /> */}</View>
-      <SafeAreaView style={style.PaddingBlock}>
+    <ScrollView style={styles.container}>
+      <SafeAreaView style={styles.paddingBlock}>
         <Header navigateTo={navigateTo} />
         <CommonRecommend />
         <SearchBar navigateTo={navigateTo} />
@@ -31,19 +29,19 @@ export default function HomeMain({ navigation }) {
   );
 }
 
-const style = StyleSheet.create({
-  Conatiner: {
+const styles = StyleSheet.create({
+  container: {
     zIndex: 1,
-    backgroundColor: '#f5e4e4',
+    backgroundColor: COLORS.HOME_TAP_MAIN,
   },
-  PaddingBlock: {
+  paddingBlock: {
     padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
     margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginTop: 0,
     display: 'flex',
   },
 
-  CreateGroupText: {
+  createGroupText: {
     fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontWeight: 'bold',
   },

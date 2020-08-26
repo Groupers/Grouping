@@ -1,15 +1,21 @@
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SwipeablePanel } from 'rn-swipeable-panel/dist';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import GenderSettingView from './settings/GenderSettingView';
+import MinAgeSettingView from './settings/MinAgeSettingView';
+import MaxAgeSettingView from './settings/MaxAgeSettingView';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupMoreInfoView = (props) => {
+  React.useEffect(() => {
+    onContentsChanged();
+  }, []);
+
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
@@ -17,17 +23,16 @@ const InputNewGroupMoreInfoView = (props) => {
     props.navigation.navigate('Preview');
   };
 
-  const rightIconStyle = (groupingCreationView) => {
+  const rightIconStyle = () => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
-        ? Colors.white
-        : '#999',
+      // eslint-disable-next-line react/prop-types
+      color: props.groupingCreationMainStore.isPreviewButtonActivated ? Colors.black : '#999',
     };
   };
 
-  const onCompleted = () => {
+  const onContentsChanged = () => {
     props.navigation.setOptions({
       headerRight: () => (
         <Text
@@ -51,23 +56,52 @@ const InputNewGroupMoreInfoView = (props) => {
     // ...or any prop you want
   });
 
-  const [isPanelActive, setIsPanelActive] = useState(false);
+  const [genderPanelActive, setGenderPanelActive] = useState(false);
+  const [agePanelActive, setAgePanelActive] = useState(false);
 
-  const openPanel = () => {
-    setIsPanelActive(true);
+  const openGenderPanel = () => {
+    setGenderPanelActive(true);
+  };
+
+  const openAgePanel = () => {
+    setAgePanelActive(true);
   };
 
   const closePanel = () => {
-    setIsPanelActive(false);
+    setGenderPanelActive(false);
+    setAgePanelActive(false);
+  };
+
+  const closeGenderPanel = () => {
+    setGenderPanelActive(false);
+  };
+
+  const closeAgePanel = () => {
+    setAgePanelActive(false);
   };
 
   const onGenderSelected = (gender) => {
     props.groupingCreationMainStore.groupingGenderSelected(gender);
   };
 
-  const initialize = () => {
+  const onMinAgeSelected = (minAge) => {
+    console.log(minAge);
+    props.groupingCreationMainStore.groupingAvailableMinAgeChanged(minAge);
+  };
+
+  const onMaxAgeSelected = (maxAge) => {
+    console.log(maxAge);
+    props.groupingCreationMainStore.groupingAvailableMaxAgeChanged(maxAge);
+  };
+
+  const initializeGender = () => {
     props.groupingCreationMainStore.groupingInitializeGender();
-    closePanel();
+    closeGenderPanel();
+  };
+
+  const initializeAge = () => {
+    props.groupingCreationMainStore.groupingInitializeAge();
+    closeAgePanel();
   };
 
   return (
@@ -79,15 +113,41 @@ const InputNewGroupMoreInfoView = (props) => {
       <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupDescription')}>
         <Text>GROUP DESCRIPTION</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => openPanel()}>
-        <Text>OPEN PANEL</Text>
+      <TouchableOpacity onPress={() => openGenderPanel()}>
+        <Text>OPEN GENDER PANEL</Text>
       </TouchableOpacity>
-      <SwipeablePanel {...panelProps} isActive={isPanelActive}>
+      <TouchableOpacity onPress={() => openAgePanel()}>
+        <Text>OPEN AGE PANEL</Text>
+      </TouchableOpacity>
+      <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
+        <TouchableOpacity onPress={() => initializeGender()}>
+          <Text>취소</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => closeGenderPanel()}>
+          <Text>완료</Text>
+        </TouchableOpacity>
+        <Text>그룹에 가입 가능한 성별을 알려주세요</Text>
+        <Text>*조건을 설정하지 않은 경우에는 기본설정인 모두환영으로 표시됩니다</Text>
         <GenderSettingView
-          initialize={initialize.bind(this)}
-          exitPanel={closePanel.bind(this)}
           onSelectGender={onGenderSelected.bind(this)}
           groupingGender={props.groupingCreationMainStore.groupingGender}
+        />
+      </SwipeablePanel>
+      <SwipeablePanel {...panelProps} isActive={agePanelActive}>
+        <TouchableOpacity onPress={() => initializeAge()}>
+          <Text>취소</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => closeAgePanel()}>
+          <Text>완료</Text>
+        </TouchableOpacity>
+        <Text>나이 제한 설정 패널</Text>
+        <MinAgeSettingView
+          onChangeText={onMinAgeSelected.bind(this)}
+          groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
+        />
+        <MaxAgeSettingView
+          onChangeText={onMaxAgeSelected.bind(this)}
+          groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
         />
       </SwipeablePanel>
     </View>
