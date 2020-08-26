@@ -8,4 +8,5 @@ export const COLORS = {
   DARK_GRAY: '#707070',
   FONT_DARK: '#313131',
   ALERT_MINT: '#47C29B',
+  HOME_TAP_MAIN: '#f5e4e4',
 };
