@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { COLORS } from '../../assets/Colors';
-import {WINDOW_SIZE} from "../../constant/WindowSize";
+import { WINDOW_SIZE } from '../../constant/WindowSize';
 
 class InputSearch extends Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -11,7 +11,11 @@ class InputSearch extends Component {
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   componentDidMount() {}
 
-  componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
+  componentDidUpdate(
+    prevProps: Readonly<P>,
+    prevState: Readonly<S>,
+    snapshot: SS,
+  ) {}
 
   // 친구목록, 채팅, 모임찾기, 마이페이지
 
@@ -29,7 +33,7 @@ class InputSearch extends Component {
         </View>
         <View style={styles.searchWrapper}>
           <TextInput
-            onTouchStart={() => this.props.onFocus()}
+            // onTouchStart={() => this.props.onFocus()}
             editable={this.props.isActivated}
             placeholder="검색"
             style={styles.search}
