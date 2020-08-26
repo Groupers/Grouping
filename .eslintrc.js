@@ -23,6 +23,8 @@ module.exports = {
         printWidth: 100,
       },
     ],
+    'react/prop-types': 0,
+    'no-use-before-define': 0,
   },
   plugins: ['prettier'],
 };
