@@ -1,22 +1,30 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { inject, observer } from 'mobx-react';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
 // eslint-disable-next-line react/prop-types
-export default function Preview({ navigation }) {
+const Preview = (props) => {
   React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => <Text onPress={() => navigation.navigate('Home')}>완료</Text>,
+    props.navigation.setOptions({
+      headerRight: () => <Text onPress={() => props.navigation.navigate('Home')}>완료</Text>,
     });
-  }, [navigation]);
+    // eslint-disable-next-line react/destructuring-assignment
+  }, [props.navigation]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.background} />
-      <View style={styles.contents} />
+      <View style={styles.background}>
+        <PreviewBackground />
+      </View>
+      <View style={styles.contents}>
+        <GroupName />
+        <GroupKeywords />
+        <GroupDescription />
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -48,3 +56,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default inject('userStore')(observer(Preview));
