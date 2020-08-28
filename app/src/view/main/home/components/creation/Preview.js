@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react';
+import ImagePicker from 'react-native-image-picker';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
 // eslint-disable-next-line react/prop-types
@@ -12,15 +13,30 @@ const Preview = (props) => {
     // eslint-disable-next-line react/destructuring-assignment
   }, [props.navigation]);
 
+  const showPicker = () => {
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.showImagePicker(options, () => {});
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.background}>
-        <PreviewBackground />
-      </View>
+      <TouchableOpacity style={styles.background} onPress={showPicker}>
+        <View style={styles.background} />
+      </TouchableOpacity>
       <View style={styles.contents}>
+        {/*
         <GroupName />
         <GroupKeywords />
         <GroupDescription />
+        */}
       </View>
     </View>
   );
