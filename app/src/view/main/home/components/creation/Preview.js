@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import ImagePicker from 'react-native-image-picker';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
@@ -23,13 +23,27 @@ const Preview = (props) => {
       },
     };
 
-    ImagePicker.showImagePicker(options, () => {});
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('사용자가 취소하였습니다.');
+      } else if (response.error) {
+        console.log('에러 : ', response.error);
+      } else {
+        // 이곳에 왔다면 이미지가 잘 선택된 것임
+        // 선택된 이미지의 경로 uri 얻어오기
+        const uri = { uri: response.uri };
+        props.groupingCreationMainStore.groupingBackgroundImageChanged({ uri });
+      }
+    });
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.background} onPress={showPicker}>
-        <View style={styles.background} />
+        <Image
+          source={props.groupingCreationMainStore.getBackgroundImageURI}
+          style={{ flex: 1, height: '100%', width: '100%', zIndex: 1 }}
+        />
       </TouchableOpacity>
       <View style={styles.contents}>
         {/*
@@ -73,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('userStore')(observer(Preview));
+export default inject('groupingCreationMainStore')(observer(Preview));
