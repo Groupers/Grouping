@@ -32,7 +32,8 @@ const Preview = (props) => {
         // 이곳에 왔다면 이미지가 잘 선택된 것임
         // 선택된 이미지의 경로 uri 얻어오기
         const uri = { uri: response.uri };
-        props.groupingCreationMainStore.groupingBackgroundImageChanged({ uri });
+        console.log(response.uri);
+        props.groupingCreationMainStore.groupingBackgroundImageChanged({ ...uri });
       }
     });
   };
