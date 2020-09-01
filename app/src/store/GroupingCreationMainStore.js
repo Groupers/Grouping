@@ -46,6 +46,8 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddressCompleted = false;
 
+  @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
+
   @action groupingInitializeGender = () => {
     this.groupingGender = 'both';
     console.log(this.groupingGender);
@@ -108,6 +110,12 @@ export default class GroupingCreationMainStore {
     console.log(this.groupingAvailableMaxAge);
   };
 
+  @action groupingBackgroundImageChanged = ({ uri }) => {
+    this.groupingBackgroundImageURI = { uri };
+    console.log('background image changed');
+    console.log(this.groupingBackgroundImageURI);
+  };
+
   @action isHeaderRightIconActivated = (groupingCreationView) => {
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
@@ -157,5 +165,9 @@ export default class GroupingCreationMainStore {
     console.log(this.groupingDescriptionCompleted);
     console.log(this.groupingAddressCompleted);
     return this.groupingDescriptionCompleted && this.groupingAddressCompleted;
+  }
+
+  @computed get getBackgroundImageURI() {
+    return this.groupingBackgroundImageURI;
   }
 }
