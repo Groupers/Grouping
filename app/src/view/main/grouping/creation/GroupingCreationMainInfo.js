@@ -46,6 +46,7 @@ class GroupingCreationMainInfo extends Component {
           }}
         />
       ),
+
     });
 
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', ()=>{

@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import { COLORS } from '../../../../../assets/Colors';
 
-const Header = ({ navigateTo }) => {
+const Header = ({ navigateTo, progress }) => {
   return (
     <View style={styles.headerBlock}>
       <View style={styles.logoBlock}>

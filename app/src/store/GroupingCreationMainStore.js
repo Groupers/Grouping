@@ -46,6 +46,8 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddressCompleted = false;
 
+  @observable creationGroupStep = 0;
+
   @action groupingInitializeGender = () => {
     this.groupingGender = 'both';
     console.log(this.groupingGender);
@@ -157,5 +159,13 @@ export default class GroupingCreationMainStore {
     console.log(this.groupingDescriptionCompleted);
     console.log(this.groupingAddressCompleted);
     return this.groupingDescriptionCompleted && this.groupingAddressCompleted;
+  }
+
+  @action nextStep() {
+    this.creationGroupStep += 1;
+  }
+
+  @action lastStep() {
+    this.creationGroupStep -= 1;
   }
 }

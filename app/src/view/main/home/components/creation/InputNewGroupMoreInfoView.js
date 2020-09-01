@@ -1,14 +1,18 @@
 import * as React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { SwipeablePanel } from 'rn-swipeable-panel/dist';
 import { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import { Icon } from 'react-native-elements';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import GenderSettingView from './settings/GenderSettingView';
 import MinAgeSettingView from './settings/MinAgeSettingView';
 import MaxAgeSettingView from './settings/MaxAgeSettingView';
+import { COLORS } from '../../../../../assets/Colors';
+import GroupCreationProgressBar from '../GroupCreationProgressBar';
+import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupMoreInfoView = (props) => {
@@ -105,19 +109,50 @@ const InputNewGroupMoreInfoView = (props) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>more info</Text>
+    <View
+      style={{
+        flex: 1,
+        paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+        paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+      }}
+    >
+      <GroupCreationProgressBar step={3} />
+      <View style={styles.labelContainer}>
+        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>
+          그룹에 대해 {'\n'}자세히 알려주세요.
+        </Text>
+      </View>
       <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupLocation')}>
-        <Text>GROUP LOCATION</Text>
+        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
+          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
+            <Icon name="place" size={15} />
+          </View>
+          <Text> 활동 위치</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupDescription')}>
-        <Text>GROUP DESCRIPTION</Text>
+        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
+          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
+            <Icon name="notes" size={15} />
+          </View>
+          <Text>그룹 소개글</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => openGenderPanel()}>
-        <Text>OPEN GENDER PANEL</Text>
+        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
+          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
+            <Icon name="add" size={15} />
+          </View>
+          <Text> 성별 제한 추가</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => openAgePanel()}>
-        <Text>OPEN AGE PANEL</Text>
+        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
+          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
+            <Icon name="add" size={15} />
+          </View>
+          <Text> 나이 제한 추가</Text>
+        </View>
       </TouchableOpacity>
       <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
         <TouchableOpacity onPress={() => initializeGender()}>
@@ -153,5 +188,15 @@ const InputNewGroupMoreInfoView = (props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  labelContainer: {
+    borderColor: COLORS.MAIN_COLOR,
+    width: '100%',
+    marginTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginBottom: 21 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    alignSelf: 'flex-start',
+  },
+});
 
 export default inject('groupingCreationMainStore')(observer(InputNewGroupMoreInfoView));
