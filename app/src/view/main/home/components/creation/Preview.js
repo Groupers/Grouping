@@ -16,7 +16,6 @@ const Preview = (props) => {
   const showPicker = () => {
     const options = {
       title: 'Select Avatar',
-      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
       storageOptions: {
         skipBackup: true,
         path: 'images',
@@ -28,9 +27,8 @@ const Preview = (props) => {
         console.log('사용자가 취소하였습니다.');
       } else if (response.error) {
         console.log('에러 : ', response.error);
+        // 에러시에 alert 를 사용할지 추가 논의 필요
       } else {
-        // 이곳에 왔다면 이미지가 잘 선택된 것임
-        // 선택된 이미지의 경로 uri 얻어오기
         const uri = { uri: response.uri };
         console.log(response.uri);
         props.groupingCreationMainStore.groupingBackgroundImageChanged({ ...uri });
@@ -75,16 +73,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
     backgroundColor: 'tomato',
-  },
-  PaddingBlock: {
-    padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginTop: 0,
-    display: 'flex',
-  },
-  CreateGroupText: {
-    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
-    fontWeight: 'bold',
   },
 });
 
