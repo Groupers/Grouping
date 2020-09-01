@@ -2,7 +2,11 @@ import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import ImagePicker from 'react-native-image-picker';
-import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import GroupName from './GroupName';
+import GroupingUserDto from '../../../../../dto/GroupingUserDto';
+import GroupLeaderProfile from './GroupLeaderProfile';
+import GroupKeyword from './GroupKeyword';
+import GroupDescription from './GroupDescription';
 
 // eslint-disable-next-line react/prop-types
 const Preview = (props) => {
@@ -44,12 +48,18 @@ const Preview = (props) => {
           style={{ flex: 1, height: '100%', width: '100%', zIndex: 1 }}
         />
       </TouchableOpacity>
+      <View>
+        <Text>{props.groupingCreationMainStore.groupingGender}</Text>
+        <Text>
+          {props.groupingCreationMainStore.groupingAvailableMinAge} ~{' '}
+          {props.groupingCreationMainStore.groupingAvailableMaxAge}
+        </Text>
+      </View>
       <View style={styles.contents}>
-        {/*
-        <GroupName />
-        <GroupKeywords />
-        <GroupDescription />
-        */}
+        <GroupLeaderProfile groupingUserDto={GroupingUserDto} />
+        <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
+        <GroupKeyword groupKeyword={props.groupingCreationMainStore.groupingKeyword} />
+        <GroupDescription groupDescription={props.groupingCreationMainStore.groupingDescription} />
       </View>
     </View>
   );
