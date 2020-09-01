@@ -15,6 +15,7 @@ import InputNewGroupLocationView from './home/components/creation/InputNewGroupL
 import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
 import Preview from './home/components/creation/Preview';
 import SearchView from './home/components/search/SearchView';
+import JoinedGroupDetail from './group/components/joinedGroup/JoinedGroupDetail';
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -66,7 +67,16 @@ const HomeStackScreen = () => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen name="Home" component={GroupMain} />
+      <GroupStack.Screen
+        name="Home"
+        component={GroupMain}
+        options={{ headerShown: false }}
+      />
+      <GroupStack.Screen
+        name="JoinedGroupDetail"
+        component={JoinedGroupDetail}
+        options={{ headerShown: false }}
+      />
     </GroupStack.Navigator>
   );
 };
