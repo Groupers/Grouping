@@ -1,9 +1,19 @@
 import { action, computed, observable } from 'mobx';
 import { GROUPING_VIEW_STATUS } from '../constant/GroupingViewStatus';
 import MainStore from './MainStore';
+import GroupingCreationDto from '../dto/GroupingCreationDto';
+import { USER_STATUS } from '../constant/UserStatus';
+import GroupTable from '../table/GroupTable';
+import GroupRepository from '../repository/GroupRepository';
 
 export default class GroupingStore {
   @observable groupingViewStatus = GROUPING_VIEW_STATUS.NONE;
+
+  groupRepository = new GroupRepository();
+
+  groupTable = new GroupTable();
+
+  groupingCreation: GroupingCreationDto;
 
   constructor(mainStore: MainStore) {
     this.mainStore = mainStore;
@@ -18,6 +28,11 @@ export default class GroupingStore {
     }
     this.mainStore.changeTabBarVisible(true);
   }
+
+  @action groupCreationCompleted = (groupingCreationDto: GroupingCreationDto) => {
+    this.groupingCreation = groupingCreationDto;
+    this.userStatus = USER_STATUS.USER;
+  };
 
   @computed get isKeywordSearchActivated() {
     if (this.groupingViewStatus === GROUPING_VIEW_STATUS.KEYWORD_SEARCH) {
