@@ -76,15 +76,18 @@ export default class GroupingCreationMainStore {
 
   @action groupingTitleChanged = (title) => {
     this.groupingTitle = title;
+    this.groupingCreationDto.title = title;
   };
 
   @action groupingKeywordChanged = (keyword) => {
     this.groupingKeyword = keyword;
+    this.groupingCreationDto.keyword = keyword;
   };
 
   @action groupingDescriptionChanged = (description) => {
     this.groupingDescriptionCompleted = true;
     this.groupingDescription = description;
+    this.groupingCreationDto.description = description;
   };
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
@@ -105,21 +108,25 @@ export default class GroupingCreationMainStore {
   @action groupingAddressSelected = (address) => {
     this.groupingAddressCompleted = true;
     this.groupingAddress = address;
+    this.groupingCreationDto.address = address;
   };
 
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
+    this.groupingCreationDto.gender = gender;
     console.log(this.groupingGender);
   };
 
   @action groupingAvailableMinAgeChanged = (minAge) => {
     this.groupingAvailableMinAge = minAge;
+    this.groupingCreationDto.minAge = minAge;
     console.log('change min age');
     console.log(this.groupingAvailableMinAge);
   };
 
   @action groupingAvailableMaxAgeChanged = (maxAge) => {
     this.groupingAvailableMaxAge = maxAge;
+    this.groupingCreationDto.maxAge = maxAge;
     console.log('change max age');
     console.log(this.groupingAvailableMaxAge);
   };
@@ -176,10 +183,12 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
+    console.log('in');
     const groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
       this.groupingCreationDto,
       () => {}
     );
+    console.log('out');
 
     if (groupingCreationDto !== undefined) {
       this.groupingStore.groupCreationCompleted(this.groupingCreationDto);

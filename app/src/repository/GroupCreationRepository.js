@@ -8,7 +8,10 @@ const TARGET_URL = `${SERVER_URL}/group`;
 
 export default class GroupCreationRepository {
   async completeGroupCreation(groupingCreationDto, failedCallback) {
+    console.log('in complete group creation');
     const response = await axios.post(`${TARGET_URL}`, groupingCreationDto);
+    console.log('response');
+    console.log(response);
 
     const commonResponse = new CommonResponse(response.data);
 
