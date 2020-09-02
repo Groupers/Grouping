@@ -27,7 +27,7 @@ const Tab = createBottomTabNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
-    <HomeStack.Navigator initialRouteName="InputNewGroupMoreInfo">
+    <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeMain} options={{ headerShown: false }} />
       <HomeStack.Screen
         name="InputNewGroupName"

@@ -23,8 +23,6 @@ const InputNewGroupNameView = (props) => {
     // eslint-disable-next-line react/prop-types,react/destructuring-assignment
   }, [props.navigation]); */
 
-  useEffect(() => props.groupingCreationMainStore.initialize, []);
-
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
