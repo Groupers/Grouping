@@ -1,6 +1,6 @@
 export const COLORS = {
   // background
-  MAIN_COLOR: '#f9f9f9',
+  MAIN_COLOR: 'white',
   // mainRed
   SUB_COLOR: '#FD6B53',
   BORDER_GRAY: 'gray',

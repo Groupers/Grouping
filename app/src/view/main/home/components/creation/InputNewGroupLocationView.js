@@ -50,6 +50,13 @@ const InputNewGroupLocationView = (props) => {
     });
   };
 
+  // props.navigation.headerBackground = () => (
+  //   <AddressSearchTextView
+  //     onChangeText={onAddressKeywordChanged.bind(this)}
+  //     value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
+  //   />
+  // );
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>input group location</Text>
