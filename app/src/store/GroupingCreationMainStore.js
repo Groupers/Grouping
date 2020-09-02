@@ -196,4 +196,17 @@ export default class GroupingCreationMainStore {
   @computed get getBackgroundImageURI() {
     return this.groupingBackgroundImageURI;
   }
+
+  @action initialize() {
+    this.groupingTitle = '';
+    this.groupingKeyword = '';
+    this.groupingDescription = '';
+    this.groupingAddressSearchKeyword = '';
+    this.groupingAddressSearchResult = [];
+    this.groupingAddress = '';
+    this.groupingGender = 'both';
+    this.groupingPreviewNextButtonActivated = false;
+    this.groupingDescriptionCompleted = false;
+    this.groupingAddressCompleted = false;
+  }
 }

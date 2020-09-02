@@ -11,6 +11,7 @@ import GroupDescription from './GroupDescription';
 // eslint-disable-next-line react/prop-types
 const Preview = (props) => {
   React.useLayoutEffect(() => {
+
     props.navigation.setOptions({
       headerRight: () => <Text onPress={() => props.navigation.navigate('Home')}>완료</Text>,
     });

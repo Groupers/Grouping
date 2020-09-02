@@ -5,6 +5,9 @@ import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import InputKeywordView from './InputKeywordView';
+import { COLORS } from '../../../../../assets/Colors';
+import GroupCreationProgressBar from '../GroupCreationProgressBar';
+import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupInterestsView = (props) => {
@@ -56,10 +59,14 @@ const InputNewGroupInterestsView = (props) => {
   return (
     // eslint-disable-next-line no-use-before-define
     <View style={styles.mainContainer}>
+      <GroupCreationProgressBar step={2} />
       <View style={styles.labelContainer}>
-        <Text>그룹의 관심사를 {'\n'} #해시태그로 소개해주세요.</Text>
+        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>
+          그룹의 관심사를 {'\n'}키워드로 소개해주세요.
+        </Text>
+        <Text>스페이스바를 눌러 키워드를 구분해주세요.</Text>
       </View>
-      <View style={styles.groupNameInputContainer}>
+      <View style={styles.interestInputContainer}>
         <InputKeywordView
           textExample="#키워드,"
           onChangeText={onKeywordChanged.bind(this)}
@@ -67,7 +74,9 @@ const InputNewGroupInterestsView = (props) => {
         />
       </View>
       <View style={styles.hotKeywordContainer}>
-        <Text>인기 키워드</Text>
+        <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, fontWeight: 'bold' }}>
+          인기 키워드
+        </Text>
       </View>
     </View>
   );
@@ -76,15 +85,23 @@ const InputNewGroupInterestsView = (props) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  labelContainer: {
+    borderColor: COLORS.MAIN_COLOR,
+    width: '100%',
+    marginTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginBottom: 21 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    alignSelf: 'flex-start',
+  },
+  interestInputContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  labelContainer: {},
-  groupNameInputContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  hotKeywordContainer: {
+    marginTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
-  hotKeywordContainer: {},
 });
 
 export default inject('groupingCreationMainStore')(observer(InputNewGroupInterestsView));

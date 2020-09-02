@@ -4,6 +4,8 @@ import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import InputSearch from '../InputSearch';
+import {WINDOW_SIZE} from '../../../constant/WindowSize';
+import {COLORS} from '../../../assets/Colors';
 
 class GroupingMainHeader extends Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
@@ -15,6 +17,7 @@ class GroupingMainHeader extends Component {
   componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
 
   // 친구목록, 채팅, 모임찾기, 마이페이지
+
 
   render() {
     return (
@@ -40,9 +43,11 @@ class GroupingMainHeader extends Component {
               color="black"
               onPress={() => this.props.onGroupingCreationClicked()}
             />
+            {/*<View style={{height:5,width:5,right:0,backgroundColor:COLORS.SUB_COLOR}}>*/}
           </View>
+
         </View>
-        <View style={styles.border} />
+        {/*<View style={styles.border} />*/}
       </SafeAreaView>
     );
   }

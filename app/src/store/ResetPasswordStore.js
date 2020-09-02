@@ -9,7 +9,7 @@ import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import PhoneValidator from '../component/PhoneValidator';
 import { TIME_OUT } from '../constant/TimeOut';
 
-export default class SignUpPhoneStore {
+export default class res {
   koreaPhonePrefixConditionFirst = '010';
 
   koreaPhonePrefixConditionSecond = '10';
@@ -99,10 +99,10 @@ export default class SignUpPhoneStore {
     console.log('send code');
     let isSucceed = false;
     const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
-    if (data.phoneNumberAvailable !== true) {
-      this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
-      return;
-    }
+    // if (data.phoneNumberAvailable !== true) {
+    //   this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
+    //   return;
+    // }
     try {
       this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
       console.log(this.codeConfirmation);
@@ -114,23 +114,19 @@ export default class SignUpPhoneStore {
     if (isSucceed) {
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
       // this.initialize();
-      console.log("codeConfirmation"+this.codeConfirmation.toString());
     }
   };
 
   @action phoneCodeChanged = (phoneCode) => {
-    console.log(phoneCode)
     if (phoneCode.length > 6) {
       return;
     }
     this.phoneCode = phoneCode;
     if (this.phoneValidator.validatePhoneCode(this.phoneCode)) {
       this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED;
-      console.log("phoneValidationStatus"+this.phoneValidationStatus)
       return;
     }
     this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_FORMATTED;
-    console.log(phoneCode.toString())
   };
 
   @action phoneCodeFocused = (index) => {
@@ -152,7 +148,6 @@ export default class SignUpPhoneStore {
 
   @action phoneCodeValidationSucceed = async () => {
     let isSucceed;
-    console.log("call phoneCodeValidationSucceed")
     if (
       this.phoneValidationStatus === INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED &&
       this.codeConfirmation != null
@@ -160,7 +155,6 @@ export default class SignUpPhoneStore {
       try {
         console.log(this.phoneCode.trim());
         isSucceed = await this.codeConfirmation.confirm(this.phoneCode.trim());
-        console.log("isSucceed"+isSucceed)
       } catch {
         this.phoneCode = '';
         this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_VALID;

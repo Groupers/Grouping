@@ -116,9 +116,24 @@ export default class SignRepository {
     return new GroupingUserDto(commonResponse.data);
   }
 
-  async signIn(email, password, failedCallback) {
+  async signInWithEmail(email, password, failedCallback) {
     const response = await axios.post(`${TARGET_URL}/login`, {
       email,
+      password,
+    });
+
+    const commonResponse = new CommonResponse(response.data);
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
+      return;
+    }
+
+    return new GroupingUserDto(commonResponse.data);
+  }
+
+  async signInWithPhone(phone, password, failedCallback) {
+    const response = await axios.post(`${TARGET_URL}/login`, {
+      phone,
       password,
     });
 

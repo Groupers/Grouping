@@ -9,6 +9,7 @@ import GroupingCreationDescription from './GroupingCreationDescription';
 import GroupingCreationMainInfo from './GroupingCreationMainInfo';
 import GroupingCreationExtraInfo from './GroupingCreationExtraInfo';
 import GroupingCreationAddressInfo from './GroupingCreationAddressInfo';
+import { COLORS } from '../../../../assets/Colors';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ class GroupingCreationMain extends Component {
                 },
                 headerShown: true,
               })}
+              progress={1}
             >
               {(props) => (
                 <GroupingCreationMainInfo
@@ -71,6 +73,7 @@ class GroupingCreationMain extends Component {
                 },
                 headerShown: true,
               })}
+              progress={2}
             >
               {(props) => <GroupingCreationDescription {...props} />}
             </Stack.Screen>
@@ -92,6 +95,7 @@ class GroupingCreationMain extends Component {
                 },
                 headerShown: true,
               })}
+              progress={3}
             >
               {(props) => <GroupingCreationExtraInfo {...props} />}
             </Stack.Screen>
@@ -113,6 +117,7 @@ class GroupingCreationMain extends Component {
                 },
                 headerShown: true,
               })}
+              progress={4}
             >
               {(props) => <GroupingCreationAddressInfo {...props} />}
             </Stack.Screen>
