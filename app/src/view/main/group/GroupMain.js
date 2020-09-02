@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet, SafeAreaView } from 'react-native';
+import { ScrollView, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 
 import JoinedGroup from './components/joinedGroup/JoinedGroup';
@@ -16,6 +16,7 @@ const GroupMain = ({ navigation }) => {
       <SafeAreaView style={style.paddingBlock}>
         <Header navigateTo={navigateTo} navigateMap="group" />
         <JoinedGroup navigateTo={navigateTo} />
+        <Text>Carousel</Text>
       </SafeAreaView>
     </ScrollView>
   );

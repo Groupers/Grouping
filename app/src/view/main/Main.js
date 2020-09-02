@@ -4,10 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
+
+//Main
 import HomeMain from './home/HomeMain';
-import FeedMain from './feed/FeedMain';
-import GroupMain from './group/GroupMain';
-import MyPageMain from './myPage/MyPageMain';
 import InputNewGroupNameView from './home/components/creation/InputNewGroupNameView';
 import InputNewGroupInterestsView from './home/components/creation/InputNewGroupInterestsView';
 import InputNewGroupMoreInfoView from './home/components/creation/InputNewGroupMoreInfoView';
@@ -15,7 +14,17 @@ import InputNewGroupLocationView from './home/components/creation/InputNewGroupL
 import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
 import Preview from './home/components/creation/Preview';
 import SearchView from './home/components/search/SearchView';
+
+//Group
+import GroupMain from './group/GroupMain';
 import JoinedGroupDetail from './group/components/joinedGroup/JoinedGroupDetail';
+import JoinedGroupMoreDetail from './group/components/joinedGroup/JoinedGroupMoreDetail';
+
+//Feed
+import FeedMain from './feed/FeedMain';
+
+//MyPage
+import MyPageMain from './myPage/MyPageMain';
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -75,6 +84,11 @@ const GroupStackScreen = () => {
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}
+        options={{ headerShown: false }}
+      />
+      <GroupStack.Screen
+        name="JoinedGroupMoreDetail"
+        component={JoinedGroupMoreDetail}
         options={{ headerShown: false }}
       />
     </GroupStack.Navigator>
