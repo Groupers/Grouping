@@ -3,10 +3,9 @@ import { Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
-import AddressSearchResultView from '../../../AddressSearchResultView';
-import AddressSearchTextViewTEST from '../../../AddressSearchTextView';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
-import AddressSearchTextView from "../../../AddressSearchTextView";
+import AddressSearchResultView from '../../../AddressSearchResultView';
+import AddressSearchTextView from '../../../AddressSearchTextView';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupLocationView = (props) => {
@@ -50,6 +49,13 @@ const InputNewGroupLocationView = (props) => {
       ),
     });
   };
+
+  // props.navigation.headerBackground = () => (
+  //   <AddressSearchTextView
+  //     onChangeText={onAddressKeywordChanged.bind(this)}
+  //     value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
+  //   />
+  // );
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

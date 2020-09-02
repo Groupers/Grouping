@@ -150,12 +150,14 @@ export default class SignInStore {
     if (this.passwordStatus === INPUT_PASSWORD_STATUS.INVALID) {
       return '비밀번호가 일치하지 않습니다.';
     }
+
+    return '로그인 할 수 없습니다.';
   }
 
   @action signIn = async () => {
     const groupingUserDto = null;
     if (this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED) {
-      this.groupingUserDto = await this.signRepository.signIn(
+      this.groupingUserDto = await this.signRepository.signInWithEmail(
         this.inputText,
         this.passwordText,
         (responseCode) => {
@@ -170,7 +172,7 @@ export default class SignInStore {
         }
       );
     } else if (this.phoneStatus === INPUT_PHONE_STATUS.SUCCEED) {
-      this.groupingUserDto = await this.signRepository.signIn(
+      this.groupingUserDto = await this.signRepository.signInWithPhone(
         this.inputText,
         this.passwordText,
         (responseCode) => {

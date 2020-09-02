@@ -1,10 +1,14 @@
-import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { BackHandler, StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import { Icon } from 'react-native-elements';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
-import InputTextView from './InputTextView';
+import InputTitleView from './InputTitleView';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import { COLORS } from '../../../../../assets/Colors';
+import GroupCreationProgressBar from '../GroupCreationProgressBar';
+import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupNameView = (props) => {
@@ -52,14 +56,18 @@ const InputNewGroupNameView = (props) => {
     });
   };
 
+  React.useEffect(() => {
+    props.groupingCreationMainStore.initialize();
+  },[]);
+
   return (
-    // eslint-disable-next-line no-use-before-define
     <View style={styles.mainContainer}>
+      <GroupCreationProgressBar step={1} />
       <View style={styles.labelContainer}>
-        <Text>그룹의 이름을 입력해주세요.</Text>
+        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>그룹 이름을 알려주세요.</Text>
       </View>
       <View style={styles.groupNameInputContainer}>
-        <InputTextView
+        <InputTitleView
           textExample="30자 이내로 입력해 주세요."
           onChangeText={onTitleChanged.bind(this)}
           groupingTitle={props.groupingCreationMainStore.groupingTitle}
@@ -72,8 +80,16 @@ const InputNewGroupNameView = (props) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  labelContainer: {
+    borderColor: COLORS.MAIN_COLOR,
+    width: '100%',
+    marginTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginBottom: 75 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    alignSelf: 'flex-start',
   },
   groupNameInputContainer: {
     justifyContent: 'center',

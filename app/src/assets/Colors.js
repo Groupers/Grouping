@@ -1,6 +1,6 @@
 export const COLORS = {
   // background
-  MAIN_COLOR: '#f9f9f9',
+  MAIN_COLOR: 'white',
   // mainRed
   SUB_COLOR: '#FD6B53',
   BORDER_GRAY: 'gray',
@@ -8,4 +8,5 @@ export const COLORS = {
   DARK_GRAY: '#707070',
   FONT_DARK: '#313131',
   ALERT_MINT: '#47C29B',
+  HOME_TAP_MAIN: '#f5e4e4',
 };

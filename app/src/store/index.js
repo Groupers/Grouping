@@ -11,7 +11,8 @@ import MainStore from './MainStore';
 import GroupingCreationMainStore from './GroupingCreationMainStore';
 import ChatStore from './ChatStore';
 import ChatRoomStore from './ChatRoomStore';
-import FriendListStore from "./FriendListStore";
+import FriendListStore from './FriendListStore';
+import ResetPasswordStore from './ResetPasswordStore';
 
 const userStore = new UserStore();
 const signInStore = new SignInStore(userStore);
@@ -26,7 +27,8 @@ const groupingStore = new GroupingStore(mainStore);
 const groupingCreationMainStore = new GroupingCreationMainStore();
 const chatRoomStore = new ChatRoomStore();
 const chatStore = new ChatStore(mainStore);
-const friendListStore = new FriendListStore()
+const friendListStore = new FriendListStore();
+const resetPasswordStore = new ResetPasswordStore();
 
 export default {
   userStore,
@@ -43,4 +45,5 @@ export default {
   chatRoomStore,
   chatStore,
   friendListStore,
+  resetPasswordStore,
 };

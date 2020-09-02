@@ -34,11 +34,31 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddress = '';
 
-  @observable groupingGender = '';
+  @observable groupingGender = 'both';
 
   @observable groupingAvailableMinAge = Number(MIN_AVAILABLE_AGE);
 
   @observable groupingAvailableMaxAge = Number(MAX_AVAILABLE_AGE);
+
+  @observable groupingPreviewNextButtonActivated = false;
+
+  @observable groupingDescriptionCompleted = false;
+
+  @observable groupingAddressCompleted = false;
+
+  @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
+
+  @action groupingInitializeGender = () => {
+    this.groupingGender = 'both';
+    console.log(this.groupingGender);
+  };
+
+  @action groupingInitializeAge = () => {
+    this.groupingAvailableMinAgeChanged(Number(MIN_AVAILABLE_AGE));
+    this.groupingAvailableMaxAgeChanged(Number(MAX_AVAILABLE_AGE));
+    console.log(this.groupingAvailableMinAge);
+    console.log(this.groupingAvailableMaxAge);
+  };
 
   @action groupingTitleChanged = (title) => {
     this.groupingTitle = title;
@@ -49,6 +69,7 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingDescriptionChanged = (description) => {
+    this.groupingDescriptionCompleted = true;
     this.groupingDescription = description;
   };
 
@@ -68,19 +89,31 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSelected = (address) => {
+    this.groupingAddressCompleted = true;
     this.groupingAddress = address;
   };
 
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
+    console.log(this.groupingGender);
   };
 
   @action groupingAvailableMinAgeChanged = (minAge) => {
     this.groupingAvailableMinAge = minAge;
+    console.log('change min age');
+    console.log(this.groupingAvailableMinAge);
   };
 
   @action groupingAvailableMaxAgeChanged = (maxAge) => {
     this.groupingAvailableMaxAge = maxAge;
+    console.log('change max age');
+    console.log(this.groupingAvailableMaxAge);
+  };
+
+  @action groupingBackgroundImageChanged = ({ uri }) => {
+    this.groupingBackgroundImageURI = { uri };
+    console.log('background image changed');
+    console.log(this.groupingBackgroundImageURI);
   };
 
   @action isHeaderRightIconActivated = (groupingCreationView) => {
@@ -126,5 +159,28 @@ export default class GroupingCreationMainStore {
 
   @action groupingCreationViewChanged(groupingCreationView) {
     this.groupingCreationViewStatus = groupingCreationView;
+  }
+
+  @computed get isPreviewButtonActivated() {
+    console.log(this.groupingDescriptionCompleted);
+    console.log(this.groupingAddressCompleted);
+    return this.groupingDescriptionCompleted && this.groupingAddressCompleted;
+  }
+
+  @computed get getBackgroundImageURI() {
+    return this.groupingBackgroundImageURI;
+  }
+
+  @action initialize() {
+    this.groupingTitle = '';
+    this.groupingKeyword = '';
+    this.groupingDescription = '';
+    this.groupingAddressSearchKeyword = '';
+    this.groupingAddressSearchResult = [];
+    this.groupingAddress = '';
+    this.groupingGender = 'both';
+    this.groupingPreviewNextButtonActivated = false;
+    this.groupingDescriptionCompleted = false;
+    this.groupingAddressCompleted = false;
   }
 }
