@@ -46,10 +46,7 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddressCompleted = false;
 
-  @observable creationGroupStep = 0;
-
   @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
-
 
   @action groupingInitializeGender = () => {
     this.groupingGender = 'both';
@@ -170,16 +167,20 @@ export default class GroupingCreationMainStore {
     return this.groupingDescriptionCompleted && this.groupingAddressCompleted;
   }
 
-<<<<<<< HEAD
-  @action nextStep() {
-    this.creationGroupStep += 1;
-  }
-
-  @action lastStep() {
-    this.creationGroupStep -= 1;
-=======
   @computed get getBackgroundImageURI() {
     return this.groupingBackgroundImageURI;
->>>>>>> 6f951005ce2c5a8ff55c7ee5a09794a5f3f32470
+  }
+
+  @action initialize() {
+    this.groupingTitle = '';
+    this.groupingKeyword = '';
+    this.groupingDescription = '';
+    this.groupingAddressSearchKeyword = '';
+    this.groupingAddressSearchResult = [];
+    this.groupingAddress = '';
+    this.groupingGender = 'both';
+    this.groupingPreviewNextButtonActivated = false;
+    this.groupingDescriptionCompleted = false;
+    this.groupingAddressCompleted = false;
   }
 }
