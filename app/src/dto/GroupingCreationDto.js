@@ -21,7 +21,7 @@ export default class GroupingCreationDto {
 
   representGroupImage;
 
-  hashtagList;
+  hashtagList = [];
 
   constructor(data = {}) {
     Object.assign(this, data);

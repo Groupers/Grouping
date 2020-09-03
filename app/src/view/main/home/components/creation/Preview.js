@@ -22,7 +22,7 @@ const Preview = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.CONFIRM
     );
-    props.groupingCreationMainStore.groupCreation(props.groupingCreationMainStore.groupingTitle);
+    props.groupingCreationMainStore.groupCreation();
     props.navigation.navigate('Home');
   };
 
@@ -65,7 +65,7 @@ const Preview = (props) => {
         </Text>
       </View>
       <View style={styles.contents}>
-        <GroupLeaderProfile representProfileImage={props.userStore.groupingUser.representProfileImage} />
+        <GroupLeaderProfile />
         <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
         <GroupKeyword groupKeyword={props.groupingCreationMainStore.groupingKeyword} />
         <GroupDescription groupDescription={props.groupingCreationMainStore.groupingDescription} />
