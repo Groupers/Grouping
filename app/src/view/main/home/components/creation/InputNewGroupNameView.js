@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { BackHandler, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import { Icon } from 'react-native-elements';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import InputTitleView from './InputTitleView';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
@@ -58,7 +57,7 @@ const InputNewGroupNameView = (props) => {
 
   React.useEffect(() => {
     props.groupingCreationMainStore.initialize();
-  },[]);
+  }, []);
 
   return (
     <View style={styles.mainContainer}>
