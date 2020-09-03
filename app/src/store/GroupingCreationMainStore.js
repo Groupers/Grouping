@@ -5,11 +5,21 @@ import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
 import KoreanChecker from '../component/KoreanChecker';
 import AgeValidator, { MAX_AVAILABLE_AGE, MIN_AVAILABLE_AGE } from '../component/AgeValidator';
+import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
+import { ResponseCode } from '../constant/ResponseCode';
+import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
+import { INPUT_STATUS } from '../constant/InputStatus';
+import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
+import GroupCreationRepository from '../repository/GroupCreationRepository';
+import UserStore from './UserStore';
+import GroupingStore from './GroupingStore';
 
 const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
 
 export default class GroupingCreationMainStore {
+  groupCreationRepository = new GroupCreationRepository();
+
   keywordParser = new KeywordParser();
 
   mapRepository = new MapRepository();
@@ -47,6 +57,10 @@ export default class GroupingCreationMainStore {
   @observable groupingAddressCompleted = false;
 
   @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
+
+  constructor(groupingStore: GroupingStore) {
+    this.groupingStore = groupingStore;
+  }
 
   @action groupingInitializeGender = () => {
     this.groupingGender = 'both';
@@ -161,6 +175,18 @@ export default class GroupingCreationMainStore {
     this.groupingCreationViewStatus = groupingCreationView;
   }
 
+  @action groupCreation = async () => {
+    const groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
+      this.groupingCreationDto,
+      () => {}
+    );
+
+    if (groupingCreationDto !== undefined) {
+      this.groupingStore.groupCreationCompleted(this.groupingCreationDto);
+      console.log('group creation completed');
+    }
+  };
+
   @computed get isPreviewButtonActivated() {
     console.log(this.groupingDescriptionCompleted);
     console.log(this.groupingAddressCompleted);
@@ -169,5 +195,18 @@ export default class GroupingCreationMainStore {
 
   @computed get getBackgroundImageURI() {
     return this.groupingBackgroundImageURI;
+  }
+
+  @action initialize() {
+    this.groupingTitle = '';
+    this.groupingKeyword = '';
+    this.groupingDescription = '';
+    this.groupingAddressSearchKeyword = '';
+    this.groupingAddressSearchResult = [];
+    this.groupingAddress = '';
+    this.groupingGender = 'both';
+    this.groupingPreviewNextButtonActivated = false;
+    this.groupingDescriptionCompleted = false;
+    this.groupingAddressCompleted = false;
   }
 }
