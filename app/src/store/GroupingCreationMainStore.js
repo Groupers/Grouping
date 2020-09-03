@@ -81,7 +81,7 @@ export default class GroupingCreationMainStore {
 
   @action groupingKeywordChanged = (keyword) => {
     this.groupingKeyword = keyword;
-    this.groupingCreationDto.keyword = keyword;
+    this.groupingCreationDto.hashtagList = new KeywordParser(this.groupingKeyword);
   };
 
   @action groupingDescriptionChanged = (description) => {
@@ -108,31 +108,32 @@ export default class GroupingCreationMainStore {
   @action groupingAddressSelected = (address) => {
     this.groupingAddressCompleted = true;
     this.groupingAddress = address;
-    this.groupingCreationDto.address = address;
+    this.groupingCreationDto.pointDescription = address;
   };
 
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
-    this.groupingCreationDto.gender = gender;
+    this.groupingCreationDto.availableGender = gender;
     console.log(this.groupingGender);
   };
 
   @action groupingAvailableMinAgeChanged = (minAge) => {
     this.groupingAvailableMinAge = minAge;
-    this.groupingCreationDto.minAge = minAge;
+    this.groupingCreationDto.minUserAge = minAge;
     console.log('change min age');
     console.log(this.groupingAvailableMinAge);
   };
 
   @action groupingAvailableMaxAgeChanged = (maxAge) => {
     this.groupingAvailableMaxAge = maxAge;
-    this.groupingCreationDto.maxAge = maxAge;
+    this.groupingCreationDto.maxUserAge = maxAge;
     console.log('change max age');
     console.log(this.groupingAvailableMaxAge);
   };
 
   @action groupingBackgroundImageChanged = ({ uri }) => {
     this.groupingBackgroundImageURI = { uri };
+    this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     console.log('background image changed');
     console.log(this.groupingBackgroundImageURI);
   };
@@ -217,5 +218,6 @@ export default class GroupingCreationMainStore {
     this.groupingPreviewNextButtonActivated = false;
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
+    this.groupingCreationDto = new GroupingCreationDto();
   }
 }
