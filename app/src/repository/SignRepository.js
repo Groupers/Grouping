@@ -109,6 +109,7 @@ export default class SignRepository {
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
+      commonResponse.data
       failedCallback(commonResponse.code);
       return;
     }

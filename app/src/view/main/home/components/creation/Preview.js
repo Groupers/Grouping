@@ -65,7 +65,7 @@ const Preview = (props) => {
         </Text>
       </View>
       <View style={styles.contents}>
-        <GroupLeaderProfile groupingUserDto={GroupingUserDto} />
+        <GroupLeaderProfile representProfileImage={props.userStore.groupingUser.representProfileImage} />
         <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
         <GroupKeyword groupKeyword={props.groupingCreationMainStore.groupingKeyword} />
         <GroupDescription groupDescription={props.groupingCreationMainStore.groupingDescription} />

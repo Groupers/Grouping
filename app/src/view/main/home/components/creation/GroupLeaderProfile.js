@@ -5,10 +5,10 @@ const GroupLeaderProfile = (props) => {
   return (
     <View>
       <Image
-        source={props.groupingUserDto.representProfileImage}
+        source={props.groupingUser.representProfileImage}
         style={{ flex: 1, height: '100%', width: '100%', zIndex: 1 }}
       />
-      <Text>그룹장 프로필</Text>
+      <Text>{props.groupingUser.groupingUser}</Text>
     </View>
   );
 };

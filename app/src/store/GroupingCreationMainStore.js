@@ -13,11 +13,14 @@ import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import GroupCreationRepository from '../repository/GroupCreationRepository';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
+import GroupingUserDto from "../dto/GroupingUserDto";
 
 const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
 
 export default class GroupingCreationMainStore {
+  groupingUserID = '';
+
   groupCreationRepository = new GroupCreationRepository();
 
   keywordParser = new KeywordParser();
@@ -207,7 +210,8 @@ export default class GroupingCreationMainStore {
     return this.groupingBackgroundImageURI;
   }
 
-  @action initialize() {
+  @action initialize(groupingUserID) {
+    this.groupingUserID = groupingUserID;
     this.groupingTitle = '';
     this.groupingKeyword = '';
     this.groupingDescription = '';
@@ -219,5 +223,6 @@ export default class GroupingCreationMainStore {
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
+    this.groupingCreationDto.representGroupingUserID = this.groupingUserID;
   }
 }

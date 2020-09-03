@@ -56,7 +56,9 @@ const InputNewGroupNameView = (props) => {
   };
 
   React.useEffect(() => {
-    props.groupingCreationMainStore.initialize();
+    console.log('그룹 생성하는 유저 아이디');
+    console.log(props.userStore.groupingUser.groupingUserId);
+    props.groupingCreationMainStore.initialize(props.userStore.groupingUser.groupingUserId);
   }, []);
 
   return (
@@ -96,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupNameView));
+export default inject('groupingCreationMainStore', 'userStore')(observer(InputNewGroupNameView));
