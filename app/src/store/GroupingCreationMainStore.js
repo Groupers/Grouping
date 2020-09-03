@@ -19,7 +19,7 @@ const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
 
 export default class GroupingCreationMainStore {
-  groupingUserID = '';
+  groupingUserId = '';
 
   groupCreationRepository = new GroupCreationRepository();
 
@@ -190,11 +190,17 @@ export default class GroupingCreationMainStore {
     console.log('in');
     this.groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
       this.groupingCreationDto,
-      () => {}
+      (responseCode) => {
+        console.log('responseCode : ');
+        console.log(responseCode);
+      }
     );
     console.log('out');
 
+    console.log(this.groupingCreationDto);
     if (this.groupingCreationDto !== undefined) {
+      console.log('group creation start');
+      // 아래 코드 에러 확인하고 수정 에정
       this.groupingStore.groupCreationCompleted(this.groupingCreationDto);
       console.log('group creation completed');
     }
@@ -210,8 +216,8 @@ export default class GroupingCreationMainStore {
     return this.groupingBackgroundImageURI;
   }
 
-  @action initialize(groupingUserID) {
-    this.groupingUserID = groupingUserID;
+  @action initialize(groupingUserId) {
+    this.groupingUserId = groupingUserId;
     this.groupingTitle = '';
     this.groupingKeyword = '';
     this.groupingDescription = '';
@@ -223,7 +229,7 @@ export default class GroupingCreationMainStore {
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
-    this.groupingCreationDto.representGroupingUserID = this.groupingUserID;
+    this.groupingCreationDto.representGroupingUserId = this.groupingUserId;
     this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;

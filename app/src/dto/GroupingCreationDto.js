@@ -17,7 +17,7 @@ export default class GroupingCreationDto {
 
   pointDescription;
 
-  representGroupingUserID;
+  representGroupingUserId;
 
   representGroupImage;
 
