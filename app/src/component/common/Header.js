@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
 
@@ -8,7 +9,7 @@ const Header = ({ navigateTo, progress }) => {
   return (
     <View style={styles.headerBlock}>
       <View style={styles.logoBlock}>
-        <Text>LOGO</Text>
+        {navigateMap === 'home' ? <Text>LOGO</Text> : <Text>내 그룹</Text>}
       </View>
       <View style={{ alignItems: 'flex-end', width: '50%' }}>
         <TouchableOpacity onPress={() => navigateTo('InputNewGroupName')}>
@@ -29,4 +30,5 @@ const styles = StyleSheet.create({
   logoBlock: { width: '50%' },
   createGroupText: {},
 });
+
 export default Header;
