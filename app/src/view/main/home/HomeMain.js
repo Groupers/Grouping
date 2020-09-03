@@ -6,7 +6,7 @@ import SearchBar from './components/search/SearchBar';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import CommonRecommend from './components/recommends/CommonRecommend';
 import PersonalRecommend from './components/recommends/PersonalRecommend';
-import Header from './components/header/Header';
+import Header from '../../../component/common/Header';
 import PopularRecommend from './components/recommends/PopularRecommend';
 import { COLORS } from '../../../assets/Colors';
 
@@ -19,7 +19,7 @@ export default function HomeMain({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <SafeAreaView style={styles.paddingBlock}>
-        <Header navigateTo={navigateTo} />
+        <Header navigateTo={navigateTo} navigateMap="home" />
         <CommonRecommend />
         <SearchBar navigateTo={navigateTo} />
         <PersonalRecommend />
