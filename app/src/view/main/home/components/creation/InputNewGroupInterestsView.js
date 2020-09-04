@@ -11,8 +11,7 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupInterestsView = (props) => {
-  // solmin--------------------------------------------------------------------------------------------------------
+const InputNewGroupInterestsView = () => {
   const [input, setInput] = React.useState('');
   const [keywords, setKeywords] = React.useState([]);
 
@@ -47,54 +46,6 @@ const InputNewGroupInterestsView = (props) => {
   React.useEffect(() => {
     console.log(keywords);
   }, [keywords]);
-  // solmin--------------------------------------------------------------------------------------------------------
-
-  /* React.useLayoutEffect(() => {
-    // eslint-disable-next-line react/prop-types
-    props.navigation.setOptions({
-      headerRight: () => (
-        // eslint-disable-next-line react/prop-types
-        <Text onPress={() => props.navigation.navigate('InputNewGroupInterests')}>다음</Text>
-      ),
-    });
-    // eslint-disable-next-line react/prop-types,react/destructuring-assignment
-  }, [props.navigation]); */
-
-  const onHeaderNextButtonClicked = () => {
-    props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
-    );
-    props.navigation.navigate('InputNewGroupMoreInfo');
-  };
-
-  const rightIconStyle = (groupingCreationView) => {
-    return {
-      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(
-        groupingCreationView,
-      )
-        ? Colors.black
-        : '#999',
-    };
-  };
-
-  // const onKeywordChanged = (keyword) => {
-  //   props.groupingCreationMainStore.groupingKeywordChanged(keyword);
-
-  //   props.navigation.setOptions({
-  //     headerRight: () => (
-  //       <Text
-  //         onPress={() => {
-  //           onHeaderNextButtonClicked();
-  //         }}
-  //         style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.INTERESTS)}
-  //       >
-  //         다음
-  //       </Text>
-  //     ),
-  //   });
-  // };
 
   return (
     // eslint-disable-next-line no-use-before-define
@@ -124,12 +75,14 @@ const InputNewGroupInterestsView = (props) => {
           인기 키워드
         </Text>
       </View>
-      <View>
+      <View style={{ flexDirection: 'row' }}>
         {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
         {keywords.map((k) => (
-          <TouchableOpacity onPress={() => onRemove(k)}>
-            <Text>{k}</Text>
-          </TouchableOpacity>
+          <View style={styles.keywordListBlock}>
+            <TouchableOpacity onPress={() => onRemove(k)}>
+              <Text>{k}</Text>
+            </TouchableOpacity>
+          </View>
         ))}
       </View>
     </View>
@@ -155,6 +108,15 @@ const styles = StyleSheet.create({
   },
   hotKeywordContainer: {
     marginTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  },
+  keywordListBlock: {
+    paddingTop: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingBottom: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingLeft: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
+    borderRadius: 24.5 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 5 * WINDOW_SIZE.WIDTH_WEIGHT,
+    backgroundColor: 'red',
   },
 });
 
