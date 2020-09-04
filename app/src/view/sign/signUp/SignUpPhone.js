@@ -81,48 +81,56 @@ class SignUpPhone extends React.Component {
               </Text>
             </View>
             <View height={30} />
-            <View style={styles.contentContainer}>
-              <View style={styles.phoneCodeContainer}>
-                <PhoneNumberInputTextView
-                  label="휴대폰 번호"
-                  isActive={!this.props.signUpPhoneStore.isAllCompleted}
-                  text={this.props.signUpPhoneStore.phoneNumber}
-                  onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
-                />
-                <PhoneCodeNextButton
-                  label="인증번호"
-                  isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
-                  text={
-                    this.props.signUpPhoneStore.phoneValidationViewStatus ===
-                    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                      ? '재인증'
-                      : '인 증'
-                  }
-                  onClick={this.authorizeButtonClicked.bind(this)}
-                />
-              </View>
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <PhoneNumberInputTextView
+                label="휴대폰 번호"
+                isActive={!this.props.signUpPhoneStore.isAllCompleted}
+                text={this.props.signUpPhoneStore.phoneNumber}
+                onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
+              />
+              <PhoneCodeNextButton
+                label="인증번호"
+                isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
+                text={
+                  this.props.signUpPhoneStore.phoneValidationViewStatus ===
+                  SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                    ? '재인증'
+                    : '인 증'
+                }
+                onClick={this.authorizeButtonClicked.bind(this)}
+              />
             </View>
-            <View style={styles.contentContainer}>
-              <View>
-                <View style={styles.phoneCodeContainer}>
-                  <PhoneCodeInputTextView
-                    onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
-                    onBlur={() => {
-                      this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
-                    }}
-                    text={this.props.signUpPhoneStore.phoneCode}
-                  />
-                </View>
-                <PhoneAuthTimer style={styles.authTimer} />
-              </View>
-              <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
-              <View style={styles.bottomContainer}>
-                <NextButton
-                  isActive={this.props.signUpPhoneStore.isValidPhoneCode}
-                  text="다음"
-                  onClick={this.signUpNextButtonClicked.bind(this)}
-                />
-              </View>
+            <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <PhoneCodeInputTextView
+                onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
+                onBlur={() => {
+                  this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
+                }}
+                text={this.props.signUpPhoneStore.phoneCode}
+              />
+              <PhoneAuthTimer style={styles.authTimer} />
+            </View>
+            <View style={styles.bottomContainer}>
+              <NextButton
+                isActive={this.props.signUpPhoneStore.isValidPhoneCode}
+                text="다음"
+                onClick={this.signUpNextButtonClicked.bind(this)}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -156,20 +164,17 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    // alignItems: 'center',
-    backgroundColor: COLORS.MAIN_COLOR,
+    backgroundColor: 'tomato',
     width: '100%',
-    // justifyContent: 'center',
-    // borderWidth: 2
+    height: 50,
   },
 
   phoneCodeContainer: {
-    height: 50,
+    backgroundColor: 'green',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    // borderWidth: 1,
   },
 
   bottomContainer: {
