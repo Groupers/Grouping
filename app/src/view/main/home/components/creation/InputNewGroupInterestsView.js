@@ -8,6 +8,7 @@ import InputKeywordView from './InputKeywordView';
 import { COLORS } from '../../../../../assets/Colors';
 import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupInterestsView = (props) => {
@@ -30,7 +31,6 @@ const InputNewGroupInterestsView = (props) => {
   };
 
   const onChange = (text) => {
-    console.log(text);
     if (text.includes(' ')) {
       onSubmit(text);
       return;
@@ -109,8 +109,6 @@ const InputNewGroupInterestsView = (props) => {
       <View style={styles.interestInputContainer}>
         <InputKeywordView
           textExample="#키워드,"
-          // onChangeText={onKeywordChanged.bind(this)}
-          groupingKeyword={props.groupingCreationMainStore.groupingKeyword}
           input={input}
           onChange={onChange}
           keywords={keywords}
@@ -124,13 +122,15 @@ const InputNewGroupInterestsView = (props) => {
           }}
         >
           인기 키워드
-          <Text>
-            {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
-            {keywords.map((k) => (
-              <Text>{k}</Text>
-            ))}
-          </Text>
         </Text>
+      </View>
+      <View>
+        {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
+        {keywords.map((k) => (
+          <TouchableOpacity onPress={() => onRemove(k)}>
+            <Text>{k}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );
