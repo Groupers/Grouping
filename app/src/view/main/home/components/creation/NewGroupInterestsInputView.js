@@ -9,6 +9,7 @@ import { COLORS } from '../../../../../assets/Colors';
 import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { EMPTY_VALUE } from '../../../../../constant/EmptyValue';
 
 // eslint-disable-next-line react/prop-types
 const NewGroupInterestsInputView = () => {
@@ -44,7 +45,7 @@ const NewGroupInterestsInputView = () => {
   const onKeywordSubmit = () => {
     console.log('submit active');
     onkeywordInserted(input.trim());
-    setInput('');
+    setInput(EMPTY_VALUE);
   };
   // useEffect로 태그의 상태가 변경이 되면 다시 불러올 수 있게
   React.useEffect(() => {
