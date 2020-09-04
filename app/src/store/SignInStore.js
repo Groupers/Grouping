@@ -9,6 +9,7 @@ import { ResponseCode } from '../constant/ResponseCode';
 import UserStore from './UserStore';
 import PhoneValidator from '../component/PhoneValidator';
 import { INPUT_STATUS } from '../constant/InputStatus';
+import GroupingUserDto from "../dto/GroupingUserDto";
 
 export default class SignInStore {
   koreaPhonePrefixConditionFirst = '010';
@@ -188,7 +189,6 @@ export default class SignInStore {
   }
 
   @action signIn = async () => {
-    const groupingUserDto = null;
     if (this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED) {
       this.groupingUserDto = await this.signRepository.signInWithEmail(
         this.inputText,
@@ -221,8 +221,9 @@ export default class SignInStore {
       );
     }
 
-    if (groupingUserDto !== undefined) {
-      this.userStore.signInCompleted(groupingUserDto);
+    if (this.groupingUserDto !== undefined) {
+      console.log(this.groupingUserDto);
+      this.userStore.signInCompleted(this.groupingUserDto);
       console.log('signInCompleted');
     }
   };

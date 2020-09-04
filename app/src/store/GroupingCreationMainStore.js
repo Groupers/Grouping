@@ -13,14 +13,15 @@ import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import GroupCreationRepository from '../repository/GroupCreationRepository';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
+import GroupingUserDto from '../dto/GroupingUserDto';
 
 const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
 
 export default class GroupingCreationMainStore {
-  groupCreationRepository = new GroupCreationRepository();
+  groupingUserId = '';
 
-  keywordParser = new KeywordParser();
+  groupCreationRepository = new GroupCreationRepository();
 
   mapRepository = new MapRepository();
 
@@ -44,7 +45,7 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddress = '';
 
-  @observable groupingGender = 'both';
+  @observable groupingGender = 'ALL';
 
   @observable groupingAvailableMinAge = Number(MIN_AVAILABLE_AGE);
 
@@ -56,14 +57,17 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddressCompleted = false;
 
-  @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
+  @observable keywordParser = new KeywordParser();
+
+  // @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
+  @observable groupingBackgroundImageURI = '';
 
   constructor(groupingStore: GroupingStore) {
     this.groupingStore = groupingStore;
   }
 
   @action groupingInitializeGender = () => {
-    this.groupingGender = 'both';
+    this.groupingGender = 'ALL';
     console.log(this.groupingGender);
   };
 
@@ -76,6 +80,7 @@ export default class GroupingCreationMainStore {
 
   @action groupingTitleChanged = (title) => {
     this.groupingTitle = title;
+    this.groupingCreationDto.title = title;
   };
 
   @action groupingKeywordChanged = (keyword) => {
@@ -85,6 +90,7 @@ export default class GroupingCreationMainStore {
   @action groupingDescriptionChanged = (description) => {
     this.groupingDescriptionCompleted = true;
     this.groupingDescription = description;
+    this.groupingCreationDto.description = description;
   };
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
@@ -105,27 +111,32 @@ export default class GroupingCreationMainStore {
   @action groupingAddressSelected = (address) => {
     this.groupingAddressCompleted = true;
     this.groupingAddress = address;
+    this.groupingCreationDto.pointDescription = address;
   };
 
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
+    this.groupingCreationDto.availableGender = gender;
     console.log(this.groupingGender);
   };
 
   @action groupingAvailableMinAgeChanged = (minAge) => {
     this.groupingAvailableMinAge = minAge;
+    this.groupingCreationDto.minUserAge = minAge;
     console.log('change min age');
     console.log(this.groupingAvailableMinAge);
   };
 
   @action groupingAvailableMaxAgeChanged = (maxAge) => {
     this.groupingAvailableMaxAge = maxAge;
+    this.groupingCreationDto.maxUserAge = maxAge;
     console.log('change max age');
     console.log(this.groupingAvailableMaxAge);
   };
 
   @action groupingBackgroundImageChanged = ({ uri }) => {
     this.groupingBackgroundImageURI = { uri };
+    this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     console.log('background image changed');
     console.log(this.groupingBackgroundImageURI);
   };
@@ -176,12 +187,20 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
-    const groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
+    console.log('in');
+    this.groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
       this.groupingCreationDto,
-      () => {}
+      (responseCode) => {
+        console.log('responseCode : ');
+        console.log(responseCode);
+      }
     );
+    console.log('out');
 
-    if (groupingCreationDto !== undefined) {
+    console.log(this.groupingCreationDto);
+    if (this.groupingCreationDto !== undefined) {
+      console.log('group creation start');
+      // 아래 코드 에러 확인하고 수정 에정
       this.groupingStore.groupCreationCompleted(this.groupingCreationDto);
       console.log('group creation completed');
     }
@@ -197,16 +216,24 @@ export default class GroupingCreationMainStore {
     return this.groupingBackgroundImageURI;
   }
 
-  @action initialize() {
+  @action initialize(groupingUserId) {
+    this.groupingUserId = groupingUserId;
     this.groupingTitle = '';
     this.groupingKeyword = '';
     this.groupingDescription = '';
     this.groupingAddressSearchKeyword = '';
     this.groupingAddressSearchResult = [];
     this.groupingAddress = '';
-    this.groupingGender = 'both';
+    this.groupingGender = 'ALL';
     this.groupingPreviewNextButtonActivated = false;
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
+    this.groupingCreationDto = new GroupingCreationDto();
+    this.groupingCreationDto.representGroupingUserId = this.groupingUserId;
+    this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
+    this.groupingCreationDto.isHidden = false;
+    this.groupingCreationDto.pointX = 100;
+    this.groupingCreationDto.pointY = 100;
+    this.groupingCreationDto.hashtagList.push('키워드1');
   }
 }

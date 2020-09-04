@@ -1,18 +1,19 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
-import { COLORS } from '../../../../../assets/Colors';
+import { WINDOW_SIZE } from '../../constant/WindowSize';
 
-const Header = ({ navigateTo, progress }) => {
+const Header = ({ navigation }) => {
   return (
     <View style={styles.headerBlock}>
       <View style={styles.logoBlock}>
-        <Text>LOGO</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text> (icon) 가입한 그룹</Text>
+        </TouchableOpacity>
       </View>
       <View style={{ alignItems: 'flex-end', width: '50%' }}>
-        <TouchableOpacity onPress={() => navigateTo('InputNewGroupName')}>
-          <Text style={styles.createGroupText}>+새 그룹</Text>
+        <TouchableOpacity>
+          <Text style={styles.createGroupText}>설정(설정아이콘)</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -26,7 +27,8 @@ const styles = StyleSheet.create({
     height: 56 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: '100%',
   },
-  logoBlock: { width: '50%' },
+  logoBlock: { width: '50%', flexDirection: 'row' },
   createGroupText: {},
 });
+
 export default Header;
