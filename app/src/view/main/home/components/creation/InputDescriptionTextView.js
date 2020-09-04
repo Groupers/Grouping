@@ -23,22 +23,18 @@ const InputDescriptionTextView = (props) => {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    borderColor: 'black',
-    borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
-    flexDirection: 'row',
-    width: '90%',
-    margin: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: WINDOW_SIZE.WIDTH,
+    height: WINDOW_SIZE.HEIGHT * 0.8,
+    borderWidth: 1,
+    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 
   title: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginLeft: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
     color: Colors.black,
-    fontSize: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+    // flexDirection: 'flex-start',
   },
 
   counter: {

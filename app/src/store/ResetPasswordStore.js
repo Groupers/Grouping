@@ -8,6 +8,13 @@ import SignProcessStore from './SignProcessStore';
 import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import PhoneValidator from '../component/PhoneValidator';
 import { TIME_OUT } from '../constant/TimeOut';
+import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
+import EmailValidator from '../component/EmailValidator';
+import UserRepository from '../repository/UserRepository';
+import { INPUT_STATUS } from '../constant/InputStatus';
+import { ResponseCode } from '../constant/ResponseCode';
+import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
+import GroupingUserDto from '../dto/GroupingUserDto';
 
 export default class res {
   koreaPhonePrefixConditionFirst = '010';
@@ -16,6 +23,12 @@ export default class res {
 
   koreaPhonePrefix = '+82';
 
+  userRepository = new UserRepository();
+
+  emailValidator = new EmailValidator();
+
+  @observable emailText = '';
+
   @observable timeRemained = 300;
 
   @observable phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_BEFORE;
@@ -23,6 +36,10 @@ export default class res {
   @observable phoneNumber = '';
 
   @observable phoneCode = '';
+
+  @observable inputStatus = INPUT_STATUS.NONE;
+
+  @observable emailStatus = INPUT_EMAIL_STATUS.NONE;
 
   @observable phoneValidationStatus = INPUT_PHONE_STATUS.NONE;
 
@@ -62,6 +79,23 @@ export default class res {
     if (this.phoneNumber !== '') {
       await this.signRepository.cancelSignUpPhoneNumber(this.phoneNumber, () => {});
     }
+  };
+
+  @action emailTextChanged = (email) => {
+    if (String(email).length === 0) {
+      this.emailStatus = INPUT_EMAIL_STATUS.NONE;
+      this.emailText = email;
+      return;
+    }
+
+    if (!this.emailValidator.validateEmail(email)) {
+      this.emailStatus = INPUT_EMAIL_STATUS.NOT_FORMATTED;
+      this.emailText = email;
+      return;
+    }
+
+    this.emailStatus = INPUT_EMAIL_STATUS.SUCCEED;
+    this.emailText = email;
   };
 
   @action phoneNumberChanged = (text) => {
@@ -211,4 +245,33 @@ export default class res {
 
     return '인증번호를 받지 못 하셨다면 다시 인증버튼을 눌러주세요';
   }
+
+  @action isValidUser = async () => {
+    console.log('isValid');
+    console.log(this.emailStatus)
+    console.log(this.phoneValidationViewStatus)
+    const groupingUserDto = GroupingUserDto;
+    const resetRequestResponse = null;
+    if (
+      (this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED) &
+      (this.phoneValidationViewStatus === SIGN_UP_PHONE_VIEW_STATUS.PHONE_VALIDATION_SUCCEED)
+    ) {
+      groupingUserDto = await this.userRepository.checkIsValidUser(
+        this.emailText,
+        this.phoneNumber,
+        (responseCode) => {
+          console.log('error');
+          if (responseCode === ResponseCode.SUCCEED) {
+          } else {
+            this.inputStatus = INPUT_STATUS.INVALID;
+          }
+        }
+      );
+    }
+    console.log('hello');
+    console.log(groupingUserDto.userId);
+    if (groupingUserDto !== undefined) {
+      console.log(groupingUserDto.userId);
+    }
+  };
 }

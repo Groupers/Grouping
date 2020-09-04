@@ -30,7 +30,9 @@ class App extends Component {
     }
     return (
       <View style={styles.body}>
-        <Main />
+         {/*<Main />*/}
+        {/*<Entrance />*/}
+        {view}
       </View>
     );
   }

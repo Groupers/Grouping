@@ -1,14 +1,19 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import { useEffect } from 'react';
+import { Header } from '@react-navigation/stack';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import AddressSearchResultView from '../../../AddressSearchResultView';
 import AddressSearchTextView from '../../../AddressSearchTextView';
 
 // eslint-disable-next-line react/prop-types
+
 const InputNewGroupLocationView = (props) => {
+  // React.useLayoutEffect(() => searchHeader(), []);
+
   const onAddressKeywordChanged = async (keyword) => {
     await props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(keyword);
   };
@@ -50,22 +55,37 @@ const InputNewGroupLocationView = (props) => {
     });
   };
 
-  // props.navigation.headerBackground = () => (
-  //   <AddressSearchTextView
-  //     onChangeText={onAddressKeywordChanged.bind(this)}
-  //     value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
-  //   />
-  // );
+  // const searchHeader = () => {
+  //   props.navigation.setOptions({
+  //     header: () => (
+  //       <AddressSearchTextView
+  //         onChangeText={onAddressKeywordChanged.bind(this)}
+  //         value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
+  //       />
+  //     ),
+  //   });
+  // };
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>input group location</Text>
+      {/* {props.navigation.setOptions({ */}
+      {/*  header: () => ( */}
+      {/*    <> */}
+      {/*      <AddressSearchTextView */}
+      {/*        onChangeText={onAddressKeywordChanged.bind(this)} */}
+      {/*        value={props.groupingCreationMainStore.groupingAddressSearchKeyword} */}
+      {/*      /> */}
+      {/*    </> */}
+      {/*  ), */}
+      {/* })} */}
+      {/* <Header mode={} layout={} insets={} scene={} navigation={} styleInterpolator={}/> */}
       <AddressSearchTextView
         onChangeText={onAddressKeywordChanged.bind(this)}
         value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
       />
+      <Text>input group location</Text>
       <AddressSearchResultView
-        onClick={onAddressSelected.bind(this)}
+        onClick={onAddressSelected(this)}
         addressList={props.groupingCreationMainStore.groupingAddressSearchResult}
       />
     </View>

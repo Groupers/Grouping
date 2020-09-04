@@ -4,6 +4,7 @@ import { NavigationContainer, useBackButton } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
+import { TextInput, View, Text } from 'react-native';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 import HomeMain from './home/HomeMain';
 import FeedMain from './feed/FeedMain';
@@ -35,6 +36,7 @@ const HomeStackScreen = ({ navigation }) => {
         options={{
           title: '',
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
       <HomeStack.Screen
@@ -42,15 +44,35 @@ const HomeStackScreen = ({ navigation }) => {
         component={InputNewGroupInterestsView}
         options={{
           title: '',
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
       <HomeStack.Screen
         name="InputNewGroupMoreInfo"
         component={InputNewGroupMoreInfoView}
-        options={{ title: '' }}
+        options={{
+          title: '',
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+        }}
       />
-      <HomeStack.Screen name="InputNewGroupLocation" component={InputNewGroupLocationView} options={{title:''}}/>
-      <HomeStack.Screen name="InputNewGroupDescription" component={InputNewGroupDescriptionView} />
+      <HomeStack.Screen
+        name="InputNewGroupLocation"
+        component={InputNewGroupLocationView}
+        options={{
+          title: '',
+        }}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupDescription"
+        component={InputNewGroupDescriptionView}
+        options={{
+          title: '',
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+        }}
+      />
       <HomeStack.Screen name="Preview" component={Preview} />
       <HomeStack.Screen
         name="SearchView"
