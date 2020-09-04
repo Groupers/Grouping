@@ -1,15 +1,13 @@
-import GroupingUserDto from './GroupingUserDto';
-
 export default class GroupingCreationDto {
   title;
 
   isHidden;
 
-  minAge;
+  minUserAge;
 
-  maxAge;
+  maxUserAge;
 
-  gender;
+  availableGender;
 
   description;
 
@@ -17,13 +15,13 @@ export default class GroupingCreationDto {
 
   pointY;
 
-  address;
+  pointDescription;
 
-  backgroundImageURI;
+  representGroupingUserId;
 
-  keyword;
+  representGroupImage;
 
-  groupLeaderDto = new GroupingUserDto();
+  hashtagList = [];
 
   constructor(data = {}) {
     Object.assign(this, data);

@@ -1,4 +1,6 @@
 export default class GroupingUserDto {
+  groupingUserId;
+
   userStatus;
 
   email;

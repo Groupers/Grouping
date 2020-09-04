@@ -84,7 +84,5 @@ export default class SignProcessStore {
     }
   };
 
-  @action termsAgreementCompleted = async () => {
-
-  };
+  @action termsAgreementCompleted = async () => {};
 }

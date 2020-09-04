@@ -7,16 +7,24 @@ import GroupingUserDto from '../../../../../dto/GroupingUserDto';
 import GroupLeaderProfile from './GroupLeaderProfile';
 import GroupKeyword from './GroupKeyword';
 import GroupDescription from './GroupDescription';
+import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 
 // eslint-disable-next-line react/prop-types
 const Preview = (props) => {
   React.useLayoutEffect(() => {
-
     props.navigation.setOptions({
-      headerRight: () => <Text onPress={() => props.navigation.navigate('Home')}>완료</Text>,
+      headerRight: () => <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>,
     });
     // eslint-disable-next-line react/destructuring-assignment
   }, [props.navigation]);
+
+  const onHeaderNextButtonClicked = () => {
+    props.groupingCreationMainStore.groupingCreationViewChanged(
+      GROUPING_CREATION_VIEW_STATUS.CONFIRM
+    );
+    props.groupingCreationMainStore.groupCreation();
+    props.navigation.navigate('Home');
+  };
 
   const showPicker = () => {
     const options = {
@@ -57,7 +65,7 @@ const Preview = (props) => {
         </Text>
       </View>
       <View style={styles.contents}>
-        <GroupLeaderProfile groupingUserDto={GroupingUserDto} />
+        <GroupLeaderProfile />
         <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
         <GroupKeyword groupKeyword={props.groupingCreationMainStore.groupingKeyword} />
         <GroupDescription groupDescription={props.groupingCreationMainStore.groupingDescription} />

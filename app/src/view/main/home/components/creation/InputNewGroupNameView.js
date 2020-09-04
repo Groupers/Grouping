@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { BackHandler, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import { Icon } from 'react-native-elements';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import InputTitleView from './InputTitleView';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
@@ -57,8 +56,10 @@ const InputNewGroupNameView = (props) => {
   };
 
   React.useEffect(() => {
-    props.groupingCreationMainStore.initialize();
-  },[]);
+    console.log('그룹 생성하는 유저 아이디');
+    console.log(props.userStore.groupingUser.groupingUserId);
+    props.groupingCreationMainStore.initialize(props.userStore.groupingUser.groupingUserId);
+  }, []);
 
   return (
     <View style={styles.mainContainer}>
@@ -97,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupNameView));
+export default inject('groupingCreationMainStore', 'userStore')(observer(InputNewGroupNameView));
