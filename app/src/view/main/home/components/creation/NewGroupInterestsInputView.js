@@ -11,41 +11,45 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupInterestsView = () => {
+const NewGroupInterestsInputView = () => {
   const [input, setInput] = React.useState('');
-  const [keywords, setKeywords] = React.useState([]);
+  const [keywordList, setKeywordList] = React.useState([]);
 
-  const onInsert = (keyword) => {
+  const onkeywordInserted = (keyword) => {
     // 공백이 빈칸이면 리턴
-    if (!keyword) return;
-    // 추가된 키워드 리스트에 추가 키워드가 있다면 리턴
-    if (keywords.includes(keyword)) return;
-    const nextKeywords = [...keywords, keyword];
-    setKeywords(nextKeywords);
-  };
-
-  const onRemove = (keyword) => {
-    const nextKeywords = keywords.filter((t) => t !== keyword);
-    setKeywords(nextKeywords);
-  };
-
-  const onChange = (text) => {
-    if (text.includes(' ')) {
-      onSubmit(text);
+    if (!keyword) {
       return;
     }
-    setInput(text);
+    // 추가된 키워드 리스트에 추가 키워드가 있다면 리턴
+    if (keywordList.includes(keyword)) {
+      return;
+    }
+    const nextKeywords = [...keywordList, keyword];
+    setKeywordList(nextKeywords);
   };
 
-  const onSubmit = () => {
+  const onKeywordRemove = (keyword) => {
+    const nextKeywords = keywordList.filter((t) => t !== keyword);
+    setKeywordList(nextKeywords);
+  };
+
+  const onKeywordChange = (keywordInput) => {
+    if (keywordInput.includes(' ')) {
+      onKeywordSubmit(keywordInput);
+      return;
+    }
+    setInput(keywordInput);
+  };
+
+  const onKeywordSubmit = () => {
     console.log('submit active');
-    onInsert(input.trim());
+    onkeywordInserted(input.trim());
     setInput('');
   };
   // useEffect로 태그의 상태가 변경이 되면 다시 불러올 수 있게
   React.useEffect(() => {
-    console.log(keywords);
-  }, [keywords]);
+    console.log(keywordList);
+  }, [keywordList]);
 
   return (
     // eslint-disable-next-line no-use-before-define
@@ -61,8 +65,8 @@ const InputNewGroupInterestsView = () => {
         <InputKeywordView
           textExample="#키워드,"
           input={input}
-          onChange={onChange}
-          keywords={keywords}
+          onKeywordChange={onKeywordChange}
+          keywordList={keywordList}
         />
       </View>
       <View style={styles.hotKeywordContainer}>
@@ -77,10 +81,10 @@ const InputNewGroupInterestsView = () => {
       </View>
       <View style={{ flexDirection: 'row' }}>
         {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
-        {keywords.map((k) => (
+        {keywordList.map((keyword) => (
           <View style={styles.keywordListBlock}>
-            <TouchableOpacity onPress={() => onRemove(k)}>
-              <Text>{k}</Text>
+            <TouchableOpacity onPress={() => onKeywordRemove(keyword)}>
+              <Text>{keyword}</Text>
             </TouchableOpacity>
           </View>
         ))}
@@ -116,10 +120,10 @@ const styles = StyleSheet.create({
     paddingRight: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
     borderRadius: 24.5 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginRight: 5 * WINDOW_SIZE.WIDTH_WEIGHT,
-    backgroundColor: 'red',
+    backgroundColor: COLORS.SUB_COLOR,
   },
 });
 
 export default inject('groupingCreationMainStore')(
-  observer(InputNewGroupInterestsView),
+  observer(NewGroupInterestsInputView),
 );

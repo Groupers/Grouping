@@ -14,7 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
  * FYI : mobx에 Observalbe 키워드 변수랑 연결
  */
 
-const InputKeywordView = ({ input, onChange, keywords }) => {
+const InputKeywordView = ({ input, onKeywordChange }) => {
   return (
     <View style={styles.keywordContainer}>
       <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>
@@ -29,7 +29,7 @@ const InputKeywordView = ({ input, onChange, keywords }) => {
         multiline
         placeholderTextColor="#ddd"
         value={input}
-        onChangeText={(text) => onChange(text)}
+        onChangeText={(keywordInput) => onKeywordChange(keywordInput)}
       />
       <Text style={styles.counter}>{input.length}/100</Text>
     </View>

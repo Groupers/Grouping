@@ -24,16 +24,18 @@ const InputNewGroupNameView = (props) => {
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
+      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
     );
-    props.navigation.navigate('InputNewGroupInterests');
+    props.navigation.navigate('NewGroupInterestsInputView');
   };
 
   const rightIconStyle = (groupingCreationView) => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
+      color: props.groupingCreationMainStore.isHeaderRightIconActivated(
+        groupingCreationView,
+      )
         ? Colors.black
         : '#999',
     };
@@ -58,14 +60,18 @@ const InputNewGroupNameView = (props) => {
   React.useEffect(() => {
     console.log('그룹 생성하는 유저 아이디');
     console.log(props.userStore.groupingUser.groupingUserId);
-    props.groupingCreationMainStore.initialize(props.userStore.groupingUser.groupingUserId);
+    props.groupingCreationMainStore.initialize(
+      props.userStore.groupingUser.groupingUserId,
+    );
   }, []);
 
   return (
     <View style={styles.mainContainer}>
       <GroupCreationProgressBar step={1} />
       <View style={styles.labelContainer}>
-        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>그룹 이름을 알려주세요.</Text>
+        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>
+          그룹 이름을 알려주세요.
+        </Text>
       </View>
       <View style={styles.groupNameInputContainer}>
         <InputTitleView
@@ -98,4 +104,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore', 'userStore')(observer(InputNewGroupNameView));
+export default inject(
+  'groupingCreationMainStore',
+  'userStore',
+)(observer(InputNewGroupNameView));
