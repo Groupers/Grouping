@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
-import SignUpNextButton from '../components/SignUpNextButton';
+import NextButton from '../components/NextButton';
 import PasswordInputTextView from '../components/PasswordInputTextView';
 import { INPUT_PASSWORD_STATUS } from '../../../constant/InputPasswordStatus';
 import LabelView from '../components/LabelView';
@@ -64,7 +64,7 @@ class SignUpPassword extends React.Component {
               <SignErrorMessageView text={this.props.signUpPasswordStore.errorMessage} />
             </View>
             <View style={styles.bottomContainer}>
-              <SignUpNextButton
+              <NextButton
                 isActive={this.props.signUpPasswordStore.isValidInputData}
                 text="확 인"
                 onClick={this.signUpNextButtonClicked.bind(this)}

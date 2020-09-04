@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import SignUpNextButton from '../components/SignUpNextButton';
+import NextButton from '../components/NextButton';
 import LabelView from '../components/LabelView';
 import SignErrorMessageView from '../components/SignErrorMessageView';
 import { COLORS } from '../../../assets/Colors';
@@ -60,7 +60,7 @@ class SignUpBirthday extends Component {
               <SignErrorMessageView text={this.props.signUpBasicInfoStore.errorMessage} />
             </View>
             <View style={styles.bottomContainer}>
-              <SignUpNextButton
+              <NextButton
                 isActive={this.props.signUpBasicInfoStore.isValidBirthday}
                 text="완료"
                 onClick={this.signUpNextButtonClicked.bind(this)}

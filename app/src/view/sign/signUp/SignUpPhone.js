@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import SignUpNextButton from '../components/SignUpNextButton';
+import NextButton from '../components/NextButton';
 import LabelView from '../components/LabelView';
 import PhoneNumberInputTextView from '../components/PhoneNumberInputTextView';
 import SignErrorMessageView from '../components/SignErrorMessageView';
@@ -134,7 +134,7 @@ class SignUpPhone extends React.Component {
 
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
               <View style={styles.bottomContainer}>
-                <SignUpNextButton
+                <NextButton
                   isActive={this.props.signUpPhoneStore.isValidPhoneCode}
                   text="다음"
                   onClick={

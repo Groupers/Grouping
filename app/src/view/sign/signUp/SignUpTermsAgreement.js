@@ -12,7 +12,7 @@ import {
 import { inject, observer } from 'mobx-react';
 import { CheckBox } from 'react-native-elements';
 import { COLORS } from '../../../assets/Colors';
-import SignUpNextButton from '../components/SignUpNextButton';
+import NextButton from '../components/NextButton';
 import SignErrorMessageView from '../components/SignErrorMessageView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
@@ -108,13 +108,13 @@ class SignUpTermsAgreement extends React.Component {
             </View>
 
             <View style={styles.bottomContainer}>
-              <SignUpNextButton
+              <NextButton
                 isActive={this.props.signUpTermsAgreementStore.isValidInputData}
                 text="확 인"
                 onClick={this.signUpNextButtonClicked.bind(this)}
               />
               <View height={20} />
-              <SignUpNextButton
+              <NextButton
                 isActive={this.props.signUpTermsAgreementStore.isValidInputData}
                 text="취 소"
                 onClick={this.signUpNextButtonClicked.bind(this)}

@@ -3,31 +3,18 @@ import { TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
-export default class SignUpNextButton extends Component {
+export default class NextButton extends Component {
   constructor(props) {
     super(props);
   }
 
   buttonStyle = function (isActive) {
     return {
-      width: WINDOW_SIZE.WIDTH,
+      width: 0.9 * WINDOW_SIZE.WIDTH,
       height: 40,
       borderRadius: 5,
       backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
       justifyContent: 'center',
-      // ...Platform.select({
-      //   ios: {
-      //     shadowColor: '#000',
-      //     shadowOffset: { width: 0, height: 2 },
-      //     shadowOpacity: 0.2,
-      //   },
-      //   android: {
-      //     elevation: 8,
-      //   },
-      // }),
-      // marginBottom: this.props.isKeyboardShow
-      //   ? this.props.keyboardHeight - 15
-      //   : 0,
     };
   };
 
@@ -49,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10,
-    backgroundColor: COLORS.MAIN_COLOR,
+    backgroundColor: COLORS.SUB_COLOR,
     borderRadius: 5,
     height: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
   },

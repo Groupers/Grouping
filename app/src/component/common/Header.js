@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 
-const Header = ({ navigateTo, progress }) => {
+const Header = ({ navigateTo, navigateMap }) => {
   return (
     <View style={styles.headerBlock}>
       <View style={styles.logoBlock}>
