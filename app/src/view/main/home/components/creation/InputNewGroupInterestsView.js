@@ -11,6 +11,44 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupInterestsView = (props) => {
+  // solmin--------------------------------------------------------------------------------------------------------
+  const [input, setInput] = React.useState('');
+  const [keywords, setKeywords] = React.useState([]);
+
+  const onInsert = (keyword) => {
+    // 공백이 빈칸이면 리턴
+    if (!keyword) return;
+    // 추가된 키워드 리스트에 추가 키워드가 있다면 리턴
+    if (keywords.includes(keyword)) return;
+    const nextKeywords = [...keywords, keyword];
+    setKeywords(nextKeywords);
+  };
+
+  const onRemove = (keyword) => {
+    const nextKeywords = keywords.filter((t) => t !== keyword);
+    setKeywords(nextKeywords);
+  };
+
+  const onChange = (text) => {
+    console.log(text);
+    if (text.includes(' ')) {
+      onSubmit(text);
+      return;
+    }
+    setInput(text);
+  };
+
+  const onSubmit = () => {
+    console.log('submit active');
+    onInsert(input.trim());
+    setInput('');
+  };
+  // useEffect로 태그의 상태가 변경이 되면 다시 불러올 수 있게
+  React.useEffect(() => {
+    console.log(keywords);
+  }, [keywords]);
+  // solmin--------------------------------------------------------------------------------------------------------
+
   /* React.useLayoutEffect(() => {
     // eslint-disable-next-line react/prop-types
     props.navigation.setOptions({
@@ -24,7 +62,7 @@ const InputNewGroupInterestsView = (props) => {
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
+      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
     );
     props.navigation.navigate('InputNewGroupMoreInfo');
   };
@@ -33,28 +71,30 @@ const InputNewGroupInterestsView = (props) => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
+      color: props.groupingCreationMainStore.isHeaderRightIconActivated(
+        groupingCreationView,
+      )
         ? Colors.black
         : '#999',
     };
   };
 
-  const onKeywordChanged = (keyword) => {
-    props.groupingCreationMainStore.groupingKeywordChanged(keyword);
+  // const onKeywordChanged = (keyword) => {
+  //   props.groupingCreationMainStore.groupingKeywordChanged(keyword);
 
-    props.navigation.setOptions({
-      headerRight: () => (
-        <Text
-          onPress={() => {
-            onHeaderNextButtonClicked();
-          }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.INTERESTS)}
-        >
-          다음
-        </Text>
-      ),
-    });
-  };
+  //   props.navigation.setOptions({
+  //     headerRight: () => (
+  //       <Text
+  //         onPress={() => {
+  //           onHeaderNextButtonClicked();
+  //         }}
+  //         style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.INTERESTS)}
+  //       >
+  //         다음
+  //       </Text>
+  //     ),
+  //   });
+  // };
 
   return (
     // eslint-disable-next-line no-use-before-define
@@ -69,13 +109,27 @@ const InputNewGroupInterestsView = (props) => {
       <View style={styles.interestInputContainer}>
         <InputKeywordView
           textExample="#키워드,"
-          onChangeText={onKeywordChanged.bind(this)}
+          // onChangeText={onKeywordChanged.bind(this)}
           groupingKeyword={props.groupingCreationMainStore.groupingKeyword}
+          input={input}
+          onChange={onChange}
+          keywords={keywords}
         />
       </View>
       <View style={styles.hotKeywordContainer}>
-        <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, fontWeight: 'bold' }}>
+        <Text
+          style={{
+            fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            fontWeight: 'bold',
+          }}
+        >
           인기 키워드
+          <Text>
+            {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
+            {keywords.map((k) => (
+              <Text>{k}</Text>
+            ))}
+          </Text>
         </Text>
       </View>
     </View>
@@ -104,4 +158,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupInterestsView));
+export default inject('groupingCreationMainStore')(
+  observer(InputNewGroupInterestsView),
+);
