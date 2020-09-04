@@ -4,13 +4,13 @@ import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
-import InputKeywordView from './InputKeywordView';
+import KeywordInput from './KeywordInput';
 import { COLORS } from '../../../../../assets/Colors';
 import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupInterestsView = (props) => {
+const NewGroupInterestsView = (props) => {
   /* React.useLayoutEffect(() => {
     // eslint-disable-next-line react/prop-types
     props.navigation.setOptions({
@@ -67,7 +67,7 @@ const InputNewGroupInterestsView = (props) => {
         <Text>스페이스바를 눌러 키워드를 구분해주세요.</Text>
       </View>
       <View style={styles.interestInputContainer}>
-        <InputKeywordView
+        <KeywordInput
           textExample="#키워드,"
           onChangeText={onKeywordChanged.bind(this)}
           groupingKeyword={props.groupingCreationMainStore.groupingKeyword}
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupInterestsView));
+export default inject('groupingCreationMainStore')(observer(NewGroupInterestsView));

@@ -8,12 +8,12 @@ import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 
 //Main
 import HomeMain from './home/HomeMain';
-import InputNewGroupNameView from './home/components/creation/InputNewGroupNameView';
-import InputNewGroupInterestsView from './home/components/creation/InputNewGroupInterestsView';
-import InputNewGroupMoreInfoView from './home/components/creation/InputNewGroupMoreInfoView';
-import InputNewGroupLocationView from './home/components/creation/InputNewGroupLocationView';
+import InputNewGroupNameView from './home/components/creation/NewGroupNameView';
+import InputNewGroupInterestsView from './home/components/creation/NewGroupInterestsView';
+import InputNewGroupMoreInfoView from './home/components/creation/NewGroupMoreInfoView';
+import InputNewGroupLocationView from './home/components/creation/NewGroupLocationView';
 import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
-import Preview from './home/components/creation/Preview';
+import Preview from './home/components/creation/NewGroupPreview';
 import SearchView from './home/components/search/SearchView';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 

@@ -3,14 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
-import InputTitleView from './InputTitleView';
+import TitleInput from './TitleInput';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
 import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupNameView = (props) => {
+const NewGroupNameView = (props) => {
   /* React.useLayoutEffect(() => {
     // eslint-disable-next-line react/prop-types
     props.navigation.setOptions({
@@ -68,7 +68,7 @@ const InputNewGroupNameView = (props) => {
         <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>그룹 이름을 알려주세요.</Text>
       </View>
       <View style={styles.groupNameInputContainer}>
-        <InputTitleView
+        <TitleInput
           textExample="30자 이내로 입력해 주세요."
           onChangeText={onTitleChanged.bind(this)}
           groupingTitle={props.groupingCreationMainStore.groupingTitle}
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore', 'userStore')(observer(InputNewGroupNameView));
+export default inject('groupingCreationMainStore', 'userStore')(observer(NewGroupNameView));

@@ -50,10 +50,8 @@ class SignUpPhone extends React.Component {
   }
 
   async signUpNextButtonClicked() {
-    this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)
-    this.props.signUpPhoneStore.isAllCompleted
-        ? this.signUpNextButtonClicked.bind(this)
-        : null;
+    this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
+    this.props.signUpPhoneStore.isAllCompleted ? this.signUpNextButtonClicked.bind(this) : null;
     await this.props.signUpPhoneStore.completePhoneNumber();
     this.props.navigation.navigate('SignUpEmail');
   }
@@ -91,12 +89,20 @@ class SignUpPhone extends React.Component {
                   text={this.props.signUpPhoneStore.phoneNumber}
                   onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
                 />
+                <PhoneCodeNextButton
+                  label="인증번호"
+                  isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
+                  text={
+                    this.props.signUpPhoneStore.phoneValidationViewStatus ===
+                    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                      ? '재인증'
+                      : '인 증'
+                  }
+                  onClick={this.authorizeButtonClicked.bind(this)}
+                />
               </View>
-              {/* {this.props.signUpPhoneStore.phoneValidationViewStatus === */}
-              {/* SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? ( */}
-              {/*  <View>/!* <ShowErrorModal /> *!/</View> */}
-              {/* ) : null} */}
-
+            </View>
+            <View style={styles.contentContainer}>
               <View>
                 <View style={styles.phoneCodeContainer}>
                   <PhoneCodeInputTextView
@@ -106,40 +112,15 @@ class SignUpPhone extends React.Component {
                     }}
                     text={this.props.signUpPhoneStore.phoneCode}
                   />
-                  <PhoneCodeNextButton
-                    label="인증번호"
-                    isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
-                    text={
-                      this.props.signUpPhoneStore.phoneValidationViewStatus ===
-                      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                        ? '재인증'
-                        : '인 증'
-                    }
-                    onClick={this.authorizeButtonClicked.bind(this)}
-                  />
-                  {/* <PhoneCodeNextButton */}
-                  {/*  style={styles.authButton} */}
-                  {/*  text={ */}
-                  {/*    this.props.signUpPhoneStore.phoneValidationViewStatus === */}
-                  {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
-                  {/*      ? '인증' */}
-                  {/*      : '재인증' */}
-                  {/*  } */}
-                  {/*  isActive={this.props.signUpPhoneStore.isValidPhoneNumber} */}
-                  {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
-                  {/* /> */}
                 </View>
                 <PhoneAuthTimer style={styles.authTimer} />
               </View>
-
               <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
               <View style={styles.bottomContainer}>
                 <NextButton
                   isActive={this.props.signUpPhoneStore.isValidPhoneCode}
                   text="다음"
-                  onClick={
-                    this.signUpNextButtonClicked.bind(this)
-                  }
+                  onClick={this.signUpNextButtonClicked.bind(this)}
                 />
               </View>
             </View>

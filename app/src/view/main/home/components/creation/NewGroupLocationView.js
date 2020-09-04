@@ -8,7 +8,7 @@ import AddressSearchResultView from '../../../AddressSearchResultView';
 import AddressSearchTextView from '../../../AddressSearchTextView';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupLocationView = (props) => {
+const NewGroupLocationView = (props) => {
   const onAddressKeywordChanged = async (keyword) => {
     await props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(keyword);
   };
@@ -72,4 +72,4 @@ const InputNewGroupLocationView = (props) => {
   );
 };
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupLocationView));
+export default inject('groupingCreationMainStore')(observer(NewGroupLocationView));

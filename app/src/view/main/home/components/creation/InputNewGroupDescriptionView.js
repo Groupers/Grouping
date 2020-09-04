@@ -13,7 +13,7 @@ import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
-import InputDescriptionTextView from './InputDescriptionTextView';
+import DescriptionInput from './DescriptionInput';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupDescriptionView = (props) => {
@@ -57,7 +57,7 @@ const InputNewGroupDescriptionView = (props) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>input group description</Text>
-      <InputDescriptionTextView
+      <DescriptionInput
         textExample="그룹을 멋지게 소개해 주세요."
         value={props.groupingCreationMainStore.groupingDescription}
         onChangeText={onDescriptionChanged.bind(this)}

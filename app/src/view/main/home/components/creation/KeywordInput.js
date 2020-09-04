@@ -3,26 +3,30 @@ import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
+import {FONT_SIZE} from '../../../../../constant/FontSize';
 
-const InputTitleView = (props) => {
+const KeywordInput = (props) => {
   return (
-    <View style={styles.titleContainer}>
+    <View style={styles.keywordContainer}>
+      <Text style={{ fontSize: 18, fontWeight: 'bold' ,marginRight:5}}>#</Text>
       <TextInput
-        style={styles.title}
-        maxLength={30}
-        placeholder={props.textExample}
+        style={styles.keyword}
+        maxLength={100}
+        placeholder="키워드"
         autoCorrect={false}
+        blurOnSubmit
+        multiline
         placeholderTextColor="#ddd"
-        value={props.groupingTitle}
+        value={props.groupingKeyword}
         onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
       />
-      <Text style={styles.counter}>{props.groupingTitle.length}/30</Text>
+      <Text style={styles.counter}>{props.groupingKeyword.length}/100</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  keywordContainer: {
     borderColor: COLORS.FONT_GRAY,
     borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
     flexDirection: 'row',
@@ -31,21 +35,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  title: {
+  keyword: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
     color: Colors.black,
-    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: FONT_SIZE.INPUT_TEXT,
     padding: 0,
+    marginTop: 5,
   },
 
   counter: {
     color: COLORS.FONT_GRAY,
     margin: 0,
-    fontSize: 9*WINDOW_SIZE.HEIGHT_WEIGHT
+    fontSize: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });
 
-export default InputTitleView;
+export default KeywordInput;
