@@ -20,11 +20,13 @@ export default class UserRepository {
   };
 
   async checkIsValidUser(email, phoneNumber, failedCallback) {
-    console.log(email)
-    console.log(phoneNumber)
+    console.log(email);
+    console.log(phoneNumber);
     const response = await axios.get(`${TARGET_URL}`, { params: { email, phoneNumber } });
     console.log('response : ');
     console.log(response);
+    console.log('response : ');
+    console.log(response.data.data.groupingUserId.toString());
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
@@ -33,21 +35,41 @@ export default class UserRepository {
       return false;
     }
     console.log('checkIsValidUser:success');
-    console.log(commonResponse.userId.toString());
-    return new GroupingUserDto(commonResponse.data);
+    console.log(commonResponse.data.groupingUserId);
+    return commonResponse.data.groupingUserId;
   }
 
-  async resetPassword(groupingUserId, newPassword, failedCallback) {
+  async resetPassword(groupingUserId, password) {
+    console.log(`groupingUserId : ${groupingUserId}`);
+    // console.log(`newPassword : ${resetPasswordDto.password}`);
+    // console.log(resetPasswordDto.password);
+    // console.log(`password${resetPasswordDto}`);
+    // console.log(`password${resetPasswordDto.toString()}`);
+    console.log(password);
+    console.log('resetPassword is called');
+    console.log(`${TARGET_URL}/${groupingUserId}/password`);
+    const result = await axios.put(`${TARGET_URL}/${groupingUserId}/password`, { password }).then(
+      (response) => {
+        console.log('reset Success');
+        console.log(response.data.code);
+        return response.data.code;
+      },
+      (error) => {
+        console.log('reset Fail');
+        console.log(error);
+        return error;
+      }
+    );
+    return result;
 
-    const response = await axios.put(`${TARGET_URL}/${groupingUserId}/password`, {
-      params: { groupingUserId, newPassword },
-    });
-    const commonResponse = new CommonResponse(response.data);
-
-    if (commonResponse.code !== ResponseCode.SUCCEED) {
-      failedCallback(commonResponse.code);
-      return false;
-    }
-    return true;
+    // const commonResponse = new CommonResponse(response.data);
+    // console.log(`commonResponse${commonResponse}`);
+    // if (commonResponse.code !== ResponseCode.SUCCEED) {
+    //   failedCallback(commonResponse.code);r
+    //   console.log('reset Fail');
+    //   return false;
+    // }
+    // console.log('reset Success');
+    // return true;
   }
 }

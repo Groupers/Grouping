@@ -57,10 +57,11 @@ const InputNewGroupDescriptionView = (props) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
       <ScrollView
         style={{
-          flex: 1,
+          width: '100%',
+          height: '100%',
           // paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
           // paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
         }}

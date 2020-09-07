@@ -23,8 +23,8 @@ const InputDescriptionTextView = (props) => {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    width: WINDOW_SIZE.WIDTH,
-    height: WINDOW_SIZE.HEIGHT * 0.8,
+    flex: 1,
+    // width: WINDOW_SIZE.WIDTH,
     borderWidth: 1,
     paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,

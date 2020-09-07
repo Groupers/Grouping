@@ -39,6 +39,7 @@ export default class SignUpPasswordStore {
 
     this.passwordValidation = INPUT_PASSWORD_STATUS.SUCCEED;
     this.passwordText = text;
+
     return this.passwordText;
   };
 

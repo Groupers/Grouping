@@ -33,7 +33,14 @@ const ResetPasssword = (props) => {
     // await props.signUpEmailStore.completeEmail();
     // if
     // this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)
+    // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
+    // props.groupingUserDto.userId = ;
+    // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
     await props.resetPasswordStore.isValidUser();
+
+    props.resetPasswordStore.groupingUserDto.userId !== null
+      ? props.navigation.navigate('newPassword')
+      : null;
     // props.navigation.navigate('SignIn');
   }
 
@@ -74,10 +81,8 @@ const ResetPasssword = (props) => {
             <View>
               <View style={styles.phoneCodeContainer}>
                 <PhoneCodeInputTextView
+                  onBlur={props.resetPasswordStore.phoneCodeValidationSucceed}
                   onChangeText={props.resetPasswordStore.phoneCodeChanged.bind(this)}
-                  onBlur={() => {
-                    props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
-                  }}
                   text={props.resetPasswordStore.phoneCode}
                 />
                 <PhoneCodeNextButton
@@ -109,7 +114,11 @@ const ResetPasssword = (props) => {
             <SignErrorMessageView text={props.resetPasswordStore.errorMessage} />
             <View style={styles.bottomContainer}>
               <SignUpNextButton
-                isActive={props.resetPasswordStore.isValidPhoneCode}
+                isActive={
+                  props.resetPasswordStore.isValidPhoneCode
+                  // props.resetPasswordStore.phoneValidationStatus ===
+                  // INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED
+                }
                 text="다음"
                 onClick={resetPasswordButtonClicked.bind(this)}
               />
