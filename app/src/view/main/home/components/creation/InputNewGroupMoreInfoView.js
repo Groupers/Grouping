@@ -206,7 +206,7 @@ const InputNewGroupMoreInfoView = (props) => {
           <Text style={styles.fontColor}> 나이 제한 추가</Text>
         </View>
       </TouchableOpacity>
-      <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
+      <SwipeablePanel {...panelProps} isActive={genderPanelActive} style={}>
         <TouchableOpacity onPress={() => initializeGender()}>
           <Text>취소</Text>
         </TouchableOpacity>

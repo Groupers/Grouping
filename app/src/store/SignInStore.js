@@ -9,7 +9,7 @@ import { ResponseCode } from '../constant/ResponseCode';
 import UserStore from './UserStore';
 import PhoneValidator from '../component/PhoneValidator';
 import { INPUT_STATUS } from '../constant/InputStatus';
-import GroupingUserDto from "../dto/GroupingUserDto";
+import GroupingUserDto from '../dto/GroupingUserDto';
 
 export default class SignInStore {
   koreaPhonePrefixConditionFirst = '010';
@@ -227,4 +227,5 @@ export default class SignInStore {
       console.log('signInCompleted');
     }
   };
+
 }
