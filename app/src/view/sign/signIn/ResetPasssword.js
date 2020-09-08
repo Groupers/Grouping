@@ -25,12 +25,23 @@ import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { INPUT_PHONE_STATUS } from '../../../constant/InputPhoneStatus';
+import EmailInputTextView from '../components/EmailInputTextView';
 
 const Width = Dimensions.get('window').width;
 const ResetPasssword = (props) => {
   async function resetPasswordButtonClicked() {
     // await props.signUpEmailStore.completeEmail();
-    props.navigation.navigate('SignIn');
+    // if
+    // this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)
+    // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
+    // props.groupingUserDto.userId = ;
+    // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
+    await props.resetPasswordStore.isValidUser();
+
+    props.resetPasswordStore.groupingUserDto.userId !== null
+      ? props.navigation.navigate('newPassword')
+      : null;
+    // props.navigation.navigate('SignIn');
   }
 
   async function authorizeButtonClicked() {
@@ -41,16 +52,18 @@ const ResetPasssword = (props) => {
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.body}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <View style={styles.informTextContainer}>
-            <Text>비밀번호 재설정을 위해</Text>
-            <Text>아래 정보를 입력해주세요</Text>
+          <View style={styles.textArea}>
+            <Text style={{ fontSize: 12, color: COLORS.DARK_GRAY }}>비밀번호 재설정을 위해</Text>
+            <Text style={{ fontSize: 12, color: COLORS.DARK_GRAY }}>
+              휴대폰 번호를 입력해주세요
+            </Text>
           </View>
           <View height={30} />
           <View style={styles.contentContainer}>
             <ActiveEmailInputTextView
-              label="이메일 주소"
-              value={props.signInStore.emailText}
-              onChangeText={props.signInStore.emailTextChanged.bind(this)}
+              label="이메일주소"
+              value={props.resetPasswordStore.emailText}
+              onChangeText={props.resetPasswordStore.emailTextChanged.bind(this)}
             />
             <View style={styles.phoneCodeContainer}>
               <PhoneNumberInputTextView
@@ -60,7 +73,7 @@ const ResetPasssword = (props) => {
                 onChangeText={props.resetPasswordStore.phoneNumberChanged.bind(this)}
               />
             </View>
-            {/* {props.signUpPhoneStore.phoneValidationViewStatus === */}
+            {/* {this.props.signUpPhoneStore.phoneValidationViewStatus === */}
             {/* SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? ( */}
             {/*  <View>/!* <ShowErrorModal /> *!/</View> */}
             {/* ) : null} */}
@@ -68,10 +81,8 @@ const ResetPasssword = (props) => {
             <View>
               <View style={styles.phoneCodeContainer}>
                 <PhoneCodeInputTextView
+                  onBlur={props.resetPasswordStore.phoneCodeValidationSucceed}
                   onChangeText={props.resetPasswordStore.phoneCodeChanged.bind(this)}
-                  onBlur={() => {
-                    props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
-                  }}
                   text={props.resetPasswordStore.phoneCode}
                 />
                 <PhoneCodeNextButton
@@ -103,7 +114,11 @@ const ResetPasssword = (props) => {
             <SignErrorMessageView text={props.resetPasswordStore.errorMessage} />
             <View style={styles.bottomContainer}>
               <SignUpNextButton
-                isActive={props.resetPasswordStore.isValidPhoneCode}
+                isActive={
+                  props.resetPasswordStore.isValidPhoneCode
+                  // props.resetPasswordStore.phoneValidationStatus ===
+                  // INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED
+                }
                 text="다음"
                 onClick={resetPasswordButtonClicked.bind(this)}
               />
@@ -116,10 +131,15 @@ const ResetPasssword = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  body: {
     flex: 1,
+    backgroundColor: COLORS.MAIN_COLOR,
+    flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   },
+
   inner: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
@@ -129,16 +149,10 @@ const styles = StyleSheet.create({
     width: '90%',
     // paddingTop:30
   },
-  informTextContainer: {
-    alignItems: 'center',
+  textArea: {
+    width: '100%',
     marginTop: 10,
-    marginBottom: 20,
-  },
-  informText: {
-    color: COLORS.FONT_DARK,
-  },
-  contentsContainer: {
-    flex: 1,
+    alignItems: 'center',
   },
   contentContainer: {
     flex: 1,
@@ -168,6 +182,8 @@ const styles = StyleSheet.create({
   },
 
   authTimer: { margin: 10 },
+
+  authButton: {},
 });
 
 export default inject('signInStore', 'resetPasswordStore')(observer(ResetPasssword));

@@ -17,7 +17,6 @@ const AddressSearchTextView = (props) => {
   const onKeywordSearchClicked = () => {
     props.groupingStore.changeView(GROUPING_VIEW_STATUS.KEYWORD_SEARCH);
   };
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -53,10 +52,7 @@ const AddressSearchTextView = (props) => {
 
 const styles = StyleSheet.create({
   body: {
-    paddingTop: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: '100%',
-    paddingStart: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    paddingEnd: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   main: {

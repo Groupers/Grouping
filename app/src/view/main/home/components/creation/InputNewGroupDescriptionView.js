@@ -3,6 +3,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -14,6 +15,7 @@ import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import InputDescriptionTextView from './InputDescriptionTextView';
+import { COLORS } from '../../../../../assets/Colors';
 
 // eslint-disable-next-line react/prop-types
 const InputNewGroupDescriptionView = (props) => {
@@ -55,13 +57,40 @@ const InputNewGroupDescriptionView = (props) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>input group description</Text>
-      <InputDescriptionTextView
-        textExample="그룹을 멋지게 소개해 주세요."
-        value={props.groupingCreationMainStore.groupingDescription}
-        onChangeText={onDescriptionChanged.bind(this)}
-      />
+    <View style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+      <ScrollView
+        style={{
+          width: '100%',
+          height: '100%',
+          // paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+          // paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+        }}
+      >
+        <InputDescriptionTextView
+          textExample="1500자 내로 입력해주세요."
+          value={props.groupingCreationMainStore.groupingDescription}
+          onChangeText={onDescriptionChanged.bind(this)}
+        />
+      </ScrollView>
+      <View
+        style={{
+          height: 30,
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          backgroundColor: 'white',
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 9 * WINDOW_SIZE.WIDTH_WEIGHT,
+            color: COLORS.FONT_GRAY,
+            paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+          }}
+        >
+          {props.groupingCreationMainStore.groupingDescription.length}/1500
+        </Text>
+      </View>
     </View>
   );
 };
