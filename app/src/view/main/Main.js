@@ -4,9 +4,10 @@ import { NavigationContainer, useBackButton } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
+import { TextInput, View, Text } from 'react-native';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 
-//Main
+// Main
 import HomeMain from './home/HomeMain';
 import InputNewGroupNameView from './home/components/creation/NewGroupNameView';
 import InputNewGroupInterestsView from './home/components/creation/NewGroupInterestsView';
@@ -17,15 +18,15 @@ import Preview from './home/components/creation/NewGroupPreview';
 import SearchView from './home/components/search/SearchView';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 
-//Group
+// Group
 import GroupMain from './group/GroupMain';
 import JoinedGroupDetail from './group/components/joinedGroup/JoinedGroupDetail';
 import JoinedGroupMoreDetail from './group/components/joinedGroup/JoinedGroupMoreDetail';
 
-//Feed
+// Feed
 import FeedMain from './feed/FeedMain';
 
-//MyPage
+// MyPage
 import MyPageMain from './myPage/MyPageMain';
 
 const HomeStack = createStackNavigator();
@@ -37,7 +38,7 @@ const Tab = createBottomTabNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator initialRouteName="InputNewGroupMoreInfo">
       <HomeStack.Screen name="Home" component={HomeMain} options={{ headerShown: false }} />
       <HomeStack.Screen
         name="InputNewGroupName"
@@ -45,22 +46,43 @@ const HomeStackScreen = ({ navigation }) => {
         options={{
           title: '',
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
       <HomeStack.Screen
-        name="InputNewGroupInterests"
-        component={InputNewGroupInterestsView}
+        name="NewGroupInterestsInputView"
+        component={NewGroupInterestsInputView}
         options={{
           title: '',
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
       <HomeStack.Screen
         name="InputNewGroupMoreInfo"
         component={InputNewGroupMoreInfoView}
-        options={{ title: '' }}
+        options={{
+          title: '',
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+        }}
       />
-      <HomeStack.Screen name="InputNewGroupLocation" component={InputNewGroupLocationView} options={{title:''}}/>
-      <HomeStack.Screen name="InputNewGroupDescription" component={InputNewGroupDescriptionView} />
+      <HomeStack.Screen
+        name="InputNewGroupLocation"
+        component={InputNewGroupLocationView}
+        options={{
+          title: '',
+        }}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupDescription"
+        component={InputNewGroupDescriptionView}
+        options={{
+          title: '',
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+        }}
+      />
       <HomeStack.Screen name="Preview" component={Preview} />
       <HomeStack.Screen
         name="SearchView"
@@ -76,11 +98,7 @@ const HomeStackScreen = ({ navigation }) => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen
-        name="Home"
-        component={GroupMain}
-        options={{ headerShown: false }}
-      />
+      <GroupStack.Screen name="Home" component={GroupMain} options={{ headerShown: false }} />
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}

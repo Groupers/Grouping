@@ -14,6 +14,7 @@ import EntranceMain from './EntranceMain';
 import FindEmail from '../sign/signIn/FindEmail';
 import ResetPassword from '../sign/signIn/ResetPassword';
 import ResetPasswordPhone from '../sign/signIn/ResetPasswordPhone';
+import NewPassword from '../sign/signIn/NewPassword';
 import SignUpName from '../sign/signUp/SignUpName';
 import SignUpGender from '../sign/signUp/SignUpGender';
 import SignUpBirthday from '../sign/signUp/SignUpBirthday';
@@ -277,7 +278,7 @@ class Entrance extends React.Component {
             {(props) => <ResetPassword {...props} />}
           </Stack.Screen>
           <Stack.Screen
-            name="ResetPasswordPhone"
+            name="newPassword"
             options={{
               headerStyle: {
                 backgroundColor: COLORS.MAIN_COLOR,
@@ -289,7 +290,7 @@ class Entrance extends React.Component {
               },
             }}
           >
-            {(props) => <ResetPasswordPhone {...props} />}
+            {(props) => <NewPassword {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

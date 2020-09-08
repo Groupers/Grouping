@@ -1,14 +1,23 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
-import {FONT_SIZE} from '../../../../../constant/FontSize';
+import { FONT_SIZE } from '../../../../../constant/FontSize';
 
-const KeywordInput = (props) => {
+/**
+ * author: solmin
+ * shortDecription: add keyword to keywordList
+ * flow: InputNewGroupInterestsView -navigaton-> inputKeywordView
+ *
+ * FYI : mobx에 Observalbe 키워드 변수랑 연결
+ */
+
+const KeywordInput = ({ input, onKeywordChange }) => {
   return (
     <View style={styles.keywordContainer}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' ,marginRight:5}}>#</Text>
+      <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>#</Text>
       <TextInput
         style={styles.keyword}
         maxLength={100}
@@ -17,10 +26,10 @@ const KeywordInput = (props) => {
         blurOnSubmit
         multiline
         placeholderTextColor="#ddd"
-        value={props.groupingKeyword}
-        onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
+        value={input}
+        onChangeText={(keywordInput) => onKeywordChange(keywordInput)}
       />
-      <Text style={styles.counter}>{props.groupingKeyword.length}/100</Text>
+      <Text style={styles.counter}>{input.length}/100</Text>
     </View>
   );
 };
