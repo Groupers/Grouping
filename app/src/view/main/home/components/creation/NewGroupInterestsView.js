@@ -33,7 +33,7 @@ const NewGroupInterestsInputView = (props) => {
     props.navigation.navigate('NewGroupMoreInfoView');
   };
 
-  const onkeywordInserted = (keyword) => {
+  const onKeywordInserted = (keyword) => {
     // 공백이 빈칸이면 리턴
     if (!keyword) {
       return;
@@ -73,7 +73,7 @@ const NewGroupInterestsInputView = (props) => {
 
   const onKeywordSubmit = () => {
     console.log('submit active');
-    onkeywordInserted(input.trim());
+    onKeywordInserted(input.trim());
     setInput(EMPTY_VALUE);
   };
   // useEffect로 태그의 상태가 변경이 되면 다시 불러올 수 있게
@@ -83,7 +83,7 @@ const NewGroupInterestsInputView = (props) => {
         headerRight: () => (
           <Text
             onPress={() => {
-              navigation.navigate('NewGroupMoreInfoView');
+              props.navigation.navigate('NewGroupMoreInfoView');
             }}
             style={styles.rightIconStyle}
           >
