@@ -99,16 +99,12 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
-    this.groupingAddressSearchKeyword = keyword;
-
     //koreanChecker does not working
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
     }
     const result = await this.mapRepository.findAddressByKeyword(keyword);
-
     if (!result.isSucceed()) {
-      console.log('data 없음');
       return;
     }
 
