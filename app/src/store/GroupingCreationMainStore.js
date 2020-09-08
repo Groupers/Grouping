@@ -1,13 +1,12 @@
 import { action, computed, observable } from 'mobx';
+import { Text } from 'react-native';
+import * as React from 'react';
 import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
 import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
 import KoreanChecker from '../component/KoreanChecker';
-import AgeValidator, {
-  MAX_AVAILABLE_AGE,
-  MIN_AVAILABLE_AGE,
-} from '../component/AgeValidator';
+import AgeValidator, { MAX_AVAILABLE_AGE, MIN_AVAILABLE_AGE } from '../component/AgeValidator';
 import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
 import { ResponseCode } from '../constant/ResponseCode';
 import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
@@ -17,6 +16,7 @@ import GroupCreationRepository from '../repository/GroupCreationRepository';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
 import GroupingUserDto from '../dto/GroupingUserDto';
+import { COLORS } from '../assets/Colors';
 
 const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
@@ -48,7 +48,7 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddress = '';
 
-  @observable groupingGender = 'ALL';
+  @observable groupingGender = null;
 
   @observable groupingAvailableMinAge = Number(MIN_AVAILABLE_AGE);
 
@@ -64,6 +64,8 @@ export default class GroupingCreationMainStore {
 
   @observable hashtagList = [];
 
+  @observable genderChanged = false;
+
   // @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
   @observable groupingBackgroundImageURI = '';
 
@@ -72,7 +74,7 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupingInitializeGender = () => {
-    this.groupingGender = 'ALL';
+    this.groupingGender = null;
     console.log(this.groupingGender);
   };
 
@@ -99,7 +101,7 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
-    //koreanChecker does not working
+    // koreanChecker does not working
     this.groupingAddressSearchKeyword = keyword;
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
@@ -121,6 +123,9 @@ export default class GroupingCreationMainStore {
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
     this.groupingCreationDto.availableGender = gender;
+    if (gender !== null) {
+      this.genderChanged = true;
+    }
     console.log(this.groupingGender);
   };
 
@@ -156,8 +161,7 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus ===
-        GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
       this.keywordParser.parseKeyword(this.groupingKeyword)
     ) {
       return true;
@@ -165,8 +169,7 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus ===
-        GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
       this.groupingDescription.length > MIN_DESCRIPTION_LENGTH
     ) {
       return true;
@@ -174,11 +177,10 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus ===
-        GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
       this.ageValidator.validateAge(
         Number(this.groupingAvailableMinAge),
-        Number(this.groupingAvailableMaxAge),
+        Number(this.groupingAvailableMaxAge)
       ) &&
       this.groupingGender !== '' &&
       this.groupingAddress !== ''
@@ -200,7 +202,7 @@ export default class GroupingCreationMainStore {
       (responseCode) => {
         console.log('responseCode : ');
         console.log(responseCode);
-      },
+      }
     );
     console.log('out');
 
@@ -223,6 +225,23 @@ export default class GroupingCreationMainStore {
     return this.groupingBackgroundImageURI;
   }
 
+  @computed get selectedGenderLimitMessage() {
+    if (this.genderChanged === false) {
+      return '성별 제한 추가';
+    }
+    if (this.groupingGender === 'MALE') {
+      return '남자만 가입 가능';
+    }
+    if (this.groupingGender === 'FEMALE') {
+      return '여자만 가입 가능';
+    }
+    return '모두환영';
+  }
+
+  @computed get genderFontColor() {
+    return this.genderChanged !== false ? COLORS.BLACK : COLORS.FONT_GRAY;
+  }
+
   @action initialize(groupingUserId) {
     this.groupingUserId = groupingUserId;
     this.groupingTitle = '';
@@ -231,7 +250,7 @@ export default class GroupingCreationMainStore {
     this.groupingAddressSearchKeyword = '';
     this.groupingAddressSearchResult = [];
     this.groupingAddress = '';
-    this.groupingGender = 'ALL';
+    this.groupingGender = null;
     this.groupingPreviewNextButtonActivated = false;
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
@@ -242,5 +261,6 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
     this.groupingCreationDto.hashtagList.push('키워드1');
+    this.selectedGender = '';
   }
 }

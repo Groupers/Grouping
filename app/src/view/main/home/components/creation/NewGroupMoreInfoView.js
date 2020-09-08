@@ -84,6 +84,9 @@ const NewGroupMoreInfoView = (props) => {
   };
 
   const closeGenderPanel = () => {
+    if (props.groupingCreationMainStore.groupingGender === null) {
+      props.groupingCreationMainStore.groupingGenderSelected('ALL');
+    }
     setGenderPanelActive(false);
   };
 
@@ -189,7 +192,9 @@ const NewGroupMoreInfoView = (props) => {
           >
             <Icon name="add" size={15} />
           </View>
-          <Text style={styles.fontColor}> 성별 제한 추가</Text>
+          <Text style={{ color: props.groupingCreationMainStore.genderFontColor }}>
+            {props.groupingCreationMainStore.selectedGenderLimitMessage}
+          </Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => openAgePanel()}>
@@ -224,8 +229,12 @@ const NewGroupMoreInfoView = (props) => {
             <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT, color: COLORS.BLACK }}>취소</Text>
           </TouchableOpacity>
           <View flex={1} />
-          <TouchableOpacity onPress={() => closeGenderPanel()}>
-            <Text>완료</Text>
+          <TouchableOpacity
+            onPress={() => {
+              closeGenderPanel();
+            }}
+          >
+            <Text>저장</Text>
           </TouchableOpacity>
         </View>
         <Text style={{ fontSize: FONT_SIZE.SMALL_TITLE, fontWeight: 'bold', color: COLORS.BLACK }}>
@@ -238,7 +247,7 @@ const NewGroupMoreInfoView = (props) => {
         <View style={{ height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
         <GenderSettingView
           onSelectGender={onGenderSelected.bind(this)}
-          groupingGender={props.groupingCreationMainStore.groupingGender}
+          // groupingGender={props.groupingCreationMainStore.groupingGender}
         />
       </SwipeablePanel>
       <SwipeablePanel {...panelProps} isActive={agePanelActive}>
