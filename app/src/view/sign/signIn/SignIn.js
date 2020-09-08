@@ -13,7 +13,7 @@ import { COLORS } from '../../../assets/Colors';
 import MoreInfoButton from '../components/MoreInfoButton';
 import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
 import ActivePasswordInputTextView from '../components/ActivePasswordInputTextView';
-import SignUpNextButton from '../components/SignUpNextButton';
+import NextButton from '../components/NextButton';
 import SignErrorMessageView from '../components/SignErrorMessageView';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
@@ -78,7 +78,7 @@ class SignIn extends React.Component {
                 title="비밀번호를 잊으셨나요?"
               />
               <SignErrorMessageView text={this.props.signInStore.errorMessage} />
-              <SignUpNextButton
+              <NextButton
                 isActive={this.props.signInStore.isValidInputData}
                 text="로그인"
                 onClick={this.signInButtonClicked.bind(this)}

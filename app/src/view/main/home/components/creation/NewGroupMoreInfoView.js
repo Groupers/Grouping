@@ -15,7 +15,7 @@ import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupMoreInfoView = (props) => {
+const NewGroupMoreInfoView = (props) => {
   React.useEffect(() => {
     onContentsChanged();
   }, []);
@@ -123,35 +123,87 @@ const InputNewGroupMoreInfoView = (props) => {
         </Text>
       </View>
       <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupLocation')}>
-        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
-          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            alignItems: 'center',
+          }}
+        >
+          <View
+            style={{
+              width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
+              paddingTop: 2,
+            }}
+          >
             <Icon name="place" size={15} />
           </View>
-          <Text> 활동 위치</Text>
+          <Text style={styles.fontColor}> 활동 위치</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupDescription')}>
-        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
-          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
-            <Icon name="notes" size={15} />
+        <View
+          style={{
+            flexDirection: 'row',
+            height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            alignItems: 'center',
+          }}
+        >
+          <View
+            style={{
+              width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
+              paddingTop: 2,
+            }}
+          >
+            <Icon name="subject" size={15} />
           </View>
-          <Text>그룹 소개글</Text>
+          <Text style={styles.fontColor}>그룹 소개글</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => openGenderPanel()}>
-        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
-          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            alignItems: 'center',
+          }}
+        >
+          <View
+            style={{
+              width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
+              paddingTop: 2,
+            }}
+          >
             <Icon name="add" size={15} />
           </View>
-          <Text> 성별 제한 추가</Text>
+          <Text style={styles.fontColor}> 성별 제한 추가</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => openAgePanel()}>
-        <View style={{ flexDirection: 'row', height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,alignItems:'center' }}>
-          <View style={{width:20*WINDOW_SIZE.WIDTH_WEIGHT, height:22*WINDOW_SIZE.HEIGHT_WEIGHT,paddingRight:4*WINDOW_SIZE.WIDTH_WEIGHT}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            alignItems: 'center',
+          }}
+        >
+          <View
+            style={{
+              width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
+              paddingTop: 2,
+            }}
+          >
             <Icon name="add" size={15} />
           </View>
-          <Text> 나이 제한 추가</Text>
+          <Text style={styles.fontColor}> 나이 제한 추가</Text>
         </View>
       </TouchableOpacity>
       <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
@@ -197,6 +249,10 @@ const styles = StyleSheet.create({
     marginBottom: 21 * WINDOW_SIZE.HEIGHT_WEIGHT,
     alignSelf: 'flex-start',
   },
+  fontColor: {
+    color: COLORS.FONT_GRAY,
+    fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupMoreInfoView));
+export default inject('groupingCreationMainStore')(observer(NewGroupMoreInfoView));

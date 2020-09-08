@@ -10,7 +10,7 @@ class BirthdayPicker extends React.Component {
 
   getParsedDate = (date) => {
     let dd = date.getDate();
-    let mm = date.getMonth(); // January is 0!
+    let mm = date.getMonth() + 1; // January is 0!
 
     const yyyy = date.getFullYear();
     if (dd < 10) {

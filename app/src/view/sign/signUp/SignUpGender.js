@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import SignUpNextButton from '../components/SignUpNextButton';
+import NextButton from '../components/NextButton';
 import LabelView from '../components/LabelView';
 import GenderInputView from '../components/GenderInputView';
 import { COLORS } from '../../../assets/Colors';
@@ -59,7 +59,7 @@ class SignUpGender extends Component {
               />
             </View>
             <View style={styles.bottomContainer}>
-              <SignUpNextButton
+              <NextButton
                 isActive={this.props.signUpBasicInfoStore.isValidGender}
                 text="등 록"
                 onClick={this.signUpNextButtonClicked.bind(this)}

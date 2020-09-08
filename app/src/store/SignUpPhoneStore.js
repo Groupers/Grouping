@@ -114,23 +114,23 @@ export default class SignUpPhoneStore {
     if (isSucceed) {
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
       // this.initialize();
-      console.log("codeConfirmation"+this.codeConfirmation.toString());
+      console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
     }
   };
 
   @action phoneCodeChanged = (phoneCode) => {
-    console.log(phoneCode)
+    console.log(phoneCode);
     if (phoneCode.length > 6) {
       return;
     }
     this.phoneCode = phoneCode;
     if (this.phoneValidator.validatePhoneCode(this.phoneCode)) {
       this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED;
-      console.log("phoneValidationStatus"+this.phoneValidationStatus)
+      console.log(`phoneValidationStatus${this.phoneValidationStatus}`);
       return;
     }
     this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_FORMATTED;
-    console.log(phoneCode.toString())
+    console.log(phoneCode.toString());
   };
 
   @action phoneCodeFocused = (index) => {
@@ -152,7 +152,7 @@ export default class SignUpPhoneStore {
 
   @action phoneCodeValidationSucceed = async () => {
     let isSucceed;
-    console.log("call phoneCodeValidationSucceed")
+    console.log('call phoneCodeValidationSucceed');
     if (
       this.phoneValidationStatus === INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED &&
       this.codeConfirmation != null
@@ -160,7 +160,7 @@ export default class SignUpPhoneStore {
       try {
         console.log(this.phoneCode.trim());
         isSucceed = await this.codeConfirmation.confirm(this.phoneCode.trim());
-        console.log("isSucceed"+isSucceed)
+        console.log(`isSucceed${isSucceed}`);
       } catch {
         this.phoneCode = '';
         this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_VALID;

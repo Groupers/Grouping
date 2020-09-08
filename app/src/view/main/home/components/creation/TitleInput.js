@@ -1,49 +1,51 @@
 import * as React from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import { COLORS } from '../../../../../assets/Colors';
 
-const InputDescriptionTextView = (props) => {
+const TitleInput = (props) => {
   return (
     <View style={styles.titleContainer}>
       <TextInput
         style={styles.title}
-        maxLength={1000}
+        maxLength={30}
         placeholder={props.textExample}
         autoCorrect={false}
-        multiline
-        numberOfLines={5}
         placeholderTextColor="#ddd"
-        value={props.value}
+        value={props.groupingTitle}
         onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
       />
+      <Text style={styles.counter}>{props.groupingTitle.length}/30</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   titleContainer: {
-    borderColor: 'black',
+    borderColor: COLORS.FONT_GRAY,
     borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
     flexDirection: 'row',
-    width: '90%',
-    margin: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    padding: 0,
+    alignItems: 'center',
   },
 
   title: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginLeft: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
     color: Colors.black,
-    fontSize: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+    padding: 0,
   },
 
   counter: {
-    color: 'black',
+    color: COLORS.FONT_GRAY,
+    margin: 0,
+    fontSize: 9*WINDOW_SIZE.HEIGHT_WEIGHT
   },
 });
 
-export default InputDescriptionTextView;
+export default TitleInput;
