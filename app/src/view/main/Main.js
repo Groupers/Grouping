@@ -4,19 +4,19 @@ import { NavigationContainer, useBackButton } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
+import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { TextInput, View, Text } from 'react-native';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 
 // Main
 import HomeMain from './home/HomeMain';
-import InputNewGroupNameView from './home/components/creation/InputNewGroupNameView';
-import NewGroupInterestsInputView from './home/components/creation/NewGroupInterestsInputView';
-import InputNewGroupMoreInfoView from './home/components/creation/InputNewGroupMoreInfoView';
-import InputNewGroupLocationView from './home/components/creation/InputNewGroupLocationView';
-import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
-import Preview from './home/components/creation/Preview';
+import NewGroupNameView from './home/components/creation/NewGroupNameView';
+import NewGroupInterestsView from './home/components/creation/NewGroupInterestsView';
+import NewGroupMoreInfoView from './home/components/creation/NewGroupMoreInfoView';
+import NewGroupLocationView from './home/components/creation/NewGroupLocationView';
+import NewGroupDescriptionView from './home/components/creation/NewGroupDescriptionView';
+import NewGroupPreview from './home/components/creation/NewGroupPreview';
 import SearchView from './home/components/search/SearchView';
-import { WINDOW_SIZE } from '../../constant/WindowSize';
 
 // Group
 import GroupMain from './group/GroupMain';
@@ -38,11 +38,11 @@ const Tab = createBottomTabNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
-    <HomeStack.Navigator initialRouteName="InputNewGroupMoreInfo">
-      <HomeStack.Screen name="Home" component={HomeMain} options={{ headerShown: false }} />
+    <HomeStack.Navigator initialRouteName="HomeMain">
+      <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
       <HomeStack.Screen
-        name="InputNewGroupName"
-        component={InputNewGroupNameView}
+        name="NewGroupNameView"
+        component={NewGroupNameView}
         options={{
           title: '',
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
@@ -50,8 +50,8 @@ const HomeStackScreen = ({ navigation }) => {
         }}
       />
       <HomeStack.Screen
-        name="NewGroupInterestsInputView"
-        component={NewGroupInterestsInputView}
+        name="NewGroupInterestsView"
+        component={NewGroupInterestsView}
         options={{
           title: '',
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
@@ -59,8 +59,8 @@ const HomeStackScreen = ({ navigation }) => {
         }}
       />
       <HomeStack.Screen
-        name="InputNewGroupMoreInfo"
-        component={InputNewGroupMoreInfoView}
+        name="NewGroupMoreInfoView"
+        component={NewGroupMoreInfoView}
         options={{
           title: '',
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
@@ -68,22 +68,22 @@ const HomeStackScreen = ({ navigation }) => {
         }}
       />
       <HomeStack.Screen
-        name="InputNewGroupLocation"
-        component={InputNewGroupLocationView}
+        name="NewGroupLocationView"
+        component={NewGroupLocationView}
         options={{
           title: '',
         }}
       />
       <HomeStack.Screen
-        name="InputNewGroupDescription"
-        component={InputNewGroupDescriptionView}
+        name="NewGroupDescriptionView"
+        component={NewGroupDescriptionView}
         options={{
           title: '',
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
-      <HomeStack.Screen name="Preview" component={Preview} />
+      <HomeStack.Screen name="NewGroupPreview" component={NewGroupPreview} />
       <HomeStack.Screen
         name="SearchView"
         component={SearchView}

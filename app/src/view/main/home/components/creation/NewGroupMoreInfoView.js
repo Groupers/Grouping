@@ -15,7 +15,7 @@ import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupMoreInfoView = (props) => {
+const NewGroupMoreInfoView = (props) => {
   React.useEffect(() => {
     onContentsChanged();
   }, []);
@@ -206,7 +206,7 @@ const InputNewGroupMoreInfoView = (props) => {
           <Text style={styles.fontColor}> 나이 제한 추가</Text>
         </View>
       </TouchableOpacity>
-      <SwipeablePanel {...panelProps} isActive={genderPanelActive} style={}>
+      <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
         <TouchableOpacity onPress={() => initializeGender()}>
           <Text>취소</Text>
         </TouchableOpacity>
@@ -255,4 +255,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupMoreInfoView));
+export default inject('groupingCreationMainStore')(observer(NewGroupMoreInfoView));

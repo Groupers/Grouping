@@ -12,7 +12,8 @@ import SignUpTermsAgreement from '../sign/signUp/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
 import EntranceMain from './EntranceMain';
 import FindEmail from '../sign/signIn/FindEmail';
-import ResetPasssword from '../sign/signIn/ResetPasssword';
+import ResetPassword from '../sign/signIn/ResetPassword';
+import ResetPasswordPhone from '../sign/signIn/ResetPasswordPhone';
 import NewPassword from '../sign/signIn/NewPassword';
 import SignUpName from '../sign/signUp/SignUpName';
 import SignUpGender from '../sign/signUp/SignUpGender';
@@ -27,8 +28,6 @@ import SignUpBirthday from '../sign/signUp/SignUpBirthday';
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
 const Stack = createStackNavigator();
-
-const Height = Dimensions.get('window').height;
 
 class Entrance extends React.Component {
   constructor(props) {
@@ -276,7 +275,7 @@ class Entrance extends React.Component {
               },
             }}
           >
-            {(props) => <ResetPasssword {...props} />}
+            {(props) => <ResetPassword {...props} />}
           </Stack.Screen>
           <Stack.Screen
             name="newPassword"

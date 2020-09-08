@@ -4,7 +4,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
 
-const InputTitleView = (props) => {
+const TitleInput = (props) => {
   return (
     <View style={styles.titleContainer}>
       <TextInput
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputTitleView;
+export default TitleInput;

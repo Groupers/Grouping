@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
-const InputDescriptionTextView = (props) => {
+const DescriptionInput = (props) => {
   return (
     <View style={styles.titleContainer}>
       <TextInput
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputDescriptionTextView;
+export default DescriptionInput;
