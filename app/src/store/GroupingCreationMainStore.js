@@ -100,6 +100,7 @@ export default class GroupingCreationMainStore {
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
     //koreanChecker does not working
+    this.groupingAddressSearchKeyword = keyword;
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
     }

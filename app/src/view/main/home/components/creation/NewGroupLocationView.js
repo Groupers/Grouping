@@ -59,7 +59,7 @@ const NewGroupLocationView = (props) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <AddressSearchTextView
-        onChangeText={(keyword) => onAddressKeywordChanged(keyword)}
+        onChangeText={onAddressKeywordChanged}
         value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
       />
       <Text>input group location</Text>
