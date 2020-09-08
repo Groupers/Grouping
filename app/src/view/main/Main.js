@@ -82,14 +82,8 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupLocationView}
         options={{
           title: '',
-<<<<<<< HEAD
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
-=======
-          headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
-          ),
->>>>>>> edea5c5b52129e9a8044678eac106833e1a1fef4
         }}
       />
       <HomeStack.Screen
