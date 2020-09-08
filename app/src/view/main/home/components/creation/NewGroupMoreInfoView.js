@@ -24,7 +24,7 @@ const NewGroupMoreInfoView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
     );
-    props.navigation.navigate('Preview');
+    props.navigation.navigate('NewGroupPreview');
   };
 
   const rightIconStyle = () => {
