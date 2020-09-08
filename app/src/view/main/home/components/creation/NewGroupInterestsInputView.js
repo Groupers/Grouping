@@ -12,7 +12,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { EMPTY_VALUE } from '../../../../../constant/EmptyValue';
 
 // eslint-disable-next-line react/prop-types
-const NewGroupInterestsInputView = () => {
+const NewGroupInterestsInputView = ({ navigation }) => {
   const [input, setInput] = React.useState('');
   const [keywordList, setKeywordList] = React.useState([]);
 
@@ -49,7 +49,24 @@ const NewGroupInterestsInputView = () => {
   };
   // useEffect로 태그의 상태가 변경이 되면 다시 불러올 수 있게
   React.useEffect(() => {
-    console.log(keywordList);
+    if (keywordList.length > 0) {
+      navigation.setOptions({
+        headerRight: () => (
+          <Text
+            onPress={() => {
+              navigation.navigate('InputNewGroupMoreInfo');
+            }}
+            style={styles.rightIconStyle}
+          >
+            다음
+          </Text>
+        ),
+      });
+    } else {
+      navigation.setOptions({
+        headerRight: false,
+      });
+    }
   }, [keywordList]);
 
   return (
@@ -122,6 +139,11 @@ const styles = StyleSheet.create({
     borderRadius: 24.5 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginRight: 5 * WINDOW_SIZE.WIDTH_WEIGHT,
     backgroundColor: COLORS.SUB_COLOR,
+  },
+  rightIconStyle: {
+    marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+    color: '#999',
   },
 });
 
