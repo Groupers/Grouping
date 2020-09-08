@@ -14,11 +14,11 @@ import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
-import InputDescriptionTextView from './InputDescriptionTextView';
+import DescriptionInput from './DescriptionInput';
 import { COLORS } from '../../../../../assets/Colors';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupDescriptionView = (props) => {
+const NewGroupDescriptionView = (props) => {
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
@@ -66,7 +66,7 @@ const InputNewGroupDescriptionView = (props) => {
           // paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
         }}
       >
-        <InputDescriptionTextView
+        <DescriptionInput
           textExample="1500자 내로 입력해주세요."
           value={props.groupingCreationMainStore.groupingDescription}
           onChangeText={onDescriptionChanged.bind(this)}
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupDescriptionView));
+export default inject('groupingCreationMainStore')(observer(NewGroupDescriptionView));

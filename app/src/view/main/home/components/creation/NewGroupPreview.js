@@ -10,7 +10,7 @@ import GroupDescription from './GroupDescription';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 
 // eslint-disable-next-line react/prop-types
-const Preview = (props) => {
+const NewGroupPreview = (props) => {
   React.useLayoutEffect(() => {
     props.navigation.setOptions({
       headerRight: () => <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>,
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(Preview));
+export default inject('groupingCreationMainStore')(observer(NewGroupPreview));

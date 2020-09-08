@@ -14,7 +14,7 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
  * FYI : mobx에 Observalbe 키워드 변수랑 연결
  */
 
-const InputKeywordView = ({ input, onKeywordChange }) => {
+const KeywordInput = ({ input, onKeywordChange }) => {
   return (
     <View style={styles.keywordContainer}>
       <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>#</Text>
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputKeywordView;
+export default KeywordInput;

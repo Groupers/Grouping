@@ -15,7 +15,7 @@ import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupMoreInfoView = (props) => {
+const NewGroupMoreInfoView = (props) => {
   React.useEffect(() => {
     onContentsChanged();
   }, []);
@@ -276,4 +276,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupMoreInfoView));
+export default inject('groupingCreationMainStore')(observer(NewGroupMoreInfoView));

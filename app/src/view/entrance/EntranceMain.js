@@ -12,19 +12,18 @@ import {
   Animated,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-import SignUpNextButton from '../sign/components/SignUpNextButton';
+import NextButton from '../sign/components/NextButton';
 import Carousel from './Carousel';
 import MoreInfoButton from '../sign/components/MoreInfoButton';
 import ActiveEmailInputTextView from '../sign/components/ActiveEmailInputTextView';
+import { WINDOW_SIZE } from '../../constant/WindowSize';
+import { COLORS } from '../../assets/Colors';
 
-const Height = Dimensions.get('window').height;
-const Width = Dimensions.get('window').width;
-
-const MoveNextScreen = ({ navigation }, screen) => {
+const moveNextScreen = ({ navigation }, screen) => {
   navigation.navigate(screen);
 };
 
-const EntraceMain = (props) => {
+const EntranceMain = (props) => {
   return (
     <View>
       <SafeAreaView style={styles.container}>
@@ -33,27 +32,38 @@ const EntraceMain = (props) => {
           <View style={styles.termsAgreementContainer}>
             <View style={styles.rowContainer}>
               <Text>가입을 누르시면 </Text>
-              <TouchableOpacity onPress={() => MoveNextScreen(props, 'SignUpTermsAgreement')}>
+              <TouchableOpacity onPress={() => moveNextScreen(props, 'SignUpTermsAgreement')}>
                 <Text style={styles.linkedText}>이용약관</Text>
               </TouchableOpacity>
               <Text>과</Text>
-              <TouchableOpacity onPress={() => MoveNextScreen(props, 'SignUpTermsAgreement')}>
+              <TouchableOpacity onPress={() => moveNextScreen(props, 'SignUpTermsAgreement')}>
                 <Text style={styles.linkedText}>개인정보 취급 방침</Text>
               </TouchableOpacity>
               <Text>에</Text>
             </View>
             <Text>동의하는 것으로 간주됩니다.</Text>
             <View height={10} />
-            <SignUpNextButton
-              isActive
-              text="가입"
-              onClick={() => MoveNextScreen(props, 'SignUpPhone')}
-            />
-            <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')}>
+            <View style={styles.signUpButtonBlock}>
+              <NextButton
+                isActive
+                color={COLORS.SUB_COLOR}
+                text="가입"
+                onClick={() => moveNextScreen(props, 'SignUpPhone')}
+              />
+            </View>
+            <View style={styles.signInButtonBlock}>
+              <NextButton
+                isActive
+                color={COLORS.MAIN_COLOR}
+                text="로그인"
+                onClick={() => moveNextScreen(props, 'SignIn')}
+              />
+            </View>
+            {/* <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')}>
               <View style={styles.loginButton}>
                 <Text style={styles.loginButtonText}>로그인</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={{ marginTop: 10 }}>
               <MoreInfoButton
                 navigation={props.navigation}
@@ -69,9 +79,17 @@ const EntraceMain = (props) => {
   );
 };
 
-export default EntraceMain;
+export default EntranceMain;
 
 const styles = StyleSheet.create({
+  signInButtonBlock: {
+    paddingTop: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    alignItems: 'center',
+  },
+  signUpButtonBlock: {
+    paddingTop: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -88,7 +106,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: 'white',
     justifyContent: 'center',
-    width: Width * 0.9,
+    width: 0.9 * WINDOW_SIZE.WIDTH,
   },
   loginButtonText: {
     color: 'gray',

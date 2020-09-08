@@ -17,7 +17,7 @@ import PhoneNumberInputTextView from '../components/PhoneNumberInputTextView';
 import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
 import SignErrorMessageView from '../components/SignErrorMessageView';
 import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
-import SignUpNextButton from '../components/SignUpNextButton';
+import NextButton from '../components/NextButton';
 import { USER_STATUS } from '../../../constant/UserStatus';
 import Main from '../../main/Main';
 import { INPUT_EMAIL_STATUS } from '../../../constant/InputEmailStatus';
@@ -27,8 +27,7 @@ import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { INPUT_PHONE_STATUS } from '../../../constant/InputPhoneStatus';
 import EmailInputTextView from '../components/EmailInputTextView';
 
-const Width = Dimensions.get('window').width;
-const ResetPasssword = (props) => {
+const ResetPassword = (props) => {
   async function resetPasswordButtonClicked() {
     // await props.signUpEmailStore.completeEmail();
     // if
@@ -113,12 +112,8 @@ const ResetPasssword = (props) => {
 
             <SignErrorMessageView text={props.resetPasswordStore.errorMessage} />
             <View style={styles.bottomContainer}>
-              <SignUpNextButton
-                isActive={
-                  props.resetPasswordStore.isValidPhoneCode
-                  // props.resetPasswordStore.phoneValidationStatus ===
-                  // INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED
-                }
+              <NextButton
+                isActive={props.resetPasswordStore.isValidPhoneCode}
                 text="다음"
                 onClick={resetPasswordButtonClicked.bind(this)}
               />
@@ -186,4 +181,4 @@ const styles = StyleSheet.create({
   authButton: {},
 });
 
-export default inject('signInStore', 'resetPasswordStore')(observer(ResetPasssword));
+export default inject('signInStore', 'resetPasswordStore')(observer(ResetPassword));

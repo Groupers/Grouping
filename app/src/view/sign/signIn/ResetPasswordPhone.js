@@ -18,7 +18,6 @@ import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { COLORS } from '../../../assets/Colors';
 import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
-import { TIME_OUT } from '../../../constant/TimeOut';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -30,7 +29,7 @@ import { TIME_OUT } from '../../../constant/TimeOut';
 
 @inject('signUpPhoneStore')
 @observer
-class SignUpPhone extends React.Component {
+class ResetPasswordPhone extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -50,10 +49,8 @@ class SignUpPhone extends React.Component {
   }
 
   async signUpNextButtonClicked() {
-    this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
-    this.props.signUpPhoneStore.isAllCompleted ? this.signUpNextButtonClicked.bind(this) : null;
     await this.props.signUpPhoneStore.completePhoneNumber();
-    this.props.navigation.navigate('SignUpEmail');
+    this.props.navigation.navigate('SignUpTermsAgreement');
   }
 
   async authorizeButtonClicked() {
@@ -66,71 +63,62 @@ class SignUpPhone extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.body}>
+      <KeyboardAvoidingView
+        // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.body}
+      >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
-            <View style={styles.textArea}>
-              <Text style={{ fontWeight: 'bold', fontSize: 25, marginBottom: 20 }}>
-                휴대폰 번호를 입력해주세요
-              </Text>
-              <Text style={{ fontSize: 12, color: 'black' }}>
-                허위 및 중복 가입을 예방하기 위하 절차입니다.
-              </Text>
-              <Text style={{ fontSize: 12, color: 'black' }}>
-                핸드폰번호는 타인에게 절대 공개되지 않습니다.
-              </Text>
+            <View style={styles.informTextContainer}>
+              <Text>계정 확인을 위해</Text>
+              <Text>휴대폰 번호를 입력해주세요</Text>
             </View>
-            <View height={30} />
-            <View
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <PhoneNumberInputTextView
-                label="휴대폰 번호"
-                isActive={!this.props.signUpPhoneStore.isAllCompleted}
-                text={this.props.signUpPhoneStore.phoneNumber}
-                onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
-              />
-              <PhoneCodeNextButton
-                label="인증번호"
-                isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
-                text={
-                  this.props.signUpPhoneStore.phoneValidationViewStatus ===
-                  SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                    ? '재인증'
-                    : '인 증'
-                }
-                onClick={this.authorizeButtonClicked.bind(this)}
-              />
-            </View>
-            <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
-            <View
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <PhoneCodeInputTextView
-                onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
-                onBlur={() => {
-                  this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
-                }}
-                text={this.props.signUpPhoneStore.phoneCode}
-              />
-              <PhoneAuthTimer style={styles.authTimer} />
-            </View>
-            <View style={styles.bottomContainer}>
-              <NextButton
-                isActive={this.props.signUpPhoneStore.isValidPhoneCode}
-                text="다음"
-                onClick={this.signUpNextButtonClicked.bind(this)}
-              />
+            <View style={styles.contentContainer}>
+              <View style={styles.phoneCodeContainer}>
+                <PhoneNumberInputTextView
+                  label="휴대폰 번호"
+                  text={this.props.signUpPhoneStore.phoneNumber}
+                  onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
+                />
+              </View>
+              {this.props.signUpPhoneStore.phoneValidationViewStatus ===
+              SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? (
+                <View>{/* <ShowErrorModal /> */}</View>
+              ) : null}
+              {this.props.signUpPhoneStore.phoneValidationViewStatus ===
+              SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER ? (
+                <View style={styles.phoneCodeContainer}>
+                  <PhoneCodeInputTextView
+                    onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
+                    text={this.props.signUpPhoneStore.phoneCode}
+                  />
+                  <PhoneAuthTimer style={styles.authTimer} />
+                  <PhoneCodeNextButton
+                    isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
+                    text={
+                      this.props.signUpPhoneStore.phoneValidationViewStatus ===
+                      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                        ? '재인증'
+                        : '인 증'
+                    }
+                    onClick={this.authorizeButtonClicked.bind(this)}
+                  />
+                  {/* <PhoneCodeNextButton */}
+                  {/*  style={styles.authButton} */}
+                  {/*  text="인 증" */}
+                  {/*  isActive={this.props.signUpPhoneStore.isValidPhoneCode} */}
+                  {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
+                  {/* /> */}
+                </View>
+              ) : null}
+              <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
+              <View style={styles.bottomContainer}>
+                <NextButton
+                  isActive={this.props.signUpPhoneStore.isAllCompleted}
+                  text="다음"
+                  onClick={this.signUpNextButtonClicked.bind(this)}
+                />
+              </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -145,7 +133,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
   },
 
@@ -154,27 +141,30 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'center',
     width: '90%',
     // paddingTop:30
   },
-  textArea: {
-    width: '100%',
+  informTextContainer: {
+    alignItems: 'center',
     marginTop: 10,
+    marginBottom: 20,
   },
-  contentContainer: {
-    flex: 1,
-    backgroundColor: 'tomato',
-    width: '100%',
-    height: 50,
-  },
-
   phoneCodeContainer: {
-    backgroundColor: 'green',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    borderColor: COLORS.FONT_GRAY,
+  },
+
+  contentContainer: {
+    flex: 1,
+    paddingTop: 150,
+    alignItems: 'center',
+    backgroundColor: COLORS.MAIN_COLOR,
     width: '100%',
+    justifyContent: 'center',
+    // borderWidth: 2
   },
 
   bottomContainer: {
@@ -182,13 +172,12 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingBottom: 60,
     flex: 1,
   },
 
-  authTimer: { margin: 10 },
+  authTimer: {},
 
   authButton: {},
 });
 
-export default SignUpPhone;
+export default ResetPasswordPhone;

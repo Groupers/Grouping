@@ -59,6 +59,8 @@ export default class GroupingCreationMainStore {
 
   @observable keywordParser = new KeywordParser();
 
+  @observable hashtagList = [];
+
   // @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
   @observable groupingBackgroundImageURI = '';
 
