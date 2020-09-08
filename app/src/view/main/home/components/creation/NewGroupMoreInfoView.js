@@ -122,7 +122,7 @@ const NewGroupMoreInfoView = (props) => {
           그룹에 대해 {'\n'}자세히 알려주세요.
         </Text>
       </View>
-      <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupLocation')}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('NewGroupLocationView')}>
         <View
           style={{
             flexDirection: 'row',
@@ -143,7 +143,7 @@ const NewGroupMoreInfoView = (props) => {
           <Text style={styles.fontColor}> 활동 위치</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupDescription')}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('NewGroupDescriptionView')}>
         <View
           style={{
             flexDirection: 'row',

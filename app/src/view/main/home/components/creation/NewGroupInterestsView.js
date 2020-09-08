@@ -12,9 +12,26 @@ import { EMPTY_VALUE } from '../../../../../constant/EmptyValue';
 import KeywordInput from './KeywordInput';
 
 // eslint-disable-next-line react/prop-types
-const NewGroupInterestsView = () => {
+const NewGroupInterestsView = (props) => {
   const [input, setInput] = React.useState('');
   const [keywordList, setKeywordList] = React.useState([]);
+
+  const rightIconStyle = (groupingCreationView) => {
+    return {
+      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
+        ? Colors.black
+        : '#999',
+    };
+  };
+
+  const onHeaderNextButtonClicked = () => {
+    props.groupingCreationMainStore.groupingCreationViewChanged(
+      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
+    );
+    props.navigation.navigate('NewGroupMoreInfoView');
+  };
 
   const onkeywordInserted = (keyword) => {
     // 공백이 빈칸이면 리턴
@@ -35,6 +52,18 @@ const NewGroupInterestsView = () => {
   };
 
   const onKeywordChange = (keywordInput) => {
+    props.navigation.setOptions({
+      headerRight: () => (
+        <Text
+          onPress={() => {
+            onHeaderNextButtonClicked();
+          }}
+          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
+        >
+          다음
+        </Text>
+      ),
+    });
     if (keywordInput.includes(' ')) {
       onKeywordSubmit(keywordInput);
       return;
