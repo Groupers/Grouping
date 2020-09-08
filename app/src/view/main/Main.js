@@ -45,8 +45,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -72,6 +76,9 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupLocationView}
         options={{
           title: '',
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
         }}
       />
       <HomeStack.Screen
@@ -79,8 +86,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupDescriptionView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen name="NewGroupPreview" component={NewGroupPreview} />

@@ -2,14 +2,14 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import InputKeywordView from './InputKeywordView';
 import { COLORS } from '../../../../../assets/Colors';
 import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { EMPTY_VALUE } from '../../../../../constant/EmptyValue';
-import KeywordInput from './KeywordInput';
 
 // eslint-disable-next-line react/prop-types
 const NewGroupInterestsInputView = ({ navigation }) => {
@@ -80,7 +80,7 @@ const NewGroupInterestsInputView = ({ navigation }) => {
         <Text>스페이스바를 눌러 키워드를 구분해주세요.</Text>
       </View>
       <View style={styles.interestInputContainer}>
-        <KeywordInput
+        <InputKeywordView
           textExample="#키워드,"
           input={input}
           onKeywordChange={onKeywordChange}
