@@ -9,7 +9,7 @@ import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 //Main
 import HomeMain from './home/HomeMain';
 import InputNewGroupNameView from './home/components/creation/InputNewGroupNameView';
-import InputNewGroupInterestsView from './home/components/creation/InputNewGroupInterestsView';
+import NewGroupInterestsInputView from './home/components/creation/NewGroupInterestsInputView';
 import InputNewGroupMoreInfoView from './home/components/creation/InputNewGroupMoreInfoView';
 import InputNewGroupLocationView from './home/components/creation/InputNewGroupLocationView';
 import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
@@ -38,18 +38,24 @@ const Tab = createBottomTabNavigator();
 const HomeStackScreen = ({ navigation }) => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeMain} options={{ headerShown: false }} />
+      <HomeStack.Screen
+        name="Home"
+        component={HomeMain}
+        options={{ headerShown: false }}
+      />
       <HomeStack.Screen
         name="InputNewGroupName"
         component={InputNewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
         }}
       />
       <HomeStack.Screen
-        name="InputNewGroupInterests"
-        component={InputNewGroupInterestsView}
+        name="NewGroupInterestsInputView"
+        component={NewGroupInterestsInputView}
         options={{
           title: '',
         }}
@@ -59,8 +65,15 @@ const HomeStackScreen = ({ navigation }) => {
         component={InputNewGroupMoreInfoView}
         options={{ title: '' }}
       />
-      <HomeStack.Screen name="InputNewGroupLocation" component={InputNewGroupLocationView} options={{title:''}}/>
-      <HomeStack.Screen name="InputNewGroupDescription" component={InputNewGroupDescriptionView} />
+      <HomeStack.Screen
+        name="InputNewGroupLocation"
+        component={InputNewGroupLocationView}
+        options={{ title: '' }}
+      />
+      <HomeStack.Screen
+        name="InputNewGroupDescription"
+        component={InputNewGroupDescriptionView}
+      />
       <HomeStack.Screen name="Preview" component={Preview} />
       <HomeStack.Screen
         name="SearchView"
