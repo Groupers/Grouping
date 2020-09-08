@@ -7,10 +7,10 @@ import { Icon } from 'react-native-elements';
 import { TextInput, View, Text } from 'react-native';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 
-//Main
+// Main
 import HomeMain from './home/HomeMain';
 import InputNewGroupNameView from './home/components/creation/InputNewGroupNameView';
-import InputNewGroupInterestsView from './home/components/creation/InputNewGroupInterestsView';
+import NewGroupInterestsInputView from './home/components/creation/NewGroupInterestsInputView';
 import InputNewGroupMoreInfoView from './home/components/creation/InputNewGroupMoreInfoView';
 import InputNewGroupLocationView from './home/components/creation/InputNewGroupLocationView';
 import InputNewGroupDescriptionView from './home/components/creation/InputNewGroupDescriptionView';
@@ -18,15 +18,15 @@ import Preview from './home/components/creation/Preview';
 import SearchView from './home/components/search/SearchView';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 
-//Group
+// Group
 import GroupMain from './group/GroupMain';
 import JoinedGroupDetail from './group/components/joinedGroup/JoinedGroupDetail';
 import JoinedGroupMoreDetail from './group/components/joinedGroup/JoinedGroupMoreDetail';
 
-//Feed
+// Feed
 import FeedMain from './feed/FeedMain';
 
-//MyPage
+// MyPage
 import MyPageMain from './myPage/MyPageMain';
 
 const HomeStack = createStackNavigator();
@@ -50,8 +50,8 @@ const HomeStackScreen = ({ navigation }) => {
         }}
       />
       <HomeStack.Screen
-        name="InputNewGroupInterests"
-        component={InputNewGroupInterestsView}
+        name="NewGroupInterestsInputView"
+        component={NewGroupInterestsInputView}
         options={{
           title: '',
           headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
@@ -98,11 +98,7 @@ const HomeStackScreen = ({ navigation }) => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen
-        name="Home"
-        component={GroupMain}
-        options={{ headerShown: false }}
-      />
+      <GroupStack.Screen name="Home" component={GroupMain} options={{ headerShown: false }} />
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}
