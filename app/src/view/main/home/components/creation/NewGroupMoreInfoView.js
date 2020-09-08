@@ -129,11 +129,7 @@ const NewGroupMoreInfoView = (props) => {
           그룹에 대해 {'\n'}자세히 알려주세요.
         </Text>
       </View>
-<<<<<<< HEAD
-      <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupLocation')}>
-=======
       <TouchableOpacity onPress={() => props.navigation.navigate('NewGroupLocationView')}>
->>>>>>> 5ba076d72de2c319c2b5f96f02e118c1c4fa4626
         <View
           style={{
             flexDirection: 'row',
@@ -237,7 +233,7 @@ const NewGroupMoreInfoView = (props) => {
         </Text>
         <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
         <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
-          미설정 시 모두환영으로 표시됩니다
+          미설정 시 모두환영으로 표시됩니다.
         </Text>
         <View style={{ height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
         <GenderSettingView

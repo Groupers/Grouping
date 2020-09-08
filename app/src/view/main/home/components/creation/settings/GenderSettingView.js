@@ -6,7 +6,7 @@ import { COLORS } from '../../../../../../assets/Colors';
 
 const GenderSettingView = (props) => {
   const [checked, setChecked] = React.useState('ALL');
-
+  let checkedColor = '#f1f1f1';
   return (
     <View style={{ flexDirection: 'row' }}>
       <TouchableOpacity
@@ -14,10 +14,12 @@ const GenderSettingView = (props) => {
         onGenderSelected={checked}
         onPress={() => {
           props.onSelectGender('MALE');
+          checkedColor = COLORS.SUB_COLOR;
         }}
+        backgroundColor={checkedColor}
         style={{
           borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          backgroundColor: '#f1f1f1',
+          // backgroundColor: { checkedColor },
           height: 120 * WINDOW_SIZE.HEIGHT_WEIGHT,
           width: 144 * WINDOW_SIZE.WIDTH_WEIGHT,
           justifyContent: 'center',
