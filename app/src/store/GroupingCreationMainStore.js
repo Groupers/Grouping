@@ -98,6 +98,20 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.description = description;
   };
 
+  @action groupingAddressSearchKeywordChanged = async (keyword) => {
+    //koreanChecker does not working
+    this.groupingAddressSearchKeyword = keyword;
+    if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
+      return;
+    }
+    const result = await this.mapRepository.findAddressByKeyword(keyword);
+    if (!result.isSucceed()) {
+      return;
+    }
+
+    this.groupingAddressSearchResult = result.getAddressList();
+  };
+
   @action groupingAddressSelected = (address) => {
     this.groupingAddressCompleted = true;
     this.groupingAddress = address;
