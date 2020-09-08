@@ -26,7 +26,7 @@ const NewGroupNameView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
     );
-    props.navigation.navigate('NewGroupInterestsInputView');
+    props.navigation.navigate('NewGroupInterestsView');
   };
 
   const rightIconStyle = (groupingCreationView) => {

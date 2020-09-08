@@ -4,6 +4,7 @@ import { NavigationContainer, useBackButton } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
+import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { TextInput, View, Text } from 'react-native';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 
@@ -16,7 +17,6 @@ import NewGroupLocationView from './home/components/creation/NewGroupLocationVie
 import NewGroupDescriptionView from './home/components/creation/NewGroupDescriptionView';
 import NewGroupPreview from './home/components/creation/NewGroupPreview';
 import SearchView from './home/components/search/SearchView';
-import { WINDOW_SIZE } from '../../constant/WindowSize';
 
 // Group
 import GroupMain from './group/GroupMain';

@@ -12,7 +12,7 @@ const Header = ({ navigateTo, navigateMap }) => {
         {navigateMap === 'home' ? <Text>LOGO</Text> : <Text>내 그룹</Text>}
       </View>
       <View style={{ alignItems: 'flex-end', width: '50%' }}>
-        <TouchableOpacity onPress={() => navigateTo('InputNewGroupName')}>
+        <TouchableOpacity onPress={() => navigateTo('NewGroupNameView')}>
           <Text style={styles.createGroupText}>+새 그룹</Text>
         </TouchableOpacity>
       </View>
