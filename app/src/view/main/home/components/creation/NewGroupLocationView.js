@@ -12,14 +12,18 @@ import AddressSearchTextView from '../../../AddressSearchTextView';
 // eslint-disable-next-line react/prop-types
 const NewGroupLocationView = (props) => {
   const onAddressKeywordChanged = async (keyword) => {
-    await props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(keyword);
+    await props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(
+      keyword,
+    );
   };
 
   const rightIconStyle = (groupingCreationView) => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
+      color: props.groupingCreationMainStore.isHeaderRightIconActivated(
+        groupingCreationView,
+      )
         ? Colors.black
         : '#999',
     };
@@ -27,7 +31,7 @@ const NewGroupLocationView = (props) => {
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.LOCATION
+      GROUPING_CREATION_VIEW_STATUS.LOCATION,
     );
     props.navigation.pop();
   };
@@ -35,7 +39,7 @@ const NewGroupLocationView = (props) => {
   const onAddressSelected = (address) => {
     props.groupingCreationMainStore.groupingAddressSelected(address);
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
+      GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO,
     );
 
     props.navigation.setOptions({
@@ -52,41 +56,25 @@ const NewGroupLocationView = (props) => {
     });
   };
 
-  // const searchHeader = () => {
-  //   props.navigation.setOptions({
-  //     header: () => (
-  //       <AddressSearchTextView
-  //         onChangeText={onAddressKeywordChanged.bind(this)}
-  //         value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
-  //       />
-  //     ),
-  //   });
-  // };
-
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {/* {props.navigation.setOptions({ */}
-      {/*  header: () => ( */}
-      {/*    <> */}
-      {/*      <AddressSearchTextView */}
-      {/*        onChangeText={onAddressKeywordChanged.bind(this)} */}
-      {/*        value={props.groupingCreationMainStore.groupingAddressSearchKeyword} */}
-      {/*      /> */}
-      {/*    </> */}
-      {/*  ), */}
-      {/* })} */}
-      {/* <Header mode={} layout={} insets={} scene={} navigation={} styleInterpolator={}/> */}
       <AddressSearchTextView
-        onChangeText={onAddressKeywordChanged.bind(this)}
+        onChangeText={(keyword) => onAddressKeywordChanged(keyword)}
         value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
       />
       <Text>input group location</Text>
       <AddressSearchResultView
-        onClick={onAddressSelected(this)}
-        addressList={props.groupingCreationMainStore.groupingAddressSearchResult}
+        onClick={(address) => onAddressSelected(address)}
+        addressList={
+          props.groupingCreationMainStore.groupingAddressSearchResult
+        }
       />
     </View>
   );
 };
 
-export default inject('groupingCreationMainStore')(observer(NewGroupLocationView));
+export default inject('groupingCreationMainStore')(
+  observer(NewGroupLocationView),
+);
+
+// export default NewGroupLocationView;

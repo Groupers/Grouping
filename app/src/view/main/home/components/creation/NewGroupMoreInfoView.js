@@ -22,7 +22,7 @@ const NewGroupMoreInfoView = (props) => {
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
+      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
     );
     props.navigation.navigate('Preview');
   };
@@ -32,7 +32,9 @@ const NewGroupMoreInfoView = (props) => {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       // eslint-disable-next-line react/prop-types
-      color: props.groupingCreationMainStore.isPreviewButtonActivated ? Colors.black : '#999',
+      color: props.groupingCreationMainStore.isPreviewButtonActivated
+        ? Colors.black
+        : '#999',
     };
   };
 
@@ -122,7 +124,9 @@ const NewGroupMoreInfoView = (props) => {
           그룹에 대해 {'\n'}자세히 알려주세요.
         </Text>
       </View>
-      <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupLocation')}>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('NewGroupLocationView')}
+      >
         <View
           style={{
             flexDirection: 'row',
@@ -143,7 +147,9 @@ const NewGroupMoreInfoView = (props) => {
           <Text style={styles.fontColor}> 활동 위치</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupDescription')}>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('NewGroupDescriptionView')}
+      >
         <View
           style={{
             flexDirection: 'row',
@@ -214,7 +220,9 @@ const NewGroupMoreInfoView = (props) => {
           <Text>완료</Text>
         </TouchableOpacity>
         <Text>그룹에 가입 가능한 성별을 알려주세요</Text>
-        <Text>*조건을 설정하지 않은 경우에는 기본설정인 모두환영으로 표시됩니다</Text>
+        <Text>
+          *조건을 설정하지 않은 경우에는 기본설정인 모두환영으로 표시됩니다
+        </Text>
         <GenderSettingView
           onSelectGender={onGenderSelected.bind(this)}
           groupingGender={props.groupingCreationMainStore.groupingGender}
@@ -230,11 +238,15 @@ const NewGroupMoreInfoView = (props) => {
         <Text>나이 제한 설정 패널</Text>
         <MinAgeSettingView
           onChangeText={onMinAgeSelected.bind(this)}
-          groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
+          groupingMinAge={
+            props.groupingCreationMainStore.groupingAvailableMinAge
+          }
         />
         <MaxAgeSettingView
           onChangeText={onMaxAgeSelected.bind(this)}
-          groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
+          groupingMaxAge={
+            props.groupingCreationMainStore.groupingAvailableMaxAge
+          }
         />
       </SwipeablePanel>
     </View>
@@ -255,4 +267,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(NewGroupMoreInfoView));
+export default inject('groupingCreationMainStore')(
+  observer(NewGroupMoreInfoView),
+);

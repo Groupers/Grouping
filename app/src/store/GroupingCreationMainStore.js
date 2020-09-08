@@ -4,7 +4,10 @@ import GroupingCreationDto from '../dto/GroupingCreationDto';
 import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
 import KoreanChecker from '../component/KoreanChecker';
-import AgeValidator, { MAX_AVAILABLE_AGE, MIN_AVAILABLE_AGE } from '../component/AgeValidator';
+import AgeValidator, {
+  MAX_AVAILABLE_AGE,
+  MIN_AVAILABLE_AGE,
+} from '../component/AgeValidator';
 import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
 import { ResponseCode } from '../constant/ResponseCode';
 import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
@@ -96,13 +99,11 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
-    this.groupingAddressSearchKeyword = keyword;
-
+    //koreanChecker does not working
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
     }
-    const result = await this.mapRepository.findAddressByKeyword(keyword, () => {});
-
+    const result = await this.mapRepository.findAddressByKeyword(keyword);
     if (!result.isSucceed()) {
       return;
     }
@@ -154,7 +155,8 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
+      this.groupingCreationViewStatus ===
+        GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
       this.keywordParser.parseKeyword(this.groupingKeyword)
     ) {
       return true;
@@ -162,7 +164,8 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
+      this.groupingCreationViewStatus ===
+        GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
       this.groupingDescription.length > MIN_DESCRIPTION_LENGTH
     ) {
       return true;
@@ -170,10 +173,11 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
+      this.groupingCreationViewStatus ===
+        GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
       this.ageValidator.validateAge(
         Number(this.groupingAvailableMinAge),
-        Number(this.groupingAvailableMaxAge)
+        Number(this.groupingAvailableMaxAge),
       ) &&
       this.groupingGender !== '' &&
       this.groupingAddress !== ''
@@ -195,7 +199,7 @@ export default class GroupingCreationMainStore {
       (responseCode) => {
         console.log('responseCode : ');
         console.log(responseCode);
-      }
+      },
     );
     console.log('out');
 

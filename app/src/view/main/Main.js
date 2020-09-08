@@ -39,14 +39,22 @@ const Tab = createBottomTabNavigator();
 const HomeStackScreen = ({ navigation }) => {
   return (
     <HomeStack.Navigator initialRouteName="HomeMain">
-      <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
+      <HomeStack.Screen
+        name="HomeMain"
+        component={HomeMain}
+        options={{ headerShown: false }}
+      />
       <HomeStack.Screen
         name="NewGroupNameView"
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -54,8 +62,9 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupInterestsView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
         }}
       />
       <HomeStack.Screen
@@ -63,8 +72,9 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupMoreInfoView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
         }}
       />
       <HomeStack.Screen
@@ -72,6 +82,9 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupLocationView}
         options={{
           title: '',
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
         }}
       />
       <HomeStack.Screen
@@ -79,8 +92,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupDescriptionView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen name="NewGroupPreview" component={NewGroupPreview} />
@@ -98,7 +115,11 @@ const HomeStackScreen = ({ navigation }) => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen name="Home" component={GroupMain} options={{ headerShown: false }} />
+      <GroupStack.Screen
+        name="Home"
+        component={GroupMain}
+        options={{ headerShown: false }}
+      />
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}
