@@ -40,6 +40,7 @@ const GenderSettingView = (props) => {
         }}
         style={{
           borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          backgroundColor: '#f1f1f1',
           // backgroundColor: {props.checked==='FEMALE'?'red':'#f1f1f1'}
           height: 120 * WINDOW_SIZE.HEIGHT_WEIGHT,
           width: 144 * WINDOW_SIZE.WIDTH_WEIGHT,
