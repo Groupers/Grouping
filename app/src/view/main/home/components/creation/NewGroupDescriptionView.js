@@ -18,7 +18,7 @@ import DescriptionInput from './DescriptionInput';
 import { COLORS } from '../../../../../assets/Colors';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupDescriptionView = (props) => {
+const NewGroupDescriptionView = (props) => {
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupDescriptionView));
+export default inject('groupingCreationMainStore')(observer(NewGroupDescriptionView));

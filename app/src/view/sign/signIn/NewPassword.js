@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import SignUpNextButton from '../components/SignUpNextButton';
 import LabelView from '../components/LabelView';
 import SignErrorMessageView from '../components/SignErrorMessageView';
 import { COLORS } from '../../../assets/Colors';
