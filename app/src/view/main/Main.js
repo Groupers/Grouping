@@ -58,17 +58,30 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupInterestsInputView}
         options={{
           title: '',
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
         }}
       />
       <HomeStack.Screen
         name="InputNewGroupMoreInfo"
         component={InputNewGroupMoreInfoView}
-        options={{ title: '' }}
+        options={{
+          title: '',
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+        }}
       />
       <HomeStack.Screen
         name="InputNewGroupLocation"
         component={InputNewGroupLocationView}
-        options={{ title: '' }}
+        options={{
+          title: '',
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+        }}
       />
       <HomeStack.Screen
         name="InputNewGroupDescription"
