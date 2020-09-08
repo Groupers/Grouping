@@ -24,7 +24,7 @@ const NewGroupMoreInfoView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.navigate('Preview');
+    props.navigation.navigate('NewGroupPreview');
   };
 
   const rightIconStyle = () => {
@@ -129,7 +129,11 @@ const NewGroupMoreInfoView = (props) => {
           그룹에 대해 {'\n'}자세히 알려주세요.
         </Text>
       </View>
+<<<<<<< HEAD
       <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupLocation')}>
+=======
+      <TouchableOpacity onPress={() => props.navigation.navigate('NewGroupLocationView')}>
+>>>>>>> 5ba076d72de2c319c2b5f96f02e118c1c4fa4626
         <View
           style={{
             flexDirection: 'row',
@@ -150,7 +154,7 @@ const NewGroupMoreInfoView = (props) => {
           <Text style={styles.fontColor}> 활동 위치</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('InputNewGroupDescription')}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('NewGroupDescriptionView')}>
         <View
           style={{
             flexDirection: 'row',

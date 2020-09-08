@@ -12,11 +12,28 @@ import { EMPTY_VALUE } from '../../../../../constant/EmptyValue';
 import KeywordInput from './KeywordInput';
 
 // eslint-disable-next-line react/prop-types
-const NewGroupInterestsInputView = ({ navigation }) => {
+const NewGroupInterestsInputView = (props) => {
   const [input, setInput] = React.useState('');
   const [keywordList, setKeywordList] = React.useState([]);
 
-  const onkeywordInserted = (keyword) => {
+  const rightIconStyle = (groupingCreationView) => {
+    return {
+      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
+        ? Colors.black
+        : '#999',
+    };
+  };
+
+  const onHeaderNextButtonClicked = () => {
+    props.groupingCreationMainStore.groupingCreationViewChanged(
+      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
+    );
+    props.navigation.navigate('NewGroupMoreInfoView');
+  };
+
+  const onKeywordInserted = (keyword) => {
     // 공백이 빈칸이면 리턴
     if (!keyword) {
       return;
@@ -35,6 +52,18 @@ const NewGroupInterestsInputView = ({ navigation }) => {
   };
 
   const onKeywordChange = (keywordInput) => {
+    props.navigation.setOptions({
+      headerRight: () => (
+        <Text
+          onPress={() => {
+            onHeaderNextButtonClicked();
+          }}
+          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
+        >
+          다음
+        </Text>
+      ),
+    });
     if (keywordInput.includes(' ')) {
       onKeywordSubmit(keywordInput);
       return;
@@ -44,17 +73,17 @@ const NewGroupInterestsInputView = ({ navigation }) => {
 
   const onKeywordSubmit = () => {
     console.log('submit active');
-    onkeywordInserted(input.trim());
+    onKeywordInserted(input.trim());
     setInput(EMPTY_VALUE);
   };
   // useEffect로 태그의 상태가 변경이 되면 다시 불러올 수 있게
   React.useEffect(() => {
     if (keywordList.length > 0) {
-      navigation.setOptions({
+      props.navigation.setOptions({
         headerRight: () => (
           <Text
             onPress={() => {
-              navigation.navigate('NewGroupMoreInfoView');
+              props.navigation.navigate('NewGroupMoreInfoView');
             }}
             style={styles.rightIconStyle}
           >
@@ -63,7 +92,7 @@ const NewGroupInterestsInputView = ({ navigation }) => {
         ),
       });
     } else {
-      navigation.setOptions({
+      props.navigation.setOptions({
         headerRight: false,
       });
     }
@@ -147,6 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(
-  observer(NewGroupInterestsInputView),
-);
+export default inject('groupingCreationMainStore')(observer(NewGroupInterestsInputView));

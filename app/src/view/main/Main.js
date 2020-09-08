@@ -4,8 +4,8 @@ import { NavigationContainer, useBackButton } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { TextInput, View, Text } from 'react-native';
+import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 
 // Main
@@ -76,9 +76,8 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupLocationView}
         options={{
           title: '',
-          headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
       <HomeStack.Screen
