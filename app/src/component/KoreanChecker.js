@@ -1,7 +1,6 @@
 export default class KoreanChecker {
   checkKoreanOrNot = (text) => {
-    const expression = /([^가-힣ㄱ-ㅎㅏ-ㅣ\x20])/i;
-
+    const expression = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$/;
     return expression.test(text);
   };
 }
