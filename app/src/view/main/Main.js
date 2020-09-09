@@ -38,16 +38,14 @@ const Tab = createBottomTabNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
-    <HomeStack.Navigator initialRouteName="HomeMain">
+    <HomeStack.Navigator initialRouteName="NewGroupMoreInfoView">
       <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
       <HomeStack.Screen
         name="NewGroupNameView"
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -85,9 +83,7 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupDescriptionView}
         options={{
           title: '',
-          headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },

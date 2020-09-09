@@ -18,35 +18,34 @@ const AddressSearchTextView = (props) => {
     props.groupingStore.changeView(GROUPING_VIEW_STATUS.KEYWORD_SEARCH);
   };
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.body}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.main}>
-          <TextInput
-            style={styles.search}
-            placeholder="주소를 검색 하세요."
-            autoCorrect={false}
-            multiline={false}
-            maxLength={30}
-            placeholderTextColor="#ddd"
-            value={props.value}
-            onChangeText={
-              props.onChangeText != null ? (text) => props.onChangeText(text) : null
-            }
-          />
-          <Icon
-            style={styles.searchIcon}
-            size={26}
-            name="search"
-            type="feather"
-            color="black"
-            onPress={() => onKeywordSearchClicked()}
-          />
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    // <KeyboardAvoidingView
+    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    //   style={styles.body}
+    // >
+    //   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <View style={styles.main}>
+      <Icon name="location" size={22} />
+      <TextInput
+        style={styles.search}
+        placeholder="주소를 검색 하세요."
+        autoCorrect={false}
+        multiline={false}
+        maxLength={30}
+        placeholderTextColor="#ddd"
+        value={props.value}
+        onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
+      />
+      <Icon
+        style={styles.searchIcon}
+        size={26}
+        name="search"
+        type="feather"
+        color="black"
+        onPress={() => onKeywordSearchClicked()}
+      />
+    </View>
+    //   </TouchableWithoutFeedback>
+    // </KeyboardAvoidingView>
   );
 };
 
@@ -68,6 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginLeft: 15,
     color: 'black',
+    padding: 0,
   },
 });
 

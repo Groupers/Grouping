@@ -58,7 +58,7 @@ const NewGroupMoreInfoView = (props) => {
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
     style: {
-      height: 348 * WINDOW_SIZE.HEIGHT_WEIGHT,
+      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT,  // 348
       paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       // paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
@@ -251,21 +251,51 @@ const NewGroupMoreInfoView = (props) => {
         />
       </SwipeablePanel>
       <SwipeablePanel {...panelProps} isActive={agePanelActive}>
-        <TouchableOpacity onPress={() => initializeAge()}>
-          <Text>취소</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => closeAgePanel()}>
-          <Text>완료</Text>
-        </TouchableOpacity>
-        <Text>나이 제한 설정 패널</Text>
-        <MinAgeSettingView
-          onChangeText={onMinAgeSelected.bind(this)}
-          groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
-        />
-        <MaxAgeSettingView
-          onChangeText={onMaxAgeSelected.bind(this)}
-          groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
-        />
+        <View
+          style={{
+            flexDirection: 'row',
+            marginBottom: 34 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          }}
+        >
+          <TouchableOpacity onPress={() => initializeAge()}>
+            <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT, color: COLORS.BLACK }}>취소</Text>
+          </TouchableOpacity>
+          <View flex={1} />
+          <TouchableOpacity
+            onPress={() => {
+              closeAgePanel();
+            }}
+          >
+            <Text
+              style={{
+                borderBottomWidth: 1,
+                paddingBottom: 0,
+                fontWeight: 'bold',
+                fontSize: FONT_SIZE.INPUT_TEXT,
+              }}
+            >
+              저장
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={{ fontSize: FONT_SIZE.SMALL_TITLE, fontWeight: 'bold', color: COLORS.BLACK }}>
+          가입 가능한 나이를 설정해주세요.
+        </Text>
+        <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+        <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
+          미설정 시 모두환영으로 표시됩니다.
+        </Text>
+        <View style={{ flexDirection: 'row' }}>
+          <MinAgeSettingView
+            onChangeText={onMinAgeSelected.bind(this)}
+            groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
+          />
+          <View style={{ width: 56 * WINDOW_SIZE.WIDTH_WEIGHT }} />
+          <MaxAgeSettingView
+            onChangeText={onMaxAgeSelected.bind(this)}
+            groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
+          />
+        </View>
       </SwipeablePanel>
     </View>
   );

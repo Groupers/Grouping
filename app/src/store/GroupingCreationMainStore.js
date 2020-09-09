@@ -48,7 +48,7 @@ export default class GroupingCreationMainStore {
 
   @observable groupingAddress = '';
 
-  @observable groupingGender = null;
+  @observable groupingGender = 'ALL';
 
   @observable groupingAvailableMinAge = Number(MIN_AVAILABLE_AGE);
 
@@ -74,7 +74,7 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupingInitializeGender = () => {
-    this.groupingGender = null;
+    this.groupingGender = 'ALL';
     console.log(this.groupingGender);
   };
 
@@ -123,7 +123,7 @@ export default class GroupingCreationMainStore {
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
     this.groupingCreationDto.availableGender = gender;
-    if (gender !== null) {
+    if (gender !== 'ALL') {
       this.genderChanged = true;
     }
     console.log(this.groupingGender);
@@ -250,7 +250,7 @@ export default class GroupingCreationMainStore {
     this.groupingAddressSearchKeyword = '';
     this.groupingAddressSearchResult = [];
     this.groupingAddress = '';
-    this.groupingGender = null;
+    this.groupingGender = 'ALL';
     this.groupingPreviewNextButtonActivated = false;
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
