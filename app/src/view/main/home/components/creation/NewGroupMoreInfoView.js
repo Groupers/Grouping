@@ -22,7 +22,7 @@ const NewGroupMoreInfoView = (props) => {
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
+      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
     props.navigation.navigate('NewGroupPreview');
   };
@@ -32,9 +32,7 @@ const NewGroupMoreInfoView = (props) => {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       // eslint-disable-next-line react/prop-types
-      color: props.groupingCreationMainStore.isPreviewButtonActivated
-        ? Colors.black
-        : '#999',
+      color: props.groupingCreationMainStore.isPreviewButtonActivated ? Colors.black : '#999',
     };
   };
 
@@ -59,6 +57,13 @@ const NewGroupMoreInfoView = (props) => {
     showCloseButton: true,
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
+    style: {
+      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT,  // 348
+      paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+      // paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+      paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+      paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    },
     // ...or any prop you want
   });
 
@@ -79,6 +84,9 @@ const NewGroupMoreInfoView = (props) => {
   };
 
   const closeGenderPanel = () => {
+    if (props.groupingCreationMainStore.groupingGender === null) {
+      props.groupingCreationMainStore.groupingGenderSelected('ALL');
+    }
     setGenderPanelActive(false);
   };
 
@@ -184,7 +192,9 @@ const NewGroupMoreInfoView = (props) => {
           >
             <Icon name="add" size={15} />
           </View>
-          <Text style={styles.fontColor}> 성별 제한 추가</Text>
+          <Text style={{ color: props.groupingCreationMainStore.genderFontColor }}>
+            {props.groupingCreationMainStore.selectedGenderLimitMessage}
+          </Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => openAgePanel()}>
@@ -209,41 +219,83 @@ const NewGroupMoreInfoView = (props) => {
         </View>
       </TouchableOpacity>
       <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
-        <TouchableOpacity onPress={() => initializeGender()}>
-          <Text>취소</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => closeGenderPanel()}>
-          <Text>완료</Text>
-        </TouchableOpacity>
-        <Text>그룹에 가입 가능한 성별을 알려주세요</Text>
-        <Text>
-          *조건을 설정하지 않은 경우에는 기본설정인 모두환영으로 표시됩니다
+        <View
+          style={{
+            flexDirection: 'row',
+            marginBottom: 34 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          }}
+        >
+          <TouchableOpacity onPress={() => initializeGender()}>
+            <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT, color: COLORS.BLACK }}>취소</Text>
+          </TouchableOpacity>
+          <View flex={1} />
+          <TouchableOpacity
+            onPress={() => {
+              closeGenderPanel();
+            }}
+          >
+            <Text>저장</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={{ fontSize: FONT_SIZE.SMALL_TITLE, fontWeight: 'bold', color: COLORS.BLACK }}>
+          가입 가능한 성별을 알려주세요
         </Text>
+        <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+        <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
+          미설정 시 모두환영으로 표시됩니다.
+        </Text>
+        <View style={{ height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
         <GenderSettingView
           onSelectGender={onGenderSelected.bind(this)}
-          groupingGender={props.groupingCreationMainStore.groupingGender}
+          // groupingGender={props.groupingCreationMainStore.groupingGender}
         />
       </SwipeablePanel>
       <SwipeablePanel {...panelProps} isActive={agePanelActive}>
-        <TouchableOpacity onPress={() => initializeAge()}>
-          <Text>취소</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => closeAgePanel()}>
-          <Text>완료</Text>
-        </TouchableOpacity>
-        <Text>나이 제한 설정 패널</Text>
-        <MinAgeSettingView
-          onChangeText={onMinAgeSelected.bind(this)}
-          groupingMinAge={
-            props.groupingCreationMainStore.groupingAvailableMinAge
-          }
-        />
-        <MaxAgeSettingView
-          onChangeText={onMaxAgeSelected.bind(this)}
-          groupingMaxAge={
-            props.groupingCreationMainStore.groupingAvailableMaxAge
-          }
-        />
+        <View
+          style={{
+            flexDirection: 'row',
+            marginBottom: 34 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          }}
+        >
+          <TouchableOpacity onPress={() => initializeAge()}>
+            <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT, color: COLORS.BLACK }}>취소</Text>
+          </TouchableOpacity>
+          <View flex={1} />
+          <TouchableOpacity
+            onPress={() => {
+              closeAgePanel();
+            }}
+          >
+            <Text
+              style={{
+                borderBottomWidth: 1,
+                paddingBottom: 0,
+                fontWeight: 'bold',
+                fontSize: FONT_SIZE.INPUT_TEXT,
+              }}
+            >
+              저장
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={{ fontSize: FONT_SIZE.SMALL_TITLE, fontWeight: 'bold', color: COLORS.BLACK }}>
+          가입 가능한 나이를 설정해주세요.
+        </Text>
+        <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+        <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
+          미설정 시 모두환영으로 표시됩니다.
+        </Text>
+        <View style={{ flexDirection: 'row' }}>
+          <MinAgeSettingView
+            onChangeText={onMinAgeSelected.bind(this)}
+            groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
+          />
+          <View style={{ width: 56 * WINDOW_SIZE.WIDTH_WEIGHT }} />
+          <MaxAgeSettingView
+            onChangeText={onMaxAgeSelected.bind(this)}
+            groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
+          />
+        </View>
       </SwipeablePanel>
     </View>
   );
@@ -263,6 +315,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(
-  observer(NewGroupMoreInfoView),
-);
+export default inject('groupingCreationMainStore')(observer(NewGroupMoreInfoView));
