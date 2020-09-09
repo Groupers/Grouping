@@ -27,6 +27,7 @@ const AddressSearchTextView = (props) => {
     <View style={styles.main}>
       <Icon name="location" size={22} />
       <TextInput
+        placeholderTextColor={COLORS.FONT_GRAY}
         style={styles.search}
         placeholder="주소를 검색 하세요."
         autoCorrect={false}
