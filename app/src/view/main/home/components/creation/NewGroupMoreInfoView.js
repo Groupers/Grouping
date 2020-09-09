@@ -32,7 +32,9 @@ const NewGroupMoreInfoView = (props) => {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       // eslint-disable-next-line react/prop-types
-      color: props.groupingCreationMainStore.isPreviewButtonActivated ? Colors.black : '#999',
+      color: props.groupingCreationMainStore.isPreviewButtonActivated
+        ? Colors.black
+        : COLORS.FONT_GRAY,
     };
   };
 
@@ -58,7 +60,7 @@ const NewGroupMoreInfoView = (props) => {
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
     style: {
-      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT,  // 348
+      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT, // 348
       paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       // paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
@@ -84,9 +86,6 @@ const NewGroupMoreInfoView = (props) => {
   };
 
   const closeGenderPanel = () => {
-    if (props.groupingCreationMainStore.groupingGender === null) {
-      props.groupingCreationMainStore.groupingGenderSelected('ALL');
-    }
     setGenderPanelActive(false);
   };
 
