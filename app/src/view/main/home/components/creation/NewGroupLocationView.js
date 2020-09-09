@@ -9,6 +9,7 @@ import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingC
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import AddressSearchResultView from '../../../AddressSearchResultView';
 import AddressSearchTextView from '../../../AddressSearchTextView';
+import { COLORS } from '../../../../../assets/Colors';
 
 // eslint-disable-next-line react/prop-types
 const NewGroupLocationView = (props) => {
@@ -22,7 +23,7 @@ const NewGroupLocationView = (props) => {
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
         ? Colors.black
-        : '#999',
+        : COLORS.FONT_GRAY,
     };
   };
 
@@ -56,7 +57,6 @@ const NewGroupLocationView = (props) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
-
         <AddressSearchTextView
           onChangeText={onAddressKeywordChanged}
           value={props.groupingCreationMainStore.groupingAddressSearchKeyword}

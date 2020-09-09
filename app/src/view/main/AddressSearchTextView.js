@@ -12,6 +12,7 @@ import { inject, observer } from 'mobx-react';
 import { Icon } from 'react-native-elements';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { GROUPING_VIEW_STATUS } from '../../constant/GroupingViewStatus';
+import { COLORS } from '../../assets/Colors';
 
 const AddressSearchTextView = (props) => {
   const onKeywordSearchClicked = () => {
@@ -31,7 +32,6 @@ const AddressSearchTextView = (props) => {
         autoCorrect={false}
         multiline={false}
         maxLength={30}
-        placeholderTextColor="#ddd"
         value={props.value}
         onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
       />
