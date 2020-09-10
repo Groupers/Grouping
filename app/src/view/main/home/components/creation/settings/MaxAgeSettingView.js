@@ -10,7 +10,8 @@ const MaxAgeSettingView = (props) => {
 
   const change = ({ nativeEvent }) => {
     props.onChangeText(
-      Math.ceil(nativeEvent.contentOffset.y / nativeEvent.layoutMeasurement.height) - 1
+      Math.ceil(((nativeEvent.contentOffset.y - 0.2) * 3) / nativeEvent.layoutMeasurement.height) -
+        2
     );
     // console.log(Math.ceil(nativeEvent.contentOffset.y / 4));
   };
@@ -23,6 +24,26 @@ const MaxAgeSettingView = (props) => {
         alignItems: 'center',
       }}
     >
+      <View
+        style={{
+          position: 'absolute',
+          height: 1,
+          backgroundColor: COLORS.SUB_COLOR,
+          width: 71 * WINDOW_SIZE.WIDTH_WEIGHT,
+          top: 51 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          left: 33 * WINDOW_SIZE.WIDTH_WEIGHT,
+        }}
+      />
+      <View
+        style={{
+          position: 'absolute',
+          height: 1,
+          backgroundColor: COLORS.SUB_COLOR,
+          width: 71 * WINDOW_SIZE.WIDTH_WEIGHT,
+          top: 102 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          left: 33 * WINDOW_SIZE.WIDTH_WEIGHT,
+        }}
+      />
       <Text style={{ fontSize: 20 * WINDOW_SIZE.HEIGHT_WEIGHT }}>최소</Text>
       <ScrollView
         scrollToOverflowEnabled
@@ -42,16 +63,23 @@ const MaxAgeSettingView = (props) => {
               justifyContent: 'center',
             }}
           >
-            <Text
+            <View
               style={{
-                fontSize: 20,
-                color: Colors.BLACK,
-                fontWeight: 'bold',
-                flex: 1,
+                height: 52 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              {item}
-            </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: Colors.BLACK,
+                  fontWeight: 'bold',
+                }}
+              >
+                {item}
+              </Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -73,8 +101,8 @@ const styles = StyleSheet.create({
   scroll: {
     height: 52 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: 72 * WINDOW_SIZE.WIDTH_WEIGHT,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    // borderTopWidth: 1,
+    // borderBottomWidth: 1,
     borderColor: COLORS.SUB_COLOR,
     padding: 0,
   },

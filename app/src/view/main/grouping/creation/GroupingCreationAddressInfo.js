@@ -25,11 +25,14 @@ class GroupingCreationAddressInfo extends Component {
   componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
 
   async onAddressKeywordChanged(keyword) {
+    console.log(keyword);
     await this.props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(keyword);
   }
 
-  onAddressSelected(address) {
-    this.props.groupingCreationMainStore.groupingAddressSelected(address);
+  onAddressSelected() {
+    this.props.groupingCreationMainStore.groupingAddressSelected(
+      this.props.groupingCreationMainStore.addre
+    );
     this.props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
     );
@@ -38,27 +41,21 @@ class GroupingCreationAddressInfo extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.body}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.inner}>
-            <View style={styles.searchContainer}>
-              <AddressSearchTextView
-                onChangeText={this.onAddressKeywordChanged.bind(this)}
-                value={this.props.groupingCreationMainStore.groupingAddressSearchKeyword}
-              />
-            </View>
-            <View style={styles.contentContainer}>
-              <AddressSearchResultView
-                onClick={this.onAddressSelected.bind(this)}
-                addressList={this.props.groupingCreationMainStore.groupingAddressSearchResult}
-              />
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+      // <KeyboardAvoidingView
+      //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      //   style={styles.body}
+      // >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        {/* <View style={styles.inner}> */}
+        <View style={styles.contentContainer}>
+          <AddressSearchResultView
+            onClick={this.onAddressSelected.bind(this)}
+            addressList={this.props.groupingCreationMainStore.groupingAddressSearchResult}
+          />
+        </View>
+        {/* </View> */}
+      </TouchableWithoutFeedback>
+      // </KeyboardAvoidingView>
     );
   }
 }
@@ -67,20 +64,20 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: Colors.primary,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     width: '100%',
   },
 
-  inner: {
-    flex: 1,
-    backgroundColor: Colors.primary,
-    flexDirection: 'column',
-    paddingTop: 50,
-    width: '100%',
-  },
+  // inner: {
+  //   flex: 1,
+  //   backgroundColor: Colors.primary,
+  //   flexDirection: 'column',
+  //   paddingTop: 50,
+  //   width: '100%',
+  // },
   contentContainer: {
+    flex: 1,
     width: '100%',
   },
   searchContainer: {

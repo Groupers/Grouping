@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, Text, TextInput, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { useEffect } from 'react';
@@ -34,8 +34,10 @@ const NewGroupLocationView = (props) => {
     props.navigation.pop();
   };
 
-  const onAddressSelected = (address) => {
-    props.groupingCreationMainStore.groupingAddressSelected(address);
+  const onAddressSelected = () => {
+    props.groupingCreationMainStore.groupingAddressSelected(
+      props.groupingCreationMainStore.groupingAddressSearchKeyword
+    );
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
     );
@@ -55,14 +57,12 @@ const NewGroupLocationView = (props) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
-        <AddressSearchTextView
-          onChangeText={onAddressKeywordChanged}
-          value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
-        />
-      </View>
-      <Text>input group location</Text>
+    <View style={{ flex: 1 }}>
+      <AddressSearchTextView
+        onChangeText={onAddressKeywordChanged}
+        value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
+        navigation={props.navigation}
+      />
       <AddressSearchResultView
         onClick={(address) => onAddressSelected(address)}
         addressList={props.groupingCreationMainStore.groupingAddressSearchResult}

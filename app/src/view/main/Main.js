@@ -28,6 +28,7 @@ import FeedMain from './feed/FeedMain';
 
 // MyPage
 import MyPageMain from './myPage/MyPageMain';
+import AddressSearchTextView from './AddressSearchTextView';
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -72,10 +73,13 @@ const HomeStackScreen = ({ navigation }) => {
       <HomeStack.Screen
         name="NewGroupLocationView"
         component={NewGroupLocationView}
+        navigation={navigation}
         options={{
-          title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          // header: () => <AddressSearchTextView navigateTo={navigation} />,
+          headerShown: false,
+          // title: '',
+          // headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          // headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
       <HomeStack.Screen

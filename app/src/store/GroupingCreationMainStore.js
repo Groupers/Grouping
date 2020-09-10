@@ -78,6 +78,13 @@ export default class GroupingCreationMainStore {
     console.log(this.groupingGender);
   };
 
+  @action groupingInitializeAddressSearchKeyword = () => {
+    this.groupingAddressSearchKeyword = '';
+    this.groupingAddressSearchResult = [];
+    this.groupingAddress = '';
+    console.log(this.groupingAddressSearchKeyword);
+  };
+
   @action groupingInitializeAge = () => {
     this.groupingAvailableMinAgeChanged(Number(MIN_AVAILABLE_AGE));
     this.groupingAvailableMaxAgeChanged(Number(MAX_AVAILABLE_AGE));
