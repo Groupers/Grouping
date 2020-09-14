@@ -9,7 +9,8 @@ const PersonalRecommend = (props) => {
     <View>
       <View style={styles.textBlock}>
         <TouchableOpacity>
-          <Text style={styles.textStyle}>{props.userStore.groupingUser.name}님 맞춤 그룹</Text>
+          {/* 추후변경 */}
+          <Text style={styles.textStyle}>연수님 맞춤 그룹</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.carouselBox}>

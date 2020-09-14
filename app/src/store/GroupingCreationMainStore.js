@@ -1,5 +1,6 @@
 import { action, computed, observable } from 'mobx';
 import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
+import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
 import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
@@ -17,6 +18,7 @@ import GroupCreationRepository from '../repository/GroupCreationRepository';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
 import GroupingUserDto from '../dto/GroupingUserDto';
+import { Platform } from 'react-native';
 
 const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
@@ -139,6 +141,22 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingBackgroundImageChanged = ({ uri }) => {
+    if (Platform.OS === 'ios') {
+      const askPermission = async () => {
+        try {
+          const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
+          if (result === RESULTS.GRANTED) {
+            this.groupingBackgroundImageURI = { uri };
+            this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
+            console.log('background image changed IOS');
+            console.log('IOS' + this.groupingBackgroundImageURI);
+          }
+        } catch (error) {
+          console.log('askPermission', error);
+        }
+      };
+      askPermission();
+    }
     this.groupingBackgroundImageURI = { uri };
     this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     console.log('background image changed');
