@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
@@ -11,17 +11,6 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
 const NewGroupNameView = (props) => {
-  /* React.useLayoutEffect(() => {
-    // eslint-disable-next-line react/prop-types
-    props.navigation.setOptions({
-      headerRight: () => (
-        // eslint-disable-next-line react/prop-types
-        <Text onPress={() => props.navigation.navigate('InputNewGroupInterests')}>다음</Text>
-      ),
-    });
-    // eslint-disable-next-line react/prop-types,react/destructuring-assignment
-  }, [props.navigation]); */
-
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
@@ -29,41 +18,38 @@ const NewGroupNameView = (props) => {
     props.navigation.navigate('NewGroupInterestsView');
   };
 
-  const rightIconStyle = (groupingCreationView) => {
+  const rightIconStyle = () => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(
-        groupingCreationView,
-      )
-        ? Colors.black
-        : '#999',
+      color: Colors.black,
     };
   };
 
   const onTitleChanged = (title) => {
     props.groupingCreationMainStore.groupingTitleChanged(title);
-    props.navigation.setOptions({
-      headerRight: () => (
-        <Text
-          onPress={() => {
-            onHeaderNextButtonClicked();
-          }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
-        >
-          다음
-        </Text>
-      ),
-    });
   };
 
   React.useEffect(() => {
-    // console.log('그룹 생성하는 유저 아이디');
-    // console.log(props.userStore.groupingUser.groupingUserId);
-    // props.groupingCreationMainStore.initialize(
-    //   props.userStore.groupingUser.groupingUserId,
-    // );
-  }, []);
+    if (props.groupingCreationMainStore.groupingTitle.length > 2) {
+      props.navigation.setOptions({
+        headerRight: () => (
+          <Text
+            onPress={() => {
+              onHeaderNextButtonClicked();
+            }}
+            style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
+          >
+            다음
+          </Text>
+        ),
+      });
+    } else if (props.groupingCreationMainStore.groupingTitle.length < 2) {
+      props.navigation.setOptions({
+        headerRight: false,
+      });
+    }
+  });
 
   return (
     <View style={styles.mainContainer}>
