@@ -74,17 +74,6 @@ const AddressSearchTextView = (props) => {
         style={{ padding: 17 * WINDOW_SIZE.HEIGHT_WEIGHT }}
         onPress={InitializeAddressKeyword}
       />
-      {/* <Icon */}
-      {/*  style={styles.searchIcon} */}
-      {/*  size={26} */}
-      {/*  name="search" */}
-      {/*  type="feather" */}
-      {/*  color="black" */}
-      {/*  onPress={ */}
-      {/*    () => onHeaderNextButtonClicked */}
-      {/*    // onKeywordSearchClicked() */}
-      {/*  } */}
-      {/* /> */}
       <TouchableOpacity onPress={props.navigation.goBack} style={rightIconStyle()}>
         <View>
           <Text>취소</Text>

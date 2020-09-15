@@ -29,10 +29,8 @@ class GroupingCreationAddressInfo extends Component {
     await this.props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(keyword);
   }
 
-  onAddressSelected() {
-    this.props.groupingCreationMainStore.groupingAddressSelected(
-      this.props.groupingCreationMainStore.addre
-    );
+  onAddressSelected(address) {
+    this.props.groupingCreationMainStore.groupingAddressSelected(address);
     this.props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
     );

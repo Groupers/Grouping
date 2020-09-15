@@ -34,27 +34,34 @@ const NewGroupLocationView = (props) => {
     props.navigation.pop();
   };
 
-  const onAddressSelected = () => {
-    props.groupingCreationMainStore.groupingAddressSelected(
-      props.groupingCreationMainStore.groupingAddressSearchKeyword
-    );
+  const onAddressSelected = (address) => {
+    props.groupingCreationMainStore.groupingAddressSelected(address);
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
     );
-
-    props.navigation.setOptions({
-      headerRight: () => (
-        <Text
-          onPress={() => {
-            onHeaderNextButtonClicked();
-          }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.LOCATION)}
-        >
-          완료
-        </Text>
-      ),
-    });
+    onHeaderNextButtonClicked();
+    // props.navigation.navigate('groupingCreationExtraInfo');
   };
+
+  // const onAddressSelected = (address) => {
+  //   props.groupingCreationMainStore.groupingAddressSelected(address);
+  //   props.groupingCreationMainStore.groupingCreationViewChanged(
+  //     GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
+  //   );
+  //
+  //   // props.navigation.setOptions({
+  //   //   headerRight: () => (
+  //   //     <Text
+  //   //       onPress={() => {
+  //   // onHeaderNextButtonClicked();
+  //   //       }}
+  //   //       style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.LOCATION)}
+  //   //     >
+  //   //       완료
+  //   //     </Text>
+  //   //   ),
+  //   // });
+  // };
 
   return (
     <View style={{ flex: 1 }}>
@@ -64,7 +71,7 @@ const NewGroupLocationView = (props) => {
         navigation={props.navigation}
       />
       <AddressSearchResultView
-        onClick={(address) => onAddressSelected(address)}
+        onClick={onAddressSelected.bind(this)}
         addressList={props.groupingCreationMainStore.groupingAddressSearchResult}
       />
     </View>

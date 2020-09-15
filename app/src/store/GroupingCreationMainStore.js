@@ -82,7 +82,7 @@ export default class GroupingCreationMainStore {
     this.groupingAddressSearchKeyword = '';
     this.groupingAddressSearchResult = [];
     this.groupingAddress = '';
-    console.log(this.groupingAddressSearchKeyword);
+    console.log(`groupingAddressSearchKeyword${this.groupingAddressSearchKeyword}`);
   };
 
   @action groupingInitializeAge = () => {
@@ -109,6 +109,7 @@ export default class GroupingCreationMainStore {
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
     // koreanChecker does not working
+    console.log("groupingAddressSearchKeywordChanged : "+keyword)
     this.groupingAddressSearchKeyword = keyword;
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
@@ -122,6 +123,7 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSelected = (address) => {
+    console.log("address : "+address)
     this.groupingAddressCompleted = true;
     this.groupingAddress = address;
     this.groupingCreationDto.pointDescription = address;
@@ -224,7 +226,7 @@ export default class GroupingCreationMainStore {
 
   @computed get isPreviewButtonActivated() {
     console.log(this.groupingDescriptionCompleted);
-    console.log(this.groupingAddressCompleted);
+    // console.log("groupingAddressCompleted : "+this.groupingAddressCompleted+this.groupingAddress);
     return this.groupingDescriptionCompleted && this.groupingAddressCompleted;
   }
 
@@ -247,6 +249,14 @@ export default class GroupingCreationMainStore {
 
   @computed get genderFontColor() {
     return this.genderChanged !== false ? COLORS.BLACK : COLORS.FONT_GRAY;
+  }
+
+  @computed get descriptionFontColor() {
+    return this.groupingDescription !== '' ? COLORS.BLACK : COLORS.FONT_GRAY;
+  }
+
+  @computed get addressFontColor() {
+    return this.groupingAddressCompleted === true ? COLORS.BLACK : COLORS.FONT_GRAY;
   }
 
   @action initialize(groupingUserId) {
