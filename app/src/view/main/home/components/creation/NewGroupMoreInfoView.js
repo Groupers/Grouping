@@ -60,7 +60,7 @@ const NewGroupMoreInfoView = (props) => {
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
     style: {
-      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT, // 348
+      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT, // 348  // 500
       paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       // paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
