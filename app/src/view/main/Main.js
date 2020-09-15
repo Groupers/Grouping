@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 import { TextInput, View, Text } from 'react-native';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
+import homeInactive from '../../assets/tab_bar_ic_home_inactive.png';
 
 // Main
 import HomeMain from './home/HomeMain';
