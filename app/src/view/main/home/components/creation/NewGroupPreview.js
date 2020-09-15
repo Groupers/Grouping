@@ -13,14 +13,16 @@ import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingC
 const NewGroupPreview = (props) => {
   React.useLayoutEffect(() => {
     props.navigation.setOptions({
-      headerRight: () => <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>,
+      headerRight: () => (
+        <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>
+      ),
     });
     // eslint-disable-next-line react/destructuring-assignment
   }, [props.navigation]);
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.CONFIRM
+      GROUPING_CREATION_VIEW_STATUS.CONFIRM,
     );
     props.groupingCreationMainStore.groupCreation();
     props.navigation.navigate('Home');
@@ -44,7 +46,9 @@ const NewGroupPreview = (props) => {
       } else {
         const uri = { uri: response.uri };
         console.log(response.uri);
-        props.groupingCreationMainStore.groupingBackgroundImageChanged({ ...uri });
+        props.groupingCreationMainStore.groupingBackgroundImageChanged({
+          ...uri,
+        });
       }
     });
   };
@@ -67,8 +71,12 @@ const NewGroupPreview = (props) => {
       <View style={styles.contents}>
         <GroupLeaderProfile />
         <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
-        <GroupKeyword groupKeyword={props.groupingCreationMainStore.groupingKeyword} />
-        <GroupDescription groupDescription={props.groupingCreationMainStore.groupingDescription} />
+        <GroupKeyword
+          groupKeyword={props.groupingCreationMainStore.groupingKeyword}
+        />
+        <GroupDescription
+          groupDescription={props.groupingCreationMainStore.groupingDescription}
+        />
       </View>
     </View>
   );

@@ -5,6 +5,7 @@ import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
 
 const TitleInput = (props) => {
+  const [input, setInput] = React.useState('');
   return (
     <View style={styles.titleContainer}>
       <TextInput
@@ -14,7 +15,9 @@ const TitleInput = (props) => {
         autoCorrect={false}
         placeholderTextColor="#ddd"
         value={props.groupingTitle}
-        onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
+        onChangeText={
+          props.onChangeText != null ? (text) => props.onChangeText(text) : null
+        }
       />
       <Text style={styles.counter}>{props.groupingTitle.length}/30</Text>
     </View>
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
   counter: {
     color: COLORS.FONT_GRAY,
     margin: 0,
-    fontSize: 9*WINDOW_SIZE.HEIGHT_WEIGHT
+    fontSize: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });
 
