@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { NavigationContainer, useBackButton } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-import { TextInput, View, Text } from 'react-native';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
-import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 
 // Main
 import HomeMain from './home/HomeMain';
@@ -45,7 +43,7 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.navigate('HomeMain')} />,
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -56,7 +54,7 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupInterestsView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.navigate('NewGroupNameView')} />,
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
@@ -65,7 +63,7 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupMoreInfoView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.navigate('NewGroupInterestsView')} />,
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
@@ -74,7 +72,7 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupLocationView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.navigate('NewGroupMoreInfoView')} />,
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
@@ -83,13 +81,23 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupDescriptionView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.navigate('NewGroupLocationView')} />,
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
         }}
       />
-      <HomeStack.Screen name="NewGroupPreview" component={NewGroupPreview} />
+      <HomeStack.Screen
+        name="NewGroupPreview"
+        component={NewGroupPreview}
+        options={{
+          title: '',
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.navigate('NewGroupDescription')} />,
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
+        }}
+      />
       <HomeStack.Screen
         name="SearchView"
         component={SearchView}
