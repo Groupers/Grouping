@@ -1,4 +1,6 @@
 import { action, computed, observable } from 'mobx';
+import { Text } from 'react-native';
+import * as React from 'react';
 import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
@@ -18,7 +20,7 @@ import GroupCreationRepository from '../repository/GroupCreationRepository';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
 import GroupingUserDto from '../dto/GroupingUserDto';
-import { Platform } from 'react-native';
+import { COLORS } from '../assets/Colors';
 
 const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
@@ -66,6 +68,8 @@ export default class GroupingCreationMainStore {
 
   @observable hashtagList = [];
 
+  @observable genderChanged = false;
+
   // @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
   @observable groupingBackgroundImageURI = '';
 
@@ -101,7 +105,7 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
-    //koreanChecker does not working
+    // koreanChecker does not working
     this.groupingAddressSearchKeyword = keyword;
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
@@ -123,6 +127,9 @@ export default class GroupingCreationMainStore {
   @action groupingGenderSelected = (gender) => {
     this.groupingGender = gender;
     this.groupingCreationDto.availableGender = gender;
+    if (gender !== 'ALL') {
+      this.genderChanged = true;
+    }
     console.log(this.groupingGender);
   };
 
@@ -241,6 +248,23 @@ export default class GroupingCreationMainStore {
     return this.groupingBackgroundImageURI;
   }
 
+  @computed get selectedGenderLimitMessage() {
+    if (this.genderChanged === false) {
+      return '성별 제한 추가';
+    }
+    if (this.groupingGender === 'MALE') {
+      return '남자만 가입 가능';
+    }
+    if (this.groupingGender === 'FEMALE') {
+      return '여자만 가입 가능';
+    }
+    return '모두환영';
+  }
+
+  @computed get genderFontColor() {
+    return this.genderChanged !== false ? COLORS.BLACK : COLORS.FONT_GRAY;
+  }
+
   @action initialize(groupingUserId) {
     this.groupingUserId = groupingUserId;
     this.groupingTitle = '';
@@ -260,5 +284,6 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
     this.groupingCreationDto.hashtagList.push('키워드1');
+    this.selectedGender = '';
   }
 }
