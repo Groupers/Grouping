@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 import { TextInput, View, Text } from 'react-native';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Main
 import HomeMain from './home/HomeMain';
@@ -38,14 +39,20 @@ const Tab = createBottomTabNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
-    <HomeStack.Navigator initialRouteName="NewGroupMoreInfoView">
-      <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeMain"
+        component={HomeMain}
+        options={{ headerShown: false }}
+      />
       <HomeStack.Screen
         name="NewGroupNameView"
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -56,8 +63,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupInterestsView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -65,8 +76,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupMoreInfoView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -74,8 +89,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupLocationView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -83,7 +102,9 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupDescriptionView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -104,7 +125,11 @@ const HomeStackScreen = ({ navigation }) => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen name="Home" component={GroupMain} options={{ headerShown: false }} />
+      <GroupStack.Screen
+        name="Home"
+        component={GroupMain}
+        options={{ headerShown: false }}
+      />
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}
@@ -135,17 +160,57 @@ const MyPageScreen = () => {
   );
 };
 
+const textMap = {
+  Home: '홈',
+  MyPage: 'My',
+};
 @inject('mainStore')
 @observer
 class Main extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeStackScreen} />
-          <Tab.Screen name="Group" component={GroupStackScreen} />
-          <Tab.Screen name="Feed" component={FeedStackScreen} />
-          <Tab.Screen name="MyPage" component={MyPageScreen} />
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              if (route.name === 'Home') {
+                iconName = focused
+                  ? 'ios-information-circle'
+                  : 'ios-information-circle-outline';
+              } else if (route.name === 'Settings') {
+                iconName = focused ? 'ios-list-box' : 'ios-list';
+              }
+
+              // You can return any component that you like here!
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: 'tomato',
+            inactiveTintColor: 'gray',
+          }}
+        >
+          <Tab.Screen
+            name="Home"
+            component={HomeStackScreen}
+            options={{ tabBarLabel: '홈' }}
+          />
+          <Tab.Screen
+            name="Group"
+            component={GroupStackScreen}
+            options={{ tabBarLabel: '내 그룹' }}
+          />
+          <Tab.Screen
+            name="Feed"
+            component={FeedStackScreen}
+            options={{ tabBarLabel: '피드' }}
+          />
+          <Tab.Screen
+            name="MyPage"
+            component={MyPageScreen}
+            options={{ tabBarLabel: 'My' }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     );
