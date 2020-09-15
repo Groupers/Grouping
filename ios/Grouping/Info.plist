@@ -31,6 +31,11 @@
 			</array>
 		</dict>
 	</array>
+  <!-- IOS PHOTO LIBRARY PERMISSION-->
+    <key>NSPhotoLibraryUsageDescription</key>
+  <string>YOUR TEXT</string>
+    <key>NSCameraUsageDescription</key>
+  <string>YOUR TEXT</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>

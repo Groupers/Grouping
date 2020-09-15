@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Image } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { NavigationContainer, useBackButton } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,7 +8,15 @@ import { Icon } from 'react-native-elements';
 import { TextInput, View, Text } from 'react-native';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
+// pic
 import homeInactive from '../../assets/tab_bar_ic_home_inactive.png';
+import homeActive from '../../assets/tab_bar_ic_home_active.png';
+import groupInactive from '../../assets/tab_bar_ic_group_inactive.png';
+import groupActive from '../../assets/tab_bar_ic_group_active.png';
+import feedInactive from '../../assets/tab_bar_ic_feed_inactive.png';
+import feedActive from '../../assets/tab_bar_ic_feed_active.png';
+import myInactive from '../../assets/tab_bar_ic_my_inactive.png';
+import myActive from '../../assets/tab_bar_ic_my_active.png';
 
 // Main
 import HomeMain from './home/HomeMain';
@@ -39,14 +48,20 @@ const Tab = createBottomTabNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
-    <HomeStack.Navigator initialRouteName="NewGroupMoreInfoView">
-      <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeMain"
+        component={HomeMain}
+        options={{ headerShown: false }}
+      />
       <HomeStack.Screen
         name="NewGroupNameView"
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -57,8 +72,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupInterestsView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -66,8 +85,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupMoreInfoView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -75,8 +98,12 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupLocationView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
         }}
       />
       <HomeStack.Screen
@@ -84,7 +111,9 @@ const HomeStackScreen = ({ navigation }) => {
         component={NewGroupDescriptionView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={navigation.goBack} />,
+          headerLeft: () => (
+            <Icon name="chevron-left" size={22} onPress={navigation.goBack} />
+          ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -105,7 +134,11 @@ const HomeStackScreen = ({ navigation }) => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen name="Home" component={GroupMain} options={{ headerShown: false }} />
+      <GroupStack.Screen
+        name="Home"
+        component={GroupMain}
+        options={{ headerShown: false }}
+      />
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}
@@ -136,17 +169,78 @@ const MyPageScreen = () => {
   );
 };
 
+const textMap = {
+  Home: '홈',
+  MyPage: 'My',
+};
 @inject('mainStore')
 @observer
 class Main extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeStackScreen} />
-          <Tab.Screen name="Group" component={GroupStackScreen} />
-          <Tab.Screen name="Feed" component={FeedStackScreen} />
-          <Tab.Screen name="MyPage" component={MyPageScreen} />
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              if (route.name === 'Home') {
+                iconName = focused
+                  ? homeActive
+                  : homeInactive
+              } else if (route.name === 'Group') {
+                iconName = focused ? groupActive : groupInactive;
+              } else if (route.name === 'Feed') {
+                iconName = focused
+                  ? feedActive
+                  : feedInactive
+              } else if (route.name === 'MyPage') {
+                iconName = focused
+                  ? myActive
+                  : myInactive
+              }
+              // You can return any component that you like here!
+              return <Image source={iconName} style={{width:30*WINDOW_SIZE.WIDTH_WEIGHT, height:30*WINDOW_SIZE.HEIGHT_WEIGHT}}/>;
+            
+            },
+            // tabBarIcon: ({ focused, color, size }) => {
+            // let groupName;
+            //   if (route.name === 'Group') {
+            //     groupName = focused
+            //       ? groupActive
+            //       : groupInactive
+            //   } else if (route.name === 'Settings') {
+            //     groupName = focused ? 'ios-list-box' : 'ios-list';
+            //   }
+            //   // You can return any component that you like here!
+            //   return <Image source={groupName} style={{width:30*WINDOW_SIZE.WIDTH_WEIGHT, height:30*WINDOW_SIZE.HEIGHT_WEIGHT}}/>;
+            // }
+          })}          
+          tabBarOptions={{
+            activeTintColor: 'tomato',
+            inactiveTintColor: 'gray',
+          }}
+        >
+          <Tab.Screen
+            name="Home"
+            component={HomeStackScreen}
+            options={{ tabBarLabel: '홈' }}
+          />
+
+          <Tab.Screen
+            name="Group"
+            component={GroupStackScreen}
+            options={{ tabBarLabel: '내 그룹' }}
+          />
+          <Tab.Screen
+            name="Feed"
+            component={FeedStackScreen}
+            options={{ tabBarLabel: '피드' }}
+          />
+          <Tab.Screen
+            name="MyPage"
+            component={MyPageScreen}
+            options={{ tabBarLabel: 'My' }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     );

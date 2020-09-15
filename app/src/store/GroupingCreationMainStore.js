@@ -2,11 +2,15 @@ import { action, computed, observable } from 'mobx';
 import { Text } from 'react-native';
 import * as React from 'react';
 import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
+import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
 import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
 import KoreanChecker from '../component/KoreanChecker';
-import AgeValidator, { MAX_AVAILABLE_AGE, MIN_AVAILABLE_AGE } from '../component/AgeValidator';
+import AgeValidator, {
+  MAX_AVAILABLE_AGE,
+  MIN_AVAILABLE_AGE,
+} from '../component/AgeValidator';
 import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
 import { ResponseCode } from '../constant/ResponseCode';
 import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
@@ -144,6 +148,22 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingBackgroundImageChanged = ({ uri }) => {
+    if (Platform.OS === 'ios') {
+      const askPermission = async () => {
+        try {
+          const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
+          if (result === RESULTS.GRANTED) {
+            this.groupingBackgroundImageURI = { uri };
+            this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
+            console.log('background image changed IOS');
+            console.log('IOS' + this.groupingBackgroundImageURI);
+          }
+        } catch (error) {
+          console.log('askPermission', error);
+        }
+      };
+      askPermission();
+    }
     this.groupingBackgroundImageURI = { uri };
     this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     console.log('background image changed');
@@ -161,7 +181,8 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
+      this.groupingCreationViewStatus ===
+        GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
       this.keywordParser.parseKeyword(this.groupingKeyword)
     ) {
       return true;
@@ -169,7 +190,8 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
+      this.groupingCreationViewStatus ===
+        GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
       this.groupingDescription.length > MIN_DESCRIPTION_LENGTH
     ) {
       return true;
@@ -177,10 +199,11 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
+      this.groupingCreationViewStatus ===
+        GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
       this.ageValidator.validateAge(
         Number(this.groupingAvailableMinAge),
-        Number(this.groupingAvailableMaxAge)
+        Number(this.groupingAvailableMaxAge),
       ) &&
       this.groupingGender !== '' &&
       this.groupingAddress !== ''
@@ -202,7 +225,7 @@ export default class GroupingCreationMainStore {
       (responseCode) => {
         console.log('responseCode : ');
         console.log(responseCode);
-      }
+      },
     );
     console.log('out');
 

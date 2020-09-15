@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
@@ -10,7 +10,7 @@ import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 const NewGroupNameView = (props) => {
-  
+
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
@@ -18,13 +18,16 @@ const NewGroupNameView = (props) => {
     props.navigation.navigate('NewGroupInterestsView');
   };
 
-  const rightIconStyle= () => {
+
+  const rightIconStyle = () => {
     return {
       marginRight: 15*WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: Colors.black,
-    }
-  }
+
+    };
+  };
+
 
   const onTitleChanged = (title) => {
     props.groupingCreationMainStore.groupingTitleChanged(title);
@@ -50,7 +53,6 @@ const NewGroupNameView = (props) => {
       });
     }
   });
-
 
 
   return (
@@ -92,4 +94,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore', 'userStore')(observer(NewGroupNameView));
+export default inject(
+  'groupingCreationMainStore',
+  'userStore',
+)(observer(NewGroupNameView));
