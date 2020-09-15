@@ -209,21 +209,8 @@ class Main extends Component {
                   : myInactive
               }
               // You can return any component that you like here!
-              return <Image source={iconName} style={{width:30*WINDOW_SIZE.WIDTH_WEIGHT, height:30*WINDOW_SIZE.HEIGHT_WEIGHT}}/>;
-            
+              return <Image source={iconName} style={{width:30*WINDOW_SIZE.WIDTH_WEIGHT, height:30*WINDOW_SIZE.HEIGHT_WEIGHT}}/>;         
             },
-            // tabBarIcon: ({ focused, color, size }) => {
-            // let groupName;
-            //   if (route.name === 'Group') {
-            //     groupName = focused
-            //       ? groupActive
-            //       : groupInactive
-            //   } else if (route.name === 'Settings') {
-            //     groupName = focused ? 'ios-list-box' : 'ios-list';
-            //   }
-            //   // You can return any component that you like here!
-            //   return <Image source={groupName} style={{width:30*WINDOW_SIZE.WIDTH_WEIGHT, height:30*WINDOW_SIZE.HEIGHT_WEIGHT}}/>;
-            // }
           })}          
           tabBarOptions={{
             activeTintColor: 'tomato',
