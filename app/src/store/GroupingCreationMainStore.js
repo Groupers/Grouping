@@ -1,6 +1,7 @@
 import { action, computed, observable } from 'mobx';
 import { Text } from 'react-native';
 import * as React from 'react';
+import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
 import KeywordParser from '../component/KeywordParser';
@@ -109,7 +110,7 @@ export default class GroupingCreationMainStore {
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
     // koreanChecker does not working
-    console.log("groupingAddressSearchKeywordChanged : "+keyword)
+    console.log(`groupingAddressSearchKeywordChanged : ${keyword}`);
     this.groupingAddressSearchKeyword = keyword;
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
@@ -123,7 +124,7 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSelected = (address) => {
-    console.log("address : "+address)
+    console.log(`address : ${address}`);
     this.groupingAddressCompleted = true;
     this.groupingAddress = address;
     this.groupingCreationDto.pointDescription = address;
@@ -153,6 +154,22 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingBackgroundImageChanged = ({ uri }) => {
+    if (Platform.OS === 'ios') {
+      const askPermission = async () => {
+        try {
+          const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
+          if (result === RESULTS.GRANTED) {
+            this.groupingBackgroundImageURI = { uri };
+            this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
+            console.log('background image changed IOS');
+            console.log(`IOS${this.groupingBackgroundImageURI}`);
+          }
+        } catch (error) {
+          console.log('askPermission', error);
+        }
+      };
+      askPermission();
+    }
     this.groupingBackgroundImageURI = { uri };
     this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     console.log('background image changed');
