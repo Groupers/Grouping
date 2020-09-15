@@ -17,4 +17,5 @@ const GroupCreationProgressBar = ({ step }) => {
     />
   );
 };
+
 export default GroupCreationProgressBar;
