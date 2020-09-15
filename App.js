@@ -29,10 +29,6 @@ class App extends Component {
       view = <Main />;
     }
     return <View style={styles.body}>{view}</View>;
-<<<<<<< HEAD
-    // return <Main />;
-=======
->>>>>>> 1b1bcd00299785d7147e9349fa7335cea69f2559
   }
 }
 
