@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import TitleInput from './TitleInput';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
@@ -13,21 +12,21 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 const NewGroupNameView = (props) => {
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION,
+      GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
     props.navigation.navigate('NewGroupInterestsView');
   };
 
-  const rightIconStyle = () => {
+  const onTitleChanged = (title) => {
+    props.groupingCreationMainStore.groupingTitleChanged(title);
+  };
+
+  const rightIconStyle = (selectedColor) => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: Colors.black,
+      color: selectedColor,
     };
-  };
-
-  const onTitleChanged = (title) => {
-    props.groupingCreationMainStore.groupingTitleChanged(title);
   };
 
   React.useEffect(() => {
@@ -38,7 +37,7 @@ const NewGroupNameView = (props) => {
             onPress={() => {
               onHeaderNextButtonClicked();
             }}
-            style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
+            style={rightIconStyle(COLORS.BLACK)}
           >
             다음
           </Text>
@@ -46,7 +45,7 @@ const NewGroupNameView = (props) => {
       });
     } else if (props.groupingCreationMainStore.groupingTitle.length < 2) {
       props.navigation.setOptions({
-        headerRight: false,
+        headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
       });
     }
   });
@@ -55,9 +54,7 @@ const NewGroupNameView = (props) => {
     <View style={styles.mainContainer}>
       <GroupCreationProgressBar step={1} />
       <View style={styles.labelContainer}>
-        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>
-          그룹 이름을 알려주세요.
-        </Text>
+        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>그룹 이름을 알려주세요.</Text>
       </View>
       <View style={styles.groupNameInputContainer}>
         <TitleInput
@@ -90,7 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject(
-  'groupingCreationMainStore',
-  'userStore',
-)(observer(NewGroupNameView));
+export default inject('groupingCreationMainStore', 'userStore')(observer(NewGroupNameView));
