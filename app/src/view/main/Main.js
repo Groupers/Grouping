@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-<<<<<<< HEAD
 import { TextInput, View, Text } from 'react-native';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
@@ -18,10 +17,6 @@ import feedInactive from '../../assets/tab_bar_ic_feed_inactive.png';
 import feedActive from '../../assets/tab_bar_ic_feed_active.png';
 import myInactive from '../../assets/tab_bar_ic_my_inactive.png';
 import myActive from '../../assets/tab_bar_ic_my_active.png';
-=======
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { WINDOW_SIZE } from '../../constant/WindowSize';
->>>>>>> 5180e23c30f53e07fb82b73a7dce08b77a739523
 
 // Main
 import HomeMain from './home/HomeMain';
