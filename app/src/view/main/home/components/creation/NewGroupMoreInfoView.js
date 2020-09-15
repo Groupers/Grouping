@@ -32,7 +32,9 @@ const NewGroupMoreInfoView = (props) => {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       // eslint-disable-next-line react/prop-types
-      color: props.groupingCreationMainStore.isPreviewButtonActivated ? Colors.black : '#999',
+      color: props.groupingCreationMainStore.isPreviewButtonActivated
+        ? Colors.black
+        : COLORS.FONT_GRAY,
     };
   };
 
@@ -58,7 +60,7 @@ const NewGroupMoreInfoView = (props) => {
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
     style: {
-      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT,  // 348  // 500
+      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT, // 348  // 500
       paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       // paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
@@ -84,9 +86,6 @@ const NewGroupMoreInfoView = (props) => {
   };
 
   const closeGenderPanel = () => {
-    if (props.groupingCreationMainStore.groupingGender === null) {
-      props.groupingCreationMainStore.groupingGenderSelected('ALL');
-    }
     setGenderPanelActive(false);
   };
 
@@ -150,28 +149,16 @@ const NewGroupMoreInfoView = (props) => {
           >
             <Icon name="place" size={15} />
           </View>
-          <Text style={styles.fontColor}> 활동 위치</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('NewGroupDescriptionView')}>
-        <View
-          style={{
-            flexDirection: 'row',
-            height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
-            alignItems: 'center',
-          }}
-        >
-          <View
+          <Text
             style={{
-              width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
-              paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
-              paddingTop: 2,
+              color: props.groupingCreationMainStore.addressFontColor,
+              fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
             }}
           >
-            <Icon name="subject" size={15} />
-          </View>
-          <Text style={styles.fontColor}>그룹 소개글</Text>
+            {props.groupingCreationMainStore.groupingAddressCompleted === true
+              ? props.groupingCreationMainStore.groupingAddress
+              : '활동 위치'}
+          </Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => openGenderPanel()}>
@@ -218,38 +205,6 @@ const NewGroupMoreInfoView = (props) => {
           <Text style={styles.fontColor}> 나이 제한 추가</Text>
         </View>
       </TouchableOpacity>
-      <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginBottom: 34 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          }}
-        >
-          <TouchableOpacity onPress={() => initializeGender()}>
-            <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT, color: COLORS.BLACK }}>취소</Text>
-          </TouchableOpacity>
-          <View flex={1} />
-          <TouchableOpacity
-            onPress={() => {
-              closeGenderPanel();
-            }}
-          >
-            <Text>저장</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{ fontSize: FONT_SIZE.SMALL_TITLE, fontWeight: 'bold', color: COLORS.BLACK }}>
-          가입 가능한 성별을 알려주세요
-        </Text>
-        <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
-        <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
-          미설정 시 모두환영으로 표시됩니다.
-        </Text>
-        <View style={{ height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
-        <GenderSettingView
-          onSelectGender={onGenderSelected.bind(this)}
-          // groupingGender={props.groupingCreationMainStore.groupingGender}
-        />
-      </SwipeablePanel>
       <SwipeablePanel {...panelProps} isActive={agePanelActive}>
         <View
           style={{
@@ -297,6 +252,70 @@ const NewGroupMoreInfoView = (props) => {
           />
         </View>
       </SwipeablePanel>
+      <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginBottom: 34 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          }}
+        >
+          <TouchableOpacity onPress={() => initializeGender()}>
+            <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT, color: COLORS.BLACK }}>취소</Text>
+          </TouchableOpacity>
+          <View flex={1} />
+          <TouchableOpacity
+            onPress={() => {
+              closeGenderPanel();
+            }}
+          >
+            <Text>저장</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={{ fontSize: FONT_SIZE.SMALL_TITLE, fontWeight: 'bold', color: COLORS.BLACK }}>
+          가입 가능한 성별을 알려주세요
+        </Text>
+        <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+        <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
+          미설정 시 모두환영으로 표시됩니다.
+        </Text>
+        <View style={{ height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+        <GenderSettingView
+          onSelectGender={onGenderSelected.bind(this)}
+          // groupingGender={props.groupingCreationMainStore.groupingGender}
+        />
+      </SwipeablePanel>
+
+      <TouchableOpacity onPress={() => props.navigation.navigate('NewGroupDescriptionView')}>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingTop: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            // alignItems: 'center',
+            width: 236 * WINDOW_SIZE.WIDTH_WEIGHT,
+          }}
+        >
+          <View
+            style={{
+              width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
+              paddingTop: 2,
+            }}
+          >
+            <Icon name="subject" size={15} />
+          </View>
+          <Text
+            style={{
+              fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              color: props.groupingCreationMainStore.descriptionFontColor,
+            }}
+          >
+            {props.groupingCreationMainStore.groupingDescription === ''
+              ? '그룹 소개글'
+              : props.groupingCreationMainStore.groupingDescription}
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -311,6 +330,11 @@ const styles = StyleSheet.create({
   },
   fontColor: {
     color: COLORS.FONT_GRAY,
+    fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  },
+  description: {
+    flex: 1,
+    // color: COLORS.FONT_GRAY,
     fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });

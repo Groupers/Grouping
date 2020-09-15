@@ -27,6 +27,7 @@ import FeedMain from './feed/FeedMain';
 
 // MyPage
 import MyPageMain from './myPage/MyPageMain';
+import AddressSearchTextView from './AddressSearchTextView';
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -58,7 +59,11 @@ const HomeStackScreen = ({ navigation }) => {
         options={{
           title: '',
           headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={() => navigation.navigate('NewGroupNameView')} />
+            <Icon
+              name="chevron-left"
+              size={22}
+              onPress={() => navigation.navigate('NewGroupNameView')}
+            />
           ),
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
@@ -81,16 +86,18 @@ const HomeStackScreen = ({ navigation }) => {
       <HomeStack.Screen
         name="NewGroupLocationView"
         component={NewGroupLocationView}
+        navigation={navigation}
         options={{
-          title: '',
-          headerLeft: () => (
-            <Icon
-              name="chevron-left"
-              size={22}
-              onPress={() => navigation.navigate('NewGroupMoreInfoView')}
-            />
-          ),
-          headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
+          headerShown: false,
+          // title: '',
+          // headerLeft: () => (
+          //   <Icon
+          //     name="chevron-left"
+          //     size={22}
+          //     onPress={() => navigation.navigate('NewGroupMoreInfoView')}
+          //   />
+          // ),
+          // headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
       <HomeStack.Screen

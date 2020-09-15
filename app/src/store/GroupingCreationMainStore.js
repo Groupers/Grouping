@@ -1,16 +1,13 @@
 import { action, computed, observable } from 'mobx';
 import { Text } from 'react-native';
 import * as React from 'react';
-import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
+import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
 import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
 import KoreanChecker from '../component/KoreanChecker';
-import AgeValidator, {
-  MAX_AVAILABLE_AGE,
-  MIN_AVAILABLE_AGE,
-} from '../component/AgeValidator';
+import AgeValidator, { MAX_AVAILABLE_AGE, MIN_AVAILABLE_AGE } from '../component/AgeValidator';
 import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
 import { ResponseCode } from '../constant/ResponseCode';
 import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
@@ -82,6 +79,13 @@ export default class GroupingCreationMainStore {
     console.log(this.groupingGender);
   };
 
+  @action groupingInitializeAddressSearchKeyword = () => {
+    this.groupingAddressSearchKeyword = '';
+    this.groupingAddressSearchResult = [];
+    this.groupingAddress = '';
+    console.log(`groupingAddressSearchKeyword${this.groupingAddressSearchKeyword}`);
+  };
+
   @action groupingInitializeAge = () => {
     this.groupingAvailableMinAgeChanged(Number(MIN_AVAILABLE_AGE));
     this.groupingAvailableMaxAgeChanged(Number(MAX_AVAILABLE_AGE));
@@ -106,6 +110,7 @@ export default class GroupingCreationMainStore {
 
   @action groupingAddressSearchKeywordChanged = async (keyword) => {
     // koreanChecker does not working
+    console.log(`groupingAddressSearchKeywordChanged : ${keyword}`);
     this.groupingAddressSearchKeyword = keyword;
     if (!this.koreanChecker.checkKoreanOrNot(keyword)) {
       return;
@@ -119,6 +124,7 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupingAddressSelected = (address) => {
+    console.log(`address : ${address}`);
     this.groupingAddressCompleted = true;
     this.groupingAddress = address;
     this.groupingCreationDto.pointDescription = address;
@@ -156,7 +162,7 @@ export default class GroupingCreationMainStore {
             this.groupingBackgroundImageURI = { uri };
             this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
             console.log('background image changed IOS');
-            console.log('IOS' + this.groupingBackgroundImageURI);
+            console.log(`IOS${this.groupingBackgroundImageURI}`);
           }
         } catch (error) {
           console.log('askPermission', error);
@@ -181,8 +187,7 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus ===
-        GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.INTERESTS &&
       this.keywordParser.parseKeyword(this.groupingKeyword)
     ) {
       return true;
@@ -190,8 +195,7 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus ===
-        GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.DESCRIPTION &&
       this.groupingDescription.length > MIN_DESCRIPTION_LENGTH
     ) {
       return true;
@@ -199,11 +203,10 @@ export default class GroupingCreationMainStore {
 
     if (
       this.groupingCreationViewStatus === groupingCreationView &&
-      this.groupingCreationViewStatus ===
-        GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
+      this.groupingCreationViewStatus === GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO &&
       this.ageValidator.validateAge(
         Number(this.groupingAvailableMinAge),
-        Number(this.groupingAvailableMaxAge),
+        Number(this.groupingAvailableMaxAge)
       ) &&
       this.groupingGender !== '' &&
       this.groupingAddress !== ''
@@ -225,7 +228,7 @@ export default class GroupingCreationMainStore {
       (responseCode) => {
         console.log('responseCode : ');
         console.log(responseCode);
-      },
+      }
     );
     console.log('out');
 
@@ -240,7 +243,7 @@ export default class GroupingCreationMainStore {
 
   @computed get isPreviewButtonActivated() {
     console.log(this.groupingDescriptionCompleted);
-    console.log(this.groupingAddressCompleted);
+    // console.log("groupingAddressCompleted : "+this.groupingAddressCompleted+this.groupingAddress);
     return this.groupingDescriptionCompleted && this.groupingAddressCompleted;
   }
 
@@ -263,6 +266,14 @@ export default class GroupingCreationMainStore {
 
   @computed get genderFontColor() {
     return this.genderChanged !== false ? COLORS.BLACK : COLORS.FONT_GRAY;
+  }
+
+  @computed get descriptionFontColor() {
+    return this.groupingDescription !== '' ? COLORS.BLACK : COLORS.FONT_GRAY;
+  }
+
+  @computed get addressFontColor() {
+    return this.groupingAddressCompleted === true ? COLORS.BLACK : COLORS.FONT_GRAY;
   }
 
   @action initialize(groupingUserId) {
