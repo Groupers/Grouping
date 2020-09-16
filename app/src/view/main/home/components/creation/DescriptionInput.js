@@ -2,11 +2,13 @@ import * as React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import { COLORS } from '../../../../../assets/Colors';
 
-const InputDescriptionTextView = (props) => {
+const DescriptionInput = (props) => {
   return (
     <View style={styles.titleContainer}>
       <TextInput
+        textAlignVertical="top"
         style={styles.title}
         maxLength={1000}
         placeholder={props.textExample}
@@ -23,22 +25,19 @@ const InputDescriptionTextView = (props) => {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    borderColor: 'black',
-    borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
-    flexDirection: 'row',
-    width: '90%',
-    margin: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
+    flex: 1,
+    // width: WINDOW_SIZE.WIDTH,
+    // borderWidth: 1,
+    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    backgroundColor: COLORS.MAIN_COLOR,
   },
 
   title: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginLeft: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    height: WINDOW_SIZE.HEIGHT,
     color: Colors.black,
-    fontSize: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   counter: {
@@ -46,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputDescriptionTextView;
+export default DescriptionInput;

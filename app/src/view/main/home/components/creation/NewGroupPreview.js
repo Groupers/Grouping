@@ -2,17 +2,31 @@ import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import ImagePicker from 'react-native-image-picker';
-import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import GroupName from './GroupName';
+import GroupingUserDto from '../../../../../dto/GroupingUserDto';
+import GroupLeaderProfile from './GroupLeaderProfile';
+import GroupKeyword from './GroupKeyword';
+import GroupDescription from './GroupDescription';
+import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 
 // eslint-disable-next-line react/prop-types
-const Preview = (props) => {
+const NewGroupPreview = (props) => {
   React.useLayoutEffect(() => {
-
     props.navigation.setOptions({
-      headerRight: () => <Text onPress={() => props.navigation.navigate('Home')}>완료</Text>,
+      headerRight: () => (
+        <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>
+      ),
     });
     // eslint-disable-next-line react/destructuring-assignment
   }, [props.navigation]);
+
+  const onHeaderNextButtonClicked = () => {
+    props.groupingCreationMainStore.groupingCreationViewChanged(
+      GROUPING_CREATION_VIEW_STATUS.CONFIRM,
+    );
+    props.groupingCreationMainStore.groupCreation();
+    props.navigation.navigate('Home');
+  };
 
   const showPicker = () => {
     const options = {
@@ -32,7 +46,9 @@ const Preview = (props) => {
       } else {
         const uri = { uri: response.uri };
         console.log(response.uri);
-        props.groupingCreationMainStore.groupingBackgroundImageChanged({ ...uri });
+        props.groupingCreationMainStore.groupingBackgroundImageChanged({
+          ...uri,
+        });
       }
     });
   };
@@ -45,12 +61,22 @@ const Preview = (props) => {
           style={{ flex: 1, height: '100%', width: '100%', zIndex: 1 }}
         />
       </TouchableOpacity>
+      <View>
+        <Text>{props.groupingCreationMainStore.groupingGender}</Text>
+        <Text>
+          {props.groupingCreationMainStore.groupingAvailableMinAge} ~{' '}
+          {props.groupingCreationMainStore.groupingAvailableMaxAge}
+        </Text>
+      </View>
       <View style={styles.contents}>
-        {/*
-        <GroupName />
-        <GroupKeywords />
-        <GroupDescription />
-        */}
+        <GroupLeaderProfile />
+        <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
+        <GroupKeyword
+          groupKeyword={props.groupingCreationMainStore.groupingKeyword}
+        />
+        <GroupDescription
+          groupDescription={props.groupingCreationMainStore.groupingDescription}
+        />
       </View>
     </View>
   );
@@ -77,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(Preview));
+export default inject('groupingCreationMainStore')(observer(NewGroupPreview));

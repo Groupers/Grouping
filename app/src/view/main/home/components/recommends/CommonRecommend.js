@@ -11,12 +11,11 @@ const CommonRecommend = () => {
       }}
     >
       <Text style={{ fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
-        선선한 여름밤, <Text style={{ color: 'orange' }}> #캠핑 </Text>
+        선선한 여름밤,{'\n'}
+        <Text style={{ color: 'orange' }}> #캠핑 </Text>
         어떠세요?
       </Text>
-      <Text style={{ fontSize: 10 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
-        관련 그룹 보기 >
-      </Text>
+      <Text style={{ fontSize: 10 * WINDOW_SIZE.HEIGHT_WEIGHT }}>관련 그룹 보기 ></Text>
       <Text style={{ fontSize: 10 * WINDOW_SIZE.HEIGHT_WEIGHT }}>1/3</Text>
     </View>
   );

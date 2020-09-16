@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { inject, observer } from 'mobx-react';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
-const PersonalRecommend = ({ navigation }) => {
+const PersonalRecommend = (props) => {
   return (
     <View>
       <View style={styles.textBlock}>
         <TouchableOpacity>
-          <Text style={styles.textStyle}>연수님 맞춤 그룹 ></Text>
+          {/* 추후변경 */}
+          <Text style={styles.textStyle}>연수님 맞춤 그룹</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.carouselBox}>
@@ -39,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PersonalRecommend;
+export default inject('userStore')(observer(PersonalRecommend));

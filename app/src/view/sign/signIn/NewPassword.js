@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -9,12 +9,12 @@ import {
   View,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import NextButton from '../components/NextButton';
 import LabelView from '../components/LabelView';
 import SignErrorMessageView from '../components/SignErrorMessageView';
 import { COLORS } from '../../../assets/Colors';
-import { WINDOW_SIZE } from '../../../constant/WindowSize';
-import BirthdayPicker from '../components/BirthdayPicker';
+import ActivePasswordInputTextView from '../components/ActivePasswordInputTextView';
+import PasswordInputTextView from '../components/PasswordInputTextView';
+import { ResponseCode } from '../../../constant/ResponseCode';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -24,9 +24,9 @@ import BirthdayPicker from '../components/BirthdayPicker';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signUpBasicInfoStore')
+@inject('signUpPasswordStore', 'resetPasswordStore')
 @observer
-class SignUpBirthday extends Component {
+class NewPassword extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -37,8 +37,12 @@ class SignUpBirthday extends Component {
   componentDidMount() {}
 
   signUpNextButtonClicked() {
-    this.props.signUpBasicInfoStore.completeBirthday();
-    // this.render();
+    this.props.signUpPasswordStore.completePassword();
+
+    this.props.resetPasswordStore.resetPassword(this.props.signUpPasswordStore.passwordText);
+    this.props.resetPasswordStore.passwordChangeStatus === ResponseCode.SUCCEED
+      ? this.props.navigation.navigate('EntranceMain')
+      : null;
   }
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
@@ -47,21 +51,22 @@ class SignUpBirthday extends Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.body}
-      >
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.body}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <LabelView text="생년월일을 알려주세요" />
-              <View style={{ height: 30 }} />
-              <BirthdayPicker />
-              <SignErrorMessageView text={this.props.signUpBasicInfoStore.errorMessage} />
+              <LabelView text="새 비밀번호" />
+              <PasswordInputTextView
+                toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(this)}
+                isShowPassword={this.props.signUpPasswordStore.isShowPassword}
+                text={this.props.signUpPasswordStore.passwordText}
+                onChangeText={this.props.signUpPasswordStore.passwordTextChanged.bind(this)}
+              />
+              <SignErrorMessageView text={this.props.signUpPasswordStore.errorMessage} />
             </View>
             <View style={styles.bottomContainer}>
-              <NextButton
-                isActive={this.props.signUpBasicInfoStore.isValidBirthday}
+              <SignUpNextButton
+                isActive={this.props.signUpPasswordStore.isValidInputData}
                 text="완료"
                 onClick={this.signUpNextButtonClicked.bind(this)}
               />
@@ -79,7 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
   },
 
@@ -88,36 +92,37 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.MAIN_COLOR,
     flexDirection: 'column',
     alignItems: 'center',
-    // justifyContent: 'center',
-    // width: 290 * WINDOW_SIZE.WIDTH_WEIGHT,
+    justifyContent: 'center',
+    width: '90%',
+    // paddingTop:30
   },
-  titleContainer: {
-    width: '100%',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    marginTop: 70 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  informTextContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
   },
-  title: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.SUB_COLOR,
-    marginBottom: 10,
-  },
-  subTitle: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.DARK_GRAY,
-  },
+
   contentContainer: {
     flex: 1,
-    width: '100%',
+    paddingTop: 150,
     alignItems: 'center',
+    backgroundColor: COLORS.MAIN_COLOR,
+    width: '100%',
     justifyContent: 'center',
+    // borderWidth: 2
   },
+
   bottomContainer: {
-    flex: 1,
+    // borderWidth:2,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    flex: 1,
   },
+
+  authTimer: {},
+
+  authButton: {},
 });
 
-export default SignUpBirthday;
+export default NewPassword;

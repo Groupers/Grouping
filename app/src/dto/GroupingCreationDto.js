@@ -1,7 +1,27 @@
 export default class GroupingCreationDto {
-  title = '';
+  title;
 
-  keyword: [];
+  isHidden;
+
+  minUserAge;
+
+  maxUserAge;
+
+  availableGender;
+
+  description;
+
+  pointX;
+
+  pointY;
+
+  pointDescription;
+
+  representGroupingUserId;
+
+  representGroupImage;
+
+  hashtagList = [];
 
   constructor(data = {}) {
     Object.assign(this, data);

@@ -4,7 +4,7 @@ const Realm = require('realm');
 
 export default class UserTable {
   create = async (groupingUserDto: GroupingUserDto) => {
-    await Realm.open({ schema: [UserTable] }).then(realm => {
+    await Realm.open({ schema: [UserTable] }).then((realm) => {
       return realm.create('User', {
         name: groupingUserDto.name,
         userStatus: groupingUserDto.userStatus,
@@ -20,8 +20,8 @@ export default class UserTable {
   };
 
   findByEmail = async (email: String) => {
-    await Realm.open({ schema: [UserTable] }).then(realm => {
-      let user = realm.objects('User').filtered('email = $0', email);
+    await Realm.open({ schema: [UserTable] }).then((realm) => {
+      const user = realm.objects('User').filtered('email = $0', email);
       console.log(user);
     });
   };
@@ -38,6 +38,6 @@ UserTable.schema = {
     userId: 'string?',
     gender: 'string',
     birthday: 'date',
-    representProfileImage: 'string?'
+    representProfileImage: 'string?',
   },
 };

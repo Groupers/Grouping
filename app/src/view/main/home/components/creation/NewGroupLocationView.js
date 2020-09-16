@@ -1,14 +1,18 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, Text, TextInput, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import { useEffect } from 'react';
+import { Header } from '@react-navigation/stack';
+import { Icon } from 'react-native-elements';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import AddressSearchResultView from '../../../AddressSearchResultView';
 import AddressSearchTextView from '../../../AddressSearchTextView';
+import { COLORS } from '../../../../../assets/Colors';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupLocationView = (props) => {
+const NewGroupLocationView = (props) => {
   const onAddressKeywordChanged = async (keyword) => {
     await props.groupingCreationMainStore.groupingAddressSearchKeywordChanged(keyword);
   };
@@ -19,7 +23,7 @@ const InputNewGroupLocationView = (props) => {
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
         ? Colors.black
-        : '#999',
+        : COLORS.FONT_GRAY,
     };
   };
 
@@ -35,34 +39,36 @@ const InputNewGroupLocationView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
     );
-
-    props.navigation.setOptions({
-      headerRight: () => (
-        <Text
-          onPress={() => {
-            onHeaderNextButtonClicked();
-          }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.LOCATION)}
-        >
-          완료
-        </Text>
-      ),
-    });
+    onHeaderNextButtonClicked();
+    // props.navigation.navigate('groupingCreationExtraInfo');
   };
 
-  // props.navigation.headerBackground = () => (
-  //   <AddressSearchTextView
-  //     onChangeText={onAddressKeywordChanged.bind(this)}
-  //     value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
-  //   />
-  // );
+  // const onAddressSelected = (address) => {
+  //   props.groupingCreationMainStore.groupingAddressSelected(address);
+  //   props.groupingCreationMainStore.groupingCreationViewChanged(
+  //     GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO
+  //   );
+  //
+  //   // props.navigation.setOptions({
+  //   //   headerRight: () => (
+  //   //     <Text
+  //   //       onPress={() => {
+  //   // onHeaderNextButtonClicked();
+  //   //       }}
+  //   //       style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.LOCATION)}
+  //   //     >
+  //   //       완료
+  //   //     </Text>
+  //   //   ),
+  //   // });
+  // };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>input group location</Text>
+    <View style={{ flex: 1 }}>
       <AddressSearchTextView
-        onChangeText={onAddressKeywordChanged.bind(this)}
+        onChangeText={onAddressKeywordChanged}
         value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
+        navigation={props.navigation}
       />
       <AddressSearchResultView
         onClick={onAddressSelected.bind(this)}
@@ -72,4 +78,6 @@ const InputNewGroupLocationView = (props) => {
   );
 };
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupLocationView));
+export default inject('groupingCreationMainStore')(observer(NewGroupLocationView));
+
+// export default NewGroupLocationView;

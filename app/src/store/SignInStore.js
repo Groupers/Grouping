@@ -9,8 +9,15 @@ import { ResponseCode } from '../constant/ResponseCode';
 import UserStore from './UserStore';
 import PhoneValidator from '../component/PhoneValidator';
 import { INPUT_STATUS } from '../constant/InputStatus';
+import GroupingUserDto from '../dto/GroupingUserDto';
 
 export default class SignInStore {
+  koreaPhonePrefixConditionFirst = '010';
+
+  koreaPhonePrefixConditionSecond = '10';
+
+  koreaPhonePrefix = '+82';
+
   signRepository = new SignRepository();
 
   emailValidator = new EmailValidator();
@@ -24,6 +31,8 @@ export default class SignInStore {
   @observable inputText = '';
 
   @observable phoneNumberText = '';
+
+  @observable formattedPhoneNumber = '';
 
   @observable passwordText = '';
 
@@ -57,10 +66,11 @@ export default class SignInStore {
 
   @action inputTextChanged = (inputText) => {
     this.inputText = inputText;
+    this.phoneNumberChanged(inputText);
     // 입력된 값 이메일 형태일 때
     if (this.emailValidator.validateEmail(inputText)) {
       this.emailTextChanged(inputText);
-    } else if (this.phoneValidator.validatePhoneNumber(inputText))
+    } else if (this.phoneValidator.validatePhoneNumber(this.formattedPhoneNumber))
       // 입력된 값 핸드폰번호 형태일 때
       this.phoneNumberTextChanged(inputText);
 
@@ -70,6 +80,31 @@ export default class SignInStore {
     ) {
       this.inputStatus = INPUT_STATUS.SUCCEED;
     }
+  };
+
+  @action phoneNumberChanged = (text) => {
+    text = text.replace(/-/gi, '');
+    if (text.toString().slice(0, 3) === this.koreaPhonePrefixConditionFirst) {
+      this.formattedPhoneNumber =
+        this.koreaPhonePrefix + text.toString().slice(1, text.toString().length + 1);
+    } else if (text.toString().slice(0, 2) === this.koreaPhonePrefixConditionSecond) {
+      this.formattedPhoneNumber =
+        this.koreaPhonePrefix + text.toString().slice(0, text.toString().length + 1);
+    } else if (
+      text.toString().length >= 4 &&
+      text.toString().length < 6 &&
+      text.toString().slice(0, 3) === this.koreaPhonePrefix
+    ) {
+      this.formattedPhoneNumber = text.toString().slice(3, text.toString().length);
+    } else if (text.toString().length > 13) {
+      this.formattedPhoneNumber = text.toString().slice(0, 13);
+      this.formattedPhoneNumber = this.formattedPhoneNumber.trim();
+      return;
+    } else {
+      this.formattedPhoneNumber = text;
+    }
+
+    this.formattedPhoneNumber = this.formattedPhoneNumber.trim();
   };
 
   @action passwordTextChanged = (password) => {
@@ -103,24 +138,23 @@ export default class SignInStore {
 
     this.emailStatus = INPUT_EMAIL_STATUS.SUCCEED;
     this.emailText = email;
-    console.log(this.emailText.toString());
   };
 
-  @action phoneNumberTextChanged = (phonenumber) => {
-    if (String(phonenumber).length === 0) {
+  @action phoneNumberTextChanged = (text) => {
+    if (String(text).length === 0) {
       this.phoneStatus = INPUT_PHONE_STATUS.NONE;
-      this.phoneNumberText = phonenumber;
+      this.phoneNumberText = text;
       return;
     }
 
-    if (!this.phoneValidator.validatePhoneNumber(phonenumber)) {
+    if (!this.phoneValidator.validatePhoneNumber(this.formattedPhoneNumber)) {
       this.phoneStatus = INPUT_PHONE_STATUS.NOT_FORMATTED;
-      this.phoneNumberText = phonenumber;
+      this.phoneNumberText = text;
       return;
     }
 
     this.phoneStatus = INPUT_PHONE_STATUS.SUCCEED;
-    this.phoneNumberText = phonenumber;
+    this.phoneNumberText = text;
   };
 
   @computed get isValidInputData() {
@@ -132,7 +166,7 @@ export default class SignInStore {
 
   @computed get errorMessage() {
     if (this.inputStatus === INPUT_STATUS.NOT_FORMATTED) {
-      return '이메일 혹은 전화번호 형식이 맞지 않습니다.';
+      return '이메일 혹은 전화번호 형식이 맞지 않습니다1.';
     }
 
     if (this.emailStatus === INPUT_STATUS.NOT_FORMATTED) {
@@ -155,7 +189,6 @@ export default class SignInStore {
   }
 
   @action signIn = async () => {
-    const groupingUserDto = null;
     if (this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED) {
       this.groupingUserDto = await this.signRepository.signInWithEmail(
         this.inputText,
@@ -173,7 +206,7 @@ export default class SignInStore {
       );
     } else if (this.phoneStatus === INPUT_PHONE_STATUS.SUCCEED) {
       this.groupingUserDto = await this.signRepository.signInWithPhone(
-        this.inputText,
+        this.phoneNumberText,
         this.passwordText,
         (responseCode) => {
           if (responseCode === ResponseCode.INVALID_PASSWORD) {
@@ -188,9 +221,11 @@ export default class SignInStore {
       );
     }
 
-    if (groupingUserDto !== undefined) {
-      this.userStore.signInCompleted(groupingUserDto);
+    if (this.groupingUserDto !== undefined) {
+      console.log(this.groupingUserDto);
+      this.userStore.signInCompleted(this.groupingUserDto);
       console.log('signInCompleted');
     }
   };
+
 }

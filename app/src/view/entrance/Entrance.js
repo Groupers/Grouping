@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import {
-  createStackNavigator,
-  HeaderBackButton,
-} from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import { Dimensions, Keyboard, StyleSheet, Text } from 'react-native';
 
 import { Icon } from 'react-native-elements';
@@ -15,8 +12,9 @@ import SignUpTermsAgreement from '../sign/signUp/SignUpTermsAgreement';
 import { COLORS } from '../../assets/Colors';
 import EntranceMain from './EntranceMain';
 import FindEmail from '../sign/signIn/FindEmail';
-import ResetPasssword from '../sign/signIn/ResetPasssword';
+import ResetPassword from '../sign/signIn/ResetPassword';
 import ResetPasswordPhone from '../sign/signIn/ResetPasswordPhone';
+import NewPassword from '../sign/signIn/NewPassword';
 import SignUpName from '../sign/signUp/SignUpName';
 import SignUpGender from '../sign/signUp/SignUpGender';
 import SignUpBirthday from '../sign/signUp/SignUpBirthday';
@@ -31,8 +29,6 @@ import SignUpBirthday from '../sign/signUp/SignUpBirthday';
 
 const Stack = createStackNavigator();
 
-const Height = Dimensions.get('window').height;
-
 class Entrance extends React.Component {
   constructor(props) {
     super(props);
@@ -41,11 +37,11 @@ class Entrance extends React.Component {
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      this._keyboardDidShow.bind(this),
+      this._keyboardDidShow.bind(this)
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
-      this._keyboardDidHide.bind(this),
+      this._keyboardDidHide.bind(this)
     );
   }
 
@@ -69,11 +65,7 @@ class Entrance extends React.Component {
   // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
   // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
   // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  componentDidUpdate(
-    prevProps: Readonly<P>,
-    prevState: Readonly<S>,
-    snapshot: SS,
-  ) {}
+  componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {}
 
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
@@ -118,12 +110,7 @@ class Entrance extends React.Component {
               },
               headerBackImage: () => {
                 return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color={COLORS.DARK_GRAY}
-                  />
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
                 );
               },
             }}
@@ -141,14 +128,7 @@ class Entrance extends React.Component {
               headerTitle: '',
               // headerBackTitle:"<",
               headerBackImage: () => {
-                return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color="lightgray"
-                  />
-                );
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
             }}
           >
@@ -164,14 +144,7 @@ class Entrance extends React.Component {
               },
               headerTitle: '',
               headerBackImage: () => {
-                return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color="lightgray"
-                  />
-                );
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
             }}
           >
@@ -190,14 +163,7 @@ class Entrance extends React.Component {
               headerTitle: '회원가입',
               // headerBackTitle:"<",
               headerBackImage: () => {
-                return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color="lightgray"
-                  />
-                );
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
             }}
           >
@@ -217,12 +183,7 @@ class Entrance extends React.Component {
               },
               headerBackImage: () => {
                 return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color={COLORS.DARK_GRAY}
-                  />
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
                 );
               },
             }}
@@ -242,12 +203,7 @@ class Entrance extends React.Component {
               },
               headerBackImage: () => {
                 return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color={COLORS.DARK_GRAY}
-                  />
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
                 );
               },
             }}
@@ -267,12 +223,7 @@ class Entrance extends React.Component {
               },
               headerBackImage: () => {
                 return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color={COLORS.DARK_GRAY}
-                  />
+                  <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
                 );
               },
             }}
@@ -290,14 +241,7 @@ class Entrance extends React.Component {
               headerShown: false,
               // headerBackTitle:"<",
               headerBackImage: () => {
-                return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color="lightgray"
-                  />
-                );
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
             }}
           >
@@ -312,14 +256,7 @@ class Entrance extends React.Component {
               },
               title: '이메일 찾기',
               headerBackImage: () => {
-                return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color="lightgray"
-                  />
-                );
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
             }}
           >
@@ -334,21 +271,14 @@ class Entrance extends React.Component {
               },
               title: '비밀번호 재설정',
               headerBackImage: () => {
-                return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color="lightgray"
-                  />
-                );
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
             }}
           >
-            {(props) => <ResetPasssword {...props} />}
+            {(props) => <ResetPassword {...props} />}
           </Stack.Screen>
           <Stack.Screen
-            name="ResetPasswordPhone"
+            name="newPassword"
             options={{
               headerStyle: {
                 backgroundColor: COLORS.MAIN_COLOR,
@@ -356,18 +286,11 @@ class Entrance extends React.Component {
               },
               title: '비밀번호 재설정',
               headerBackImage: () => {
-                return (
-                  <Icon
-                    name="chevron-left"
-                    type="feather"
-                    size={26}
-                    color="lightgray"
-                  />
-                );
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
             }}
           >
-            {(props) => <ResetPasswordPhone {...props} />}
+            {(props) => <NewPassword {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

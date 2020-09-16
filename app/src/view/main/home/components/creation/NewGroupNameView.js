@@ -1,64 +1,54 @@
-import React, { useEffect } from 'react';
-import { BackHandler, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
-import { Icon } from 'react-native-elements';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
-import InputTitleView from './InputTitleView';
+import TitleInput from './TitleInput';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
 import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 // eslint-disable-next-line react/prop-types
-const InputNewGroupNameView = (props) => {
-  /* React.useLayoutEffect(() => {
-    // eslint-disable-next-line react/prop-types
-    props.navigation.setOptions({
-      headerRight: () => (
-        // eslint-disable-next-line react/prop-types
-        <Text onPress={() => props.navigation.navigate('InputNewGroupInterests')}>다음</Text>
-      ),
-    });
-    // eslint-disable-next-line react/prop-types,react/destructuring-assignment
-  }, [props.navigation]); */
-
+const NewGroupNameView = (props) => {
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.navigate('InputNewGroupInterests');
-  };
-
-  const rightIconStyle = (groupingCreationView) => {
-    return {
-      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
-        ? Colors.black
-        : '#999',
-    };
+    props.navigation.navigate('NewGroupInterestsView');
   };
 
   const onTitleChanged = (title) => {
     props.groupingCreationMainStore.groupingTitleChanged(title);
-    props.navigation.setOptions({
-      headerRight: () => (
-        <Text
-          onPress={() => {
-            onHeaderNextButtonClicked();
-          }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
-        >
-          다음
-        </Text>
-      ),
-    });
+  };
+
+  const rightIconStyle = (selectedColor) => {
+    return {
+      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+      color: selectedColor,
+    };
   };
 
   React.useEffect(() => {
-    props.groupingCreationMainStore.initialize();
-  },[]);
+    if (props.groupingCreationMainStore.groupingTitle.length > 2) {
+      props.navigation.setOptions({
+        headerRight: () => (
+          <Text
+            onPress={() => {
+              onHeaderNextButtonClicked();
+            }}
+            style={rightIconStyle(COLORS.BLACK)}
+          >
+            다음
+          </Text>
+        ),
+      });
+    } else if (props.groupingCreationMainStore.groupingTitle.length < 2) {
+      props.navigation.setOptions({
+        headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
+      });
+    }
+  });
 
   return (
     <View style={styles.mainContainer}>
@@ -67,7 +57,7 @@ const InputNewGroupNameView = (props) => {
         <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>그룹 이름을 알려주세요.</Text>
       </View>
       <View style={styles.groupNameInputContainer}>
-        <InputTitleView
+        <TitleInput
           textExample="30자 이내로 입력해 주세요."
           onChangeText={onTitleChanged.bind(this)}
           groupingTitle={props.groupingCreationMainStore.groupingTitle}
@@ -97,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('groupingCreationMainStore')(observer(InputNewGroupNameView));
+export default inject('groupingCreationMainStore', 'userStore')(observer(NewGroupNameView));
