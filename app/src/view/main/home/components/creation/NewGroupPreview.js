@@ -8,21 +8,21 @@ import GroupLeaderProfile from './GroupLeaderProfile';
 import GroupKeyword from './GroupKeyword';
 import GroupDescription from './GroupDescription';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
+import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
+import { COLORS } from '../../../../../assets/Colors';
 
 // eslint-disable-next-line react/prop-types
 const NewGroupPreview = (props) => {
   React.useLayoutEffect(() => {
     props.navigation.setOptions({
-      headerRight: () => (
-        <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>
-      ),
+      headerRight: () => <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>,
     });
     // eslint-disable-next-line react/destructuring-assignment
   }, [props.navigation]);
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
-      GROUPING_CREATION_VIEW_STATUS.CONFIRM,
+      GROUPING_CREATION_VIEW_STATUS.CONFIRM
     );
     props.groupingCreationMainStore.groupCreation();
     props.navigation.navigate('Home');
@@ -63,20 +63,32 @@ const NewGroupPreview = (props) => {
       </TouchableOpacity>
       <View>
         <Text>{props.groupingCreationMainStore.groupingGender}</Text>
-        <Text>
-          {props.groupingCreationMainStore.groupingAvailableMinAge} ~{' '}
-          {props.groupingCreationMainStore.groupingAvailableMaxAge}
-        </Text>
+        <View
+          style={{
+            position: 'absolute',
+            top: -20 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          }}
+        >
+          <Text>
+            {props.groupingCreationMainStore.groupingAvailableMinAge} ~{' '}
+            {props.groupingCreationMainStore.groupingAvailableMaxAge}
+          </Text>
+        </View>
       </View>
       <View style={styles.contents}>
         <GroupLeaderProfile />
         <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
-        <GroupKeyword
-          groupKeyword={props.groupingCreationMainStore.groupingKeyword}
+        <GroupKeyword groupKeyword={props.groupingCreationMainStore.groupingKeyword} />
+        <View
+          style={{
+            height: 1,
+            width: '100%',
+            backgroundColor: COLORS.FONT_GRAY,
+            marginTop: 24 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            marginBottom: 24 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          }}
         />
-        <GroupDescription
-          groupDescription={props.groupingCreationMainStore.groupingDescription}
-        />
+        <GroupDescription groupDescription={props.groupingCreationMainStore.groupingDescription} />
       </View>
     </View>
   );
@@ -99,7 +111,8 @@ const styles = StyleSheet.create({
   contents: {
     width: '100%',
     flex: 1,
-    backgroundColor: 'tomato',
+    backgroundColor: 'white',
+    padding: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });
 
