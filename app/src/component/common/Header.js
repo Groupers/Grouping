@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 56 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: '100%',
+    paddingRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   logoBlock: { width: '50%' },
   createGroupText: {},

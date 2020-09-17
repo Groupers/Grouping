@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  Keyboard,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Text, TouchableOpacity, Keyboard, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  TextInput,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
+import { TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 
 // 추후 검색 api 와 연동
@@ -46,9 +37,10 @@ const SearchView = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginTop: 0,
+    // padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    // margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   paddingBlock: {},
   headerBlock: {
@@ -58,9 +50,10 @@ const styles = StyleSheet.create({
   searchBarBlock: {
     width: '80%',
     height: 56 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    justifyContent: 'center',
   },
   textInputBlock: {
-    marginTop: 21 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    // marginTop: 21 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
   cancelButtonBlock: {
     alignItems: 'flex-end',
