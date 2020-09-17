@@ -1,15 +1,6 @@
 import * as React from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Text,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { useState } from 'react';
 import { WINDOW_SIZE } from '../../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../../assets/Colors';
 
@@ -56,7 +47,7 @@ const MinAgeSettingView = (props) => {
       <Text style={{ fontSize: 20 * WINDOW_SIZE.HEIGHT_WEIGHT }}>최소</Text>
       <ScrollView
         scrollToOverflowEnabled
-        // pagingEnabled
+        pagingEnabled
         overScrollMode="always"
         horizontal={false}
         onScroll={change}
@@ -82,7 +73,7 @@ const MinAgeSettingView = (props) => {
               <Text
                 style={{
                   fontSize: 20,
-                  color: Colors.BLACK,
+                  color: 'red',
                   fontWeight: 'bold',
                 }}
               >
