@@ -7,12 +7,13 @@ import { COLORS } from '../../../../../assets/Colors';
 
 const PopularRecommend = () => {
   return (
-    <View>
+    <View style={{ marginBottom: 54 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
       <View style={styles.textBlock}>
         <TouchableOpacity style={{ flexDirection: 'row' }}>
           <Text style={styles.textStyle}>지금 내 주변 인기 그룹</Text>
-          <Icon name="keyboard_arrow_right" />
+          <Icon name="navigate-next" size={20} color={COLORS.BLACK} />
         </TouchableOpacity>
+        <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT }}>#고양이 #사진 #카페투어</Text>
       </View>
       <View style={styles.carouselBox}>
         <View>
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   sampleStyle: {
     height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
     width: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    borderRadius: 35 * (WINDOW_SIZE.HEIGHT_WEIGHT / WINDOW_SIZE.WIDTH_WEIGHT),
+    borderRadius: 12 * (WINDOW_SIZE.HEIGHT_WEIGHT / WINDOW_SIZE.WIDTH_WEIGHT),
     backgroundColor: 'purple',
   },
   carouselBox: {

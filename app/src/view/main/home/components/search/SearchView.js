@@ -9,28 +9,28 @@ import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 const SearchView = ({ navigation }) => {
   const [input, setInput] = useState('');
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.paddingBlock}>
-        <View style={styles.headerBlock}>
-          <View style={styles.searchBarBlock}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <TextInput
-                style={styles.textInputBlock}
-                placeholder="# 키워드로 검색해보세요."
-                value={input}
-                onChangeText={(text) => setInput(text)}
-              />
-            </TouchableWithoutFeedback>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.paddingBlock}>
+          <View style={styles.headerBlock}>
+            <View style={styles.searchBarBlock}>
+              <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <TextInput
+                    style={styles.textInputBlock}
+                    placeholder="# 키워드로 검색해보세요."
+                    value={input}
+                    onChangeText={(text) => setInput(text)}
+                />
+              </TouchableWithoutFeedback>
+            </View>
+            <View style={styles.cancelButtonBlock}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Text>취소</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.cancelButtonBlock}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Text>취소</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={styles.grayLine} />
         </View>
-        <View style={styles.grayLine} />
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
   );
 };
 

@@ -8,7 +8,8 @@ import CommonRecommend from './components/recommends/CommonRecommend';
 import PersonalRecommend from './components/recommends/PersonalRecommend';
 import Header from '../../../component/common/Header';
 import PopularRecommend from './components/recommends/PopularRecommend';
-import { COLORS } from '../../../assets/Colors';
+import HotKeyword from './components/hotKeyword/HotKeyword';
+import HotKeywordRecommend from './components/hotKeyword/HotKeywordRecommends';
 
 // eslint-disable-next-line react/prop-types
 export default function HomeMain({ navigation }) {
@@ -22,6 +23,7 @@ export default function HomeMain({ navigation }) {
         <View
           style={{
             backgroundColor: '#f5e4e4',
+            flex: 1,
           }}
         >
           <Header navigateTo={navigateTo} navigateMap="home" />
@@ -39,6 +41,8 @@ export default function HomeMain({ navigation }) {
           <SearchBar navigateTo={navigateTo} />
           <PersonalRecommend />
           <PopularRecommend />
+          <HotKeyword />
+          <HotKeywordRecommend />
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
   paddingBlock: {
     width: '100%',
     flex: 1,
+    paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
     // backgroundImage:
   },
   topArea: {
