@@ -30,7 +30,7 @@ const NewGroupMoreInfoView = (props) => {
   const rightIconStyle = () => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
       // eslint-disable-next-line react/prop-types
       color: props.groupingCreationMainStore.isPreviewButtonActivated
         ? Colors.black

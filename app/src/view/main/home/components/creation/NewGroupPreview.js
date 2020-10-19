@@ -15,7 +15,14 @@ import { COLORS } from '../../../../../assets/Colors';
 const NewGroupPreview = (props) => {
   React.useLayoutEffect(() => {
     props.navigation.setOptions({
-      headerRight: () => <Text onPress={() => onHeaderNextButtonClicked()}>완료</Text>,
+      headerRight: () => (
+        <Text
+          onPress={() => onHeaderNextButtonClicked()}
+          style={{ marginRight: 24 * WINDOW_SIZE.WIDTH_WEIGHT }}
+        >
+          완료
+        </Text>
+      ),
     });
     // eslint-disable-next-line react/destructuring-assignment
   }, [props.navigation]);
@@ -61,24 +68,49 @@ const NewGroupPreview = (props) => {
           style={{ flex: 1, height: '100%', width: '100%', zIndex: 1 }}
         />
       </TouchableOpacity>
-      <View>
-        <Text>{props.groupingCreationMainStore.groupingGender}</Text>
+      <View style={styles.contents}>
         <View
           style={{
             position: 'absolute',
-            top: -20 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            top: -38 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            left: 24 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            flexDirection: 'row',
           }}
         >
-          <Text>
-            {props.groupingCreationMainStore.groupingAvailableMinAge} ~{' '}
-            {props.groupingCreationMainStore.groupingAvailableMaxAge}
-          </Text>
+          <View style={styles.moreInfoTextContainerOnImage}>
+            <Text style={styles.moreInfoTextOnImage}>
+              {props.groupingCreationMainStore.minAge} ~ {props.groupingCreationMainStore.maxAge}
+            </Text>
+          </View>
+          <View style={styles.moreInfoTextContainerOnImage}>
+            <Text style={styles.moreInfoTextOnImage}>
+              {props.groupingCreationMainStore.groupingGender}
+            </Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.contents}>
-        <GroupLeaderProfile />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Image
+            source={require('../../../../../../../Img/ic_people.png')}
+            style={{
+              height: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              width: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            }}
+          />
+          <Text style={styles.moreInfoText}>1</Text>
+          <View
+            style={{
+              backgroundColor: COLORS.BLACK,
+              height: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              width: 1,
+              marginLeft: 8 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              marginRight: 8 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            }}
+          />
+          <Text style={styles.moreInfoText}>{props.groupingCreationMainStore.groupingAddress}</Text>
+        </View>
+        {/* <GroupLeaderProfile /> */}
         <GroupName groupName={props.groupingCreationMainStore.groupingTitle} />
-        <GroupKeyword groupKeyword={props.groupingCreationMainStore.groupingKeyword} />
+        <GroupKeyword groupKeyword={props.groupingCreationMainStore.hashtagList} />
         <View
           style={{
             height: 1,
@@ -99,21 +131,34 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'blue',
+    // alignItems: 'center',
+    // backgroundColor: 'blue',
   },
   background: {
     width: '100%',
-    flex: 1,
-    height: 50,
+    // flex: 1,
+    height: 260 * WINDOW_SIZE.HEIGHT_WEIGHT,
     backgroundColor: 'green',
+    top: -30,
+    position: 'absolute',
   },
   contents: {
     width: '100%',
-    flex: 1,
+    // flex: 1,
     backgroundColor: 'white',
     padding: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
+  moreInfoText: { fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.BLACK },
+  moreInfoTextContainerOnImage: {
+    backgroundColor: '#11111188',
+    borderRadius: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingLeft: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingRight: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingTop: 2 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingBottom: 2 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginRight: 8 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  moreInfoTextOnImage: { color: COLORS.WHITE, fontSize: 11 * WINDOW_SIZE.HEIGHT_WEIGHT },
 });
 
 export default inject('groupingCreationMainStore')(observer(NewGroupPreview));

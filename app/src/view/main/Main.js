@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 
+import { color } from 'react-native-reanimated';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
 // pic
@@ -49,7 +50,7 @@ const Tab = createBottomTabNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator initialRouteName="NewGroupPreview">
       <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
       <HomeStack.Screen
         name="NewGroupNameView"
@@ -147,6 +148,7 @@ const HomeStackScreen = ({ navigation }) => {
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
+          headerTransparent: 50,
         }}
       />
       <HomeStack.Screen
