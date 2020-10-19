@@ -115,16 +115,20 @@ const HomeStackScreen = ({ navigation }) => {
         name="NewGroupDescriptionView"
         component={NewGroupDescriptionView}
         options={{
-          title: '',
+          headerTitleAlign: 'center',
           headerLeft: () => (
             <Icon
               name="chevron-left"
               size={22}
-              onPress={() => navigation.navigate('NewGroupLocationView')}
+              onPress={() => navigation.navigate('NewGroupMoreInfoView')}
             />
           ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
+          title: '그룹 소개글',
+          headerTitleStyle: {
+            fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
           },
         }}
       />
