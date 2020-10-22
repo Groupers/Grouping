@@ -29,7 +29,7 @@ const NewGroupDescriptionView = (props) => {
   const rightIconStyle = (groupingCreationView) => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
         ? Colors.black
         : '#999',

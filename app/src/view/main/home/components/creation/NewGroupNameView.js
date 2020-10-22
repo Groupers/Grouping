@@ -9,7 +9,6 @@ import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 const NewGroupNameView = (props) => {
-
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
@@ -23,8 +22,8 @@ const NewGroupNameView = (props) => {
 
   const rightIconStyle = (selectedColor) => {
     return {
-      marginRight: 15*WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: selectedColor,
     };
   };
@@ -49,7 +48,6 @@ const NewGroupNameView = (props) => {
       });
     }
   });
-
 
   return (
     <View style={styles.mainContainer}>
