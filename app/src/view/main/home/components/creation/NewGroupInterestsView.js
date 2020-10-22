@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -126,12 +126,24 @@ const NewGroupInterestsInputView = (props) => {
           인기 키워드
         </Text>
       </View>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', marginTop: 11 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
         {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
         {keywordList.map((keyword) => (
           <View style={styles.keywordListBlock}>
-            <TouchableOpacity onPress={() => onKeywordRemove(keyword)}>
-              <Text>{keyword}</Text>
+            <TouchableOpacity
+              onPress={() => onKeywordRemove(keyword)}
+              style={{ flexDirection: 'row', alignItems: 'center' }}
+            >
+              <Text style={{ color: COLORS.WHITE, fontSize: 11 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
+                {keyword}
+              </Text>
+              <Image
+                source={require('../../../../../../../Img/tag_ic_x.png')}
+                resizeMode="center"
+                width={6 * WINDOW_SIZE.HEIGHT_WEIGHT}
+                height={6 * WINDOW_SIZE.HEIGHT_WEIGHT}
+                style={{ paddingLeft: 4 * WINDOW_SIZE.HEIGHT_WEIGHT }}
+              />
             </TouchableOpacity>
           </View>
         ))}
@@ -168,10 +180,12 @@ const styles = StyleSheet.create({
     borderRadius: 24.5 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginRight: 5 * WINDOW_SIZE.WIDTH_WEIGHT,
     backgroundColor: COLORS.SUB_COLOR,
+    marginTop: 3 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginBottom: 3 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
   rightIconStyle: {
     marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-    fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
     color: '#999',
   },
 });
