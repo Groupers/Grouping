@@ -45,11 +45,13 @@ const NewGroupInterestsInputView = (props) => {
     }
     const nextKeywords = [...keywordList, keyword];
     setKeywordList(nextKeywords);
+    props.groupingCreationMainStore.pushKeywordToHashtagList(keyword);
   };
 
   const onKeywordRemove = (keyword) => {
     const nextKeywords = keywordList.filter((t) => t !== keyword);
     setKeywordList(nextKeywords);
+    props.groupingCreationMainStore.deleteKeywordFromHashtagList(keyword);
   };
 
   const onKeywordChange = (keywordInput) => {
