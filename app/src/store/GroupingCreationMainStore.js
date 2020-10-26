@@ -241,6 +241,19 @@ export default class GroupingCreationMainStore {
     }
   };
 
+  @action pushKeywordToHashtagList = (keyword) => {
+    this.groupingCreationDto.hashtagList.push(keyword);
+    console.log(this.groupingCreationDto.hashtagList);
+  };
+
+  @action deleteKeywordFromHashtagList = (keyword) => {
+    this.groupingCreationDto.hashtagList.splice(
+      this.groupingCreationDto.hashtagList.indexOf(keyword),
+      1
+    );
+    console.log(this.groupingCreationDto.hashtagList);
+  };
+
   @computed get isPreviewButtonActivated() {
     console.log(this.groupingDescriptionCompleted);
     // console.log("groupingAddressCompleted : "+this.groupingAddressCompleted+this.groupingAddress);
@@ -294,7 +307,7 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
-    this.groupingCreationDto.hashtagList.push('키워드1');
+    this.groupingCreationDto.hashtagList = [];
     this.selectedGender = '';
   }
 }

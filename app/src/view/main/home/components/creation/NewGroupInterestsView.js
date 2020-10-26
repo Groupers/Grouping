@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { color } from 'react-native-reanimated';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
@@ -44,11 +45,13 @@ const NewGroupInterestsInputView = (props) => {
     }
     const nextKeywords = [...keywordList, keyword];
     setKeywordList(nextKeywords);
+    props.groupingCreationMainStore.pushKeywordToHashtagList(keyword);
   };
 
   const onKeywordRemove = (keyword) => {
     const nextKeywords = keywordList.filter((t) => t !== keyword);
     setKeywordList(nextKeywords);
+    props.groupingCreationMainStore.deleteKeywordFromHashtagList(keyword);
   };
 
   const onKeywordChange = (keywordInput) => {
@@ -115,6 +118,19 @@ const NewGroupInterestsInputView = (props) => {
           onKeywordChange={onKeywordChange}
           keywordList={keywordList}
         />
+      </View>
+      <View style={{ flexDirection: 'row' }}>
+        {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
+        {keywordList.map((keyword) => (
+          <View style={styles.keywordListBlock}>
+            <TouchableOpacity onPress={() => onKeywordRemove(keyword)}>
+              <Text>
+                {keyword}
+                <Text style={{ color: 'white' }}> x</Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ))}
       </View>
       <View style={styles.hotKeywordContainer}>
         <Text
