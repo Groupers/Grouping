@@ -42,7 +42,7 @@ const NewGroupNameView = (props) => {
           </Text>
         ),
       });
-    } else if (props.groupingCreationMainStore.groupingTitle.length < 2) {
+    } else {
       props.navigation.setOptions({
         headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
       });

@@ -12,9 +12,7 @@ const MinAgeSettingView = (props) => {
   ages.unshift('', '제한없음');
 
   const change = ({ nativeEvent }) => {
-    props.onChangeText(
-      Math.ceil((nativeEvent.contentOffset.y)/41 )-2
-    );
+    props.onChangeText(Math.ceil(nativeEvent.contentOffset.y / 41) - 2);
     // console.log(Math.ceil(nativeEvent.contentOffset.y / 4));
   };
 
@@ -24,28 +22,9 @@ const MinAgeSettingView = (props) => {
         flexDirection: 'row',
         marginTop: 36 * WINDOW_SIZE.HEIGHT_WEIGHT,
         alignItems: 'center',
+        width: 140 * WINDOW_SIZE.WIDTH_WEIGHT,
       }}
     >
-      <View
-        style={{
-          position: 'absolute',
-          height: 1,
-          backgroundColor: COLORS.SUB_COLOR,
-          width: 71 * WINDOW_SIZE.WIDTH_WEIGHT,
-          top: 26 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          left: 33 * WINDOW_SIZE.WIDTH_WEIGHT,
-        }}
-      />
-      <View
-        style={{
-          position: 'absolute',
-          height: 1,
-          backgroundColor: COLORS.SUB_COLOR,
-          width: 71 * WINDOW_SIZE.WIDTH_WEIGHT,
-          top: 78 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          left: 33 * WINDOW_SIZE.WIDTH_WEIGHT,
-        }}
-      />
       <Text style={{ fontSize: 20 * WINDOW_SIZE.HEIGHT_WEIGHT }}>최소</Text>
       {/* <WheelPicker indicatorWidth={0.8} data={wheelPickerData} /> */}
       <ScrollView
@@ -76,7 +55,7 @@ const MinAgeSettingView = (props) => {
               <Text
                 style={{
                   fontSize: 20,
-                  color: 'red',
+                  color: COLORS.SUB_COLOR,
                   fontWeight: 'bold',
                 }}
               >
@@ -111,10 +90,10 @@ const styles = StyleSheet.create({
   },
   scroll: {
     opacity: 50,
-    height: 109 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    width: 72 * WINDOW_SIZE.WIDTH_WEIGHT,
-    // borderTopWidth: 1,
-    // borderBottomWidth: 1,
+    height: 52 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 100 * WINDOW_SIZE.WIDTH_WEIGHT,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: COLORS.SUB_COLOR,
     padding: 0,
   },
