@@ -5,14 +5,16 @@ import { WINDOW_SIZE } from '../../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../../assets/Colors';
 
 const MinAgeSettingView = (props) => {
-  const [value, setValue] = React.useState('');
-
   const ages = Array.from({ length: 80 }, (v, i) => i);
   ages.unshift('제한없음');
 
   const change = ({ nativeEvent }) => {
     props.onChangeText(Math.ceil(nativeEvent.contentOffset.y / 41) - 2);
     // console.log(Math.ceil(nativeEvent.contentOffset.y / 4));
+  };
+
+  const setItem = ({ item }) => {
+    props.groupingMinAge = item;
   };
 
   return (
@@ -51,11 +53,8 @@ const MinAgeSettingView = (props) => {
               }}
             >
               <Text
-                style={{
-                  fontSize: 20,
-                  color: COLORS.SUB_COLOR,
-                  fontWeight: 'bold',
-                }}
+                key={setItem(item)}
+                style={{ fontSize: 20, color: COLORS.SUB_COLOR, fontWeight: 'bold' }}
               >
                 {item}
               </Text>
