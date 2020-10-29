@@ -5,6 +5,8 @@ import { WINDOW_SIZE } from '../../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../../assets/Colors';
 
 const MinAgeSettingView = (props) => {
+  const [value, setValue] = React.useState('');
+
   const ages = Array.from({ length: 80 }, (v, i) => i);
   ages.unshift('제한없음');
 

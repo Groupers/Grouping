@@ -114,7 +114,6 @@ const NewGroupMoreInfoView = (props) => {
 
   const initializeAge = () => {
     props.groupingCreationMainStore.groupingInitializeAge();
-    closeAgePanel();
   };
 
   return (
@@ -222,12 +221,31 @@ const NewGroupMoreInfoView = (props) => {
           </TouchableOpacity>
           <View flex={1} />
           <TouchableOpacity
+            style={{ paddingRight: 30 }}
+            onPress={() => {
+              initializeAge();
+            }}
+          >
+            <Text
+              style={{
+                color: Colors.black,
+                borderBottomWidth: 1,
+                paddingBottom: 0,
+                fontWeight: 'bold',
+                fontSize: FONT_SIZE.INPUT_TEXT,
+              }}
+            >
+              초기화
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => {
               closeAgePanel();
             }}
           >
             <Text
               style={{
+                color: Colors.black,
                 borderBottomWidth: 1,
                 paddingBottom: 0,
                 fontWeight: 'bold',
