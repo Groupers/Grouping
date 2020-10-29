@@ -45,7 +45,7 @@ const NewGroupPreview = (props) => {
       GROUPING_CREATION_VIEW_STATUS.CONFIRM
     );
     props.groupingCreationMainStore.groupCreation();
-    props.navigation.navigate('Home');
+    props.navigation.popToTop();
   };
 
   const showPicker = () => {

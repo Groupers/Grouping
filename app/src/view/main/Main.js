@@ -142,7 +142,7 @@ const HomeStackScreen = ({ navigation }) => {
             <Icon
               name="chevron-left"
               size={22}
-              onPress={() => navigation.navigate('NewGroupDescription')}
+              onPress={() => navigation.navigate('NewGroupMoreInfoView')}
             />
           ),
           headerLeftContainerStyle: {
