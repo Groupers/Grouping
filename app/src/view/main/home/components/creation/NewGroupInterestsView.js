@@ -29,7 +29,7 @@ const NewGroupInterestsInputView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.navigate('NewGroupMoreInfoView');
+    props.navigation.push('NewGroupMoreInfoView');
   };
 
   const onKeywordInserted = (keyword) => {

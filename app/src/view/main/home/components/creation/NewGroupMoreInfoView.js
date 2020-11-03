@@ -50,7 +50,7 @@ const NewGroupMoreInfoView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.navigate('NewGroupPreview');
+    props.navigation.push('NewGroupPreview');
   };
 
   const [panelProps, setPanelProps] = useState({

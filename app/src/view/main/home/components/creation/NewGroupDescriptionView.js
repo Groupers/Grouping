@@ -23,7 +23,7 @@ const NewGroupDescriptionView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.goBack();
+    props.navigation.pop();
   };
 
   const rightIconStyle = (groupingCreationView) => {

@@ -31,7 +31,7 @@ const NewGroupLocationView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.LOCATION
     );
-    props.navigation.goBack();
+    props.navigation.pop();
   };
 
   const onAddressSelected = (address) => {

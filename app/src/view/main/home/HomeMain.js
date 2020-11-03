@@ -14,7 +14,7 @@ import HotKeywordRecommend from './components/hotKeyword/HotKeywordRecommends';
 // eslint-disable-next-line react/prop-types
 export default function HomeMain({ navigation }) {
   const navigateTo = (arrival) => {
-    navigation.navigate(arrival);
+    navigation.push(arrival);
   };
 
   return (

@@ -58,7 +58,7 @@ const HomeStackScreen = ({ navigation }) => {
         options={{
           title: '',
           headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={() => navigation.navigate('HomeMain')} />
+            <Icon name="chevron-left" size={22} onPress={() => navigation.pop()} />
           ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
@@ -74,7 +74,7 @@ const HomeStackScreen = ({ navigation }) => {
             <Icon
               name="chevron-left"
               size={22}
-              onPress={() => navigation.navigate('NewGroupNameView')}
+              onPress={() => navigation.pop()}
             />
           ),
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
@@ -89,7 +89,7 @@ const HomeStackScreen = ({ navigation }) => {
             <Icon
               name="chevron-left"
               size={22}
-              onPress={() => navigation.navigate('NewGroupInterestsView')}
+              onPress={() => navigation.pop()}
             />
           ),
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
@@ -121,7 +121,7 @@ const HomeStackScreen = ({ navigation }) => {
             <Icon
               name="chevron-left"
               size={22}
-              onPress={() => navigation.navigate('NewGroupMoreInfoView')}
+              onPress={() => navigation.pop()}
             />
           ),
           headerLeftContainerStyle: {
@@ -142,7 +142,7 @@ const HomeStackScreen = ({ navigation }) => {
             <Icon
               name="chevron-left"
               size={22}
-              onPress={() => navigation.navigate('NewGroupMoreInfoView')}
+              onPress={() => navigation.pop()}
             />
           ),
           headerLeftContainerStyle: {
@@ -165,7 +165,7 @@ const HomeStackScreen = ({ navigation }) => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen name="Home" component={GroupMain} options={{ headerShown: false }} />
+      <GroupStack.Screen name="Group" component={GroupMain} options={{ headerShown: false }} />
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}
@@ -183,7 +183,7 @@ const GroupStackScreen = () => {
 const FeedStackScreen = () => {
   return (
     <FeedStack.Navigator>
-      <FeedStack.Screen name="Home" component={FeedMain} />
+      <FeedStack.Screen name="Feed" component={FeedMain} />
     </FeedStack.Navigator>
   );
 };
@@ -191,7 +191,7 @@ const FeedStackScreen = () => {
 const MyPageScreen = () => {
   return (
     <MyPageStack.Navigator>
-      <MyPageStack.Screen name="Home" component={MyPageMain} />
+      <MyPageStack.Screen name="MyPage" component={MyPageMain} />
     </MyPageStack.Navigator>
   );
 };
@@ -233,11 +233,7 @@ class Main extends Component {
           }}
         >
           <Tab.Screen name="Home" component={HomeStackScreen} options={{ tabBarLabel: '홈' }} />
-          <Tab.Screen
-            name="Group"
-            component={GroupStackScreen}
-            options={{ tabBarLabel: '채널' }}
-          />
+          <Tab.Screen name="Group" component={GroupStackScreen} options={{ tabBarLabel: '채널' }} />
           <Tab.Screen name="Feed" component={FeedStackScreen} options={{ tabBarLabel: '알림' }} />
           <Tab.Screen name="MyPage" component={MyPageScreen} options={{ tabBarLabel: 'My' }} />
         </Tab.Navigator>

@@ -13,7 +13,7 @@ const NewGroupNameView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.navigate('NewGroupInterestsView');
+    props.navigation.push('NewGroupInterestsView');
   };
 
   const onTitleChanged = (title) => {
