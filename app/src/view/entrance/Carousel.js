@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, ScrollView, Text, StyleSheet } from 'react-native';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
+import { COLORS } from '../../assets/Colors';
 
 const images = [
   'https://images.pexels.com/photos/4775426/pexels-photo-4775426.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
@@ -39,7 +40,7 @@ export default class Carousel extends React.Component {
               key={k}
               style={k === this.state.active ? styles.pagingActiveText : styles.pagingText}
             >
-              ⬤
+              ●
             </Text>
           ))}
         </View>
@@ -49,10 +50,23 @@ export default class Carousel extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: { marginTop: 50, width: WINDOW_SIZE.WIDTH * 0.9, height: 250 },
-  scroll: { width: WINDOW_SIZE.WIDTH * 0.9, height: 220, paddingBottom: 30 },
-  image: { width: WINDOW_SIZE.WIDTH * 0.9, height: 220, resizeMode: 'cover' },
-  pagination: { flexDirection: 'row', position: 'absolute', bottom: 0, alignSelf: 'center' },
-  pagingText: { color: '#888', margin: 3 },
-  pagingActiveText: { color: '#fff', margin: 3 },
+  container: {
+    marginTop: 50,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    height: 270 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  },
+  scroll: { flex: 1, paddingBottom: 30 },
+  image: {
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    height: 270 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    resizeMode: 'contain',
+  },
+  pagination: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: -98 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    alignSelf: 'center',
+  },
+  pagingText: { color: COLORS.FONT_GRAY, margin: 3, fontSize: 4 },
+  pagingActiveText: { color: COLORS.SUB_COLOR, margin: 3, fontSize: 4 },
 });
