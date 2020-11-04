@@ -48,7 +48,12 @@ const MyPageStack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-const HomeStackScreen = ({ navigation }) => {
+const HomeStackScreen = ({ navigation, route }) => {
+  console.log('route.state ? ', route.state && route.state);
+  console.log('route.state.index ? ', route.state && route.state.index);
+  route.state && route.state.index > 0
+    ? navigation.setOptions({ tabBarVisible: false })
+    : navigation.setOptions({ tabBarVisible: true });
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
