@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { Icon } from 'react-native-elements';
+import { StackActions } from '@react-navigation/native';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import GenderSettingView from './settings/GenderSettingView';
@@ -50,7 +51,7 @@ const NewGroupMoreInfoView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.push('NewGroupPreview');
+    props.navigation.dispatch(StackActions.push('NewGroupPreview'));
   };
 
   const [panelProps, setPanelProps] = useState({

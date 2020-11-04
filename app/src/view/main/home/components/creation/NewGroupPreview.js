@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import ImagePicker from 'react-native-image-picker';
+import { StackActions } from '@react-navigation/native';
 import GroupName from './GroupName';
 import GroupingUserDto from '../../../../../dto/GroupingUserDto';
 import GroupLeaderProfile from './GroupLeaderProfile';
@@ -45,7 +46,7 @@ const NewGroupPreview = (props) => {
       GROUPING_CREATION_VIEW_STATUS.CONFIRM
     );
     props.groupingCreationMainStore.groupCreation();
-    props.navigation.popToTop();
+    props.navigation.dispatch(StackActions.popToTop());
   };
 
   const showPicker = () => {

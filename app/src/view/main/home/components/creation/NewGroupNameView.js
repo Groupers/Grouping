@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
+import { StackActions } from '@react-navigation/native';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import TitleInput from './TitleInput';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
@@ -13,7 +14,7 @@ const NewGroupNameView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.push('NewGroupInterestsView');
+    props.navigation.dispatch(StackActions.push('NewGroupInterestsView'));
   };
 
   const onTitleChanged = (title) => {

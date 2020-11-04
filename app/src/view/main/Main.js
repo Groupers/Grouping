@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, TextInput, View, Text } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
@@ -62,9 +62,7 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={() => navigation.pop()} />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -75,13 +73,7 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupInterestsView}
         options={{
           title: '',
-          headerLeft: () => (
-            <Icon
-              name="chevron-left"
-              size={22}
-              onPress={() => navigation.pop()}
-            />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
@@ -90,13 +82,7 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupMoreInfoView}
         options={{
           title: '',
-          headerLeft: () => (
-            <Icon
-              name="chevron-left"
-              size={22}
-              onPress={() => navigation.pop()}
-            />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
@@ -122,13 +108,7 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupDescriptionView}
         options={{
           headerTitleAlign: 'center',
-          headerLeft: () => (
-            <Icon
-              name="chevron-left"
-              size={22}
-              onPress={() => navigation.pop()}
-            />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -143,13 +123,7 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupPreview}
         options={{
           title: '',
-          headerLeft: () => (
-            <Icon
-              name="chevron-left"
-              size={22}
-              onPress={() => navigation.pop()}
-            />
-          ),
+          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },

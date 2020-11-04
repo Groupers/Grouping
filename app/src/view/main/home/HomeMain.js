@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StackActions } from '@react-navigation/native';
 import SearchBar from './components/search/SearchBar';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import CommonRecommend from './components/recommends/CommonRecommend';
@@ -14,7 +15,7 @@ import HotKeywordRecommend from './components/hotKeyword/HotKeywordRecommends';
 // eslint-disable-next-line react/prop-types
 export default function HomeMain({ navigation }) {
   const navigateTo = (arrival) => {
-    navigation.push(arrival);
+    navigation.dispatch(StackActions.push(arrival));
   };
 
   return (
