@@ -30,7 +30,7 @@ const NewGroupMoreInfoView = (props) => {
   const rightIconStyle = () => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
       // eslint-disable-next-line react/prop-types
       color: props.groupingCreationMainStore.isPreviewButtonActivated
         ? Colors.black
@@ -60,7 +60,7 @@ const NewGroupMoreInfoView = (props) => {
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
     style: {
-      height: 500 * WINDOW_SIZE.HEIGHT_WEIGHT, // 348  // 500
+      height: 348 * WINDOW_SIZE.HEIGHT_WEIGHT, // 348  // 500
       paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       // paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
       paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
@@ -179,7 +179,12 @@ const NewGroupMoreInfoView = (props) => {
           >
             <Icon name="add" size={15} />
           </View>
-          <Text style={{ color: props.groupingCreationMainStore.genderFontColor }}>
+          <Text
+            style={{
+              color: props.groupingCreationMainStore.genderFontColor,
+              fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            }}
+          >
             {props.groupingCreationMainStore.selectedGenderLimitMessage}
           </Text>
         </View>

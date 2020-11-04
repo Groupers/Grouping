@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import { Image, TextInput, View, Text } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import { color } from 'react-native-reanimated';
 import { WINDOW_SIZE } from '../../constant/WindowSize';
+import { CHAT_VIEW_STATUS } from '../../constant/ChatViewStatus';
+// pic
+import homeInactive from '../../assets/tab_bar_ic_home_inactive.png';
+import homeActive from '../../assets/tab_bar_ic_home_active.png';
+import groupInactive from '../../assets/tab_bar_ic_group_inactive.png';
+import groupActive from '../../assets/tab_bar_ic_group_active.png';
+import feedInactive from '../../assets/tab_bar_ic_feed_inactive.png';
+import feedActive from '../../assets/tab_bar_ic_feed_active.png';
+import myInactive from '../../assets/tab_bar_ic_my_inactive.png';
+import myActive from '../../assets/tab_bar_ic_my_active.png';
 
 // Main
 import HomeMain from './home/HomeMain';
@@ -36,7 +48,12 @@ const MyPageStack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-const HomeStackScreen = ({ navigation }) => {
+const HomeStackScreen = ({ navigation, route }) => {
+  console.log('route.state ? ', route.state && route.state);
+  console.log('route.state.index ? ', route.state && route.state.index);
+  route.state && route.state.index > 0
+    ? navigation.setOptions({ tabBarVisible: false })
+    : navigation.setOptions({ tabBarVisible: true });
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
@@ -104,16 +121,20 @@ const HomeStackScreen = ({ navigation }) => {
         name="NewGroupDescriptionView"
         component={NewGroupDescriptionView}
         options={{
-          title: '',
+          headerTitleAlign: 'center',
           headerLeft: () => (
             <Icon
               name="chevron-left"
               size={22}
-              onPress={() => navigation.navigate('NewGroupLocationView')}
+              onPress={() => navigation.navigate('NewGroupMoreInfoView')}
             />
           ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+          },
+          title: '그룹 소개글',
+          headerTitleStyle: {
+            fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
           },
         }}
       />
@@ -132,6 +153,7 @@ const HomeStackScreen = ({ navigation }) => {
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
+          headerTransparent: 50,
         }}
       />
       <HomeStack.Screen
@@ -190,13 +212,24 @@ class Main extends Component {
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
               if (route.name === 'Home') {
-                iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
-              } else if (route.name === 'Settings') {
-                iconName = focused ? 'ios-list-box' : 'ios-list';
+                iconName = focused ? homeActive : homeInactive;
+              } else if (route.name === 'Group') {
+                iconName = focused ? groupActive : groupInactive;
+              } else if (route.name === 'Feed') {
+                iconName = focused ? feedActive : feedInactive;
+              } else if (route.name === 'MyPage') {
+                iconName = focused ? myActive : myInactive;
               }
-
               // You can return any component that you like here!
-              return <Ionicons name={iconName} size={size} color={color} />;
+              return (
+                <Image
+                  source={iconName}
+                  style={{
+                    width: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+                    height: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                  }}
+                />
+              );
             },
           })}
           tabBarOptions={{

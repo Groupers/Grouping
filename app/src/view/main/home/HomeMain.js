@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchBar from './components/search/SearchBar';
@@ -8,7 +8,8 @@ import CommonRecommend from './components/recommends/CommonRecommend';
 import PersonalRecommend from './components/recommends/PersonalRecommend';
 import Header from '../../../component/common/Header';
 import PopularRecommend from './components/recommends/PopularRecommend';
-import { COLORS } from '../../../assets/Colors';
+import HotKeyword from './components/hotKeyword/HotKeyword';
+import HotKeywordRecommend from './components/hotKeyword/HotKeywordRecommends';
 
 // eslint-disable-next-line react/prop-types
 export default function HomeMain({ navigation }) {
@@ -19,11 +20,30 @@ export default function HomeMain({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <SafeAreaView style={styles.paddingBlock}>
-        <Header navigateTo={navigateTo} navigateMap="home" />
-        <CommonRecommend />
-        <SearchBar navigateTo={navigateTo} />
-        <PersonalRecommend />
-        <PopularRecommend />
+        <View
+          style={{
+            backgroundColor: '#f5e4e4',
+            flex: 1,
+          }}
+        >
+          <Header navigateTo={navigateTo} navigateMap="home" />
+          <ImageBackground
+            source={require('../../../../../Img/img_banner_sample.png')}
+            style={{
+              width: WINDOW_SIZE.WIDTH,
+              height: 260 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            }}
+          >
+            <CommonRecommend />
+          </ImageBackground>
+        </View>
+        <View style={styles.contentArea}>
+          <SearchBar navigateTo={navigateTo} />
+          <PersonalRecommend />
+          <PopularRecommend />
+          <HotKeyword />
+          <HotKeywordRecommend />
+        </View>
       </SafeAreaView>
     </ScrollView>
   );
@@ -31,14 +51,28 @@ export default function HomeMain({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 1,
-    backgroundColor: COLORS.HOME_TAP_MAIN,
+    backgroundColor: 'white',
+    flex: 1,
   },
   paddingBlock: {
-    padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: '100%',
+    flex: 1,
+    paddingBottom: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    // backgroundImage:
+  },
+  topArea: {
+    // padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    // margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginTop: 0,
     display: 'flex',
+  },
+  contentArea: {
+    // padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    // margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 
   createGroupText: {
