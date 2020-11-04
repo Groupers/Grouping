@@ -45,8 +45,9 @@ const NewGroupPreview = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.CONFIRM
     );
-    props.groupingCreationMainStore.groupCreation();
-    props.navigation.dispatch(StackActions.popToTop());
+    props.groupingCreationMainStore
+      .groupCreation()
+      .then(props.navigation.dispatch(StackActions.popToTop()));
   };
 
   const showPicker = () => {
