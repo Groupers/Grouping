@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
+import { StackActions } from '@react-navigation/native';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import DescriptionInput from './DescriptionInput';
@@ -23,7 +24,7 @@ const NewGroupDescriptionView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.pop();
+    props.navigation.dispatch(StackActions.pop(1));
   };
 
   const rightIconStyle = (groupingCreationView) => {

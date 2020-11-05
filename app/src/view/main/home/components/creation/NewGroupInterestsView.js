@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { color } from 'react-native-reanimated';
+import { StackActions } from '@react-navigation/native';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../assets/Colors';
@@ -17,13 +18,11 @@ const NewGroupInterestsInputView = (props) => {
   const [input, setInput] = React.useState('');
   const [keywordList, setKeywordList] = React.useState([]);
 
-  const rightIconStyle = (groupingCreationView) => {
+  const rightIconStyle = (selectedColor) => {
     return {
       marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-      color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
-        ? Colors.black
-        : '#999',
+      fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+      color: selectedColor,
     };
   };
 
@@ -31,7 +30,7 @@ const NewGroupInterestsInputView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.navigate('NewGroupMoreInfoView');
+    props.navigation.dispatch(StackActions.push('NewGroupMoreInfoView'));
   };
 
   const onKeywordInserted = (keyword) => {
@@ -55,18 +54,6 @@ const NewGroupInterestsInputView = (props) => {
   };
 
   const onKeywordChange = (keywordInput) => {
-    props.navigation.setOptions({
-      headerRight: () => (
-        <Text
-          onPress={() => {
-            onHeaderNextButtonClicked();
-          }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.NAME)}
-        >
-          다음
-        </Text>
-      ),
-    });
     if (keywordInput.includes(' ')) {
       onKeywordSubmit(keywordInput);
       return;
@@ -79,26 +66,26 @@ const NewGroupInterestsInputView = (props) => {
     onKeywordInserted(input.trim());
     setInput(EMPTY_VALUE);
   };
-  // useEffect로 태그의 상태가 변경이 되면 다시 불러올 수 있게
+  // useEffect 로 태그의 상태가 변경이 되면 다시 불러올 수 있게
   React.useEffect(() => {
     if (keywordList.length > 0) {
       props.navigation.setOptions({
         headerRight: () => (
           <Text
             onPress={() => {
-              props.navigation.navigate('NewGroupMoreInfoView');
+              onHeaderNextButtonClicked();
             }}
-            style={styles.rightIconStyle}
+            style={rightIconStyle(COLORS.BLACK)}
           >
             다음
           </Text>
         ),
       });
-    } else {
-      props.navigation.setOptions({
-        headerRight: false,
-      });
+      return;
     }
+    props.navigation.setOptions({
+      headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
+    });
   }, [keywordList]);
 
   return (
