@@ -40,6 +40,7 @@ import FeedMain from './feed/FeedMain';
 // MyPage
 import MyPageMain from './myPage/MyPageMain';
 import AddressSearchTextView from './AddressSearchTextView';
+import {FONT_SIZE} from "../../constant/FontSize";
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -62,7 +63,13 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupNameView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
+          headerLeft: () => (
+            <Icon
+              name="chevron-left"
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
+            />
+          ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -73,7 +80,13 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupInterestsView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
+          headerLeft: () => (
+            <Icon
+              name="chevron-left"
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
+            />
+          ),
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
@@ -82,7 +95,13 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupMoreInfoView}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
+          headerLeft: () => (
+            <Icon
+              name="chevron-left"
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
+            />
+          ),
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
         }}
       />
@@ -108,7 +127,13 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupDescriptionView}
         options={{
           headerTitleAlign: 'center',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
+          headerLeft: () => (
+            <Icon
+              name="chevron-left"
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
+            />
+          ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
@@ -123,7 +148,13 @@ const HomeStackScreen = ({ navigation, route }) => {
         component={NewGroupPreview}
         options={{
           title: '',
-          headerLeft: () => <Icon name="chevron-left" size={22} onPress={() => navigation.dispatch(StackActions.pop(1))} />,
+          headerLeft: () => (
+            <Icon
+              name="chevron-left"
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
+            />
+          ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
           },
