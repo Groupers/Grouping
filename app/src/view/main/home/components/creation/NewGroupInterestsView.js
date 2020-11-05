@@ -81,11 +81,11 @@ const NewGroupInterestsInputView = (props) => {
           </Text>
         ),
       });
-    } else {
-      props.navigation.setOptions({
-        headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
-      });
+      return;
     }
+    props.navigation.setOptions({
+      headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
+    });
   }, [keywordList]);
 
   return (

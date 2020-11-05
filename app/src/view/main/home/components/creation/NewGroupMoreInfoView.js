@@ -20,6 +20,7 @@ const NewGroupMoreInfoView = (props) => {
   React.useEffect(() => {
     // 나이 제한, 성별 제한, 그룹 소개, 그룹 위치 중 필수요소를 입력 하였을 경우
     if (true) {
+      // 조건 미완성 코드 우선 true 값으로 테스트
       props.navigation.setOptions({
         headerRight: () => (
           <Text
@@ -32,11 +33,11 @@ const NewGroupMoreInfoView = (props) => {
           </Text>
         ),
       });
-    } else {
-      props.navigation.setOptions({
-        headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
-      });
+      return;
     }
+    props.navigation.setOptions({
+      headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
+    });
   });
 
   const rightIconStyle = (selectedColor) => {
