@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeNextButton from './PhoneCodeNextButton';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 class PhoneNumberInputTextView extends Component {
   constructor(props) {
@@ -32,21 +33,14 @@ class PhoneNumberInputTextView extends Component {
       // backgroundColor: 'green',
     };
     return (
-      <Animated.View
-        style={{
-          paddingTop: 12,
-          width: '90%',
-          height: 40,
-          // backgroundColor: 'yellow',
-        }}
-      >
-        <Text style={labelStyle}>{label}</Text>
+      <Animated.View style={{}}>
+        {/*<Text style={labelStyle}>{label}</Text>*/}
         <TextInput
           {...props}
           maxLength={20}
           autoCorrect={false}
           style={{
-            width: '100%',
+            width: 274 * WINDOW_SIZE.WIDTH_WEIGHT,
             alignItems: 'center',
             justifyContent: 'center',
             height: 40,

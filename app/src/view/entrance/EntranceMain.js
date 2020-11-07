@@ -41,15 +41,16 @@ const EntranceMain = (props) => {
               text="가입"
               onClick={() => moveNextScreen(props, 'SignUpPhone')}
               fontColor={COLORS.WHITE}
+              buttonType
             />
           </View>
           <View style={styles.signInButtonBlock}>
             <NextButton
               isActive={false}
-              color={COLORS.WHITE}
               text="로그인"
               onClick={() => moveNextScreen(props, 'SignIn')}
               fontColor={COLORS.BLACK}
+              buttonType
             />
           </View>
         </View>

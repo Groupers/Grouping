@@ -66,7 +66,10 @@ class SignUpPhone extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.body}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.body}
+      >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.textArea}>
@@ -81,30 +84,21 @@ class SignUpPhone extends React.Component {
               </Text>
             </View>
             <View height={30} />
+
             <View
               style={{
                 width: '100%',
-                flexDirection: 'row',
+                // flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
+              <LabelView text="휴대폰 번호" />
               <PhoneNumberInputTextView
                 label="휴대폰 번호"
                 isActive={!this.props.signUpPhoneStore.isAllCompleted}
                 text={this.props.signUpPhoneStore.phoneNumber}
                 onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
-              />
-              <PhoneCodeNextButton
-                label="인증번호"
-                isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
-                text={
-                  this.props.signUpPhoneStore.phoneValidationViewStatus ===
-                  SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                    ? '재인증'
-                    : '인 증'
-                }
-                onClick={this.authorizeButtonClicked.bind(this)}
               />
             </View>
             <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
@@ -130,6 +124,8 @@ class SignUpPhone extends React.Component {
                 isActive={this.props.signUpPhoneStore.isValidPhoneCode}
                 text="다음"
                 onClick={this.signUpNextButtonClicked.bind(this)}
+                buttonType={false}
+                fontColor={COLORS.WHITE}
               />
             </View>
           </View>
@@ -182,7 +178,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingBottom: 60,
     flex: 1,
   },
 
