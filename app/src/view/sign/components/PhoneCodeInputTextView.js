@@ -2,6 +2,7 @@ import React from 'react';
 import { Animated, StyleSheet, Text, TextInput, View } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -33,36 +34,28 @@ export default class PhoneCodeInputTextView extends React.Component {
   render() {
     const { label, ...props } = this.props;
     const { isFocused } = this.state;
-    const labelStyle = {
-      position: 'absolute',
-      left: 0, // left로부터 0떨어진
-      top: !isFocused ? 20 : 0,
-      fontSize: !isFocused ? 12 : 12,
-      color: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
-      margin: 0,
-    };
     return (
-      <Animated.View style={{ paddingTop: 18, width: '90%', height: 40 }}>
-        <Text style={labelStyle}>{label}</Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          borderBottomWidth: 1,
+          borderBottomColor: COLORS.FONT_GRAY,
+          width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+          alignItems: 'center',
+        }}
+      >
         <TextInput
           {...props}
           maxLength={6}
           autoCorrect={false}
           clearTextOnFocus
-          style={{
-            height: 30,
-            fontSize: 14,
-            color: '#111',
-            borderBottomWidth: 1,
-            borderBottomColor: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
-            padding: 1,
-          }}
+          style={styles.inputCode}
           textContentType="creditCardNumber"
           onFocus={this.handleFocus}
-          onBlur={this.props.value === null ? this.handleBlur : null}
           blurOnSubmit
         />
-      </Animated.View>
+        <PhoneAuthTimer style={styles.authTimer} />
+      </View>
     );
   }
 
@@ -86,3 +79,21 @@ export default class PhoneCodeInputTextView extends React.Component {
   //   );
   // }
 }
+const styles = StyleSheet.create({
+  authTimer: {
+    height: 11 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 9 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  inputCode: {
+    height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 261 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    color: '#111',
+    paddingBottom: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingTop: 13 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    lineHeight: 17 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+});

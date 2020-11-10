@@ -8,16 +8,24 @@ export default class NextButton extends Component {
     super(props);
   }
 
-  buttonStyle = function (isActive) {
-    return {
-      width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
-      height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
-      borderRadius: 12,
-      backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.WHITE,
-      borderWidth: 1,
-      borderColor: isActive === true ? COLORS.SUB_COLOR : '#e3e3e3',
-      justifyContent: 'center',
-    };
+  buttonStyle = function (isActive, buttonType = false) {
+    return buttonType === true
+      ? {
+          width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+          height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          borderRadius: 12,
+          backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.WHITE,
+          borderWidth: 1,
+          borderColor: isActive === true ? COLORS.SUB_COLOR : '#e3e3e3',
+          justifyContent: 'center',
+        }
+      : {
+          width: WINDOW_SIZE.WIDTH,
+          height: 56 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.LIGHT_GRAY,
+          borderColor: isActive === true ? COLORS.SUB_COLOR : '#e3e3e3',
+          justifyContent: 'center',
+        };
   };
 
   fontStyle = function (fontcolor) {
@@ -32,7 +40,7 @@ export default class NextButton extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={this.buttonStyle(this.props.isActive)}
+        style={this.buttonStyle(this.props.isActive, this.props.buttonType)}
         onPress={this.props.isActive ? () => this.props.onClick() : null}
       >
         <Text style={this.fontStyle(this.props.fontColor)}>{this.props.text}</Text>

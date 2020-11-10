@@ -4,6 +4,7 @@ import { WINDOW_SIZE } from '../../constant/WindowSize';
 import { COLORS } from '../../assets/Colors';
 
 const images = [
+  'Img/onboarding_img_1.png',
   'https://images.pexels.com/photos/4775426/pexels-photo-4775426.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
   'https://images.pexels.com/photos/945966/pexels-photo-945966.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
   'https://images.pexels.com/photos/2664/blue-car-vehicle-vintage.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500',
@@ -31,7 +32,11 @@ export default class Carousel extends React.Component {
           style={styles.scroll}
         >
           {images.map((image, index) => (
-            <Image key={index} source={{ uri: image }} style={styles.image} />
+            <Image
+              key={index}
+              source={require('../../../../Img/onboarding_img_1.png')}
+              style={styles.image}
+            />
           ))}
         </ScrollView>
         <View style={styles.pagination}>
