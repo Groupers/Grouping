@@ -36,18 +36,16 @@ export default class LabelView extends React.Component {
 
 const styles = StyleSheet.create({
   labelContainer: {
-    borderColor: COLORS.MAIN_COLOR,
-    width: '100%',
-    marginTop: 20,
-    alignSelf:'flex-start'
+    borderColor: COLORS.BOTTOM_BORDER_GRAY,
+    marginTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   label: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+    color: COLORS.BLACK,
+    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontWeight: 'bold',
+    letterSpacing: -0.3,
+    lineHeight: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: 57 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });

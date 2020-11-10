@@ -19,6 +19,7 @@ import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { COLORS } from '../../../assets/Colors';
 import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 import { TIME_OUT } from '../../../constant/TimeOut';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -56,10 +57,6 @@ class SignUpPhone extends React.Component {
     this.props.navigation.navigate('SignUpEmail');
   }
 
-  async authorizeButtonClicked() {
-    await this.props.signUpPhoneStore.sendPhoneCode();
-  }
-
   // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
   // 예: return nextProps.id !== this.props.id;
@@ -72,44 +69,28 @@ class SignUpPhone extends React.Component {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
-            <View style={styles.textArea}>
-              <Text style={{ fontWeight: 'bold', fontSize: 25, marginBottom: 20 }}>
-                휴대폰 번호를 입력해주세요
-              </Text>
-              <Text style={{ fontSize: 12, color: 'black' }}>
-                허위 및 중복 가입을 예방하기 위하 절차입니다.
-              </Text>
-              <Text style={{ fontSize: 12, color: 'black' }}>
-                핸드폰번호는 타인에게 절대 공개되지 않습니다.
-              </Text>
-            </View>
-            <View height={30} />
-
-            <View
-              style={{
-                width: '100%',
-                // flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <View style={styles.contentContainer}>
+              <View style={styles.textArea}>
+                <Text style={{ fontSize: 25, marginBottom: 6, color: COLORS.BLACK }}>
+                  휴대폰 번호를 입력해주세요
+                </Text>
+                <Text style={{ fontSize: 12, color: COLORS.BLACK, lineHeight: 18 }}>
+                  {
+                    '허위 및 중복 가입을 예방하기 위한 절차입니다. \n핸드폰번호는 타인에게 절대 공개되지 않습니다.'
+                  }
+                </Text>
+              </View>
+              <View height={12 * WINDOW_SIZE.HEIGHT_WEIGHT} />
               <LabelView text="휴대폰 번호" />
               <PhoneNumberInputTextView
                 label="휴대폰 번호"
                 isActive={!this.props.signUpPhoneStore.isAllCompleted}
                 text={this.props.signUpPhoneStore.phoneNumber}
                 onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
+                placeholder="-없이 번호 입력"
               />
-            </View>
-            <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} />
-            <View
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+              {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
+              <LabelView text="인증번호" />
               <PhoneCodeInputTextView
                 onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
                 onBlur={() => {
@@ -117,7 +98,6 @@ class SignUpPhone extends React.Component {
                 }}
                 text={this.props.signUpPhoneStore.phoneCode}
               />
-              <PhoneAuthTimer style={styles.authTimer} />
             </View>
             <View style={styles.bottomContainer}>
               <NextButton
@@ -139,30 +119,23 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
 
   inner: {
-    flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
-    alignItems: 'center',
-    // justifyContent: 'center',
-    width: '90%',
-    // paddingTop:30
+    // alignItems: 'center',
+    // marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    // marginEnd: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   textArea: {
     width: '100%',
     marginTop: 10,
   },
   contentContainer: {
-    flex: 1,
-    backgroundColor: 'tomato',
-    width: '100%',
-    height: 50,
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 
   phoneCodeContainer: {
@@ -180,8 +153,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flex: 1,
   },
-
-  authTimer: { margin: 10 },
 
   authButton: {},
 });
