@@ -11,4 +11,5 @@ export const COLORS = {
   HOME_TAP_MAIN: '#f5e4e4',
   BLACK: '#111111',
   WHITE: '#ffffff',
+  BOTTOM_BORDER_GRAY: '#b7b7b7',
 };

@@ -4,7 +4,10 @@ import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeNextButton from './PhoneCodeNextButton';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
+@inject('signUpPhoneStore')
+@observer
 class PhoneNumberInputTextView extends Component {
   constructor(props) {
     super(props);
@@ -19,49 +22,63 @@ class PhoneNumberInputTextView extends Component {
 
   handleBlur = () => this.setState({ isFocused: false });
 
+  async authorizeButtonClicked() {
+    await this.props.signUpPhoneStore.sendPhoneCode();
+  }
+
   render() {
     const { label, ...props } = this.props;
     const { isFocused } = this.state;
-    const labelStyle = {
-      position: 'absolute',
-      left: 0, // left로부터 0떨어진
-      top: !isFocused ? 25 : 0,
-      fontSize: !isFocused ? 12 : 12,
-      color: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
-      margin: 0,
-      // backgroundColor: 'green',
-    };
     return (
-      <Animated.View
+      <View
         style={{
-          paddingTop: 12,
-          width: '90%',
-          height: 40,
-          // backgroundColor: 'yellow',
+          borderBottomWidth: 1,
+          borderColor: COLORS.FONT_GRAY,
+          width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+          height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          flexDirection: 'row',
+          alignItems: 'center',
         }}
       >
-        <Text style={labelStyle}>{label}</Text>
+        {/* <Text style={labelStyle}>{label}</Text> */}
         <TextInput
           {...props}
           maxLength={20}
           autoCorrect={false}
           style={{
-            width: '100%',
+            width: 261 * WINDOW_SIZE.WIDTH_WEIGHT,
             alignItems: 'center',
             justifyContent: 'center',
-            height: 40,
-            fontSize: 14,
+            height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
             color: '#111',
-            borderBottomWidth: 1,
-            borderBottomColor: !isFocused ? COLORS.FONT_GRAY : COLORS.SUB_COLOR,
-            // backgroundColor: 'gray',
+            paddingTop: 13 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            paddingBottom: 13 * WINDOW_SIZE.HEIGHT_WEIGHT,
           }}
           textContentType="telephoneNumber"
           onFocus={this.handleFocus}
           onBlur={this.props.value === null ? this.handleBlur : null}
           blurOnSubmit
+          placeholder={this.props.placeholder}
         />
-      </Animated.View>
+        <PhoneCodeNextButton
+          label="인증번호"
+          isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
+          text={
+            this.props.signUpPhoneStore.phoneValidationViewStatus ===
+            SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+              ? '재전송'
+              : '인증'
+          }
+          textcolor={
+            this.props.signUpPhoneStore.phoneValidationViewStatus ===
+            SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+              ? COLORS.BLACK
+              : COLORS.SUB_COLOR
+          }
+          onClick={this.authorizeButtonClicked.bind(this)}
+        />
+      </View>
     );
   }
 }

@@ -48,19 +48,23 @@ class EmailInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
   emailContainer: {
-    width: '100%',
-    borderRadius: 4,
+    borderBottomWidth: 1,
+    borderColor: COLORS.FONT_GRAY,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    flexDirection: 'row',
     alignItems: 'center',
   },
 
   email: {
-    width: '100%',
+    width: 261 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'black',
-    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
-    borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
-    borderColor: COLORS.FONT_GRAY,
+    height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    color: '#111',
+    paddingTop: 13 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingBottom: 13 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 });
 

@@ -28,50 +28,59 @@ const EntranceMain = (props) => {
     <View>
       <SafeAreaView style={styles.container}>
         <Carousel flex={1} />
+        <View style={styles.onBoardingTextContainer}>
+          <Text style={styles.onBoardingText}>지금 내 주변에 있는 그룹을</Text>
+          <Text style={styles.onBoardingText}>만나보세요</Text>
+        </View>
+        <View height={10} />
+        <View style={styles.buttonContainer}>
+          <View style={styles.signUpButtonBlock}>
+            <NextButton
+              isActive
+              color={COLORS.SUB_COLOR}
+              text="가입"
+              onClick={() => moveNextScreen(props, 'SignUpPhone')}
+              fontColor={COLORS.WHITE}
+              buttonType
+            />
+          </View>
+          <View style={styles.signInButtonBlock}>
+            <NextButton
+              isActive={false}
+              text="로그인"
+              onClick={() => moveNextScreen(props, 'SignIn')}
+              fontColor={COLORS.BLACK}
+              buttonType
+            />
+          </View>
+        </View>
+        <View style={{ height: 20 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+        <MoreInfoButton
+          navigation={props.navigation}
+          screen="Home"
+          title="먼저 둘러보시겠어요?"
+          /*  추후 navigation 구조 변경 후 메인화면으로 연결할 예정 */
+        />
         <View style={styles.inner}>
           <View style={styles.termsAgreementContainer}>
             <View style={styles.rowContainer}>
-              <Text>가입을 누르시면 </Text>
+              <Text style={styles.agreementText}>가입을 누르시면 </Text>
               <TouchableOpacity onPress={() => moveNextScreen(props, 'SignUpTermsAgreement')}>
                 <Text style={styles.linkedText}>이용약관</Text>
               </TouchableOpacity>
-              <Text>과</Text>
+              <Text style={styles.agreementText}>과</Text>
               <TouchableOpacity onPress={() => moveNextScreen(props, 'SignUpTermsAgreement')}>
                 <Text style={styles.linkedText}>개인정보 취급 방침</Text>
               </TouchableOpacity>
-              <Text>에</Text>
+              <Text style={styles.agreementText}>에</Text>
             </View>
-            <Text>동의하는 것으로 간주됩니다.</Text>
-            <View height={10} />
-            <View style={styles.signUpButtonBlock}>
-              <NextButton
-                isActive
-                color={COLORS.SUB_COLOR}
-                text="가입"
-                onClick={() => moveNextScreen(props, 'SignUpPhone')}
-              />
-            </View>
-            <View style={styles.signInButtonBlock}>
-              <NextButton
-                isActive
-                color={COLORS.MAIN_COLOR}
-                text="로그인"
-                onClick={() => moveNextScreen(props, 'SignIn')}
-              />
-            </View>
+            <Text style={styles.agreementText}>동의하는 것으로 간주됩니다.</Text>
+
             {/* <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')}>
               <View style={styles.loginButton}>
                 <Text style={styles.loginButtonText}>로그인</Text>
               </View>
             </TouchableOpacity> */}
-            <View style={{ marginTop: 10 }}>
-              <MoreInfoButton
-                navigation={props.navigation}
-                screen="Home"
-                title="먼저 둘러보시겠어요?"
-                /*  추후 navigation 구조 변경 후 메인화면으로 연결할 예정 */
-              />
-            </View>
           </View>
         </View>
       </SafeAreaView>
@@ -94,22 +103,35 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  inner: { flex: 1, marginTop: 20, width: '90%' },
-  linkedText: { borderBottomColor: 'black', borderBottomWidth: 1, fontWeight: 'bold' },
-  loginButton: {
-    marginTop: 10,
-    // elevation:8,
-    color: 'gray',
-    borderRadius: 5,
-    borderWidth: 0.5,
+  onBoardingTextContainer: {
+    width: '100%',
     alignItems: 'center',
-    height: 40,
-    backgroundColor: 'white',
     justifyContent: 'center',
-    width: 0.9 * WINDOW_SIZE.WIDTH,
+    paddingRight: 10,
+    paddingLeft: 10,
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    height: 52 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
-  loginButtonText: {
-    color: 'gray',
+  onBoardingText: {
+    letterSpacing: -0.5,
+    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
+    color: COLORS.BLACK,
+  },
+  inner: { marginTop: 20, backgroundColor: 'green' },
+  linkedText: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    fontWeight: 'bold',
+    fontSize: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
+    opacity: 30,
+  },
+  agreementText: {
+    fontSize: 10 * WINDOW_SIZE.WIDTH_WEIGHT,
+    opacity: 30,
+  },
+  buttonContainer: {
+    height: 166 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingTop: 42 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -120,5 +142,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: 'white'
   },
-  termsAgreementContainer: { height: 60, alignItems: 'center' },
+  termsAgreementContainer: {
+    height: 84,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
