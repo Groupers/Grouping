@@ -15,6 +15,7 @@ import PasswordInputTextView from '../components/PasswordInputTextView';
 import { INPUT_PASSWORD_STATUS } from '../../../constant/InputPasswordStatus';
 import LabelView from '../components/LabelView';
 import SignErrorMessageView from '../components/SignErrorMessageView';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -47,27 +48,37 @@ class SignUpPassword extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : null}
-        style={styles.body}
-      >
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.body}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <LabelView text="새 비밀번호" />
-              <PasswordInputTextView
-                toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(this)}
-                isShowPassword={this.props.signUpPasswordStore.isShowPassword}
-                text={this.props.signUpPasswordStore.passwordText}
-                onChangeText={this.props.signUpPasswordStore.passwordTextChanged.bind(this)}
-              />
-              <SignErrorMessageView text={this.props.signUpPasswordStore.errorMessage} />
+              <View style={styles.textArea}>
+                <Text style={{ fontSize: 25, marginBottom: 6, color: COLORS.BLACK }}>
+                  비밀번호를 입력해주세요
+                </Text>
+                <Text style={{ fontSize: 12, color: COLORS.BLACK, lineHeight: 18 }}>
+                  한 번만 입력하니 정확히 입력해주세요!
+                </Text>
+              </View>
+              <View style={{ height: 30 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+              <View>
+                <LabelView text="새 비밀번호" />
+                <PasswordInputTextView
+                  toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(this)}
+                  isShowPassword={this.props.signUpPasswordStore.isShowPassword}
+                  text={this.props.signUpPasswordStore.passwordText}
+                  onChangeText={this.props.signUpPasswordStore.passwordTextChanged.bind(this)}
+                />
+                <SignErrorMessageView text={this.props.signUpPasswordStore.errorMessage} />
+              </View>
             </View>
             <View style={styles.bottomContainer}>
               <NextButton
                 isActive={this.props.signUpPasswordStore.isValidInputData}
-                text="확 인"
+                text="다음"
                 onClick={this.signUpNextButtonClicked.bind(this)}
+                buttonType={false}
+                fontColor={COLORS.WHITE}
               />
             </View>
           </View>
@@ -81,34 +92,26 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
-
   inner: {
-    flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
-    alignItems: 'center',
-    // justifyContent: 'center',
-    width: '90%',
-    paddingTop: 30,
   },
-
   contentContainer: {
-    flex: 1,
-    paddingTop: 150,
-    alignItems: 'center',
-    backgroundColor: COLORS.MAIN_COLOR,
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  textArea: {
     width: '100%',
+    marginTop: 10,
   },
   bottomContainer: {
-    backgroundColor: COLORS.MAIN_COLOR,
+    // borderWidth:2,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
+    flex: 1,
   },
 });
 

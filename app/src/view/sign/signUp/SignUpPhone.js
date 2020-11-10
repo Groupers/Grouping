@@ -64,7 +64,7 @@ class SignUpPhone extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 'padding' : 0}
         style={styles.body}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -81,23 +81,25 @@ class SignUpPhone extends React.Component {
                 </Text>
               </View>
               <View height={12 * WINDOW_SIZE.HEIGHT_WEIGHT} />
-              <LabelView text="휴대폰 번호" />
-              <PhoneNumberInputTextView
-                label="휴대폰 번호"
-                isActive={!this.props.signUpPhoneStore.isAllCompleted}
-                text={this.props.signUpPhoneStore.phoneNumber}
-                onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
-                placeholder="-없이 번호 입력"
-              />
-              {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
-              <LabelView text="인증번호" />
-              <PhoneCodeInputTextView
-                onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
-                onBlur={() => {
-                  this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
-                }}
-                text={this.props.signUpPhoneStore.phoneCode}
-              />
+              <View>
+                <LabelView text="휴대폰 번호" />
+                <PhoneNumberInputTextView
+                  label="휴대폰 번호"
+                  isActive={!this.props.signUpPhoneStore.isAllCompleted}
+                  text={this.props.signUpPhoneStore.phoneNumber}
+                  onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
+                  placeholder="-없이 번호 입력"
+                />
+                {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
+                <LabelView text="인증번호" />
+                <PhoneCodeInputTextView
+                  onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
+                  onBlur={() => {
+                    this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
+                  }}
+                  text={this.props.signUpPhoneStore.phoneCode}
+                />
+              </View>
             </View>
             <View style={styles.bottomContainer}>
               <NextButton
@@ -129,15 +131,15 @@ const styles = StyleSheet.create({
     // marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     // marginEnd: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
+  contentContainer: {
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    alignItems: 'center',
+  },
   textArea: {
     width: '100%',
     marginTop: 10,
   },
-  contentContainer: {
-    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
-  },
-
   phoneCodeContainer: {
     backgroundColor: 'green',
     flexDirection: 'row',
