@@ -8,15 +8,15 @@ export default class NextButton extends Component {
     super(props);
   }
 
-  buttonStyle = function (isActive, buttonType = false) {
-    return buttonType === true
+  buttonStyle = function (isActive, buttonType = 'notEntrance') {
+    return buttonType === 'EntranceSignIn' || buttonType === 'EntranceLogIn'
       ? {
           width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
           height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
           borderRadius: 12,
-          backgroundColor: isActive === true ? COLORS.SUB_COLOR : COLORS.WHITE,
+          backgroundColor: buttonType === 'EntranceSignIn' ? COLORS.SUB_COLOR : COLORS.WHITE,
           borderWidth: 1,
-          borderColor: isActive === true ? COLORS.SUB_COLOR : '#e3e3e3',
+          borderColor: buttonType === 'EntranceSignIn' ? COLORS.SUB_COLOR : '#e3e3e3',
           justifyContent: 'center',
         }
       : {
@@ -48,21 +48,3 @@ export default class NextButton extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-    backgroundColor: COLORS.SUB_COLOR,
-    borderRadius: 5,
-    height: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
-  },
-  title: {
-    fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
-    fontWeight: 'bold',
-    color: 'white',
-    alignSelf: 'center',
-  },
-});

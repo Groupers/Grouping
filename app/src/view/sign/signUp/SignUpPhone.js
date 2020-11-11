@@ -63,10 +63,7 @@ class SignUpPhone extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 0}
-        style={styles.body}
-      >
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
@@ -106,7 +103,6 @@ class SignUpPhone extends React.Component {
                 isActive={this.props.signUpPhoneStore.isValidPhoneCode}
                 text="다음"
                 onClick={this.signUpNextButtonClicked.bind(this)}
-                buttonType={false}
                 fontColor={COLORS.WHITE}
               />
             </View>

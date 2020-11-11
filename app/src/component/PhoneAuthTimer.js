@@ -15,10 +15,7 @@ class PhoneAuthTimer extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.timeText}>
-          {this.props.signUpPhoneStore.phoneValidationViewStatus ===
-          SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-            ? this.props.signUpPhoneStore.startTimer()
-            : null}
+          {this.props.signUpPhoneStore.isSucceed ? this.props.signUpPhoneStore.startTimer() : null}
           {this.props.signUpPhoneStore.getFormatTimer}
         </Text>
       </View>

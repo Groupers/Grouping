@@ -37,20 +37,19 @@ const EntranceMain = (props) => {
           <View style={styles.signUpButtonBlock}>
             <NextButton
               isActive
-              color={COLORS.SUB_COLOR}
               text="가입"
               onClick={() => moveNextScreen(props, 'SignUpPhone')}
               fontColor={COLORS.WHITE}
-              buttonType
+              buttonType="EntranceSignIn"
             />
           </View>
           <View style={styles.signInButtonBlock}>
             <NextButton
-              isActive={false}
+              isActive
               text="로그인"
               onClick={() => moveNextScreen(props, 'SignIn')}
               fontColor={COLORS.BLACK}
-              buttonType
+              buttonType="EntranceLogIn"
             />
           </View>
         </View>
