@@ -46,10 +46,11 @@ const EntranceMain = (props) => {
           </View>
           <View style={styles.signInButtonBlock}>
             <NextButton
-              isActive={false}
+              isActive
               text="로그인"
               onClick={() => moveNextScreen(props, 'SignIn')}
               fontColor={COLORS.BLACK}
+              color={COLORS.WHITE}
               buttonType
             />
           </View>

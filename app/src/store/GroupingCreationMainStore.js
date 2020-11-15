@@ -168,7 +168,7 @@ export default class GroupingCreationMainStore {
           console.log('askPermission', error);
         }
       };
-      askPermission();
+      askPermission().then();
     }
     this.groupingBackgroundImageURI = { uri };
     this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
@@ -222,7 +222,6 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
-    console.log('in');
     this.groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
       this.groupingCreationDto,
       (responseCode) => {
@@ -230,8 +229,6 @@ export default class GroupingCreationMainStore {
         console.log(responseCode);
       }
     );
-    console.log('out');
-
     console.log(this.groupingCreationDto);
     if (this.groupingCreationDto !== undefined) {
       console.log('group creation start');
@@ -239,6 +236,10 @@ export default class GroupingCreationMainStore {
       this.groupingStore.groupCreationCompleted(this.groupingCreationDto);
       console.log('group creation completed');
     }
+  };
+
+  @action groupRepresentImgUpload = async () => {
+
   };
 
   @action pushKeywordToHashtagList = (keyword) => {
