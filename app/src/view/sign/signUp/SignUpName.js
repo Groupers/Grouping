@@ -79,7 +79,6 @@ class SignUpName extends React.Component {
                   text="다음"
                   isActive={this.props.signUpBasicInfoStore.isValidInputData}
                   onClick={this.signUpNextButtonClicked.bind(this)}
-                  buttonType={false}
                   fontColor={COLORS.WHITE}
                 />
               </View>
