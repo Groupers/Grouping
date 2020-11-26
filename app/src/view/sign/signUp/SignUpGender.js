@@ -47,23 +47,25 @@ class SignUpGender extends Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.title}>필수 정보 입력</Text>
-                <Text style={styles.subTitle}>그루핑 활동 시 사용될 정보를 입력해주세요</Text>
+              <View style={styles.textArea}>
+                <Text style={styles.title}>성별을 알려주세요</Text>
               </View>
-              <LabelView text="성별" />
-              <GenderInputView
-                isMaleSelected={this.props.signUpBasicInfoStore.isMaleSelected}
-                isFemaleSelected={this.props.signUpBasicInfoStore.isFemaleSelected}
-                genderSelected={this.props.signUpBasicInfoStore.genderSelected.bind(this)}
-              />
-            </View>
-            <View style={styles.bottomContainer}>
-              <NextButton
-                isActive={this.props.signUpBasicInfoStore.isValidGender}
-                text="등 록"
-                onClick={this.signUpNextButtonClicked.bind(this)}
-              />
+              <View height={70 * WINDOW_SIZE.HEIGHT_WEIGHT} />
+              <View>
+                <GenderInputView
+                  isMaleSelected={this.props.signUpBasicInfoStore.isMaleSelected}
+                  isFemaleSelected={this.props.signUpBasicInfoStore.isFemaleSelected}
+                  genderSelected={this.props.signUpBasicInfoStore.genderSelected.bind(this)}
+                />
+              </View>
+              <View style={styles.bottomContainer}>
+                <NextButton
+                  isActive={this.props.signUpBasicInfoStore.isValidGender}
+                  text="다음"
+                  fontColor={COLORS.WHITE}
+                  onClick={this.signUpNextButtonClicked.bind(this)}
+                />
+              </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -76,45 +78,29 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
-
   inner: {
-    flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
-    alignItems: 'center',
-    // justifyContent: 'center',
-    width: 290 * WINDOW_SIZE.WIDTH_WEIGHT,
-  },
-  titleContainer: {
-    width: '100%',
-    justifyContent: 'flex-start',
-    marginTop: 70 * WINDOW_SIZE.HEIGHT_WEIGHT,
-  },
-  title: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.SUB_COLOR,
-    marginBottom: 10,
-  },
-  subTitle: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.DARK_GRAY,
+    flex: 1,
   },
   contentContainer: {
-    width: '100%',
+    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
-    justifyContent: 'center',
   },
+  textArea: {
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.BLACK },
   bottomContainer: {
-    flex: 1,
+    // borderWidth:2,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    marginBottom: 60 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    flex: 1,
   },
 });
 

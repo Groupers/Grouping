@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -36,16 +37,13 @@ export default class SignErrorMessageView extends React.Component {
 const styles = StyleSheet.create({
   errorMessageContainer: {
     borderColor: '#FFF',
-    width: '100%',
-    marginTop: 20,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   errorMessage: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
     color: COLORS.SUB_COLOR,
-    fontSize: 10,
-    fontWeight: '600',
+    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    letterSpacing: 0.3,
   },
 });

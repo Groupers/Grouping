@@ -37,7 +37,7 @@ class BirthdayPicker extends React.Component {
           androidVariant="iosClone"
           mode="date"
         />
-        <Text>{this.getParsedDate(this.state.date).toString()}</Text>
+        {/* <Text>{this.getParsedDate(this.state.date).toString()}</Text> */}
       </>
     );
   }
