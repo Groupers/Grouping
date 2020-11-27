@@ -58,12 +58,12 @@ class SignUpName extends React.Component {
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
   render() {
     return (
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={styles.body}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
               <View style={styles.textArea}>
-                <Text style={{ fontSize: 25, marginBottom: 6, color: COLORS.BLACK }}>이메일 주소를 입력해주세요.</Text>
+                <Text style={styles.title}>이름을 알려주세요.</Text>
                 <View style={{ height: 30 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
               </View>
               <View>
@@ -77,7 +77,7 @@ class SignUpName extends React.Component {
               <View style={styles.bottomContainer}>
                 <NextButton
                   text="다음"
-                  isActive={this.props.signUpBasicInfoStore.isValidInputData}
+                  isActive={this.props.signUpBasicInfoStore.isValidName}
                   onClick={this.signUpNextButtonClicked.bind(this)}
                   fontColor={COLORS.WHITE}
                 />
@@ -102,13 +102,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
   },
   textArea: {
-    marginTop: 10,
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    // alignSelf: 'flex-start',
+    // width: '100%',
   },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.BLACK },
   bottomContainer: {
     // borderWidth:2,
     width: '100%',

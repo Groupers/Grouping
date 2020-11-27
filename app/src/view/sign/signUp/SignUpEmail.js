@@ -62,9 +62,7 @@ class SignUpEmail extends React.Component {
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
               <View style={styles.textArea}>
-                <Text style={{ fontSize: 25, marginBottom: 6, color: COLORS.BLACK }}>
-                  이메일 주소를 입력해주세요.
-                </Text>
+                <Text style={styles.title}>이메일 주소를 입력해주세요.</Text>
                 <View style={{ height: 30 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
               </View>
               <View>
@@ -79,7 +77,6 @@ class SignUpEmail extends React.Component {
               <View style={styles.bottomContainer}>
                 <NextButton
                   text="다음"
-                  buttonType={false}
                   fontColor={COLORS.WHITE}
                   isActive={this.props.signUpEmailStore.isValidInputData}
                   onClick={this.signUpNextButtonClicked.bind(this)}
@@ -105,13 +102,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
   },
   textArea: {
-    marginTop: 10,
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, marginBottom: 6, color: COLORS.BLACK },
   bottomContainer: {
     // borderWidth:2,
     width: '100%',

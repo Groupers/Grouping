@@ -49,9 +49,8 @@ export default class SignUpPasswordStore {
 
   @computed get errorMessage() {
     if (this.passwordValidation === INPUT_PASSWORD_STATUS.NOT_FORMATTED) {
-      return '8자 이상이어야 합니다.';
+      if (this.passwordText.length < 6) return '아직 6자리가 아니에요';
+      return '알맞지 않은 비밀번호입니다.';
     }
-
-    return '';
   }
 }

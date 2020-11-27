@@ -117,16 +117,13 @@ class Entrance extends React.Component {
           >
             {(props) => <SignIn {...props} />}
           </Stack.Screen>
-
           <Stack.Screen
             name="SignUpEmail"
             options={{
               headerStyle: {
-                backgroundColor: COLORS.MAIN_COLOR,
                 elevation: 0,
               },
               headerTitle: '',
-              // headerBackTitle:"<",
               headerBackImage: () => {
                 return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
@@ -139,7 +136,6 @@ class Entrance extends React.Component {
             options={{
               // title: 'Sign Up Password',
               headerStyle: {
-                backgroundColor: COLORS.MAIN_COLOR,
                 elevation: 0,
               },
               headerTitle: '',
@@ -154,14 +150,13 @@ class Entrance extends React.Component {
             name="SignUpPhone"
             options={{
               headerStyle: {
-                backgroundColor: COLORS.MAIN_COLOR,
                 elevation: 0,
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
+                //   headerTitleStyle: {
+                //     fontWeight: 'bold',
+                //   },
               },
-              headerTitle: '회원가입',
-              // headerBackTitle:"<",
+              headerTitle: '',
+              // // headerBackTitle:"<",
               headerBackImage: () => {
                 return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
@@ -169,18 +164,13 @@ class Entrance extends React.Component {
           >
             {(props) => <SignUpPhone {...props} />}
           </Stack.Screen>
-
           <Stack.Screen
             name="SignUpName"
             options={{
-              headerTitle: '회원가입',
               headerStyle: {
-                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
               },
-              headerTintColor: 'black',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
+              headerTitle: '',
               headerBackImage: () => {
                 return (
                   <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
@@ -193,14 +183,10 @@ class Entrance extends React.Component {
           <Stack.Screen
             name="SignUpGender"
             options={{
-              headerTitle: '회원가입',
               headerStyle: {
-                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
               },
-              headerTintColor: 'black',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
+              headerTitle: '',
               headerBackImage: () => {
                 return (
                   <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
@@ -213,14 +199,10 @@ class Entrance extends React.Component {
           <Stack.Screen
             name="SignUpBirthday"
             options={{
-              headerTitle: '회원가입',
               headerStyle: {
-                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
               },
-              headerTintColor: 'black',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
+              headerTitle: '',
               headerBackImage: () => {
                 return (
                   <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />

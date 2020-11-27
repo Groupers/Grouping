@@ -53,10 +53,14 @@ class SignUpPassword extends React.Component {
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
               <View style={styles.textArea}>
-                <Text style={{ fontSize: 25, marginBottom: 6, color: COLORS.BLACK }}>
-                  비밀번호를 입력해주세요
-                </Text>
-                <Text style={{ fontSize: 12, color: COLORS.BLACK, lineHeight: 18 }}>
+                <Text style={styles.title}>비밀번호를 입력해주세요</Text>
+                <Text
+                  style={{
+                    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                    color: COLORS.BLACK,
+                    lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                  }}
+                >
                   한 번만 입력하니 정확히 입력해주세요!
                 </Text>
               </View>
@@ -105,6 +109,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 10,
   },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, marginBottom: 6, color: COLORS.BLACK },
   bottomContainer: {
     // borderWidth:2,
     width: '100%',

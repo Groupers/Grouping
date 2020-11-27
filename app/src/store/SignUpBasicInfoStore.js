@@ -59,7 +59,6 @@ export default class SignUpBasicInfoStore {
   };
 
   @action birthdayChanged = (birthday) => {
-
     this.birthdayText = birthday;
 
     console.log(birthday);
@@ -77,7 +76,9 @@ export default class SignUpBasicInfoStore {
 
   @computed get errorMessage() {
     if (this.nameValidation === SIGN_UP_NAME_STATUS.NOT_FORMATTED) {
-      return '이름 형식이 맞지 않습니다.';
+      if (this.nameText.length < 2) return '이름이 너무 짧아요';
+      if (this.nameText.length > 6) return '이름이 너무 길어요';
+      return '이름 형식이 올바르지 않습니다.';
     }
 
     if (this.birthdayValidation === INPUT_BIRTHDAY_STATUS.NOT_FORMATTED) {
