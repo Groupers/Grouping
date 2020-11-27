@@ -1,30 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../assets/Colors';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../constant/SignUpPhoneStatus';
 
-@inject('signUpPhoneStore')
-@observer
-class PhoneAuthTimer extends Component {
-  constructor(props) {
-    super(props);
-  }
+const PhoneAuthTimer = (props) => {
+  const getTimer = () => {
+    if (
+      props.signUpPhoneStore.phoneValidationStatus ===
+      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+    ) {
+      console.log('타이머 시작!!!');
+      props.signUpPhoneStore.startTimer();
+    }
+    if (
+      props.signUpPhoneStore.phoneValidationStatus === SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT
+    ) {
+      console.log('타이머 리셋하고 시작!!!');
+      props.signUpPhoneStore.clearTimer();
+      props.signUpPhoneStore.initialize();
+      props.signUpPhoneStore.startTimer();
+    }
+    return props.signUpPhoneStore.getFormatTimer;
+  };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.timeText}>
-          {this.props.signUpPhoneStore.phoneValidationViewStatus ===
-          SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-            ? this.props.signUpPhoneStore.startTimer()
-            : null}
-          {this.props.signUpPhoneStore.getFormatTimer}
-        </Text>
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <Text style={styles.timeText}>{getTimer()}</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {},
@@ -34,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PhoneAuthTimer;
+export default inject('signUpPhoneStore')(observer(PhoneAuthTimer));

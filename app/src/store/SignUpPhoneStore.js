@@ -28,6 +28,8 @@ export default class SignUpPhoneStore {
 
   @observable timeOut = TIME_OUT.START_TIME;
 
+  @observable timerID;
+
   signRepository = new SignRepository();
 
   firebaseRepository = new FirebaseRepository();
@@ -49,9 +51,16 @@ export default class SignUpPhoneStore {
   }
 
   @action startTimer() {
-    BackgroundTimer.setTimeout(() => {
+    console.log('start timer begin');
+    this.timerID = BackgroundTimer.setTimeout(() => {
       this.countDown();
     }, TIME_OUT.THOUSAND_MILLI_SECONDS);
+  }
+
+  @action clearTimer() {
+    console.log('clear timer begin');
+    console.log(this.timerID);
+    clearTimeout(this.timerID);
   }
 
   @action completePhoneNumber = async () => {
@@ -112,9 +121,15 @@ export default class SignUpPhoneStore {
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR;
     }
     if (isSucceed) {
-      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
-      // this.initialize();
+      if (this.phoneValidationStatus === SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER) {
+        console.log('재전송!!!');
+        console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
+        this.phoneValidationStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT;
+        return;
+      }
+      console.log('첫 전송!!!');
       console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
+      this.phoneValidationStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
     }
   };
 
