@@ -7,9 +7,10 @@ import PhoneCodeNextButton from './PhoneCodeNextButton';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
 const PhoneNumberInputTextView = (props) => {
-  const authorizeButtonClicked = async () => {
-    await props.signUpPhoneStore.sendPhoneCode();
+  const authorizeButtonClicked = () => {
+    props.signUpPhoneStore.sendPhoneCode().then();
   };
+
   return (
     <View
       style={{
@@ -22,6 +23,7 @@ const PhoneNumberInputTextView = (props) => {
       }}
     >
       <TextInput
+        {...props}
         maxLength={20}
         autoCorrect={false}
         style={{
@@ -51,7 +53,7 @@ const PhoneNumberInputTextView = (props) => {
             ? COLORS.BLACK
             : COLORS.SUB_COLOR
         }
-        onClick={authorizeButtonClicked()}
+        onClick={authorizeButtonClicked}
       />
     </View>
   );

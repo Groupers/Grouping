@@ -121,15 +121,15 @@ export default class SignUpPhoneStore {
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR;
     }
     if (isSucceed) {
-      if (this.phoneValidationStatus === SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER) {
+      if (this.phoneValidationViewStatus === SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER) {
         console.log('재전송!!!');
         console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
-        this.phoneValidationStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT;
+        this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT;
         return;
       }
       console.log('첫 전송!!!');
       console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
-      this.phoneValidationStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
+      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
     }
   };
 
