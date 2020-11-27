@@ -54,17 +54,20 @@ class SignUpBirthday extends Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <LabelView text="생년월일을 알려주세요" />
-              <View style={{ height: 30 }} />
+              <View style={styles.textArea}>
+                <Text style={styles.title}>생년월일을 알려주세요</Text>
+                <View style={{ height: 66 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+              </View>
               <BirthdayPicker />
               <SignErrorMessageView text={this.props.signUpBasicInfoStore.errorMessage} />
-            </View>
-            <View style={styles.bottomContainer}>
-              <NextButton
-                isActive={this.props.signUpBasicInfoStore.isValidBirthday}
-                text="완료"
-                onClick={this.signUpNextButtonClicked.bind(this)}
-              />
+              <View style={styles.bottomContainer}>
+                <NextButton
+                  isActive={this.props.signUpBasicInfoStore.isValidBirthday}
+                  text="시작하기"
+                  fontColor={COLORS.WHITE}
+                  onClick={this.signUpNextButtonClicked.bind(this)}
+                />
+              </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -77,40 +80,22 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
-
   inner: {
-    flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
-    alignItems: 'center',
-    // justifyContent: 'center',
-    // width: 290 * WINDOW_SIZE.WIDTH_WEIGHT,
-  },
-  titleContainer: {
-    width: '100%',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    marginTop: 70 * WINDOW_SIZE.HEIGHT_WEIGHT,
-  },
-  title: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.SUB_COLOR,
-    marginBottom: 10,
-  },
-  subTitle: {
-    fontSize: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
-    color: COLORS.DARK_GRAY,
-  },
-  contentContainer: {
     flex: 1,
-    width: '100%',
+  },
+  textArea: {
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.BLACK },
+  contentContainer: {
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   bottomContainer: {
     flex: 1,

@@ -10,16 +10,11 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import NextButton from '../components/NextButton';
-import LabelView from '../components/LabelView';
 import PhoneNumberInputTextView from '../components/PhoneNumberInputTextView';
-import SignErrorMessageView from '../components/SignErrorMessageView';
-import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
-import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { COLORS } from '../../../assets/Colors';
-import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
-import { TIME_OUT } from '../../../constant/TimeOut';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import LabelView from '../components/LabelView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -68,10 +63,14 @@ class SignUpPhone extends React.Component {
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
               <View style={styles.textArea}>
-                <Text style={{ fontSize: 25, marginBottom: 6, color: COLORS.BLACK }}>
-                  휴대폰 번호를 입력해주세요
-                </Text>
-                <Text style={{ fontSize: 12, color: COLORS.BLACK, lineHeight: 18 }}>
+                <Text style={styles.title}>휴대폰 번호를 입력해주세요</Text>
+                <Text
+                  style={{
+                    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                    color: COLORS.BLACK,
+                    lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                  }}
+                >
                   {
                     '허위 및 중복 가입을 예방하기 위한 절차입니다. \n핸드폰번호는 타인에게 절대 공개되지 않습니다.'
                   }
@@ -136,6 +135,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 10,
   },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, marginBottom: 6, color: COLORS.BLACK },
   phoneCodeContainer: {
     backgroundColor: 'green',
     flexDirection: 'row',

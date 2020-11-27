@@ -12,7 +12,7 @@ import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-export default class PhoneCodeInputTextView extends React.Component {
+class PhoneCodeInputTextView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -97,3 +97,4 @@ const styles = StyleSheet.create({
     paddingRight: 0,
   },
 });
+export default PhoneCodeInputTextView;
