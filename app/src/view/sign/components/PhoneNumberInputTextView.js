@@ -13,22 +13,12 @@ class PhoneNumberInputTextView extends Component {
     super(props);
   }
 
-  state = {
-    isFocused: false,
-  };
-
-  // 나중에 store에 연결
-  handleFocus = () => this.setState({ isFocused: true });
-
-  handleBlur = () => this.setState({ isFocused: false });
-
   async authorizeButtonClicked() {
     await this.props.signUpPhoneStore.sendPhoneCode();
   }
 
   render() {
     const { label, ...props } = this.props;
-    const { isFocused } = this.state;
     return (
       <View
         style={{
