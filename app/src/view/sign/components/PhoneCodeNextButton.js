@@ -22,7 +22,7 @@ const PhoneCodeNextButton = (props) => {
   };
 
   return (
-    <TouchableOpacity style={buttonStyle()} onPress={props.isActive ? () => props.onClick : null}>
+    <TouchableOpacity style={buttonStyle()} onPress={props.isActive ? () => props.onClick() : null}>
       <Text style={fontStyle()}>{props.text}</Text>
     </TouchableOpacity>
   );

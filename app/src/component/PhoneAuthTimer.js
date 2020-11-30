@@ -1,67 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import BackgroundTimer from 'react-native-background-timer';
-import { computed } from 'mobx';
+import { action } from 'mobx';
 import { COLORS } from '../assets/Colors';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../constant/SignUpPhoneStatus';
 import { TIME_OUT } from '../constant/TimeOut';
 
 const PhoneAuthTimer = (props) => {
-  const countDown = () => {
-    if (props.signUpPhoneStore.timeOut > 0) {
-      props.signUpPhoneStore.timeOut -= TIME_OUT.A_SECOND;
-    }
+  const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+
+  const reStartTimer = () => {
+    toggle();
+    reset();
   };
 
-  const initialize = () => {
-    props.signUpPhoneStore.timeOut = TIME_OUT.START_TIME;
+  const toggle = () => {
+    setIsActive(!isActive);
   };
 
-  const startTimer = () => {
-    console.log('start timer begin');
-    props.signUpPhoneStore.timeOut = BackgroundTimer.setTimeout(() => {
-      countDown();
+  const reset = () => {
+    setSeconds(0);
+    setIsActive(false);
+  };
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - TIME_OUT.A_SECOND);
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(countdown);
+        } else {
+          setMinutes(minutes - TIME_OUT.A_SECOND);
+          setSeconds(59);
+        }
+      }
     }, TIME_OUT.THOUSAND_MILLI_SECONDS);
-  };
+    return () => clearInterval(countdown);
+  }, [minutes, seconds]);
 
-  const clearTimer = () => {
-    console.log('clear timer begin');
-    console.log(props.signUpPhoneStore.timerID);
-    clearTimeout(props.signUpPhoneStore.timerID);
-  };
-
-  const getFormatTimer = () => {
-    let time = props.signUpPhoneStore.timeOut;
-    const minutes = Math.floor(time / 60);
-    time -= minutes * 60;
-    const seconds = parseInt(time % 60, 10);
-    return `${minutes < 10 ? `0${minutes}` : minutes} : ${seconds < 10 ? `0${seconds}` : seconds}`;
-  };
-
-  const getTimer = () => {
+  /*  const getTimer = () => {
     if (
       props.signUpPhoneStore.phoneValidationViewStatus ===
       SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
     ) {
       console.log('타이머 시작!!!');
-      startTimer();
+      props.signUpPhoneStore.startTimer();
     }
     if (
       props.signUpPhoneStore.phoneValidationViewStatus ===
       SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT
     ) {
       console.log('타이머 리셋하고 시작!!!');
-      clearTimer();
-      initialize();
-      startTimer();
+      props.signUpPhoneStore.reStartTimer();
     }
-    return getFormatTimer();
-  };
+  }; */
 
   return (
     <View style={styles.container}>
-      <Text style={styles.timeText}>{getTimer()}</Text>
+      <Text style={styles.timeText}>
+        {props.signUpPhoneStore.phoneValidationViewStatus ===
+        SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+          ? toggle()
+          : null}
+        {props.signUpPhoneStore.phoneValidationViewStatus ===
+        SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT
+          ? reStartTimer()
+          : null}
+        {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+      </Text>
     </View>
   );
 };

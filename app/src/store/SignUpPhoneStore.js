@@ -57,6 +57,13 @@ export default class SignUpPhoneStore {
     }, TIME_OUT.THOUSAND_MILLI_SECONDS);
   }
 
+  @action reStartTimer() {
+    console.log('re start timer begin');
+    this.clearTimer();
+    this.initialize();
+    this.startTimer();
+  }
+
   @action clearTimer() {
     console.log('clear timer begin');
     console.log(this.timerID);
