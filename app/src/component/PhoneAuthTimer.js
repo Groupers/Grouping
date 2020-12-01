@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { action } from 'mobx';
 import { COLORS } from '../assets/Colors';
-import { SIGN_UP_PHONE_VIEW_STATUS } from '../constant/SignUpPhoneStatus';
 import { TIME_OUT } from '../constant/TimeOut';
 
 const PhoneAuthTimer = (props) => {
   const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
+
+  const startTimer = () => {
+    toggle();
+  };
 
   const reStartTimer = () => {
     toggle();
@@ -62,15 +64,9 @@ const PhoneAuthTimer = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.timeText}>
-        {props.signUpPhoneStore.phoneValidationViewStatus ===
-        SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-          ? toggle()
-          : null}
-        {props.signUpPhoneStore.phoneValidationViewStatus ===
-        SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT
-          ? reStartTimer()
-          : null}
+        {}
         {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        {/* {props.signUpPhoneStore.getFormatTimer} */}
       </Text>
     </View>
   );

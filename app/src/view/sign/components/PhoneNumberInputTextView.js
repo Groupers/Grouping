@@ -5,6 +5,7 @@ import { COLORS } from '../../../assets/Colors';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeNextButton from './PhoneCodeNextButton';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 const PhoneNumberInputTextView = (props) => {
   const authorizeButtonClicked = () => {
