@@ -19,8 +19,6 @@ export default class GroupingCreationDto {
 
   representGroupingUserId;
 
-  representGroupImage;
-
   hashtagList = [];
 
   constructor(data = {}) {

@@ -163,7 +163,6 @@ export default class GroupingCreationMainStore {
           const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
           if (result === RESULTS.GRANTED) {
             this.groupingBackgroundImageURI = { uri };
-            this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
             console.log('background image changed IOS');
             console.log(`IOS${this.groupingBackgroundImageURI}`);
           }
@@ -174,7 +173,6 @@ export default class GroupingCreationMainStore {
       askPermission().then();
     }
     this.groupingBackgroundImageURI = { uri };
-    this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     console.log('background image changed');
     console.log(this.groupingBackgroundImageURI);
   };
@@ -245,16 +243,6 @@ export default class GroupingCreationMainStore {
     }
   };
 
-  @action groupRepresentImgUpload = async () => {
-    this.groupingCreationDto = await this.groupRepresentImgRepository.completeGroupRepresentImg(
-      this.groupingCreationDto,
-      (responseCode) => {
-        console.log('responseCode : ');
-        console.log(responseCode);
-      }
-    );
-  };
-
   @action pushKeywordToHashtagList = (keyword) => {
     this.groupingCreationDto.hashtagList.push(keyword);
     console.log(this.groupingCreationDto.hashtagList);
@@ -317,7 +305,6 @@ export default class GroupingCreationMainStore {
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
     this.groupingCreationDto.representGroupingUserId = this.groupingUserId;
-    this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
