@@ -15,6 +15,7 @@ import { INPUT_STATUS } from '../constant/InputStatus';
 import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import GroupCreationRepository from '../repository/GroupCreationRepository';
 import GroupRepresentImgRepository from '../repository/GroupRepresentImgRepository';
+import PostGroupCreationDto from '../repository/PostGroupCreationDto';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
 import GroupingUserDto from '../dto/GroupingUserDto';
@@ -223,15 +224,11 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
-    const response = await this.groupCreationRepository.completeGroupCreation(
-      this.groupingCreationDto,
-      (responseCode) => {
-        console.log('responseCode : ');
-        console.log(responseCode);
-      }
-    );
+    const response = await PostGroupCreationDto(this.groupingCreationDto, (responseCode) => {
+      console.log(`responseCode : ${responseCode}`);
+    });
     await this.groupRepresentImgRepository.completeGroupRepresentImg(
-      response.groupId,
+      response.data().groupId,
       this.getBackgroundImageURI
     );
     console.log(this.groupingCreationDto);
@@ -310,5 +307,6 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.pointY = 100;
     this.groupingCreationDto.hashtagList = [];
     this.selectedGender = '';
+    this.groupingBackgroundImageURI = '';
   }
 }

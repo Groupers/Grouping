@@ -6,26 +6,15 @@ import GroupingCreationDto from '../dto/GroupingCreationDto';
 
 const TARGET_URL = `${SERVER_URL}/group`;
 
-export default class GroupCreationRepository {
-  async completeGroupCreation(groupingCreationDto, failedCallback) {
-    console.log('in complete group creation');
-    console.log(groupingCreationDto);
-    // eslint-disable-next-line no-param-reassign
-    groupingCreationDto.pointX = 100;
-    // eslint-disable-next-line no-param-reassign
-    groupingCreationDto.pointY = 100;
-    console.log({ TARGET_URL });
-    const response = await axios.post(`${TARGET_URL}`, groupingCreationDto);
-    console.log('response');
-    console.log(response);
-
-    const commonResponse = new CommonResponse(response.data);
-
-    if (commonResponse.code !== ResponseCode.SUCCEED) {
-      failedCallback(commonResponse.code);
-      return;
+const GroupCreationRepository = () => {
+  const completeGroupCreation = async (groupingCreationDto) => {
+    try {
+      return await axios.post(`${TARGET_URL}`, groupingCreationDto);
+    } catch (error) {
+      console.error(error);
     }
+    return null;
+  };
+};
 
-    return new GroupingCreationDto(commonResponse.data);
-  }
-}
+export default GroupCreationRepository;
