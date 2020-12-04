@@ -14,6 +14,7 @@ import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
 import { INPUT_STATUS } from '../constant/InputStatus';
 import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import GroupCreationRepository from '../repository/GroupCreationRepository';
+import GroupRepresentImgRepository from '../repository/GroupRepresentImgRepository';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
 import GroupingUserDto from '../dto/GroupingUserDto';
@@ -26,6 +27,8 @@ export default class GroupingCreationMainStore {
   groupingUserId = '';
 
   groupCreationRepository = new GroupCreationRepository();
+
+  groupRepresentImgRepository = new GroupRepresentImgRepository();
 
   mapRepository = new MapRepository();
 
@@ -222,12 +225,16 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
-    this.groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
+    const response = await this.groupCreationRepository.completeGroupCreation(
       this.groupingCreationDto,
       (responseCode) => {
         console.log('responseCode : ');
         console.log(responseCode);
       }
+    );
+    await this.groupRepresentImgRepository.completeGroupRepresentImg(
+      response.groupId,
+      this.getBackgroundImageURI
     );
     console.log(this.groupingCreationDto);
     if (this.groupingCreationDto !== undefined) {
@@ -239,7 +246,13 @@ export default class GroupingCreationMainStore {
   };
 
   @action groupRepresentImgUpload = async () => {
-
+    this.groupingCreationDto = await this.groupRepresentImgRepository.completeGroupRepresentImg(
+      this.groupingCreationDto,
+      (responseCode) => {
+        console.log('responseCode : ');
+        console.log(responseCode);
+      }
+    );
   };
 
   @action pushKeywordToHashtagList = (keyword) => {
