@@ -12,11 +12,13 @@ import GroupCreationProgressBar from '../GroupCreationProgressBar';
 import { FONT_SIZE } from '../../../../../constant/FontSize';
 import { EMPTY_VALUE } from '../../../../../constant/EmptyValue';
 import KeywordInput from './KeywordInput';
+import LabelView from '../../../../sign/components/LabelView';
 
 // eslint-disable-next-line react/prop-types
 const NewGroupInterestsInputView = (props) => {
   const [input, setInput] = React.useState('');
   const [keywordList, setKeywordList] = React.useState([]);
+  const sampleHotKeyword = ['헬스', '온라인 스터디', '홈트', '베이킹'];
 
   const rightIconStyle = (selectedColor) => {
     return {
@@ -106,30 +108,14 @@ const NewGroupInterestsInputView = (props) => {
           keywordList={keywordList}
         />
       </View>
-      <View style={{ flexDirection: 'row' }}>
-        {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
-        {keywordList.map((keyword) => (
-          <View style={styles.keywordListBlock}>
-            <TouchableOpacity onPress={() => onKeywordRemove(keyword)}>
-              <Text>
-                {keyword}
-                <Text style={{ color: 'white' }}> x</Text>
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-      <View style={styles.hotKeywordContainer}>
-        <Text
-          style={{
-            fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-            fontWeight: 'bold',
-          }}
-        >
-          인기 키워드
-        </Text>
-      </View>
-      <View style={{ flexDirection: 'row', marginTop: 11 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+          flexWrap: 'wrap',
+          marginTop: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
+        }}
+      >
         {/* keywords에서 불러오는것이 아니라 mobx에 상태에서 가져왔으면 좋겠음 */}
         {keywordList.map((keyword) => (
           <View style={styles.keywordListBlock}>
@@ -137,9 +123,7 @@ const NewGroupInterestsInputView = (props) => {
               onPress={() => onKeywordRemove(keyword)}
               style={{ flexDirection: 'row', alignItems: 'center' }}
             >
-              <Text style={{ color: COLORS.WHITE, fontSize: 11 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
-                {keyword}
-              </Text>
+              <Text style={styles.keywordText}>{keyword}</Text>
               <Image
                 source={require('../../../../../../../Img/tag_ic_x.png')}
                 resizeMode="center"
@@ -151,6 +135,31 @@ const NewGroupInterestsInputView = (props) => {
           </View>
         ))}
       </View>
+      <View style={styles.hotKeywordContainer}>
+        <LabelView text="인기 키워드" />
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 11 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* 인기키워드는 나중에 서버부분 완료되면 실제 데이터 불러오도록 수정필요 // mobx에 상태에서 가져왔으면 좋겠음 */}
+          {sampleHotKeyword.map((keyword) => (
+            <View style={styles.hotkeywordListBlock}>
+              <TouchableOpacity
+                onPress={() => onKeywordRemove(keyword)}
+                style={{ flexDirection: 'row', alignItems: 'center' }}
+              >
+                <Text style={{ color: COLORS.BLACK, fontSize: 11 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
+                  {keyword}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+      </View>
     </View>
   );
 };
@@ -160,6 +169,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    backgroundColor: COLORS.WHITE,
   },
   labelContainer: {
     borderColor: COLORS.MAIN_COLOR,
@@ -173,7 +183,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   hotKeywordContainer: {
-    marginTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
   keywordListBlock: {
     paddingTop: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
@@ -186,6 +196,18 @@ const styles = StyleSheet.create({
     marginTop: 3 * WINDOW_SIZE.HEIGHT_WEIGHT,
     marginBottom: 3 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
+  hotkeywordListBlock: {
+    paddingTop: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingBottom: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingLeft: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
+    borderRadius: 24.5 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 5 * WINDOW_SIZE.WIDTH_WEIGHT,
+    backgroundColor: COLORS.GRAY_5,
+    marginTop: 3 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginBottom: 3 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  },
+  keywordText: { color: COLORS.WHITE, fontSize: 11 * WINDOW_SIZE.HEIGHT_WEIGHT },
   rightIconStyle: {
     marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
