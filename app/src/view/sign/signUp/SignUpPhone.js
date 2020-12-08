@@ -17,23 +17,35 @@ import { COLORS } from '../../../assets/Colors';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import LabelView from '../components/LabelView';
 import { TIME_OUT } from '../../../constant/TimeOut';
+import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 
 const SignUpPhone = (props) => {
   const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
+  const getTimer = () => (
+    <Text style={styles.timeText}>
+      {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+    </Text>
+  );
+
   const startTimer = () => {
-    toggle();
-  };
-
-  const reStartTimer = () => {
-    reset();
-    toggle();
-  };
-
-  const toggle = () => {
-    setIsActive(!isActive);
+    if (
+      props.signUpPhoneStore.phoneValidationViewStatus ===
+      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+    ) {
+      console.log('타이머 시작!!!');
+      setIsActive(true);
+    }
+    if (
+      props.signUpPhoneStore.phoneValidationViewStatus ===
+      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT
+    ) {
+      console.log('타이머 리셋하고 시작!!!');
+      reset();
+      setIsActive(true);
+    }
   };
 
   const reset = () => {
@@ -80,9 +92,9 @@ const SignUpPhone = (props) => {
     props.navigation.navigate('SignUpEmail');
   };
 
-  // const authorizeButtonClicked = () => {
-  //   props.signUpPhoneStore.sendPhoneCode().then();
-  // };
+  const authorizeButtonClicked = () => {
+    props.signUpPhoneStore.sendPhoneCode().then(startTimer);
+  };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
@@ -113,6 +125,7 @@ const SignUpPhone = (props) => {
                 onChangeText={props.signUpPhoneStore.phoneNumberChanged.bind(this)}
                 placeholder="-없이 번호 입력"
               />
+              <Button title="전송" onPress={authorizeButtonClicked} />
               {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
               <LabelView text="인증번호" />
               <PhoneCodeInputTextView
@@ -122,10 +135,7 @@ const SignUpPhone = (props) => {
                 }}
                 text={props.signUpPhoneStore.phoneCode}
               />
-              <Button title="전송" onPress={reStartTimer} />
-              <Text>
-                {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-              </Text>
+              {getTimer()}
             </View>
           </View>
           <View style={styles.bottomContainer}>
@@ -180,6 +190,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     flex: 1,
+  },
+
+  timeText: {
+    fontSize: 12,
+    color: COLORS.SUB_COLOR,
   },
 
   authButton: {},

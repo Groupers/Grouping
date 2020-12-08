@@ -3,3 +3,4 @@ export const PHONE_CODE_AUTH_STATUS = {
   SUCCEED: 'SUCCEED',
   FAIL: 'FAIL',
 };
+

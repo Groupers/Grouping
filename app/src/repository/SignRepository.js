@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { SERVER_URL } from '../constant/HttpProperty';
+import { SIGN_URL } from '../constant/HttpProperty';
 import CommonResponse from '../dto/CommonResponse';
 import CheckEmailResponseDto from '../dto/CheckEmailResponseDto';
 import CheckPhoneNumberResponseDto from '../dto/CheckPhoneNumberResponseDto';
 import { ResponseCode } from '../constant/ResponseCode';
 import GroupingUserDto from '../dto/GroupingUserDto';
 
-const TARGET_URL = `${SERVER_URL}/sign`;
+const TARGET_URL = `${SIGN_URL}`;
 
 export default class SignRepository {
   async checkEmail(email, failedCallback) {

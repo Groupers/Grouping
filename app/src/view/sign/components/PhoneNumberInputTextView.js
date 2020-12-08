@@ -2,10 +2,7 @@ import React from 'react';
 import { View, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
-import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
-import PhoneCodeNextButton from './PhoneCodeNextButton';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
-import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 const PhoneNumberInputTextView = (props) => {
   return (
@@ -35,7 +32,7 @@ const PhoneNumberInputTextView = (props) => {
         }}
         textContentType="telephoneNumber"
       />
-      <PhoneCodeNextButton
+      {/* <PhoneCodeNextButton
         label="인증번호"
         isActive={props.signUpPhoneStore.isValidPhoneNumber}
         text={
@@ -51,7 +48,7 @@ const PhoneNumberInputTextView = (props) => {
             : COLORS.SUB_COLOR
         }
         // onClick={authorizeButtonClicked}
-      />
+      /> */}
     </View>
   );
 };
