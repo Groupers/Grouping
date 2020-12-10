@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, TextInput, View, Text } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
@@ -40,6 +40,7 @@ import FeedMain from './feed/FeedMain';
 // MyPage
 import MyPageMain from './myPage/MyPageMain';
 import AddressSearchTextView from './AddressSearchTextView';
+import {FONT_SIZE} from "../../constant/FontSize";
 
 const HomeStack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -63,7 +64,11 @@ const HomeStackScreen = ({ navigation, route }) => {
         options={{
           title: '',
           headerLeft: () => (
-            <Icon name="chevron-left" size={22} onPress={() => navigation.navigate('HomeMain')} />
+            <Icon
+              name="chevron-left"
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
+            />
           ),
           headerLeftContainerStyle: {
             marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
@@ -78,8 +83,8 @@ const HomeStackScreen = ({ navigation, route }) => {
           headerLeft: () => (
             <Icon
               name="chevron-left"
-              size={22}
-              onPress={() => navigation.navigate('NewGroupNameView')}
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
             />
           ),
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
@@ -93,8 +98,8 @@ const HomeStackScreen = ({ navigation, route }) => {
           headerLeft: () => (
             <Icon
               name="chevron-left"
-              size={22}
-              onPress={() => navigation.navigate('NewGroupInterestsView')}
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
             />
           ),
           headerLeftContainerStyle: { marginLeft: 14 * WINDOW_SIZE.WIDTH_WEIGHT },
@@ -125,8 +130,8 @@ const HomeStackScreen = ({ navigation, route }) => {
           headerLeft: () => (
             <Icon
               name="chevron-left"
-              size={22}
-              onPress={() => navigation.navigate('NewGroupMoreInfoView')}
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
             />
           ),
           headerLeftContainerStyle: {
@@ -146,8 +151,8 @@ const HomeStackScreen = ({ navigation, route }) => {
           headerLeft: () => (
             <Icon
               name="chevron-left"
-              size={22}
-              onPress={() => navigation.navigate('NewGroupDescription')}
+              size={FONT_SIZE.BACK_ARROW}
+              onPress={() => navigation.dispatch(StackActions.pop(1))}
             />
           ),
           headerLeftContainerStyle: {
@@ -170,7 +175,7 @@ const HomeStackScreen = ({ navigation, route }) => {
 const GroupStackScreen = () => {
   return (
     <GroupStack.Navigator>
-      <GroupStack.Screen name="Home" component={GroupMain} options={{ headerShown: false }} />
+      <GroupStack.Screen name="Group" component={GroupMain} options={{ headerShown: false }} />
       <GroupStack.Screen
         name="JoinedGroupDetail"
         component={JoinedGroupDetail}
@@ -188,7 +193,7 @@ const GroupStackScreen = () => {
 const FeedStackScreen = () => {
   return (
     <FeedStack.Navigator>
-      <FeedStack.Screen name="Home" component={FeedMain} />
+      <FeedStack.Screen name="Feed" component={FeedMain} />
     </FeedStack.Navigator>
   );
 };
@@ -196,7 +201,7 @@ const FeedStackScreen = () => {
 const MyPageScreen = () => {
   return (
     <MyPageStack.Navigator>
-      <MyPageStack.Screen name="Home" component={MyPageMain} />
+      <MyPageStack.Screen name="MyPage" component={MyPageMain} />
     </MyPageStack.Navigator>
   );
 };

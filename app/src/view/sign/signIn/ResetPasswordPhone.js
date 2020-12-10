@@ -17,7 +17,6 @@ import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { COLORS } from '../../../assets/Colors';
-import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -92,7 +91,6 @@ class ResetPasswordPhone extends React.Component {
                     onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
                     text={this.props.signUpPhoneStore.phoneCode}
                   />
-                  <PhoneAuthTimer style={styles.authTimer} />
                   <PhoneCodeNextButton
                     isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
                     text={

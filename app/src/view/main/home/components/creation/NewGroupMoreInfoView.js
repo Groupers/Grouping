@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { Icon } from 'react-native-elements';
+import { StackActions } from '@react-navigation/native';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import GenderSettingView from './settings/GenderSettingView';
@@ -17,40 +18,41 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 // eslint-disable-next-line react/prop-types
 const NewGroupMoreInfoView = (props) => {
   React.useEffect(() => {
-    onContentsChanged();
-  }, []);
+    // 나이 제한, 성별 제한, 그룹 소개, 그룹 위치 중 필수요소를 입력 하였을 경우
+    if (true) {
+      // 조건 미완성 코드 우선 true 값으로 테스트
+      props.navigation.setOptions({
+        headerRight: () => (
+          <Text
+            onPress={() => {
+              onHeaderNextButtonClicked();
+            }}
+            style={rightIconStyle(COLORS.BLACK)}
+          >
+            다음
+          </Text>
+        ),
+      });
+      return;
+    }
+    props.navigation.setOptions({
+      headerRight: () => <Text style={rightIconStyle(COLORS.LIGHT_GRAY)}>다음</Text>,
+    });
+  });
+
+  const rightIconStyle = (selectedColor) => {
+    return {
+      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+      fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
+      color: selectedColor,
+    };
+  };
 
   const onHeaderNextButtonClicked = () => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.DESCRIPTION
     );
-    props.navigation.navigate('NewGroupPreview');
-  };
-
-  const rightIconStyle = () => {
-    return {
-      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
-      fontSize: 14 * WINDOW_SIZE.WIDTH_WEIGHT,
-      // eslint-disable-next-line react/prop-types
-      color: props.groupingCreationMainStore.isPreviewButtonActivated
-        ? Colors.black
-        : COLORS.FONT_GRAY,
-    };
-  };
-
-  const onContentsChanged = () => {
-    props.navigation.setOptions({
-      headerRight: () => (
-        <Text
-          onPress={() => {
-            onHeaderNextButtonClicked();
-          }}
-          style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.EXTRA_INFO)}
-        >
-          완료
-        </Text>
-      ),
-    });
+    props.navigation.dispatch(StackActions.push('NewGroupPreview'));
   };
 
   const [panelProps, setPanelProps] = useState({
@@ -114,7 +116,6 @@ const NewGroupMoreInfoView = (props) => {
 
   const initializeAge = () => {
     props.groupingCreationMainStore.groupingInitializeAge();
-    closeAgePanel();
   };
 
   return (
@@ -222,12 +223,31 @@ const NewGroupMoreInfoView = (props) => {
           </TouchableOpacity>
           <View flex={1} />
           <TouchableOpacity
+            style={{ paddingRight: 30 }}
+            onPress={() => {
+              initializeAge();
+            }}
+          >
+            <Text
+              style={{
+                color: Colors.black,
+                borderBottomWidth: 1,
+                paddingBottom: 0,
+                fontWeight: 'bold',
+                fontSize: FONT_SIZE.INPUT_TEXT,
+              }}
+            >
+              초기화
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => {
               closeAgePanel();
             }}
           >
             <Text
               style={{
+                color: Colors.black,
                 borderBottomWidth: 1,
                 paddingBottom: 0,
                 fontWeight: 'bold',
@@ -242,19 +262,23 @@ const NewGroupMoreInfoView = (props) => {
           가입 가능한 나이를 설정해주세요.
         </Text>
         <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
-        <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
+        <Text style={{ fontSize: FONT_SIZE.SMALL_DESCRIPTION }}>
           미설정 시 모두환영으로 표시됩니다.
         </Text>
         <View style={{ flexDirection: 'row' }}>
-          <MinAgeSettingView
-            onChangeText={onMinAgeSelected.bind(this)}
-            groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
-          />
+          <View style={{ flex: 1 }}>
+            <MinAgeSettingView
+              onChangeText={onMinAgeSelected.bind(this)}
+              groupingMinAge={props.groupingCreationMainStore.groupingAvailableMinAge}
+            />
+          </View>
           <View style={{ width: 56 * WINDOW_SIZE.WIDTH_WEIGHT }} />
-          <MaxAgeSettingView
-            onChangeText={onMaxAgeSelected.bind(this)}
-            groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
-          />
+          <View style={{ flex: 1 }}>
+            <MaxAgeSettingView
+              onChangeText={onMaxAgeSelected.bind(this)}
+              groupingMaxAge={props.groupingCreationMainStore.groupingAvailableMaxAge}
+            />
+          </View>
         </View>
       </SwipeablePanel>
       <SwipeablePanel {...panelProps} isActive={genderPanelActive}>
@@ -280,7 +304,7 @@ const NewGroupMoreInfoView = (props) => {
           가입 가능한 성별을 알려주세요
         </Text>
         <View style={{ height: 8 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
-        <Text style={{ fontSize: FONT_SIZE.SMALL_DISCRIPTION }}>
+        <Text style={{ fontSize: FONT_SIZE.SMALL_DESCRIPTION }}>
           미설정 시 모두환영으로 표시됩니다.
         </Text>
         <View style={{ height: 40 * WINDOW_SIZE.HEIGHT_WEIGHT }} />

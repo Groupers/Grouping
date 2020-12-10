@@ -2,7 +2,7 @@ export const COLORS = {
   // background
   MAIN_COLOR: 'white',
   // mainRed
-  SUB_COLOR: '#FD6B53',
+  SUB_COLOR: '#ff6a4d',
   LIGHT_GRAY: '#999',
   FONT_GRAY: '#c9c9c9',
   DARK_GRAY: '#707070',

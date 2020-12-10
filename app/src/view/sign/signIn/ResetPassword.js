@@ -2,9 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
-  Dimensions,
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
@@ -12,21 +10,12 @@ import {
   TextInput,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { func } from 'prop-types';
 import { COLORS } from '../../../assets/Colors';
 import PhoneNumberInputTextView from '../components/PhoneNumberInputTextView';
 import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
-import SignErrorMessageView from '../components/SignErrorMessageView';
-import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
 import NextButton from '../components/NextButton';
-import { USER_STATUS } from '../../../constant/UserStatus';
-import Main from '../../main/Main';
-import { INPUT_EMAIL_STATUS } from '../../../constant/InputEmailStatus';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
-import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
-import { INPUT_PHONE_STATUS } from '../../../constant/InputPhoneStatus';
-import EmailInputTextView from '../components/EmailInputTextView';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import LabelView from '../components/LabelView';
 
@@ -105,36 +94,36 @@ const ResetPassword = (props) => {
             {/*  <View>/!* <ShowErrorModal /> *!/</View> */}
             {/* ) : null} */}
 
-            <View height={18 * WINDOW_SIZE.HEIGHT_WEIGHT} />
-            <View style={styles.phoneCodeContainer}>
-              <LabelView text="인증번호" />
-              <PhoneCodeInputTextView
-                onBlur={props.resetPasswordStore.phoneCodeValidationSucceed}
-                onChangeText={props.resetPasswordStore.phoneCodeChanged.bind(this)}
-                text={props.resetPasswordStore.phoneCode}
-              />
-              {/* <PhoneCodeNextButton */}
-              {/*  label="인증번호" */}
-              {/*  isActive={props.resetPasswordStore.isValidPhoneNumber} */}
-              {/*  text={ */}
-              {/*    props.resetPasswordStore.phoneValidationViewStatus === */}
-              {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
-              {/*      ? '재인증' */}
-              {/*      : '인 증' */}
-              {/*  } */}
-              {/*  onClick={authorizeButtonClicked.bind(this)} */}
-              {/* /> */}
-              {/* <PhoneCodeNextButton */}
-              {/*  style={styles.authButton} */}
-              {/*  text={ */}
-              {/*    this.props.signUpPhoneStore.phoneValidationViewStatus === */}
-              {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
-              {/*      ? '인증' */}
-              {/*      : '재인증' */}
-              {/*  } */}
-              {/*  isActive={this.props.signUpPhoneStore.isValidPhoneNumber} */}
-              {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
-              {/* /> */}
+            <View>
+              <View style={styles.phoneCodeContainer}>
+                <PhoneCodeInputTextView
+                  onBlur={props.resetPasswordStore.phoneCodeValidationSucceed}
+                  onChangeText={props.resetPasswordStore.phoneCodeChanged.bind(this)}
+                  text={props.resetPasswordStore.phoneCode}
+                />
+                <PhoneCodeNextButton
+                  label="인증번호"
+                  isActive={props.resetPasswordStore.isValidPhoneNumber}
+                  text={
+                    props.resetPasswordStore.phoneValidationViewStatus ===
+                    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                      ? '재인증'
+                      : '인 증'
+                  }
+                  onClick={authorizeButtonClicked.bind(this)}
+                />
+                {/* <PhoneCodeNextButton */}
+                {/*  style={styles.authButton} */}
+                {/*  text={ */}
+                {/*    this.props.signUpPhoneStore.phoneValidationViewStatus === */}
+                {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
+                {/*      ? '인증' */}
+                {/*      : '재인증' */}
+                {/*  } */}
+                {/*  isActive={this.props.signUpPhoneStore.isValidPhoneNumber} */}
+                {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
+                {/* /> */}
+              </View>
             </View>
             {/* <PhoneAuthTimer style={styles.authTimer} /> */}
 

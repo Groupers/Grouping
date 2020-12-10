@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-// import { WheelPicker } from 'react-native-wheel-picker-android/index';
 import { WINDOW_SIZE } from '../../../../../../constant/WindowSize';
 import { COLORS } from '../../../../../../assets/Colors';
 
 const MinAgeSettingView = (props) => {
-  // const wheelPickerData = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-
   const ages = Array.from({ length: 80 }, (v, i) => i);
-  ages.unshift('', '제한없음');
+  ages.unshift('제한없음');
 
   const change = ({ nativeEvent }) => {
-    props.onChangeText(
-      Math.ceil((nativeEvent.contentOffset.y)/41 )-2
-    );
+    props.onChangeText(Math.ceil(nativeEvent.contentOffset.y / 41) - 2);
     // console.log(Math.ceil(nativeEvent.contentOffset.y / 4));
+  };
+
+  const setItem = ({ item }) => {
+    props.groupingMinAge = item;
   };
 
   return (
@@ -24,30 +23,10 @@ const MinAgeSettingView = (props) => {
         flexDirection: 'row',
         marginTop: 36 * WINDOW_SIZE.HEIGHT_WEIGHT,
         alignItems: 'center',
+        width: 120 * WINDOW_SIZE.WIDTH_WEIGHT,
       }}
     >
-      <View
-        style={{
-          position: 'absolute',
-          height: 1,
-          backgroundColor: COLORS.SUB_COLOR,
-          width: 71 * WINDOW_SIZE.WIDTH_WEIGHT,
-          top: 26 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          left: 33 * WINDOW_SIZE.WIDTH_WEIGHT,
-        }}
-      />
-      <View
-        style={{
-          position: 'absolute',
-          height: 1,
-          backgroundColor: COLORS.SUB_COLOR,
-          width: 71 * WINDOW_SIZE.WIDTH_WEIGHT,
-          top: 78 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          left: 33 * WINDOW_SIZE.WIDTH_WEIGHT,
-        }}
-      />
       <Text style={{ fontSize: 20 * WINDOW_SIZE.HEIGHT_WEIGHT }}>최소</Text>
-      {/* <WheelPicker indicatorWidth={0.8} data={wheelPickerData} /> */}
       <ScrollView
         scrollToOverflowEnabled
         pagingEnabled
@@ -74,11 +53,8 @@ const MinAgeSettingView = (props) => {
               }}
             >
               <Text
-                style={{
-                  fontSize: 20,
-                  color: 'red',
-                  fontWeight: 'bold',
-                }}
+                key={setItem(item)}
+                style={{ fontSize: 20, color: COLORS.SUB_COLOR, fontWeight: 'bold' }}
               >
                 {item}
               </Text>
@@ -86,14 +62,14 @@ const MinAgeSettingView = (props) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <TextInput
-        maxLength={50}
-        style={styles.age}
-        autoCorrect={false}
-        placeholder="최소 나이 입력"
-        value={props.groupingMinAge}
-        onChangeText={props.onChangeText != null ? (minAge) => props.onChangeText(minAge) : null}
-      />
+      {/* <TextInput */}
+      {/*  maxLength={50} */}
+      {/*  style={styles.age} */}
+      {/*  autoCorrect={false} */}
+      {/*  placeholder="최소 나이 입력" */}
+      {/*  value={props.groupingMinAge} */}
+      {/*  onChangeText={props.onChangeText != null ? (minAge) => props.onChangeText(minAge) : null} */}
+      {/* /> */}
     </View>
   );
 };
@@ -111,10 +87,10 @@ const styles = StyleSheet.create({
   },
   scroll: {
     opacity: 50,
-    height: 109 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    width: 72 * WINDOW_SIZE.WIDTH_WEIGHT,
-    // borderTopWidth: 1,
-    // borderBottomWidth: 1,
+    height: 52 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 120 * WINDOW_SIZE.WIDTH_WEIGHT,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: COLORS.SUB_COLOR,
     padding: 0,
   },

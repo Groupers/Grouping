@@ -5,6 +5,7 @@ import Colors from 'react-native/Libraries/NewAppScreen/components/Colors';
 import { useEffect } from 'react';
 import { Header } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
+import { StackActions } from '@react-navigation/native';
 import { GROUPING_CREATION_VIEW_STATUS } from '../../../../../constant/GroupingCreationViewStatus';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
 import AddressSearchResultView from '../../../AddressSearchResultView';
@@ -31,7 +32,7 @@ const NewGroupLocationView = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.LOCATION
     );
-    props.navigation.pop();
+    props.navigation.dispatch(StackActions.pop(1));
   };
 
   const onAddressSelected = (address) => {
