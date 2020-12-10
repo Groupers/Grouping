@@ -6,7 +6,7 @@ import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeNextButton from './PhoneCodeNextButton';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
-@inject('signUpPhoneStore')
+@inject('resetPasswordStore')
 @observer
 class PhoneNumberInputTextView extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class PhoneNumberInputTextView extends Component {
   }
 
   async authorizeButtonClicked() {
-    await this.props.signUpPhoneStore.sendPhoneCode();
+    await this.props.resetPasswordStore.sendPhoneCode();
   }
 
   render() {
@@ -53,15 +53,15 @@ class PhoneNumberInputTextView extends Component {
         />
         <PhoneCodeNextButton
           label="인증번호"
-          isActive={this.props.signUpPhoneStore.isValidPhoneNumber}
+          isActive={this.props.resetPasswordStore.isValidPhoneNumber}
           text={
-            this.props.signUpPhoneStore.phoneValidationViewStatus ===
+            this.props.resetPasswordStore.phoneValidationViewStatus ===
             SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
               ? '재전송'
-              : '인증'
+              : '전송'
           }
           textcolor={
-            this.props.signUpPhoneStore.phoneValidationViewStatus ===
+            this.props.resetPasswordStore.phoneValidationViewStatus ===
             SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
               ? COLORS.BLACK
               : COLORS.SUB_COLOR

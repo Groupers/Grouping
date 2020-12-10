@@ -238,11 +238,7 @@ class Main extends Component {
           }}
         >
           <Tab.Screen name="Home" component={HomeStackScreen} options={{ tabBarLabel: '홈' }} />
-          <Tab.Screen
-            name="Group"
-            component={GroupStackScreen}
-            options={{ tabBarLabel: '채널' }}
-          />
+          <Tab.Screen name="Group" component={GroupStackScreen} options={{ tabBarLabel: '채널' }} />
           <Tab.Screen name="Feed" component={FeedStackScreen} options={{ tabBarLabel: '알림' }} />
           <Tab.Screen name="MyPage" component={MyPageScreen} options={{ tabBarLabel: 'My' }} />
         </Tab.Navigator>

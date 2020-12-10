@@ -83,7 +83,7 @@ class SignUpPhone extends React.Component {
                   label="휴대폰 번호"
                   isActive={!this.props.signUpPhoneStore.isAllCompleted}
                   text={this.props.signUpPhoneStore.phoneNumber}
-                  onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
+                  onChangeText={this.props.signUpPhoneStore.phoneNumberChanged}
                   placeholder="-없이 번호 입력"
                 />
                 {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}

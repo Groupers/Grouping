@@ -27,13 +27,14 @@ class EmailInputTextView extends React.Component {
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
   // 예: return nextProps.id !== this.props.id;
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
+
   render() {
     return (
       <View style={styles.emailContainer}>
         <TextInput
           style={styles.email}
           maxLength={30}
-          placeholder="example@gmail.com"
+          placeholder={this.props.label}
           autoCorrect={false}
           placeholderTextColor={COLORS.FONT_GRAY}
           value={this.props.text}

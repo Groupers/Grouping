@@ -56,6 +56,14 @@ export default class SignUpEmailStore {
     return this.emailValidation === INPUT_EMAIL_STATUS.SUCCEED;
   }
 
+  @computed get isAlreadyRegisted() {
+    return this.emailValidation === INPUT_EMAIL_STATUS.ALREADY_REGISTERED;
+  }
+
+  @computed get isRightFormat() {
+    return this.emailValidation !== INPUT_EMAIL_STATUS.NOT_FORMATTED;
+  }
+
   @computed get errorMessage() {
     if (this.emailValidation === INPUT_EMAIL_STATUS.ALREADY_REGISTERED) {
       return '이미 등록된 계정입니다.';

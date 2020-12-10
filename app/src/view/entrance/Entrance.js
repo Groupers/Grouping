@@ -18,6 +18,7 @@ import NewPassword from '../sign/signIn/NewPassword';
 import SignUpName from '../sign/signUp/SignUpName';
 import SignUpGender from '../sign/signUp/SignUpGender';
 import SignUpBirthday from '../sign/signUp/SignUpBirthday';
+import ResetPasswordConfirmEmail from '../sign/signIn/ResetPasswordConfirmEmail';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -100,14 +101,11 @@ class Entrance extends React.Component {
           <Stack.Screen
             name="SignIn"
             options={{
-              title: '로그인',
               headerStyle: {
                 backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
               },
-              headerTintColor: 'black',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
+              headerTitle: '',
               headerBackImage: () => {
                 return (
                   <Icon name="chevron-left" type="feather" size={26} color={COLORS.DARK_GRAY} />
@@ -245,13 +243,28 @@ class Entrance extends React.Component {
             {(props) => <FindEmail {...props} />}
           </Stack.Screen>
           <Stack.Screen
+            name="ResetPasswordConfirmEmail"
+            options={{
+              headerStyle: {
+                backgroundColor: COLORS.MAIN_COLOR,
+                elevation: 0,
+              },
+              title: '',
+              headerBackImage: () => {
+                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
+              },
+            }}
+          >
+            {(props) => <ResetPasswordConfirmEmail {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
             name="ResetPassword"
             options={{
               headerStyle: {
                 backgroundColor: COLORS.MAIN_COLOR,
                 elevation: 0,
               },
-              title: '비밀번호 재설정',
+              title: '',
               headerBackImage: () => {
                 return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },
@@ -266,7 +279,7 @@ class Entrance extends React.Component {
                 backgroundColor: COLORS.MAIN_COLOR,
                 elevation: 0,
               },
-              title: '비밀번호 재설정',
+              title: '',
               headerBackImage: () => {
                 return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
               },

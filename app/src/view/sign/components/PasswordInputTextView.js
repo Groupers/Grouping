@@ -58,25 +58,23 @@ export default class PasswordInputTextView extends React.Component {
 
 const styles = StyleSheet.create({
   passwordContainer: {
-    width: '100%',
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1 * WINDOW_SIZE.WIDTH_WEIGHT,
     borderColor: COLORS.FONT_GRAY,
+    fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   password: {
-    width: '90%',
+    width: 261 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
     // margin:5,
     color: 'black',
-    fontSize: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
+    fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
-  passwordToggleButton: {
-    height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    resizeMode: 'contain',
-  },
+  passwordToggleButton: {},
 });

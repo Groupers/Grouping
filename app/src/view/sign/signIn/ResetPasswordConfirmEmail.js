@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
-  TextInput,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { func } from 'prop-types';
@@ -30,7 +29,15 @@ import EmailInputTextView from '../components/EmailInputTextView';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import LabelView from '../components/LabelView';
 
-const ResetPassword = (props) => {
+const Toast = ({ visible, message }) => {
+  if (visible) {
+    ToastAndroid.showWithGravityAndOffset(message, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+    return null;
+  }
+  return null;
+};
+
+const ResetPasswordConfirmEmail = (props) => {
   async function resetPasswordButtonClicked() {
     // await props.signUpEmailStore.completeEmail();
     // if
@@ -38,17 +45,20 @@ const ResetPassword = (props) => {
     // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
     // props.groupingUserDto.userId = ;
     // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
-    await props.resetPasswordStore.isValidUser();
+    props.resetPasswordStore.emailTextChanged(props.signUpEmailStore.emailText);
+    props.signUpEmailStore.isAlreadyRegisted === true
+      ? props.navigation.navigate('ResetPassword')
+      : handleButtonPress;
 
-    props.resetPasswordStore.groupingUserDto.userId !== null
-      ? props.navigation.navigate('newPassword')
-      : null;
     // props.navigation.navigate('SignIn');
   }
+  const [visibleToast, setvisibleToast] = useState(false);
 
-  async function authorizeButtonClicked() {
-    await props.resetPasswordStore.sendPhoneCode();
-  }
+  useEffect(() => setvisibleToast(false), [visibleToast]);
+
+  const handleButtonPress = () => {
+    setvisibleToast(true);
+  };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
@@ -70,82 +80,22 @@ const ResetPassword = (props) => {
             </View>
             <View>
               <LabelView text="이메일 주소" />
-              {/* <EmailInputTextView */}
-              {/*  value={props.resetPasswordStore.emailText} */}
-              {/*  // onChangeText={props.resetPasswordStore.emailTextChanged.bind(this)} */}
-              {/* /> */}
-              <TextInput
-                value={props.resetPasswordStore.emailText}
-                editable={false}
-                focusable={false}
-                style={{
-                  borderBottomWidth: 1,
-                  borderColor: COLORS.FONT_GRAY,
-                  width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
-                  height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                }}
-                onChangeText={props.resetPasswordStore.emailTextChanged(
-                  props.resetPasswordStore.emailText
-                )}
+              <EmailInputTextView
+                value={props.signUpEmailStore.emailText}
+                onChangeText={props.signUpEmailStore.emailTextChanged.bind(this)}
               />
-            </View>
-            <View style={styles.phoneCodeContainer}>
-              <LabelView text="휴대폰 번호" />
-              <PhoneNumberInputTextView
-                isActive={!props.resetPasswordStore.isValidPhoneNumber}
-                text={props.resetPasswordStore.phoneNumber}
-                onChangeText={props.resetPasswordStore.phoneNumberChanged.bind(this)}
-              />
-            </View>
-            {/* {this.props.signUpPhoneStore.phoneValidationViewStatus === */}
-            {/* SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? ( */}
-            {/*  <View>/!* <ShowErrorModal /> *!/</View> */}
-            {/* ) : null} */}
-
-            <View height={18 * WINDOW_SIZE.HEIGHT_WEIGHT} />
-            <View style={styles.phoneCodeContainer}>
-              <LabelView text="인증번호" />
-              <PhoneCodeInputTextView
-                onBlur={props.resetPasswordStore.phoneCodeValidationSucceed}
-                onChangeText={props.resetPasswordStore.phoneCodeChanged.bind(this)}
-                text={props.resetPasswordStore.phoneCode}
-              />
-              {/* <PhoneCodeNextButton */}
-              {/*  label="인증번호" */}
-              {/*  isActive={props.resetPasswordStore.isValidPhoneNumber} */}
-              {/*  text={ */}
-              {/*    props.resetPasswordStore.phoneValidationViewStatus === */}
-              {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
-              {/*      ? '재인증' */}
-              {/*      : '인 증' */}
-              {/*  } */}
-              {/*  onClick={authorizeButtonClicked.bind(this)} */}
-              {/* /> */}
-              {/* <PhoneCodeNextButton */}
-              {/*  style={styles.authButton} */}
-              {/*  text={ */}
-              {/*    this.props.signUpPhoneStore.phoneValidationViewStatus === */}
-              {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
-              {/*      ? '인증' */}
-              {/*      : '재인증' */}
-              {/*  } */}
-              {/*  isActive={this.props.signUpPhoneStore.isValidPhoneNumber} */}
-              {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
-              {/* /> */}
             </View>
             {/* <PhoneAuthTimer style={styles.authTimer} /> */}
 
             {/* <SignErrorMessageView text={props.resetPasswordStore.errorMessage} /> */}
             <View style={styles.bottomContainer}>
               <NextButton
-                isActive={props.resetPasswordStore.isValidPhoneCode}
+                isActive={props.signUpEmailStore.isRightFormat}
                 text="다음"
                 onClick={resetPasswordButtonClicked.bind(this)}
               />
             </View>
+            <Toast visible={visibleToast} message="Example" />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -196,7 +146,6 @@ const styles = StyleSheet.create({
 });
 
 export default inject(
-  'signInStore',
   'resetPasswordStore',
   'signUpEmailStore'
-)(observer(ResetPassword));
+)(observer(ResetPasswordConfirmEmail));

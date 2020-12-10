@@ -210,7 +210,8 @@ export default class res {
       }
 
       if (isSucceed) {
-        this.phoneValidationStatus = INPUT_PHONE_STATUS.SUCCEED;
+        console.log('코드 인증 성공');
+        this.phoneValidationStatus = INPUT_PHONE_STATUS.SUCCEED; // 코드 인증 성공
         this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_VALIDATION_SUCCEED;
       }
     }
