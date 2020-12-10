@@ -2,7 +2,6 @@ import React from 'react';
 import { Animated, StyleSheet, Text, TextInput, View } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
-import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -54,7 +53,6 @@ class PhoneCodeInputTextView extends React.Component {
           onFocus={this.handleFocus}
           blurOnSubmit
         />
-        <PhoneAuthTimer style={styles.authTimer} />
       </View>
     );
   }

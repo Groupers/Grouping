@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  Button,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -15,102 +16,141 @@ import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
 import { COLORS } from '../../../assets/Colors';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import LabelView from '../components/LabelView';
+import { TIME_OUT } from '../../../constant/TimeOut';
+import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 
-// 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
+const SignUpPhone = (props) => {
+  const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
-// 컴포넌트를 제거 할 때는 componentWillUnmount 메소드만 실행됩니다.
+  const getTimer = () => (
+    <Text style={styles.timeText}>
+      {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+    </Text>
+  );
 
-// 컴포넌트의 prop이 변경될 때엔 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 순으로 진행됩니다.
+  const startTimer = () => {
+    if (
+      props.signUpPhoneStore.phoneValidationViewStatus ===
+      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+    ) {
+      console.log('타이머 시작!!!');
+      setIsActive(true);
+    }
+    if (
+      props.signUpPhoneStore.phoneValidationViewStatus ===
+      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT
+    ) {
+      console.log('타이머 리셋하고 시작!!!');
+      reset();
+      setIsActive(true);
+    }
+  };
 
-// 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
+  const reset = () => {
+    setMinutes(TIME_OUT.START_TIME);
+    setSeconds(0);
+    setIsActive(false);
+  };
 
-@inject('signUpPhoneStore')
-@observer
-class SignUpPhone extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  useEffect(() => {
+    let countDown = null;
+    if (isActive) {
+      countDown = setInterval(() => {
+        if (seconds > 0) {
+          setSeconds(seconds - TIME_OUT.A_SECOND);
+        }
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(countDown);
+          } else {
+            setMinutes(minutes - TIME_OUT.A_SECOND);
+            setSeconds(59);
+          }
+        }
+      }, TIME_OUT.THOUSAND_MILLI_SECONDS);
+    }
+    return () => clearInterval(countDown);
+  }, [minutes, seconds, isActive]);
 
-  // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
-  // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
-  // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  async componentDidMount() {
-    this.focusListener = this.props.navigation.addListener(
-      'focus',
-      this.props.signUpPhoneStore.clearPhoneNumber.bind(this)
-    );
-  }
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-param-reassign
+  //   props.focusListener = props.navigation.addListener(
+  //     'focus',
+  //     props.signUpPhoneStore.clearPhoneNumber()
+  //   );
+  //   return () => {
+  //     props.focusListener();
+  //   };
+  // });
 
-  componentWillUnmount() {
-    this.focusListener();
-  }
+  const signUpNextButtonClicked = async () => {
+    props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
+    props.signUpPhoneStore.isAllCompleted ? signUpNextButtonClicked.bind(this) : null;
+    await props.signUpPhoneStore.completePhoneNumber();
+    props.navigation.navigate('SignUpEmail');
+  };
 
-  async signUpNextButtonClicked() {
-    this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
-    this.props.signUpPhoneStore.isAllCompleted ? this.signUpNextButtonClicked.bind(this) : null;
-    await this.props.signUpPhoneStore.completePhoneNumber();
-    this.props.navigation.navigate('SignUpEmail');
-  }
+  const authorizeButtonClicked = () => {
+    props.signUpPhoneStore.sendPhoneCode().then(startTimer);
+  };
 
-  // prop 혹은 state 가 변경 되었을 때, 리렌더링을 할지 말지 정하는 메소드입니다.
-  // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
-  // 예: return nextProps.id !== this.props.id;
-  // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
-  render() {
-    return (
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.inner}>
-            <View style={styles.contentContainer}>
-              <View style={styles.textArea}>
-                <Text style={styles.title}>휴대폰 번호를 입력해주세요</Text>
-                <Text
-                  style={{
-                    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                    color: COLORS.BLACK,
-                    lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                  }}
-                >
-                  {
-                    '허위 및 중복 가입을 예방하기 위한 절차입니다. \n핸드폰번호는 타인에게 절대 공개되지 않습니다.'
-                  }
-                </Text>
-              </View>
-              <View height={12 * WINDOW_SIZE.HEIGHT_WEIGHT} />
-              <View>
-                <LabelView text="휴대폰 번호" />
-                <PhoneNumberInputTextView
-                  label="휴대폰 번호"
-                  isActive={!this.props.signUpPhoneStore.isAllCompleted}
-                  text={this.props.signUpPhoneStore.phoneNumber}
-                  onChangeText={this.props.signUpPhoneStore.phoneNumberChanged.bind(this)}
-                  placeholder="-없이 번호 입력"
-                />
-                {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
-                <LabelView text="인증번호" />
-                <PhoneCodeInputTextView
-                  onChangeText={this.props.signUpPhoneStore.phoneCodeChanged.bind(this)}
-                  onBlur={() => {
-                    this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
-                  }}
-                  text={this.props.signUpPhoneStore.phoneCode}
-                />
-              </View>
+  return (
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          <View style={styles.contentContainer}>
+            <View style={styles.textArea}>
+              <Text style={styles.title}>휴대폰 번호를 입력해주세요</Text>
+              <Text
+                style={{
+                  fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                  color: COLORS.BLACK,
+                  lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                }}
+              >
+                {
+                  '허위 및 중복 가입을 예방하기 위한 절차입니다. \n핸드폰번호는 타인에게 절대 공개되지 않습니다.'
+                }
+              </Text>
             </View>
-            <View style={styles.bottomContainer}>
-              <NextButton
-                isActive={this.props.signUpPhoneStore.isValidPhoneCode}
-                text="다음"
-                onClick={this.signUpNextButtonClicked.bind(this)}
-                fontColor={COLORS.WHITE}
+            <View height={12 * WINDOW_SIZE.HEIGHT_WEIGHT} />
+            <View>
+              <LabelView text="휴대폰 번호" />
+              <PhoneNumberInputTextView
+                label="휴대폰 번호"
+                isActive={!props.signUpPhoneStore.isAllCompleted}
+                text={props.signUpPhoneStore.phoneNumber}
+                onChangeText={props.signUpPhoneStore.phoneNumberChanged.bind(this)}
+                placeholder="-없이 번호 입력"
               />
+              <Button title="전송" onPress={authorizeButtonClicked} />
+              {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
+              <LabelView text="인증번호" />
+              <PhoneCodeInputTextView
+                onChangeText={props.signUpPhoneStore.phoneCodeChanged.bind(this)}
+                onBlur={() => {
+                  props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
+                }}
+                text={props.signUpPhoneStore.phoneCode}
+              />
+              {getTimer()}
             </View>
           </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    );
-  }
-}
+          <View style={styles.bottomContainer}>
+            <NextButton
+              isActive={props.signUpPhoneStore.isValidPhoneCode}
+              text="다음"
+              onClick={signUpNextButtonClicked.bind(this)}
+              fontColor={COLORS.WHITE}
+            />
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );
+};
 
 const styles = StyleSheet.create({
   body: {
@@ -152,7 +192,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  timeText: {
+    fontSize: 12,
+    color: COLORS.SUB_COLOR,
+  },
+
   authButton: {},
 });
 
-export default SignUpPhone;
+export default inject('signUpPhoneStore')(observer(SignUpPhone));

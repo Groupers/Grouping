@@ -22,7 +22,6 @@ import { USER_STATUS } from '../../../constant/UserStatus';
 import Main from '../../main/Main';
 import { INPUT_EMAIL_STATUS } from '../../../constant/InputEmailStatus';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
-import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { INPUT_PHONE_STATUS } from '../../../constant/InputPhoneStatus';
 import EmailInputTextView from '../components/EmailInputTextView';
@@ -107,7 +106,6 @@ const ResetPassword = (props) => {
                 {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
                 {/* /> */}
               </View>
-              <PhoneAuthTimer style={styles.authTimer} />
             </View>
 
             <SignErrorMessageView text={props.resetPasswordStore.errorMessage} />

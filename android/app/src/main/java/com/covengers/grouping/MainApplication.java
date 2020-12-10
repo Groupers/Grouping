@@ -8,7 +8,6 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.wheelpicker.WheelPickerPackage;
 
 import java.util.List;
 import java.util.Arrays;
@@ -34,15 +33,9 @@ public class MainApplication extends Application implements ReactApplication {
                     List<ReactPackage> packages = new PackageList(this).getPackages();
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // packages.add(new MyReactNativePackage());
-//            packages.add(new RealmReactPackage()); // add this line)
-                    packages.add(new WheelPickerPackage());
+                    // packages.add(new RealmReactPackage()); // add this line)
                     return packages;
                 }
-
-//                @Override
-//                protected List<ReactPackage> getPackages() {
-//                    return Arrays.<ReactPackage>asList(new MyReactNativePackage(), new WheelPickerPackage());
-//                }
 
                 @Override
                 protected String getJSMainModuleName() {

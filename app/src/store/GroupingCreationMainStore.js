@@ -14,6 +14,8 @@ import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
 import { INPUT_STATUS } from '../constant/InputStatus';
 import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import GroupCreationRepository from '../repository/GroupCreationRepository';
+import GroupRepresentImgRepository from '../repository/GroupRepresentImgRepository';
+import PostGroupCreationDto from '../repository/PostGroupCreationDto';
 import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
 import GroupingUserDto from '../dto/GroupingUserDto';
@@ -26,6 +28,8 @@ export default class GroupingCreationMainStore {
   groupingUserId = '';
 
   groupCreationRepository = new GroupCreationRepository();
+
+  groupRepresentImgRepository = new GroupRepresentImgRepository();
 
   mapRepository = new MapRepository();
 
@@ -160,7 +164,6 @@ export default class GroupingCreationMainStore {
           const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
           if (result === RESULTS.GRANTED) {
             this.groupingBackgroundImageURI = { uri };
-            this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
             console.log('background image changed IOS');
             console.log(`IOS${this.groupingBackgroundImageURI}`);
           }
@@ -168,10 +171,9 @@ export default class GroupingCreationMainStore {
           console.log('askPermission', error);
         }
       };
-      askPermission();
+      askPermission().then();
     }
     this.groupingBackgroundImageURI = { uri };
-    this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     console.log('background image changed');
     console.log(this.groupingBackgroundImageURI);
   };
@@ -222,16 +224,13 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
-    console.log('in');
-    this.groupingCreationDto = await this.groupCreationRepository.completeGroupCreation(
-      this.groupingCreationDto,
-      (responseCode) => {
-        console.log('responseCode : ');
-        console.log(responseCode);
-      }
+    const response = await PostGroupCreationDto(this.groupingCreationDto, (responseCode) => {
+      console.log(`responseCode : ${responseCode}`);
+    });
+    await this.groupRepresentImgRepository.completeGroupRepresentImg(
+      response.data().groupId,
+      this.getBackgroundImageURI
     );
-    console.log('out');
-
     console.log(this.groupingCreationDto);
     if (this.groupingCreationDto !== undefined) {
       console.log('group creation start');
@@ -303,11 +302,11 @@ export default class GroupingCreationMainStore {
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
     this.groupingCreationDto.representGroupingUserId = this.groupingUserId;
-    this.groupingCreationDto.representGroupImage = this.groupingBackgroundImageURI;
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
     this.groupingCreationDto.hashtagList = [];
     this.selectedGender = '';
+    this.groupingBackgroundImageURI = '';
   }
 }
