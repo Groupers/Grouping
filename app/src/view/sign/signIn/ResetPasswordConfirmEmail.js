@@ -8,7 +8,8 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView, ToastAndroid,
+  KeyboardAvoidingView,
+  ToastAndroid,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
@@ -36,17 +37,13 @@ const ResetPasswordConfirmEmail = (props) => {
     props.resetPasswordStore.emailTextChanged(props.signUpEmailStore.emailText);
     props.signUpEmailStore.isAlreadyRegisted === true
       ? props.navigation.navigate('ResetPassword')
-      : handleButtonPress;
+      : setvisibleToast(true);
 
     // props.navigation.navigate('SignIn');
   }
   const [visibleToast, setvisibleToast] = useState(false);
 
   useEffect(() => setvisibleToast(false), [visibleToast]);
-
-  const handleButtonPress = () => {
-    setvisibleToast(true);
-  };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
@@ -82,7 +79,7 @@ const ResetPasswordConfirmEmail = (props) => {
                 onClick={resetPasswordButtonClicked.bind(this)}
               />
             </View>
-            <Toast visible={visibleToast} message="Example" />
+            <Toast visible={visibleToast} message="등록된 계정이 아닙니다." />
           </View>
         </View>
       </TouchableWithoutFeedback>
