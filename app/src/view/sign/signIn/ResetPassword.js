@@ -8,8 +8,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TextInput,
-  Button,
-  TouchableOpacity,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
@@ -78,12 +76,6 @@ const ResetPassword = (props) => {
   }, [minutes, seconds, isActive]);
 
   async function resetPasswordButtonClicked() {
-    // await props.signUpEmailStore.completeEmail();
-    // if
-    // this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)
-    // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
-    // props.groupingUserDto.userId = ;
-    // props.resetPasswordStore.phoneCodeValidationSucceed.bind(this);
     await props.resetPasswordStore.isValidUser();
 
     props.resetPasswordStore.groupingUserDto.userId !== null
@@ -95,27 +87,6 @@ const ResetPassword = (props) => {
   async function authorizeButtonClicked() {
     props.resetPasswordStore.sendPhoneCode().then(startTimer);
   }
-
-  const buttonStyle = () => {
-    return {
-      width: 39 * WINDOW_SIZE.WIDTH_WEIGHT,
-      alignItems: 'space-between',
-      justifyContent: 'center',
-      height: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    };
-  };
-
-  const fontStyle = () => {
-    return {
-      fontSize: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
-      color:
-        props.resetPasswordStore.phoneValidationViewStatus ===
-        SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-          ? COLORS.SUB_COLOR
-          : COLORS.FONT_GRAY,
-      fontWeight: 'bold',
-    };
-  };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
@@ -137,10 +108,6 @@ const ResetPassword = (props) => {
             </View>
             <View>
               <LabelView text="이메일 주소" />
-              {/* <EmailInputTextView */}
-              {/*  value={props.resetPasswordStore.emailText} */}
-              {/*  // onChangeText={props.resetPasswordStore.emailTextChanged.bind(this)} */}
-              {/* /> */}
               <TextInput
                 value={props.resetPasswordStore.emailText}
                 editable={false}
@@ -177,19 +144,6 @@ const ResetPassword = (props) => {
                 }
                 onClick={authorizeButtonClicked.bind(this)}
               />
-              {/* <TouchableOpacity style={buttonStyle} onPress={authorizeButtonClicked}> */}
-              {/*  <Text style={fontStyle}> */}
-              {/*    {props.resetPasswordStore.phoneValidationViewStatus === */}
-              {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
-              {/*      ? '재인증' */}
-              {/*      : '인 증'} */}
-              {/*  </Text> */}
-              {/* </TouchableOpacity> */}
-              {/* <Button */}
-              {/*  title="전송" */}
-              {/*  onPress={authorizeButtonClicked} */}
-              {/*  style={{ width: 40 * WINDOW_SIZE.WIDTH_WEIGHT }} */}
-              {/* /> */}
             </View>
             <View>
               <LabelView text="인증번호" />
