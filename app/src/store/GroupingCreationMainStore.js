@@ -219,7 +219,7 @@ export default class GroupingCreationMainStore {
         console.log(`responseCode : ${responseCode}`);
       }
     );
-    await this.groupCreationRepository.completeGroupRepresentImg(
+    await this.groupCreationRepository.completeGroupRepresentImgUpload(
       response.data().groupId,
       this.getBackgroundImageURI
     );

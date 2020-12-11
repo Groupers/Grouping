@@ -17,7 +17,7 @@ export default class GroupCreationRepository {
     return null;
   }
 
-  async completeGroupRepresentImg(groupId, imageFile, failedCallback) {
+  async completeGroupRepresentImgUpload(groupId, imageFile, failedCallback) {
     const response = await axios.post(`${TARGET_URL}/image`, groupId, imageFile);
     console.log('response');
     console.log(response);
