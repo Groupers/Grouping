@@ -7,20 +7,35 @@ import GroupingCreationDto from '../dto/GroupingCreationDto';
 const TARGET_URL = `${GROUP_URL}`;
 
 export default class GroupCreationRepository {
-  async completeGroupCreation(groupingCreationDto) {
-    try {
-      console.log('group creation complete');
-      return await axios.post(`${TARGET_URL}`, groupingCreationDto);
-    } catch (error) {
-      console.error(error);
+  async completeGroupCreation(groupingCreationDto, failedCallback) {
+    const response = await axios
+      .post(`${TARGET_URL}`, groupingCreationDto)
+      .then(() => {
+        console.log('group creation complete');
+        console.log(response);
+      })
+      .catch(() => {
+        console.log('group creation error');
+      });
+    const commonResponse = new CommonResponse(response.data);
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
     }
-    return null;
+    return new GroupingCreationDto(commonResponse.data);
   }
 
-  async completeGroupRepresentImgUpload(groupId, imageFile, failedCallback) {
-    const response = await axios.post(`${TARGET_URL}/image`, groupId, imageFile);
-    console.log('response');
-    console.log(response);
+  async completeGroupRepresentImgUpload(groupId, uri, failedCallback) {
+    const imageFile = new FormData();
+    imageFile.append('imageFile', uri.content);
+    const response = await axios
+      .post(`${TARGET_URL}/image`, groupId, imageFile)
+      .then(() => {
+        console.log('group represent img upload complete');
+      })
+      .catch(() => {
+        console.log('group represent img upload error');
+      });
+    console.log(`response${response}`);
     const commonResponse = new CommonResponse(response.data);
     if (commonResponse.code !== ResponseCode.SUCCEED) {
       failedCallback(commonResponse.code);

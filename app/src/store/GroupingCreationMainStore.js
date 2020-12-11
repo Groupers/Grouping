@@ -16,7 +16,7 @@ const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
 
 export default class GroupingCreationMainStore {
-  groupingUserId = '';
+  groupingUserId = new GroupingUserDto().userId;
 
   groupCreationRepository = new GroupCreationRepository();
 
@@ -219,9 +219,13 @@ export default class GroupingCreationMainStore {
         console.log(`responseCode : ${responseCode}`);
       }
     );
+    console.log(`response : ${response.data.code}`);
     await this.groupCreationRepository.completeGroupRepresentImgUpload(
-      response.data().groupId,
-      this.getBackgroundImageURI
+      // groupId,
+      this.getBackgroundImageURI,
+      (responseCode) => {
+        console.log(`responseCode : ${responseCode}`);
+      }
     );
     console.log(this.groupingCreationDto);
     if (this.groupingCreationDto !== undefined) {
@@ -280,8 +284,8 @@ export default class GroupingCreationMainStore {
     return this.groupingAddressCompleted === true ? COLORS.BLACK : COLORS.FONT_GRAY;
   }
 
-  @action initialize(groupingUserId) {
-    this.groupingUserId = groupingUserId;
+  @action initialize() {
+    this.groupingUserId = new GroupingUserDto().userId;
     this.groupingTitle = '';
     this.groupingKeyword = '';
     this.groupingDescription = '';
@@ -293,7 +297,7 @@ export default class GroupingCreationMainStore {
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
-    this.groupingCreationDto.representGroupingUserId = this.groupingUserId;
+    this.groupingCreationDto.representGroupingUserId = new GroupingUserDto().userId;
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
