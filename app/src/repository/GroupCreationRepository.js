@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { SERVER_URL } from '../constant/HttpProperty';
+import { GROUP_URL } from '../constant/HttpProperty';
 import CommonResponse from '../dto/CommonResponse';
 import { ResponseCode } from '../constant/ResponseCode';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
 
-const TARGET_URL = `${SERVER_URL}/group`;
+const TARGET_URL = `${GROUP_URL}`;
 
 export default class GroupCreationRepository {
   async completeGroupCreation(groupingCreationDto) {
@@ -18,7 +18,7 @@ export default class GroupCreationRepository {
   }
 
   async completeGroupRepresentImg(groupId, imageFile, failedCallback) {
-    const response = await axios.post(`${TARGET_URL}`, groupId, imageFile);
+    const response = await axios.post(`${TARGET_URL}/image`, groupId, imageFile);
     console.log('response');
     console.log(response);
     const commonResponse = new CommonResponse(response.data);
