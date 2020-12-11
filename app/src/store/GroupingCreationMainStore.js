@@ -1,6 +1,4 @@
 import { action, computed, observable } from 'mobx';
-import { Text } from 'react-native';
-import * as React from 'react';
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import { GROUPING_CREATION_VIEW_STATUS } from '../constant/GroupingCreationViewStatus';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
@@ -8,16 +6,9 @@ import KeywordParser from '../component/KeywordParser';
 import MapRepository from '../repository/MapRepository';
 import KoreanChecker from '../component/KoreanChecker';
 import AgeValidator, { MAX_AVAILABLE_AGE, MIN_AVAILABLE_AGE } from '../component/AgeValidator';
-import { INPUT_EMAIL_STATUS } from '../constant/InputEmailStatus';
-import { ResponseCode } from '../constant/ResponseCode';
-import { INPUT_PASSWORD_STATUS } from '../constant/InputPasswordStatus';
-import { INPUT_STATUS } from '../constant/InputStatus';
-import { INPUT_PHONE_STATUS } from '../constant/InputPhoneStatus';
 import GroupCreationRepository from '../repository/GroupCreationRepository';
-import GroupRepresentImgRepository from '../repository/GroupRepresentImgRepository';
-import PostGroupCreationDto from '../repository/PostGroupCreationDto';
-import UserStore from './UserStore';
 import GroupingStore from './GroupingStore';
+import UserStore from './UserStore';
 import GroupingUserDto from '../dto/GroupingUserDto';
 import { COLORS } from '../assets/Colors';
 
@@ -28,8 +19,6 @@ export default class GroupingCreationMainStore {
   groupingUserId = '';
 
   groupCreationRepository = new GroupCreationRepository();
-
-  groupRepresentImgRepository = new GroupRepresentImgRepository();
 
   mapRepository = new MapRepository();
 
@@ -224,10 +213,13 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
-    const response = await PostGroupCreationDto(this.groupingCreationDto, (responseCode) => {
-      console.log(`responseCode : ${responseCode}`);
-    });
-    await this.groupRepresentImgRepository.completeGroupRepresentImg(
+    const response = await this.groupCreationRepository.completeGroupCreation(
+      this.groupingCreationDto,
+      (responseCode) => {
+        console.log(`responseCode : ${responseCode}`);
+      }
+    );
+    await this.groupCreationRepository.completeGroupRepresentImg(
       response.data().groupId,
       this.getBackgroundImageURI
     );
