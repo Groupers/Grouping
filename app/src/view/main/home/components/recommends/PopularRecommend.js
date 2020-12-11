@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
@@ -15,31 +15,70 @@ const PopularRecommend = () => {
         </TouchableOpacity>
         <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT }}>#고양이 #사진 #카페투어</Text>
       </View>
-      <View style={styles.carouselBox}>
-        <View>
-          <View style={styles.sampleStyle} />
-        </View>
-        <View>
-          <Text
-            style={{
-              marginTop: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
-              fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
-              fontWeight: 'bold',
-            }}
-          >
-            인사동 냥집사 모여라
-          </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Icon name="person" size={14} color={COLORS.FONT_GRAY} />
-            <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
-              삼청동
-            </Text>
-          </View>
-        </View>
-      </View>
+      <FlatList
+        data={dataArr}
+        renderItem={dataItem}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
     </View>
   );
 };
+
+const dataItem = ({ item }) => (
+  <View style={styles.carouselBox}>
+    <View>
+      <Image
+        style={styles.sampleStyle}
+        source={{
+          uri:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRDcX-y0hQ8j988oKlwkfH4ACUkKbOccRkQqw&usqp=CAU',
+        }}
+      />
+    </View>
+    <View>
+      <Text
+        style={{
+          marginTop: 10 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          fontWeight: 'bold',
+        }}
+      >
+        {item.title}
+      </Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Icon name="person" size={14} color={COLORS.FONT_GRAY} />
+        <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
+          {item.numOfPeople} | {item.location}
+        </Text>
+      </View>
+    </View>
+  </View>
+);
+
+const dataArr = [
+  {
+    tag: ['고양이', '사진', '카페투어'],
+    title: '인사동 냥집사 모여라',
+    numberOfMem: 6,
+    location: '삼청동',
+    image: '',
+  },
+  {
+    tag: ['고양이', '사진', '카페투어'],
+    title: '인사동 냥집사 모여라',
+    numberOfMem: 6,
+    location: '삼청동',
+    image: '',
+  },
+  {
+    tag: ['고양이', '사진', '카페투어'],
+    title: '인사동 냥집사 모여라',
+    numberOfMem: 6,
+    location: '삼청동',
+    image: '',
+  },
+];
 
 const styles = StyleSheet.create({
   textBlock: {},
@@ -52,6 +91,7 @@ const styles = StyleSheet.create({
   },
   carouselBox: {
     marginTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginRight: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });
 
