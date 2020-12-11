@@ -8,23 +8,11 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView, ToastAndroid,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { func } from 'prop-types';
 import { COLORS } from '../../../assets/Colors';
-import PhoneNumberInputTextView from '../components/PhoneNumberInputTextView';
-import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
-import SignErrorMessageView from '../components/SignErrorMessageView';
-import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
 import NextButton from '../components/NextButton';
-import { USER_STATUS } from '../../../constant/UserStatus';
-import Main from '../../main/Main';
-import { INPUT_EMAIL_STATUS } from '../../../constant/InputEmailStatus';
-import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
-import PhoneAuthTimer from '../../../component/PhoneAuthTimer';
-import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
-import { INPUT_PHONE_STATUS } from '../../../constant/InputPhoneStatus';
 import EmailInputTextView from '../components/EmailInputTextView';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import LabelView from '../components/LabelView';
@@ -85,7 +73,6 @@ const ResetPasswordConfirmEmail = (props) => {
                 onChangeText={props.signUpEmailStore.emailTextChanged.bind(this)}
               />
             </View>
-            {/* <PhoneAuthTimer style={styles.authTimer} /> */}
 
             {/* <SignErrorMessageView text={props.resetPasswordStore.errorMessage} /> */}
             <View style={styles.bottomContainer}>

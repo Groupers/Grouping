@@ -138,9 +138,10 @@ export default class res {
   @action sendPhoneCode = async () => {
     console.log('send code');
     let isSucceed = false;
-    const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
-    // if (data.phoneNumberAvailable !== true) {
-    //   this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
+    const enrolled = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
+    console.log(enrolled,enrolled.phoneNumberAvailable,)
+    // if (enrolled !== true) {
+    //   this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_VALID;
     //   return;
     // }
     try {
@@ -153,9 +154,15 @@ export default class res {
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR;
     }
     if (isSucceed) {
-      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
-      // this.initialize();
-      // console.log(`codeConfirmation${this.codeConfirmation.status.toString()}`);
+      if (this.phoneValidationViewStatus === SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER) {
+        console.log('재전송!!!');
+        console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
+        this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT;
+        return;
+      }
+      console.log('첫 전송!!!');
+      console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
+      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
     }
   };
 
@@ -218,14 +225,6 @@ export default class res {
     console.log('성공여부 : ');
     console.log(isSucceed);
   };
-
-  @computed get getFormatTimer() {
-    let time = this.timeOut;
-    const minutes = Math.floor(time / 60);
-    time -= minutes * 60;
-    const seconds = parseInt(time % 60, 10);
-    return `${minutes < 10 ? `0${minutes}` : minutes} : ${seconds < 10 ? `0${seconds}` : seconds}`;
-  }
 
   @computed get isValidPhoneNumber() {
     return (

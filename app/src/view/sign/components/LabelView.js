@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: -0.3,
     lineHeight: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
-    width: 57 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });
 export default LabelView;

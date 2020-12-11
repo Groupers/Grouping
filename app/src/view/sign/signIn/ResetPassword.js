@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TextInput,
+  Button,
+  TouchableOpacity,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
@@ -18,8 +20,63 @@ import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import LabelView from '../components/LabelView';
+import { TIME_OUT } from '../../../constant/TimeOut';
 
 const ResetPassword = (props) => {
+  const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+
+  const getTimer = () => (
+    <Text style={styles.timeText}>
+      {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+    </Text>
+  );
+
+  const startTimer = () => {
+    if (
+      props.resetPasswordStore.phoneValidationViewStatus ===
+      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+    ) {
+      console.log('타이머 시작!!!');
+      setIsActive(true);
+    }
+    if (
+      props.resetPasswordStore.phoneValidationViewStatus ===
+      SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_RESENT
+    ) {
+      console.log('타이머 리셋하고 시작!!!');
+      reset();
+      setIsActive(true);
+    }
+  };
+
+  const reset = () => {
+    setMinutes(TIME_OUT.START_TIME);
+    setSeconds(0);
+    setIsActive(false);
+  };
+
+  useEffect(() => {
+    let countDown = null;
+    if (isActive) {
+      countDown = setInterval(() => {
+        if (seconds > 0) {
+          setSeconds(seconds - TIME_OUT.A_SECOND);
+        }
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(countDown);
+          } else {
+            setMinutes(minutes - TIME_OUT.A_SECOND);
+            setSeconds(59);
+          }
+        }
+      }, TIME_OUT.THOUSAND_MILLI_SECONDS);
+    }
+    return () => clearInterval(countDown);
+  }, [minutes, seconds, isActive]);
+
   async function resetPasswordButtonClicked() {
     // await props.signUpEmailStore.completeEmail();
     // if
@@ -36,8 +93,29 @@ const ResetPassword = (props) => {
   }
 
   async function authorizeButtonClicked() {
-    await props.resetPasswordStore.sendPhoneCode();
+    props.resetPasswordStore.sendPhoneCode().then(startTimer);
   }
+
+  const buttonStyle = () => {
+    return {
+      width: 39 * WINDOW_SIZE.WIDTH_WEIGHT,
+      alignItems: 'space-between',
+      justifyContent: 'center',
+      height: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    };
+  };
+
+  const fontStyle = () => {
+    return {
+      fontSize: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
+      color:
+        props.resetPasswordStore.phoneValidationViewStatus ===
+        SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+          ? COLORS.SUB_COLOR
+          : COLORS.FONT_GRAY,
+      fontWeight: 'bold',
+    };
+  };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
@@ -81,53 +159,49 @@ const ResetPassword = (props) => {
                 )}
               />
             </View>
+            <LabelView text="휴대폰 번호" />
             <View style={styles.phoneCodeContainer}>
-              <LabelView text="휴대폰 번호" />
               <PhoneNumberInputTextView
                 isActive={!props.resetPasswordStore.isValidPhoneNumber}
                 text={props.resetPasswordStore.phoneNumber}
                 onChangeText={props.resetPasswordStore.phoneNumberChanged.bind(this)}
               />
+              <PhoneCodeNextButton
+                label="인증번호"
+                isActive={props.resetPasswordStore.isValidPhoneNumber}
+                text={
+                  props.resetPasswordStore.phoneValidationViewStatus ===
+                  SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                    ? '재인증'
+                    : '인 증'
+                }
+                onClick={authorizeButtonClicked.bind(this)}
+              />
+              {/* <TouchableOpacity style={buttonStyle} onPress={authorizeButtonClicked}> */}
+              {/*  <Text style={fontStyle}> */}
+              {/*    {props.resetPasswordStore.phoneValidationViewStatus === */}
+              {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
+              {/*      ? '재인증' */}
+              {/*      : '인 증'} */}
+              {/*  </Text> */}
+              {/* </TouchableOpacity> */}
+              {/* <Button */}
+              {/*  title="전송" */}
+              {/*  onPress={authorizeButtonClicked} */}
+              {/*  style={{ width: 40 * WINDOW_SIZE.WIDTH_WEIGHT }} */}
+              {/* /> */}
             </View>
-            {/* {this.props.signUpPhoneStore.phoneValidationViewStatus === */}
-            {/* SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR ? ( */}
-            {/*  <View>/!* <ShowErrorModal /> *!/</View> */}
-            {/* ) : null} */}
-
             <View>
+              <LabelView text="인증번호" />
               <View style={styles.phoneCodeContainer}>
                 <PhoneCodeInputTextView
-                  onBlur={props.resetPasswordStore.phoneCodeValidationSucceed}
+                  onBlur={props.resetPasswordStore.phoneCodeValidationSucceed.bind(this)}
                   onChangeText={props.resetPasswordStore.phoneCodeChanged.bind(this)}
                   text={props.resetPasswordStore.phoneCode}
                 />
-                <PhoneCodeNextButton
-                  label="인증번호"
-                  isActive={props.resetPasswordStore.isValidPhoneNumber}
-                  text={
-                    props.resetPasswordStore.phoneValidationViewStatus ===
-                    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
-                      ? '재인증'
-                      : '인 증'
-                  }
-                  onClick={authorizeButtonClicked.bind(this)}
-                />
-                {/* <PhoneCodeNextButton */}
-                {/*  style={styles.authButton} */}
-                {/*  text={ */}
-                {/*    this.props.signUpPhoneStore.phoneValidationViewStatus === */}
-                {/*    SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER */}
-                {/*      ? '인증' */}
-                {/*      : '재인증' */}
-                {/*  } */}
-                {/*  isActive={this.props.signUpPhoneStore.isValidPhoneNumber} */}
-                {/*  onClick={this.props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this)} */}
-                {/* /> */}
+                {getTimer()}
               </View>
             </View>
-            {/* <PhoneAuthTimer style={styles.authTimer} /> */}
-
-            {/* <SignErrorMessageView text={props.resetPasswordStore.errorMessage} /> */}
             <View style={styles.bottomContainer}>
               <NextButton
                 isActive={props.resetPasswordStore.isValidPhoneCode}
@@ -165,10 +239,13 @@ const styles = StyleSheet.create({
   },
 
   phoneCodeContainer: {
-    height: 50,
-    // alignItems: 'center',
+    flexDirection: 'row',
+    height: 50 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    alignItems: 'center',
     width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
-    // borderWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: COLORS.FONT_GRAY,
+    justifyContent: 'space-between',
   },
   title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, marginBottom: 6, color: COLORS.BLACK },
   bottomContainer: {
@@ -179,7 +256,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  authTimer: { margin: 10 },
+  timeText: {
+    color: COLORS.SUB_COLOR,
+    fontSize: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  },
 
   authButton: {},
 });

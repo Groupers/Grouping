@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { COLORS } from '../../../assets/Colors';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 
