@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 import { Icon } from 'react-native-elements';
@@ -17,55 +17,116 @@ const PersonalRecommend = (props) => {
           <Icon name="navigate-next" size={22} color="black" />
         </TouchableOpacity>
       </View>
-      <View style={styles.carouselBox}>
-        <View style={{ marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
-          <View style={styles.sampleStyle}>
-            <View
-              style={{
-                position: 'absolute',
-                right: 0,
-                bottom: 0,
-                width: 230 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                backgroundColor: 'yellow',
-              }}
-            />
-            <View
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                backgroundColor: 'orange',
-                width: 108 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                height: 124 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                padding: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-              }}
-            >
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
-                }}
-                numberOfLines={1}
-              >
-                #건강다이어트
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT }}>같이 다이어트해요</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Icon name="person" size={14} color={COLORS.FONT_GRAY} />
-          <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
-            삼청동
+      <FlatList
+        data={dataArr}
+        renderItem={personalItem}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
+    </View>
+  );
+};
+class RecmmendGroupItem {
+  tag;
+
+  title;
+
+  numberOfMem;
+
+  location;
+
+  image;
+
+  constructor(data = {}) {
+    Object.assign(this, data);
+  }
+}
+
+const dataArr = [
+  {
+    tag: ['다이어트', '운동', '직장인'],
+    title: '출근러들 같이 다이어트',
+    numberOfMem: 6,
+    location: '삼청동',
+    image: '',
+  },
+  {
+    tag: ['다이어트', '운동', '직장인'],
+    title: '출근러들 같이 다이어트',
+    numberOfMem: 6,
+    location: '삼청동',
+    image: '',
+  },
+  {
+    tag: ['다이어트', '운동', '직장인'],
+    title: '출근러들 같이 다이어트',
+    numberOfMem: 6,
+    location: '삼청동',
+    image: '',
+  },
+];
+
+const personalItem = ({ item }) => (
+  <View style={styles.carouselBox}>
+    <View style={{ marginBottom: 10 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
+      <View style={styles.sampleStyle}>
+        <Image
+          style={{
+            position: 'absolute',
+            right: 0,
+            bottom: 0,
+            width: 230 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            backgroundColor: 'yellow',
+          }}
+          source={{
+            uri:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRDcX-y0hQ8j988oKlwkfH4ACUkKbOccRkQqw&usqp=CAU',
+          }}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            backgroundColor: 'orange',
+            width: 108 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            height: 124 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            padding: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          }}
+        >
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            }}
+            numberOfLines={1}
+          >
+            #{item.tag[0]}
+          </Text>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            }}
+            numberOfLines={1}
+          >
+            #{item.tag[1]}
           </Text>
         </View>
       </View>
     </View>
-  );
-};
+    <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT }}>{item.title}</Text>
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Icon name="person" size={14} color={COLORS.FONT_GRAY} />
+      <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
+        {item.numberOfMem} | {item.location}
+      </Text>
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   textBlock: {
@@ -79,6 +140,7 @@ const styles = StyleSheet.create({
   },
   carouselBox: {
     marginTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    marginRight: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });
 
