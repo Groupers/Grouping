@@ -37,9 +37,9 @@ class PhoneCodeInputTextView extends React.Component {
       <View
         style={{
           flexDirection: 'row',
-          borderBottomWidth: 1,
           borderBottomColor: COLORS.FONT_GRAY,
-          width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+          width: 255 * WINDOW_SIZE.WIDTH_WEIGHT,
+          height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
           alignItems: 'center',
         }}
       >
@@ -52,6 +52,7 @@ class PhoneCodeInputTextView extends React.Component {
           textContentType="creditCardNumber"
           onFocus={this.handleFocus}
           blurOnSubmit
+          placeholder="숫자6자리"
         />
       </View>
     );
@@ -85,14 +86,12 @@ const styles = StyleSheet.create({
   },
   inputCode: {
     height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    width: 261 * WINDOW_SIZE.WIDTH_WEIGHT,
+    width: 255 * WINDOW_SIZE.WIDTH_WEIGHT,
     fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
     color: '#111',
     paddingBottom: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
     paddingTop: 13 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    lineHeight: 17 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    paddingLeft: 0,
-    paddingRight: 0,
+    alignItems: 'center',
   },
 });
 export default PhoneCodeInputTextView;

@@ -8,9 +8,8 @@ const PhoneNumberInputTextView = (props) => {
   return (
     <View
       style={{
-        borderBottomWidth: 1,
         borderColor: COLORS.FONT_GRAY,
-        width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+        width: 255 * WINDOW_SIZE.WIDTH_WEIGHT,
         height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
         flexDirection: 'row',
         alignItems: 'center',
@@ -21,7 +20,7 @@ const PhoneNumberInputTextView = (props) => {
         maxLength={20}
         autoCorrect={false}
         style={{
-          width: 261 * WINDOW_SIZE.WIDTH_WEIGHT,
+          width: 255 * WINDOW_SIZE.WIDTH_WEIGHT,
           alignItems: 'center',
           justifyContent: 'center',
           height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,

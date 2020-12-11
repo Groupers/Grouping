@@ -15,6 +15,9 @@ import { COLORS } from '../../../assets/Colors';
 import ActivePasswordInputTextView from '../components/ActivePasswordInputTextView';
 import PasswordInputTextView from '../components/PasswordInputTextView';
 import { ResponseCode } from '../../../constant/ResponseCode';
+import NextButton from '../components/NextButton';
+import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import EmailInputTextView from '../components/EmailInputTextView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -40,6 +43,7 @@ class NewPassword extends React.Component {
     this.props.signUpPasswordStore.completePassword();
 
     this.props.resetPasswordStore.resetPassword(this.props.signUpPasswordStore.passwordText);
+
     this.props.resetPasswordStore.passwordChangeStatus === ResponseCode.SUCCEED
       ? this.props.navigation.navigate('EntranceMain')
       : null;
@@ -55,20 +59,36 @@ class NewPassword extends React.Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <LabelView text="새 비밀번호" />
-              <PasswordInputTextView
-                toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(this)}
-                isShowPassword={this.props.signUpPasswordStore.isShowPassword}
-                text={this.props.signUpPasswordStore.passwordText}
-                onChangeText={this.props.signUpPasswordStore.passwordTextChanged.bind(this)}
-              />
-              <SignErrorMessageView text={this.props.signUpPasswordStore.errorMessage} />
+              <View style={styles.textArea}>
+                <Text style={styles.title}>비밀번호를 입력해주세요</Text>
+                <Text
+                  style={{
+                    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                    color: COLORS.BLACK,
+                    lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                  }}
+                >
+                  한 번만 입력하니 정확히 입력해주세요!
+                </Text>
+              </View>
+              <View style={{ height: 30 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+              <View>
+                <LabelView text="새 비밀번호" />
+                <PasswordInputTextView
+                  toggleShowPassword={this.props.signUpPasswordStore.toggleShowPassword.bind(this)}
+                  isShowPassword={this.props.signUpPasswordStore.isShowPassword}
+                  text={this.props.signUpPasswordStore.passwordText}
+                  onChangeText={this.props.signUpPasswordStore.passwordTextChanged.bind(this)}
+                />
+                <SignErrorMessageView text={this.props.signUpPasswordStore.errorMessage} />
+              </View>
             </View>
             <View style={styles.bottomContainer}>
-              <SignUpNextButton
+              <NextButton
                 isActive={this.props.signUpPasswordStore.isValidInputData}
                 text="완료"
                 onClick={this.signUpNextButtonClicked.bind(this)}
+                fontColor={COLORS.WHITE}
               />
             </View>
           </View>
@@ -82,38 +102,29 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
     alignItems: 'center',
-    width: '100%',
+    justifyContent: 'center',
   },
 
   inner: {
-    flex: 1,
     backgroundColor: COLORS.MAIN_COLOR,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '90%',
-    // paddingTop:30
+    flex: 1,
   },
-  informTextContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-
   contentContainer: {
-    flex: 1,
-    paddingTop: 150,
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
-    backgroundColor: COLORS.MAIN_COLOR,
-    width: '100%',
-    justifyContent: 'center',
-    // borderWidth: 2
   },
-
+  textArea: {
+    width: '100%',
+    marginTop: 10,
+  },
+  title: {
+    fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    color: COLORS.BLACK,
+    marginBottom: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+  },
   bottomContainer: {
-    // borderWidth:2,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',

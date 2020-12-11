@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -16,6 +17,9 @@ import ActivePasswordInputTextView from '../components/ActivePasswordInputTextVi
 import NextButton from '../components/NextButton';
 import SignErrorMessageView from '../components/SignErrorMessageView';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import LabelView from '../components/LabelView';
+import EmailInputTextView from '../components/EmailInputTextView';
+import PasswordInputTextView from '../components/PasswordInputTextView';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -58,31 +62,43 @@ class SignIn extends React.Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.contentContainer}>
-              <ActiveEmailInputTextView
-                label="이메일 또는 휴대폰번호"
-                value={this.props.signInStore.inputText}
-                onChangeText={this.props.signInStore.inputTextChanged.bind(this)}
-              />
-              <View style={{ height: 30 }} />
-              <ActivePasswordInputTextView
-                label="비밀번호"
-                toggleShowPassword={this.props.signInStore.toggleShowPassword.bind(this)}
-                isShowPassword={this.props.signInStore.isShowPassword}
-                onChangeText={this.props.signInStore.passwordTextChanged.bind(this)}
-                value={this.props.signInStore.passwordText}
-              />
-              <View style={{ height: 100 }} />
+              <View style={styles.textArea}>
+                <Text style={styles.title}>안녕하세요!</Text>
+                <View style={{ height: 30 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+              </View>
+              <View>
+                <LabelView text="ID" />
+                <EmailInputTextView
+                  label="이메일 또는 휴대폰번호"
+                  value={this.props.signInStore.inputText}
+                  onChangeText={this.props.signInStore.inputTextChanged.bind(this)}
+                />
+              </View>
+              <View>
+                <LabelView text="비밀번호" />
+                <PasswordInputTextView
+                  label="비밀번호"
+                  toggleShowPassword={this.props.signInStore.toggleShowPassword.bind(this)}
+                  isShowPassword={this.props.signInStore.isShowPassword}
+                  onChangeText={this.props.signInStore.passwordTextChanged.bind(this)}
+                  value={this.props.signInStore.passwordText}
+                />
+              </View>
+              <View height={41 * WINDOW_SIZE.HEIGHT_WEIGHT} />
               <MoreInfoButton
                 navigation={this.props.navigation}
-                screen="ResetPassword"
+                screen="ResetPasswordConfirmEmail"
                 title="비밀번호를 잊으셨나요?"
               />
-              <SignErrorMessageView text={this.props.signInStore.errorMessage} />
-              <NextButton
-                isActive={this.props.signInStore.isValidInputData}
-                text="로그인"
-                onClick={this.signInButtonClicked.bind(this)}
-              />
+              {/* <SignErrorMessageView text={this.props.signInStore.errorMessage} /> */}
+              <View style={styles.bottomContainer}>
+                <NextButton
+                  isActive={this.props.signInStore.isValidInputData}
+                  text="로그인"
+                  fontColor={COLORS.WHITE}
+                  onClick={this.signInButtonClicked.bind(this)}
+                />
+              </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -94,49 +110,29 @@ class SignIn extends React.Component {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    flexDirection: 'column',
+    backgroundColor: COLORS.MAIN_COLOR,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
   inner: {
+    backgroundColor: COLORS.MAIN_COLOR,
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    // justifyContent: 'center',
   },
   contentContainer: {
+    marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignItems: 'center',
-    flex: 1,
-    width: 0.9 * WINDOW_SIZE.WIDTH,
-    marginTop: 50,
   },
-  loginButton: {
-    marginTop: 10,
-    // elevation:8,
-    color: 'gray',
-    alignItems: 'center',
-    height: 40,
-    backgroundColor: COLORS.DARK_GRAY,
-    justifyContent: 'center',
-    width: WINDOW_SIZE.WIDTH,
+  textArea: {
+    marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
-  loginButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  buttonContainer: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginBottom: 30,
-  },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.BLACK },
   bottomContainer: {
-    flex: 1,
-    alignItems: 'center',
-    marginBottom: 40,
-    // borderWidth:2,
     width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flex: 1,
   },
 });
 

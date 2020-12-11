@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -13,11 +12,12 @@ import { inject, observer } from 'mobx-react';
 import NextButton from '../components/NextButton';
 import PhoneNumberInputTextView from '../components/PhoneNumberInputTextView';
 import PhoneCodeInputTextView from '../components/PhoneCodeInputTextView';
-import { COLORS } from '../../../assets/Colors';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import LabelView from '../components/LabelView';
 import { TIME_OUT } from '../../../constant/TimeOut';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
+import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
+import {COLORS} from '../../../assets/Colors';
 
 const SignUpPhone = (props) => {
   const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
@@ -116,8 +116,8 @@ const SignUpPhone = (props) => {
               </Text>
             </View>
             <View height={12 * WINDOW_SIZE.HEIGHT_WEIGHT} />
-            <View>
-              <LabelView text="휴대폰 번호" />
+            <LabelView text="휴대폰 번호" />
+            <View style={styles.phoneCodeContainer}>
               <PhoneNumberInputTextView
                 label="휴대폰 번호"
                 isActive={!props.signUpPhoneStore.isAllCompleted}
@@ -125,9 +125,21 @@ const SignUpPhone = (props) => {
                 onChangeText={props.signUpPhoneStore.phoneNumberChanged.bind(this)}
                 placeholder="-없이 번호 입력"
               />
-              <Button title="전송" onPress={authorizeButtonClicked} />
-              {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
-              <LabelView text="인증번호" />
+              <PhoneCodeNextButton
+                label="인증번호"
+                isActive={props.signUpPhoneStore.isValidPhoneNumber}
+                text={
+                  props.signUpPhoneStore.phoneValidationViewStatus ===
+                  SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+                    ? '재인증'
+                    : '인 증'
+                }
+                onClick={authorizeButtonClicked.bind(this)}
+              />
+            </View>
+            {/* <SignErrorMessageView text={this.props.signUpPhoneStore.errorMessage} /> */}
+            <LabelView text="인증번호" />
+            <View style={styles.phoneCodeContainer}>
               <PhoneCodeInputTextView
                 onChangeText={props.signUpPhoneStore.phoneCodeChanged.bind(this)}
                 onBlur={() => {
@@ -177,11 +189,12 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, marginBottom: 6, color: COLORS.BLACK },
   phoneCodeContainer: {
-    backgroundColor: 'green',
-    flexDirection: 'row',
+    // backgroundColor: 'green',
     alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+    justifyContent: 'space-between',
   },
 
   bottomContainer: {
@@ -193,8 +206,8 @@ const styles = StyleSheet.create({
   },
 
   timeText: {
-    fontSize: 12,
     color: COLORS.SUB_COLOR,
+    fontSize: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   authButton: {},

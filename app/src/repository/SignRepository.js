@@ -35,6 +35,7 @@ export default class SignRepository {
   }
 
   async checkPhoneNumber(phoneNumber, failedCallback) {
+    console.log('checkPhoneNumber1');
     const response = await axios.get(`${TARGET_URL}/phone-number`, {
       params: { 'phone-number': phoneNumber },
     });
@@ -42,6 +43,7 @@ export default class SignRepository {
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
+      console.log('checkPhoneNumber');
       failedCallback(commonResponse.code);
       return;
     }
@@ -50,6 +52,7 @@ export default class SignRepository {
   }
 
   async enrollPhoneNumber(phoneNumber, failedCallback) {
+    console.log('enrollPhoneNumber1');
     const response = await axios.post(`${TARGET_URL}/phone-number`, {
       phoneNumber,
     });
@@ -58,6 +61,9 @@ export default class SignRepository {
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
       failedCallback(commonResponse.code);
+      console.log('enrollPhoneNumber');
+      console.log(response.data);
+      console.log(response.status);
       return false;
     }
 
