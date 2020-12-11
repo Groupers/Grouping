@@ -77,6 +77,7 @@ const ResetPasswordConfirmEmail = (props) => {
                 isActive={props.signUpEmailStore.isRightFormat}
                 text="다음"
                 onClick={resetPasswordButtonClicked.bind(this)}
+                fontcolor={COLORS.WHITE}
               />
             </View>
             <Toast visible={visibleToast} message="등록된 계정이 아닙니다." />

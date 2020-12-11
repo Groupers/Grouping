@@ -11,6 +11,7 @@ const HotKeyword = () => {
     { hashtag: '취미미술' },
     { hashtag: '캠핑' },
     { hashtag: '아웃도어' },
+    { hashtag: '홈트' },
   ];
 
   const hotKeywordItem = ({ item }) => (

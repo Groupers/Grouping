@@ -74,6 +74,7 @@ const HotKeywordRecommend = () => {
           marginLeft: 16 * WINDOW_SIZE.HEIGHT_WEIGHT,
           paddingBottom: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
           paddingTop: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          borderColor: COLORS.FONT_GRAY,
         }}
       >
         <Text
@@ -90,7 +91,7 @@ const HotKeywordRecommend = () => {
             source={require('../../../../../../../Img/ic_people.png')}
             style={{ height: 18 * WINDOW_SIZE.HEIGHT_WEIGHT, resizeMode: 'contain' }}
           />
-          <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
+          <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
             {item.numOfPeople} | {item.location}
           </Text>
         </View>
@@ -99,7 +100,7 @@ const HotKeywordRecommend = () => {
   );
 
   return (
-    <View>
+    <View style={{ marginRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT }}>
       <KeywordBanner />
       <FlatList
         data={HotKeywordGroup}
