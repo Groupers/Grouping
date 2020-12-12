@@ -16,7 +16,7 @@ const MIN_DESCRIPTION_LENGTH = 10;
 const MIN_TITLE_LENGTH = 2;
 
 export default class GroupingCreationMainStore {
-  groupingUserId = new GroupingUserDto().userId;
+  groupingUserId = new GroupingUserDto().groupingUserId;
 
   groupCreationRepository = new GroupCreationRepository();
 
@@ -285,7 +285,7 @@ export default class GroupingCreationMainStore {
   }
 
   @action initialize() {
-    this.groupingUserId = new GroupingUserDto().userId;
+    this.groupingUserId = new GroupingUserDto().groupingUserId;
     this.groupingTitle = '';
     this.groupingKeyword = '';
     this.groupingDescription = '';
@@ -297,7 +297,7 @@ export default class GroupingCreationMainStore {
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
-    this.groupingCreationDto.representGroupingUserId = new GroupingUserDto().userId;
+    this.groupingCreationDto.representGroupingUserId = new GroupingUserDto().groupingUserId;
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
