@@ -138,8 +138,11 @@ export default class res {
   @action sendPhoneCode = async () => {
     console.log('send code');
     let isSucceed = false;
-    const enrolled = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
-    console.log(enrolled,enrolled.phoneNumberAvailable,)
+    const enrolled = await this.signRepository.checkPhoneNumber(
+      this.phoneNumber,
+      (responseCode) => {}
+    );
+    console.log(enrolled, enrolled.phoneNumberAvailable);
     // if (enrolled !== true) {
     //   this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_VALID;
     //   return;
@@ -162,7 +165,7 @@ export default class res {
       }
       console.log('첫 전송!!!');
       console.log(`codeConfirmation${this.codeConfirmation.toString()}`);
-      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+      this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER;
     }
   };
 
@@ -189,7 +192,7 @@ export default class res {
     console.log('validatePhoneCode');
     if (this.phoneValidator.validatePhoneCode(this.phoneCode.trim())) {
       this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_FORMATTED;
-      console.log(`phonecode Foramtted${this.phoneValidationStatus}`);
+      console.log(`phoneCode Formatted${this.phoneValidationStatus}`);
       return;
     }
 
@@ -273,7 +276,7 @@ export default class res {
       (this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED) &
       (this.phoneValidationViewStatus === SIGN_UP_PHONE_VIEW_STATUS.PHONE_VALIDATION_SUCCEED)
     ) {
-      const userId = await this.userRepository.checkIsValidUser(
+      const groupingUserId = await this.userRepository.checkIsValidUser(
         this.emailText,
         this.phoneNumber,
         (responseCode) => {
@@ -284,20 +287,20 @@ export default class res {
           }
         }
       );
-      this.groupingUserDto.userId = userId;
+      this.groupingUserDto.groupingUserId = groupingUserId;
     }
     console.log('hello');
-    console.log(this.groupingUserDto.userId);
-    if (this.groupingUserDto.userId !== null) {
-      console.log('confirmed user Id : ');
-      console.log(this.groupingUserDto.userId);
+    console.log(this.groupingUserDto.groupingUserId);
+    if (this.groupingUserDto.groupingUserId !== null) {
+      console.log('confirmed groupingUserId : ');
+      console.log(this.groupingUserDto.groupingUserId);
       // return this.groupingUserDto.userId;
     }
   };
 
   @action resetPassword = async (password) => {
     const responseCode = await this.userRepository.resetPassword(
-      this.groupingUserDto.userId,
+      this.groupingUserDto.groupingUserId,
       password
     );
     console.log(responseCode);
