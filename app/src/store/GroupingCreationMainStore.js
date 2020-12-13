@@ -139,6 +139,7 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.minUserAge = minAge;
     console.log('change min age');
     console.log(this.groupingAvailableMinAge);
+    this.availableAgeChanged = true;
   };
 
   @action groupingAvailableMaxAgeChanged = (maxAge) => {
@@ -146,6 +147,7 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.maxUserAge = maxAge;
     console.log('change max age');
     console.log(this.groupingAvailableMaxAge);
+    this.availableAgeChanged = true;
   };
 
   @action groupingBackgroundImageChanged = ({ uri }) => {
