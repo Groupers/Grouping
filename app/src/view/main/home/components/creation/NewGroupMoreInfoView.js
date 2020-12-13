@@ -208,7 +208,14 @@ const NewGroupMoreInfoView = (props) => {
           >
             <Icon name="add" size={15} />
           </View>
-          <Text style={styles.fontColor}> 나이 제한 추가</Text>
+          <Text
+            style={{
+              color: props.groupingCreationMainStore.availableFontColor,
+              fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            }}
+          >
+            {props.groupingCreationMainStore.selectedAgeLimitMessage}
+          </Text>
         </View>
       </TouchableOpacity>
       <SwipeablePanel {...panelProps} isActive={agePanelActive}>

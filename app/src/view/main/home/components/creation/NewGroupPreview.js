@@ -101,8 +101,8 @@ const NewGroupPreview = (props) => {
             >
               <View style={styles.moreInfoTextContainerOnImage}>
                 <Text style={styles.moreInfoTextOnImage}>
-                  {props.groupingCreationMainStore.minAge} ~{' '}
-                  {props.groupingCreationMainStore.maxAge}
+                  {props.groupingCreationMainStore.groupingAvailableMinAge} ~{' '}
+                  {props.groupingCreationMainStore.groupingAvailableMaxAge}
                 </Text>
               </View>
               <View style={styles.moreInfoTextContainerOnImage}>
