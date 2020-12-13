@@ -26,7 +26,7 @@ export default class UserRepository {
     console.log('response : ');
     console.log(response);
     console.log('response : ');
-    console.log(response.data.data.groupingUserId.toString());
+    // console.log(response.data.groupingUserId.toString());
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
