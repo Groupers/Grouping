@@ -75,6 +75,10 @@ const NewGroupPreview = (props) => {
     });
   };
 
+  const getAvailableAge = () => {
+    return `${props.groupingCreationMainStore.groupingAvailableMinAge}세 ~ ${props.groupingCreationMainStore.groupingAvailableMaxAge}세`;
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar translucent backgroundColor="#00000011" />
@@ -101,8 +105,9 @@ const NewGroupPreview = (props) => {
             >
               <View style={styles.moreInfoTextContainerOnImage}>
                 <Text style={styles.moreInfoTextOnImage}>
-                  {props.groupingCreationMainStore.minAge} ~{' '}
-                  {props.groupingCreationMainStore.maxAge}
+                  {/* {props.groupingCreationMainStore.groupingAvailableMinAge} ~{' '} */}
+                  {/* {props.groupingCreationMainStore.groupingAvailableMaxAge} */}
+                  {getAvailableAge()}
                 </Text>
               </View>
               <View style={styles.moreInfoTextContainerOnImage}>
