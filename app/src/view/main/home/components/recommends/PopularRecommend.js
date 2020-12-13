@@ -20,6 +20,8 @@ const PopularRecommend = () => {
         renderItem={dataItem}
         horizontal
         showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={<View width={32 * WINDOW_SIZE.WIDTH_WEIGHT} />}
+        ListFooterComponent={<View width={32 * WINDOW_SIZE.WIDTH_WEIGHT} />}
       />
     </View>
   );
@@ -81,7 +83,7 @@ const dataArr = [
 ];
 
 const styles = StyleSheet.create({
-  textBlock: {},
+  textBlock: { marginLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT },
   textStyle: { fontSize: 20 * WINDOW_SIZE.HEIGHT_WEIGHT, fontWeight: 'bold', color: COLORS.BLACK },
   sampleStyle: {
     height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,

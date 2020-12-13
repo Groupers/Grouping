@@ -61,7 +61,10 @@ export default class SignUpEmailStore {
   }
 
   @computed get isRightFormat() {
-    return this.emailValidation !== INPUT_EMAIL_STATUS.NOT_FORMATTED;
+    return (
+      this.emailValidation !== INPUT_EMAIL_STATUS.NOT_FORMATTED &&
+      this.emailValidation !== INPUT_EMAIL_STATUS.NONE
+    );
   }
 
   @computed get errorMessage() {

@@ -44,6 +44,7 @@ const HotKeyword = () => {
           fontSize: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
           color: COLORS.BLACK,
           fontWeight: 'bold',
+          marginLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
         }}
       >
         인기 키워드
@@ -57,6 +58,8 @@ const HotKeyword = () => {
           height: 116 * WINDOW_SIZE.HEIGHT_WEIGHT,
           marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
         }}
+        ListHeaderComponent={<View width={32 * WINDOW_SIZE.WIDTH_WEIGHT} />}
+        ListFooterComponent={<View width={32 * WINDOW_SIZE.WIDTH_WEIGHT} />}
       />
     </View>
   );

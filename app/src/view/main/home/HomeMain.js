@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     // padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
     // margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
     // paddingRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    paddingLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+    // paddingLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 
   createGroupText: {

@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     paddingLeft: 16 * WINDOW_SIZE.WIDTH_WEIGHT,
     width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
     alignSelf: 'center',
-    marginRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   buttonBlock: {
     flex: 1,
