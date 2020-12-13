@@ -46,7 +46,7 @@ export default class PasswordInputTextView extends React.Component {
         />
         <Icon
           style={styles.passwordToggleButton}
-          name={this.props.isShowPassword ? 'eye-off' : 'eye'}
+          name={this.props.isShowPassword ? 'eye' : 'eye-off'}
           type="feather"
           color={COLORS.FONT_GRAY}
           onPress={() => this.props.toggleShowPassword()}
