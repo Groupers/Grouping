@@ -9,7 +9,12 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 
 const PersonalRecommend = (props) => {
   return (
-    <View style={{ marginBottom: 54 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
+    <View
+      style={{
+        marginBottom: 54 * WINDOW_SIZE.HEIGHT_WEIGHT,
+        width: '100%',
+      }}
+    >
       <View style={styles.textBlock}>
         <TouchableOpacity style={{ flexDirection: 'row' }}>
           {/* 추후변경 */}
@@ -22,6 +27,8 @@ const PersonalRecommend = (props) => {
         renderItem={personalItem}
         horizontal
         showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={<View width={32 * WINDOW_SIZE.WIDTH_WEIGHT} />}
+        ListFooterComponent={<View width={32 * WINDOW_SIZE.WIDTH_WEIGHT} />}
       />
     </View>
   );
@@ -130,7 +137,7 @@ const personalItem = ({ item }) => (
 
 const styles = StyleSheet.create({
   textBlock: {
-    // flexDirection: 'row'
+    marginLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   textStyle: { fontSize: 20 * WINDOW_SIZE.HEIGHT_WEIGHT, fontWeight: 'bold', color: 'black' },
   sampleStyle: {

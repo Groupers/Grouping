@@ -100,13 +100,14 @@ const HotKeywordRecommend = () => {
   );
 
   return (
-    <View style={{ marginRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT }}>
+    <View
+      style={{
+        marginRight: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+        marginLeft: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
+      }}
+    >
       <KeywordBanner />
-      <FlatList
-        data={HotKeywordGroup}
-        renderItem={HotKeywordGroupItem}
-        style={{ height: 350 * WINDOW_SIZE.HEIGHT_WEIGHT }}
-      />
+      <FlatList data={HotKeywordGroup} renderItem={HotKeywordGroupItem} />
     </View>
   );
 };

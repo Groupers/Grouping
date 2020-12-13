@@ -161,6 +161,7 @@ const ResetPassword = (props) => {
                 isActive={props.resetPasswordStore.isValidPhoneCode}
                 text="다음"
                 onClick={resetPasswordButtonClicked.bind(this)}
+                fontColor={COLORS.WHITE}
               />
             </View>
           </View>
