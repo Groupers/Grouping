@@ -60,6 +60,8 @@ export default class GroupingCreationMainStore {
 
   @observable genderChanged = false;
 
+  @observable availableAgeChanged = false;
+
   // @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
   @observable groupingBackgroundImageURI = '';
 
@@ -137,6 +139,7 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.minUserAge = minAge;
     console.log('change min age');
     console.log(this.groupingAvailableMinAge);
+    this.availableAgeChanged = true;
   };
 
   @action groupingAvailableMaxAgeChanged = (maxAge) => {
@@ -144,6 +147,7 @@ export default class GroupingCreationMainStore {
     this.groupingCreationDto.maxUserAge = maxAge;
     console.log('change max age');
     console.log(this.groupingAvailableMaxAge);
+    this.availableAgeChanged = true;
   };
 
   @action groupingBackgroundImageChanged = ({ uri }) => {
@@ -272,8 +276,19 @@ export default class GroupingCreationMainStore {
     return '모두환영';
   }
 
+  @computed get selectedAgeLimitMessage() {
+    if (this.availableAgeChanged === false) {
+      return '나이 제한 추가';
+    }
+    return `${this.groupingAvailableMinAge}세 ~ ${this.groupingAvailableMaxAge}세 가입 가능`;
+  }
+
   @computed get genderFontColor() {
     return this.genderChanged !== false ? COLORS.BLACK : COLORS.FONT_GRAY;
+  }
+
+  @computed get availableFontColor() {
+    return this.availableAgeChanged !== false ? COLORS.BLACK : COLORS.FONT_GRAY;
   }
 
   @computed get descriptionFontColor() {

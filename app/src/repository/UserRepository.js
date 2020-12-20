@@ -1,11 +1,11 @@
 import axios from 'axios';
 import auth from '@react-native-firebase/auth';
-import { SERVER_URL } from '../constant/HttpProperty';
+import { USER_URL } from '../constant/HttpProperty';
 import CommonResponse from '../dto/CommonResponse';
 import { ResponseCode } from '../constant/ResponseCode';
 import GroupingUserDto from '../dto/GroupingUserDto';
 
-const TARGET_URL = `${SERVER_URL}/users`;
+const TARGET_URL = `${USER_URL}`;
 
 export default class UserRepository {
   initialize = async () => {
@@ -26,7 +26,7 @@ export default class UserRepository {
     console.log('response : ');
     console.log(response);
     console.log('response : ');
-    console.log(response.data.data.groupingUserId.toString());
+    // console.log(response.data.groupingUserId.toString());
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {

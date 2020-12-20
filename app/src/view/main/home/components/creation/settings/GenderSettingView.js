@@ -20,7 +20,7 @@ const GenderSettingView = (props) => {
         style={checked === 'MALE' ? styles.clickedGender : styles.defaultGender}
       >
         <Image
-          source={require('../../../../../../../../Img/normal_w.png')}
+          source={require('../../../../../../../../Img/component_new_ic_male_normal.png')}
           style={{ width: 72 * WINDOW_SIZE.WIDTH_WEIGHT, height: 72 * WINDOW_SIZE.HEIGHT_WEIGHT }}
         />
         <Text>남자만</Text>
@@ -36,7 +36,7 @@ const GenderSettingView = (props) => {
         style={checked === 'FEMALE' ? styles.clickedGender : styles.defaultGender}
       >
         <Image
-          source={require('../../../../../../../../Img/normal_w.png')}
+          source={require('../../../../../../../../Img/component_new_ic_female_normal.png')}
           style={{ width: 72 * WINDOW_SIZE.WIDTH_WEIGHT, height: 72 * WINDOW_SIZE.HEIGHT_WEIGHT }}
         />
         <Text>여자만</Text>

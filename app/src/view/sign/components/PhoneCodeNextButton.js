@@ -15,7 +15,7 @@ const PhoneCodeNextButton = (props) => {
 
   const fontStyle = () => {
     return {
-      fontSize: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
+      fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
       color: props.isActive === true ? COLORS.SUB_COLOR : COLORS.FONT_GRAY,
       fontWeight: 'bold',
     };
