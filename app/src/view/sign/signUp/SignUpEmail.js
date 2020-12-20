@@ -16,6 +16,7 @@ import SignErrorMessageView from '../components/SignErrorMessageView';
 import ActiveEmailInputTextView from '../components/ActiveEmailInputTextView';
 import EmailInputTextView from '../components/EmailInputTextView';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
+import { INPUT_EMAIL_STATUS } from '../../../constant/InputEmailStatus';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -72,7 +73,14 @@ class SignUpEmail extends React.Component {
                   onChangeText={this.props.signUpEmailStore.emailTextChanged.bind(this)}
                 />
 
-                <SignErrorMessageView text={this.props.signUpEmailStore.errorMessage} />
+                <SignErrorMessageView
+                  text={this.props.signUpEmailStore.errorMessage}
+                  messagecolor={
+                    this.props.signUpEmailStore.emailValidation === INPUT_EMAIL_STATUS.INVALID
+                      ? COLORS.GRAY_5
+                      : COLORS.SUB_COLOR
+                  }
+                />
               </View>
               <View style={styles.bottomContainer}>
                 <NextButton
