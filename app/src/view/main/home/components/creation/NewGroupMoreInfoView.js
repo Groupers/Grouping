@@ -297,7 +297,7 @@ const NewGroupMoreInfoView = (props) => {
               closeGenderPanel();
             }}
           >
-            <Text>저장</Text>
+            <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT, color: COLORS.BLACK }}>저장</Text>
           </TouchableOpacity>
         </View>
         <Text style={{ fontSize: FONT_SIZE.SMALL_TITLE, fontWeight: 'bold', color: COLORS.BLACK }}>

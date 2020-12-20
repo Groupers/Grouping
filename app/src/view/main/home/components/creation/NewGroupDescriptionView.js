@@ -51,7 +51,7 @@ const NewGroupDescriptionView = (props) => {
           }}
           style={rightIconStyle(GROUPING_CREATION_VIEW_STATUS.DESCRIPTION)}
         >
-          완료
+          저장
         </Text>
       ),
     });

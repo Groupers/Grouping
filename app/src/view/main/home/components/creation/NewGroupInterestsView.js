@@ -95,14 +95,30 @@ const NewGroupInterestsInputView = (props) => {
     <View style={styles.mainContainer}>
       <GroupCreationProgressBar step={2} />
       <View style={styles.labelContainer}>
-        <Text style={{ fontSize: FONT_SIZE.CONTENTS_TITLE }}>
+        <Text
+          style={{
+            fontSize: FONT_SIZE.CONTENTS_TITLE,
+            fontWeight: 'bold',
+            lineHeight: 32 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            marginBottom: 6 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            letterSpacing: -1,
+          }}
+        >
           그룹의 관심사를 {'\n'}키워드로 소개해주세요.
         </Text>
-        <Text>스페이스바를 눌러 키워드를 구분해주세요.</Text>
+        <Text
+          style={{
+            fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            letterSpacing: -0.3,
+          }}
+        >
+          스페이스바를 눌러 키워드를 구분해주세요.
+        </Text>
       </View>
       <View style={styles.interestInputContainer}>
         <KeywordInput
-          textExample="#키워드,"
+          textExample="키워드"
           input={input}
           onKeywordChange={onKeywordChange}
           keywordList={keywordList}
@@ -126,10 +142,9 @@ const NewGroupInterestsInputView = (props) => {
               <Text style={styles.keywordText}>{keyword}</Text>
               <Image
                 source={require('../../../../../../../Img/tag_ic_x.png')}
-                resizeMode="center"
                 width={6 * WINDOW_SIZE.HEIGHT_WEIGHT}
                 height={6 * WINDOW_SIZE.HEIGHT_WEIGHT}
-                style={{ paddingLeft: 4 * WINDOW_SIZE.HEIGHT_WEIGHT }}
+                style={{ marginLeft: 4 * WINDOW_SIZE.HEIGHT_WEIGHT, resizeMode: 'contain' }}
               />
             </TouchableOpacity>
           </View>
@@ -179,6 +194,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   interestInputContainer: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
