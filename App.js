@@ -6,6 +6,7 @@ import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
 import { WINDOW_SIZE } from './app/src/constant/WindowSize';
+import SignUpPhone from './app/src/view/sign/signUp/SignUpPhone';
 
 @inject('userStore', 'friendListStore')
 @observer
@@ -28,7 +29,11 @@ class App extends Component {
     } else if (this.props.userStore.userStatus === USER_STATUS.USER) {
       view = <Main />;
     }
-    return <View style={styles.body}>{view}</View>;
+    return (
+      <View style={styles.body}>
+        <SignUpPhone />
+      </View>
+    );
   }
 }
 
