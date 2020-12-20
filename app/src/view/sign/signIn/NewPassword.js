@@ -42,7 +42,7 @@ class NewPassword extends React.Component {
   signUpNextButtonClicked() {
     this.props.signUpPasswordStore.completePassword();
 
-    this.props.resetPasswordStore.resetPassword(this.props.signUpPasswordStore.passwordText);
+    this.props.resetPasswordStore.resetPassword(this.props.signUpPasswordStore.passwordText).then();
 
     this.props.resetPasswordStore.passwordChangeStatus === ResponseCode.SUCCEED
       ? this.props.navigation.navigate('EntranceMain')
