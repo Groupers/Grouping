@@ -83,9 +83,10 @@ const personalItem = ({ item }) => (
             right: 0,
             bottom: 0,
             width: 230 * WINDOW_SIZE.HEIGHT_WEIGHT,
-            height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            height: 132 * WINDOW_SIZE.HEIGHT_WEIGHT,
             borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
             backgroundColor: 'yellow',
+            marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
           }}
           source={{
             uri:

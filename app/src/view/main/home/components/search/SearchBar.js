@@ -13,8 +13,8 @@ const SearchBar = ({ navigateTo }) => {
         <Image
           source={require('../../../../../../../Img/hashtag.png')}
           style={{
-            height: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-            width: 9 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
             marginRight: 4 * WINDOW_SIZE.HEIGHT_WEIGHT,
           }}
         />
