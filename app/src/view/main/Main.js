@@ -56,7 +56,7 @@ const HomeStackScreen = ({ navigation, route }) => {
     ? navigation.setOptions({ tabBarVisible: false })
     : navigation.setOptions({ tabBarVisible: true });
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator initialRouteName={"HomeMain"}>
       <HomeStack.Screen name="HomeMain" component={HomeMain} options={{ headerShown: false }} />
       <HomeStack.Screen
         name="NewGroupNameView"
