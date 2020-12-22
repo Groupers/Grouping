@@ -75,7 +75,7 @@ export default class SignUpEmailStore {
     if (this.emailValidation === INPUT_EMAIL_STATUS.NOT_FORMATTED) {
       return '올바르지 않은 메일형식입니다.';
     }
-    if (this.emailValidation === INPUT_EMAIL_STATUS.INVALID) {
+    if (this.emailValidation === INPUT_EMAIL_STATUS.SUCCEED) {
       return '올바른 이메일 패턴입니다.';
     }
 
