@@ -7,6 +7,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  ScrollView,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import NextButton from '../components/NextButton';
@@ -17,7 +18,7 @@ import LabelView from '../components/LabelView';
 import { TIME_OUT } from '../../../constant/TimeOut';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
-import {COLORS} from '../../../assets/Colors';
+import { COLORS } from '../../../assets/Colors';
 
 const SignUpPhone = (props) => {
   const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
@@ -100,7 +101,7 @@ const SignUpPhone = (props) => {
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 0} style={styles.body}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <View style={styles.contentContainer}>
+          <ScrollView style={styles.contentContainer}>
             <View style={styles.textArea}>
               <Text style={styles.title}>휴대폰 번호를 입력해주세요</Text>
               <Text
@@ -132,7 +133,7 @@ const SignUpPhone = (props) => {
                   props.signUpPhoneStore.phoneValidationViewStatus ===
                   SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
                     ? '재인증'
-                    : '인 증'
+                    : '인증'
                 }
                 onClick={authorizeButtonClicked.bind(this)}
               />
@@ -149,7 +150,7 @@ const SignUpPhone = (props) => {
               />
               {getTimer()}
             </View>
-          </View>
+          </ScrollView>
           <View style={styles.bottomContainer}>
             <NextButton
               isActive={props.signUpPhoneStore.isValidPhoneCode}
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   textArea: {
     width: '100%',

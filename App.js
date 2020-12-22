@@ -6,6 +6,7 @@ import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
 import { WINDOW_SIZE } from './app/src/constant/WindowSize';
+import SignUpPhone from './app/src/view/sign/signUp/SignUpPhone';
 
 @inject('userStore', 'friendListStore')
 @observer
