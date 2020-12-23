@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Image } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WINDOW_SIZE } from '../../../../../constant/WindowSize';
@@ -17,7 +17,14 @@ import { FONT_SIZE } from '../../../../../constant/FontSize';
 const KeywordInput = ({ input, onKeywordChange }) => {
   return (
     <View style={styles.keywordContainer}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>#</Text>
+      <Image
+        source={require('../../../../../../../Img/component_ic_middle_ic.png')}
+        style={{
+          height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          width: 22 * WINDOW_SIZE.WIDTH_WEIGHT,
+          marginBottom: 2 * WINDOW_SIZE.HEIGHT_WEIGHT,
+        }}
+      />
       <TextInput
         style={styles.keyword}
         maxLength={100}
@@ -42,6 +49,7 @@ const styles = StyleSheet.create({
     width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
     padding: 0,
     alignItems: 'center',
+    height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
   keyword: {

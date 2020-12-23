@@ -91,9 +91,9 @@ const HotKeywordRecommend = () => {
             source={require('../../../../../../../Img/ic_people.png')}
             style={{ height: 18 * WINDOW_SIZE.HEIGHT_WEIGHT, resizeMode: 'contain' }}
           />
-          <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
-            {item.numOfPeople} | {item.location}
-          </Text>
+          <Text style={styles.carouselTitle}>{item.numberOfMem}</Text>
+          <Text style={styles.carouselTitle}>Ι</Text>
+          <Text style={styles.carouselTitle}>{item.location}</Text>
         </View>
       </View>
     </View>
@@ -111,5 +111,15 @@ const HotKeywordRecommend = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  carouselTitle: {
+    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    color: COLORS.BLACK,
+    lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    opacity: 0.4,
+    marginRight: 8 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+});
 
 export default HotKeywordRecommend;

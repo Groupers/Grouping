@@ -25,10 +25,19 @@ export default class SignErrorMessageView extends React.Component {
   // 위 예제에선 무조건 true 를 반환 하도록 하였지만, 실제로 사용 할 떄는 필요한 비교를 하고 값을 반환하도록 하시길 바랍니다.
   // 예: return nextProps.id !== this.props.id;
   // JSON.stringify() 를 쓰면 여러 field 를 편하게 비교 할 수 있답니다.
+
+  errorMessageStyle = (messagecolor = COLORS.SUB_COLOR) => {
+    return {
+      color: messagecolor,
+      fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+      letterSpacing: 0.3,
+    };
+  };
+
   render() {
     return (
       <View style={styles.errorMessageContainer}>
-        <Text style={styles.errorMessage}>{this.props.text}</Text>
+        <Text style={this.errorMessageStyle()}>{this.props.text}</Text>
       </View>
     );
   }
@@ -39,11 +48,5 @@ const styles = StyleSheet.create({
     borderColor: '#FFF',
     width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-  },
-
-  errorMessage: {
-    color: COLORS.SUB_COLOR,
-    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-    letterSpacing: 0.3,
   },
 });

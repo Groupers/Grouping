@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
+    backgroundColor: COLORS.WHITE,
   },
   labelContainer: {
     borderColor: COLORS.MAIN_COLOR,

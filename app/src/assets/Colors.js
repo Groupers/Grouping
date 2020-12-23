@@ -13,4 +13,5 @@ export const COLORS = {
   WHITE: '#ffffff',
   BOTTOM_BORDER_GRAY: '#b7b7b7',
   GRAY_5: '#f1f1f1',
+  GRAY_2: '#b7b7b7',
 };

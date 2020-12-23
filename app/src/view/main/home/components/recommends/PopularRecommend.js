@@ -50,9 +50,9 @@ const dataItem = ({ item }) => (
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Icon name="person" size={14} color={COLORS.FONT_GRAY} />
-        <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
-          {item.numOfPeople} | {item.location}
-        </Text>
+        <Text style={styles.carouselTitle}>{item.numberOfMem}</Text>
+        <Text style={styles.carouselTitle}>Ι</Text>
+        <Text style={styles.carouselTitle}>{item.location}</Text>
       </View>
     </View>
   </View>
@@ -90,6 +90,12 @@ const styles = StyleSheet.create({
     width: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
     borderRadius: 12 * (WINDOW_SIZE.HEIGHT_WEIGHT / WINDOW_SIZE.WIDTH_WEIGHT),
     backgroundColor: 'purple',
+  },  carouselTitle: {
+    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    color: COLORS.BLACK,
+    lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    opacity: 0.4,
+    marginRight: 8 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
   carouselBox: {
     marginTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,

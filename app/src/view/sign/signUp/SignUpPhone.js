@@ -153,7 +153,11 @@ const SignUpPhone = (props) => {
           </ScrollView>
           <View style={styles.bottomContainer}>
             <NextButton
-              isActive={props.signUpPhoneStore.isValidPhoneCode}
+              isActive={
+                props.signUpPhoneStore.isValidPhoneCode &&
+                props.signUpPhoneStore.phoneValidationViewStatus ===
+                  SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_AFTER
+              }
               text="다음"
               onClick={signUpNextButtonClicked.bind(this)}
               fontColor={COLORS.WHITE}

@@ -10,12 +10,12 @@ const DescriptionInput = (props) => {
       <TextInput
         textAlignVertical="top"
         style={styles.title}
-        maxLength={1000}
+        maxLength={1500}
         placeholder={props.textExample}
         autoCorrect={false}
         multiline
-        numberOfLines={5}
-        placeholderTextColor="#ddd"
+        numberOfLines={20}
+        placeholderTextColor={COLORS.GRAY_2}
         value={props.value}
         onChangeText={props.onChangeText != null ? (text) => props.onChangeText(text) : null}
       />
@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
     flex: 1,
     // width: WINDOW_SIZE.WIDTH,
     // borderWidth: 1,
-    paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
-    paddingRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
-    paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingLeft: 24 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingRight: 24 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    paddingTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
     backgroundColor: COLORS.MAIN_COLOR,
   },
 
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     height: WINDOW_SIZE.HEIGHT,
     color: Colors.black,
     fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    lineHeight:20*WINDOW_SIZE.HEIGHT_WEIGHT
   },
 
   counter: {

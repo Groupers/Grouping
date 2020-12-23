@@ -64,7 +64,7 @@ class SignIn extends React.Component {
             <View style={styles.contentContainer}>
               <View style={styles.textArea}>
                 <Text style={styles.title}>안녕하세요!</Text>
-                <View style={{ height: 30 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
+                <View style={{ height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT }} />
               </View>
               <View>
                 <LabelView text="ID" />

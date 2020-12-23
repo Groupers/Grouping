@@ -83,9 +83,10 @@ const personalItem = ({ item }) => (
             right: 0,
             bottom: 0,
             width: 230 * WINDOW_SIZE.HEIGHT_WEIGHT,
-            height: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            height: 132 * WINDOW_SIZE.HEIGHT_WEIGHT,
             borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
             backgroundColor: 'yellow',
+            marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
           }}
           source={{
             uri:
@@ -125,12 +126,25 @@ const personalItem = ({ item }) => (
         </View>
       </View>
     </View>
-    <Text style={{ fontSize: FONT_SIZE.INPUT_TEXT }}>{item.title}</Text>
+    <Text
+      style={{
+        fontSize: FONT_SIZE.INPUT_TEXT,
+        lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+        color: COLORS.BLACK,
+      }}
+    >
+      {item.title}
+    </Text>
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Icon name="person" size={14} color={COLORS.FONT_GRAY} />
-      <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT, color: COLORS.FONT_GRAY }}>
-        {item.numberOfMem} | {item.location}
-      </Text>
+      <Icon
+        name="person"
+        size={14}
+        color={COLORS.FONT_GRAY}
+        marginRight={1 * WINDOW_SIZE.WIDTH_WEIGHT}
+      />
+      <Text style={styles.carouselTitle}>{item.numberOfMem}</Text>
+      <Text style={styles.carouselTitle}>Ι</Text>
+      <Text style={styles.carouselTitle}>{item.location}</Text>
     </View>
   </View>
 );
@@ -148,6 +162,13 @@ const styles = StyleSheet.create({
   carouselBox: {
     marginTop: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
     marginRight: 12 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
+  carouselTitle: {
+    fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    color: COLORS.BLACK,
+    lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,
+    opacity: 0.4,
+    marginRight: 8 * WINDOW_SIZE.WIDTH_WEIGHT,
   },
 });
 
