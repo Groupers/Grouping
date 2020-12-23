@@ -32,7 +32,7 @@ const SearchBar = ({ navigateTo }) => {
 const styles = StyleSheet.create({
   searchBarBlock: {
     zIndex: 2,
-    elevation: 10,
+    elevation: 20,
     top: -25,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,

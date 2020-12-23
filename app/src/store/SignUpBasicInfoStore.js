@@ -60,12 +60,12 @@ export default class SignUpBasicInfoStore {
 
   @action birthdayChanged = (birthday) => {
     this.birthdayText = birthday;
-    const curdate = new Date();
+    const currentDate = new Date();
     console.log(birthday);
-    console.log(`${curdate.getFullYear()}.${curdate.getMonth() + 1}.${curdate.getDate()}`);
+    console.log(`${currentDate.getFullYear()}.${currentDate.getMonth() + 1}.${currentDate.getDate()}`);
     if (
       this.birthdayValidator.validateBirthday(this.birthdayText) &&
-      this.birthdayText < `${curdate.getFullYear()}.${curdate.getMonth() + 1}.${curdate.getDate()}`
+      this.birthdayText < `${currentDate.getFullYear()}.${currentDate.getMonth() + 1}.${currentDate.getDate()}`
     ) {
       this.birthdayValidation = INPUT_BIRTHDAY_STATUS.SUCCEED;
       console.log(this.birthdayValidator.validateBirthday(this.birthdayText));
