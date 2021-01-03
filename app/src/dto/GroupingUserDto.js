@@ -1,23 +1,23 @@
 export default class GroupingUserDto {
-  groupingUserId;
-
-  userStatus;
+  birthday;
 
   email;
+
+  gender;
+
+  groupingUserId;
+
+  name;
 
   nationCode;
 
   phoneNumber;
 
-  name;
+  representProfileImage;
 
   userId;
 
-  gender;
-
-  birthday;
-
-  representProfileImage;
+  userStatus;
 
   constructor(data = {}) {
     Object.assign(this, data);
