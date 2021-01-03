@@ -19,6 +19,12 @@ export default class UserRepository {
       });
   };
 
+  async getUserDto() {
+    const userDto = await axios.get(`${TARGET_URL}`);
+    console.log(userDto.data);
+    return userDto.data;
+  }
+
   async checkIsValidUser(email, phoneNumber, failedCallback) {
     console.log(email);
     console.log(phoneNumber);

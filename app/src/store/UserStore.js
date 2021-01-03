@@ -21,6 +21,7 @@ export default class UserStore {
 
   @action signInCompleted = (groupingUserDto: GroupingUserDto) => {
     this.groupingUser = groupingUserDto;
+    // this.groupingUser = this.userRepository.getUserDto();
     this.userStatus = USER_STATUS.USER;
   };
 
