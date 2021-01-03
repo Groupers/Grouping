@@ -1,5 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+  TouchableHighlight,
+  TouchableOpacity,
+} from 'react-native';
 
 import { Icon } from 'react-native-elements';
 import { COLORS } from '../../../assets/Colors';
@@ -44,13 +52,28 @@ export default class PasswordInputTextView extends React.Component {
             this.props.onChangeText != null ? (text) => this.props.onChangeText(text) : null
           }
         />
-        <Icon
+        {/* <Icon
           style={styles.passwordToggleButton}
           name={this.props.isShowPassword ? 'eye' : 'eye-off'}
           type="feather"
           color={COLORS.FONT_GRAY}
           onPress={() => this.props.toggleShowPassword()}
-        />
+        /> */}
+        {this.props.isShowPassword ? (
+          <TouchableOpacity onPress={() => this.props.toggleShowPassword()}>
+            <Image
+              style={styles.passwordToggleButton}
+              source={require('../../../assets/ic_show.png')}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={() => this.props.toggleShowPassword()}>
+            <Image
+              style={styles.passwordToggleButton}
+              source={require('../../../assets/ic_hide.png')}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
@@ -76,5 +99,8 @@ const styles = StyleSheet.create({
     fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
 
-  passwordToggleButton: {},
+  passwordToggleButton: {
+    width: 22 * WINDOW_SIZE.WIDTH_WEIGHT,
+    height: 22 * WINDOW_SIZE.WIDTH_WEIGHT,
+  },
 });
