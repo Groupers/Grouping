@@ -19,10 +19,19 @@ export default class UserRepository {
       });
   };
 
-  async getUserDto() {
-    const userDto = await axios.get(`${TARGET_URL}`);
-    console.log(userDto.data);
-    return userDto.data;
+  async getUserDto(email, phoneNumber, failedCallback) {
+    const phoneNumberWithNationCode = phoneNumber.replace('010', '+8210');
+    const response = await axios.get(`${TARGET_URL}`, {
+      params: { email, phoneNumber: phoneNumberWithNationCode },
+    });
+    const commonResponse = new CommonResponse(response.data);
+    if (commonResponse.code !== ResponseCode.SUCCEED) {
+      failedCallback(commonResponse.code);
+      return;
+    }
+    console.log('get response data : ');
+    console.log(commonResponse.data);
+    return new GroupingUserDto(commonResponse.data);
   }
 
   async checkIsValidUser(email, phoneNumber, failedCallback) {
