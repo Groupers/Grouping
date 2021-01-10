@@ -224,6 +224,7 @@ export default class GroupingCreationMainStore {
       }
     );
     console.log(`response : ${response.data.code}`);
+    console.log(`groupingUserId : ${this.groupingUserId}`);
     await this.groupCreationRepository.completeGroupRepresentImgUpload(
       this.groupingUserId,
       this.getBackgroundImageURI,

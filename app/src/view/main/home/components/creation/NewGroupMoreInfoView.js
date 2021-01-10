@@ -121,6 +121,7 @@ const NewGroupMoreInfoView = (props) => {
   return (
     <View
       style={{
+        backgroundColor: COLORS.WHITE,
         flex: 1,
         paddingLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
         paddingTop: 30 * WINDOW_SIZE.HEIGHT_WEIGHT,
