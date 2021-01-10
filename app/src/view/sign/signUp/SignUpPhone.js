@@ -103,7 +103,7 @@ const SignUpPhone = (props) => {
         <View style={styles.inner}>
           <ScrollView style={styles.contentContainer}>
             <View style={styles.textArea}>
-              <Text style={styles.title}>휴대폰 번호를 입력해주세요</Text>
+              <Text style={styles.title}>휴대폰 번호를 입력해주세요.</Text>
               <Text
                 style={{
                   fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
