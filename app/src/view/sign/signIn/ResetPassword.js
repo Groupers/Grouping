@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
-  TextInput,
+  TextInput, ScrollView,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
@@ -94,7 +94,7 @@ const ResetPassword = (props) => {
         <View style={styles.inner}>
           <View style={styles.contentContainer}>
             <View style={styles.textArea}>
-              <Text style={styles.title}>비밀번호를 재설정해주세요.</Text>
+              <Text style={styles.title}>비밀번호를 재설정해주세요.???</Text>
               <Text
                 style={{
                   fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
@@ -156,14 +156,14 @@ const ResetPassword = (props) => {
                 {getTimer()}
               </View>
             </View>
-            <View style={styles.bottomContainer}>
-              <NextButton
-                isActive={props.resetPasswordStore.isValidPhoneCode}
-                text="다음"
-                onClick={resetPasswordButtonClicked.bind(this)}
-                fontColor={COLORS.WHITE}
-              />
-            </View>
+          </View>
+          <View style={styles.bottomContainer}>
+            <NextButton
+              isActive={props.resetPasswordStore.isValidPhoneCode}
+              text="다음"
+              onClick={resetPasswordButtonClicked.bind(this)}
+              fontColor={COLORS.WHITE}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginLeft: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
     marginRight: 30 * WINDOW_SIZE.WIDTH_WEIGHT,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
 
   phoneCodeContainer: {

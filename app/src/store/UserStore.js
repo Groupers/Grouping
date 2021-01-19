@@ -20,8 +20,17 @@ export default class UserStore {
   };
 
   @action signInCompleted = (groupingUserDto: GroupingUserDto) => {
-    this.groupingUser = groupingUserDto;
-    // this.groupingUser = this.userRepository.getUserDto();
+    // this.groupingUser = groupingUserDto;
+    console.log(`email : ${groupingUserDto.email}`);
+    console.log(`phone number : ${groupingUserDto.phoneNumber}`);
+    this.groupingUser = this.userRepository.getUserDto(
+      groupingUserDto.email,
+      groupingUserDto.phoneNumber
+    );
+    console.log(`userId : ${this.groupingUser.userId}`);
+    console.log(`groupingUserId : ${this.groupingUser.groupingUserId}`);
+    console.log(`name : ${this.groupingUser.name}`);
+    console.log(`email : ${this.groupingUser.email}`);
     this.userStatus = USER_STATUS.USER;
   };
 

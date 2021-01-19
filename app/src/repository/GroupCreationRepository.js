@@ -24,11 +24,11 @@ export default class GroupCreationRepository {
     return new GroupingCreationDto(commonResponse.data);
   }
 
-  async completeGroupRepresentImgUpload(groupId, uri, failedCallback) {
+  async completeGroupRepresentImgUpload(groupingUserId, uri, failedCallback) {
     const imageFile = new FormData();
     imageFile.append('imageFile', uri.content);
     const response = await axios
-      .post(`${TARGET_URL}/image`, groupId, imageFile)
+      .post(`${TARGET_URL}/image`, groupingUserId, imageFile)
       .then(() => {
         console.log('group represent img upload complete');
       })
