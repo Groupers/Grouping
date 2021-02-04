@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import AuthTable from './app/src/table/AuthTable';
 import Splash from './app/src/view/Splash';
@@ -7,8 +7,8 @@ import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
 
-const App = () => {
-  let accessToken = false;
+const App = (props) => {
+  let accessToken = null;
 
   useEffect(() => {
     const getAccessToken = async () => {
@@ -17,8 +17,23 @@ const App = () => {
       } catch (e) {
         console.log('no access token');
       }
+      return accessToken;
     };
-    getAccessToken().then();
+
+    const testAccessToken = async () => {
+      await AuthTable.write(() => {
+        try {
+          AuthTable.create('Auth', {
+            accessToken: 'ship_sang_token',
+          });
+        } catch (e) {
+          console.log('write error');
+        }
+      });
+      accessToken = getAccessToken();
+    };
+
+    testAccessToken().then();
   }, []);
 
   /* async componentDidMount() {
@@ -28,14 +43,22 @@ const App = () => {
   } */
 
   let view;
-  if (this.props.userStore.userStatus === USER_STATUS.READY) {
+  if (props.userStore.userStatus === USER_STATUS.READY) {
     view = <Splash />;
-  } else if (this.props.userStore.userStatus === USER_STATUS.GUEST) {
-    view = <Entrance />;
-  } else if (this.props.userStore.userStatus === USER_STATUS.USER) {
+  } else if (props.userStore.userStatus === USER_STATUS.GUEST) {
     if (accessToken) {
+      console.log(`accessToken : ${accessToken}`);
       view = <Main />;
     } else {
+      console.log(`accessToken : ${accessToken}`);
+      view = <Entrance />;
+    }
+  } else if (props.userStore.userStatus === USER_STATUS.USER) {
+    if (accessToken) {
+      console.log(`accessToken : ${accessToken}`);
+      view = <Main />;
+    } else {
+      console.log(`accessToken : ${accessToken}`);
       view = <Entrance />;
     }
   }
