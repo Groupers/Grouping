@@ -19,8 +19,6 @@ export default class GroupingUserDto {
 
   userStatus;
 
-  accessToken;
-
   constructor(data = {}) {
     Object.assign(this, data);
   }
