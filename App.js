@@ -1,19 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { Component } from 'react';
-import { inject, observer, Provider } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
+import UserTable from './app/src/table/UserTable';
 import Splash from './app/src/view/Splash';
 import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
-import { WINDOW_SIZE } from './app/src/constant/WindowSize';
-import SignUpPhone from './app/src/view/sign/signUp/SignUpPhone';
 
 @inject('userStore', 'friendListStore')
 @observer
 class App extends Component {
-  // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
-  // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
-  // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
   async componentDidMount() {
     // eslint-disable-next-line react/prop-types,react/destructuring-assignment
     // await this.props.userStore.ready();
@@ -27,7 +23,11 @@ class App extends Component {
     } else if (this.props.userStore.userStatus === USER_STATUS.GUEST) {
       view = <Entrance />;
     } else if (this.props.userStore.userStatus === USER_STATUS.USER) {
-      view = <Main />;
+      if (UserTable.schema.properties.accessToken) {
+        view = <Main />;
+      } else {
+        view = <Entrance />;
+      }
     }
     return <View style={styles.body}>{view}</View>;
   }

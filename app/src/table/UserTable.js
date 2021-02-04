@@ -1,6 +1,5 @@
+import Realm from 'realm';
 import GroupingUserDto from '../dto/GroupingUserDto';
-
-const Realm = require('realm');
 
 export default class UserTable {
   create = async (groupingUserDto: GroupingUserDto) => {
@@ -15,6 +14,7 @@ export default class UserTable {
         gender: groupingUserDto.gender,
         birthday: groupingUserDto.birthday,
         representProfileImage: groupingUserDto.representProfileImage,
+        accessToken: groupingUserDto.accessToken,
       });
     });
   };
@@ -39,5 +39,6 @@ UserTable.schema = {
     gender: 'string',
     birthday: 'date',
     representProfileImage: 'string?',
+    accessToken: 'string',
   },
 };
