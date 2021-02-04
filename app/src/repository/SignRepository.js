@@ -5,6 +5,7 @@ import CheckEmailResponseDto from '../dto/CheckEmailResponseDto';
 import CheckPhoneNumberResponseDto from '../dto/CheckPhoneNumberResponseDto';
 import { ResponseCode } from '../constant/ResponseCode';
 import GroupingUserDto from '../dto/GroupingUserDto';
+import AuthDto from '../dto/AuthDto';
 
 const TARGET_URL = `${SIGN_URL}`;
 
@@ -115,12 +116,12 @@ export default class SignRepository {
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
-      commonResponse.data;
       failedCallback(commonResponse.code);
       return;
     }
 
-    return new GroupingUserDto(commonResponse.data);
+    await new AuthDto(commonResponse.data);
+    await new GroupingUserDto(commonResponse.data);
   }
 
   async signInWithEmail(email, password, failedCallback) {
@@ -135,7 +136,8 @@ export default class SignRepository {
       return;
     }
 
-    return new GroupingUserDto(commonResponse.data);
+    await new AuthDto(commonResponse.data);
+    await new GroupingUserDto(commonResponse.data);
   }
 
   async signInWithPhone(phoneNumber, password, failedCallback) {
@@ -150,6 +152,7 @@ export default class SignRepository {
       return;
     }
 
-    return new GroupingUserDto(commonResponse.data);
+    await new AuthDto(commonResponse.data);
+    await new GroupingUserDto(commonResponse.data);
   }
 }
