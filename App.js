@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
+import Realm from 'realm';
 import AuthTable from './app/src/table/AuthTable';
 import Splash from './app/src/view/Splash';
 import { USER_STATUS } from './app/src/constant/UserStatus';
@@ -13,23 +14,22 @@ const App = (props) => {
   useEffect(() => {
     const getAccessToken = async () => {
       try {
-        accessToken = await AuthTable.objects('Auth');
+        await Realm.open({ schema: [AuthTable] }).then((realm) => {
+          return realm.objects(accessToken);
+        });
       } catch (e) {
         console.log('no access token');
       }
-      return accessToken;
+      return null;
     };
 
     const testAccessToken = async () => {
-      await AuthTable.write(() => {
-        try {
-          AuthTable.create('Auth', {
-            accessToken: 'ship_sang_token',
-          });
-        } catch (e) {
-          console.log('write error');
-        }
+      await Realm.open({ schema: [AuthTable] }).then((realm) => {
+        realm.write(() => {
+          realm.create('Auth', { accessToken: 'new_sang_token' });
+        });
       });
+
       accessToken = getAccessToken();
     };
 

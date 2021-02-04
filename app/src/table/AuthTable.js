@@ -4,7 +4,7 @@ import AuthDto from '../dto/AuthDto';
 export default class AuthTable {
   create = async (authDto: AuthDto) => {
     await Realm.open({ schema: [AuthTable] }).then((realm) => {
-      return realm.create('User', {
+      return realm.create('Auth', {
         name: authDto.name,
       });
     });
@@ -12,7 +12,7 @@ export default class AuthTable {
 }
 
 AuthTable.schema = {
-  name: 'auth',
+  name: 'Auth',
   properties: {
     accessToken: 'string',
   },
