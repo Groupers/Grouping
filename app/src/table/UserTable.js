@@ -1,6 +1,5 @@
+import Realm from 'realm';
 import GroupingUserDto from '../dto/GroupingUserDto';
-
-const Realm = require('realm');
 
 export default class UserTable {
   create = async (groupingUserDto: GroupingUserDto) => {

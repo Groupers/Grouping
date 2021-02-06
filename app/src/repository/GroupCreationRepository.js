@@ -7,9 +7,9 @@ import GroupingCreationDto from '../dto/GroupingCreationDto';
 const TARGET_URL = `${GROUP_URL}`;
 
 export default class GroupCreationRepository {
-  async completeGroupCreation(groupingCreationDto, failedCallback) {
+  async completeGroupCreation(requestDto, failedCallback) {
     const response = await axios
-      .post(`${TARGET_URL}`, groupingCreationDto)
+      .post(`${TARGET_URL}`, requestDto)
       .then(() => {
         console.log('group creation complete');
         console.log(response);
@@ -24,11 +24,11 @@ export default class GroupCreationRepository {
     return new GroupingCreationDto(commonResponse.data);
   }
 
-  async completeGroupRepresentImgUpload(groupingUserId, uri, failedCallback) {
+  async completeGroupRepresentImgUpload(groupId, uri, failedCallback) {
     const imageFile = new FormData();
     imageFile.append('imageFile', uri.content);
     const response = await axios
-      .post(`${TARGET_URL}/image`, groupingUserId, imageFile)
+      .post(`${TARGET_URL}/image`, groupId, imageFile)
       .then(() => {
         console.log('group represent img upload complete');
       })

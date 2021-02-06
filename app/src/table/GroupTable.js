@@ -1,22 +1,21 @@
+import Realm from 'realm';
 import GroupingCreationDto from '../dto/GroupingCreationDto';
-
-const Realm = require('realm');
 
 export default class GroupTable {
   create = async (groupingCreationDto: GroupingCreationDto) => {
     await Realm.open({ schema: [GroupTable] }).then((realm) => {
       return realm.create('Group', {
         title: groupingCreationDto.title,
+        description: groupingCreationDto.description,
+        pointDescription: groupingCreationDto.pointDescription,
         isHidden: groupingCreationDto.isHidden,
-        minAge: groupingCreationDto.minAge,
-        maxAge: groupingCreationDto.maxAge,
-        gender: groupingCreationDto.gender,
+        minUserAge: groupingCreationDto.minUserAge,
+        maxUserAge: groupingCreationDto.maxUserAge,
+        availableGender: groupingCreationDto.availableGender,
         pointX: groupingCreationDto.pointX,
         pointY: groupingCreationDto.pointY,
-        address: groupingCreationDto.address,
-        backgroundImageURI: groupingCreationDto.backgroundImageURI,
-        keyword: groupingCreationDto.keyword,
-        groupLeaderDto: groupingCreationDto.groupLeaderDto,
+        hashtagList: groupingCreationDto.hashtagList,
+        representGroupingUserId: groupingCreationDto.representGroupingUserId,
       });
     });
   };
@@ -25,17 +24,16 @@ export default class GroupTable {
 GroupTable.schema = {
   name: 'Group',
   properties: {
-    title: 'string',
-    isHidden: 'boolean',
-    minAge: 'int',
-    maxAge: 'int',
-    gender: 'string',
+    availableGender: 'MALE',
     description: 'string',
-    pointX: 'long',
-    pointY: 'long',
-    address: 'string',
-    backgroundImageURI: 'string?',
-    keyword: 'keyword',
-    groupLeaderDto: '',
+    hashtagList: ['string'],
+    isHidden: true,
+    maxUserAge: 0,
+    minUserAge: 0,
+    pointDescription: 'string',
+    pointX: 0,
+    pointY: 0,
+    representGroupingUserId: 'string',
+    title: 'string',
   },
 };

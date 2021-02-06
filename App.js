@@ -1,37 +1,74 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { Component } from 'react';
-import { inject, observer, Provider } from 'mobx-react';
+import { StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { inject, observer } from 'mobx-react';
+import Realm from 'realm';
+import AuthTable from './app/src/table/AuthTable';
 import Splash from './app/src/view/Splash';
 import { USER_STATUS } from './app/src/constant/UserStatus';
 import Main from './app/src/view/main/Main';
 import Entrance from './app/src/view/entrance/Entrance';
-import { WINDOW_SIZE } from './app/src/constant/WindowSize';
-import SignUpPhone from './app/src/view/sign/signUp/SignUpPhone';
 
-@inject('userStore', 'friendListStore')
-@observer
-class App extends Component {
-  // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
-  // 이 안에서 다른 JavaScript 프레임워크를 연동하거나,
-  // setTimeout, setInterval 및 AJAX 처리 등을 넣습니다.
-  async componentDidMount() {
+const App = (props) => {
+  let accessToken = null;
+
+  const getAccessToken = async () => {
+    await Realm.open({ schema: [AuthTable] })
+      .then((realm) => {
+        return realm.objects('Auth').sorted('accessToken');
+      })
+      .catch(() => {
+        console.log('can not open table');
+      });
+    return null;
+  };
+
+  useEffect(() => {
+    const testAccessToken = async (testToken: String) => {
+      console.log(`input value : ${testToken}`);
+      await Realm.open({ schema: [AuthTable] })
+        .then((realm) => {
+          realm.write(() => {
+            realm.create('Auth', { accessToken: testToken });
+            accessToken = getAccessToken();
+            console.log(accessToken);
+          });
+        })
+        .catch(() => {
+          console.log('can not write table');
+        });
+    };
+
+    testAccessToken('nothing').then();
+  }, []);
+
+  /* async componentDidMount() {
     // eslint-disable-next-line react/prop-types,react/destructuring-assignment
     // await this.props.userStore.ready();
     // await this.props.friendListStore.ready();
-  }
+  } */
 
-  render() {
-    let view;
-    if (this.props.userStore.userStatus === USER_STATUS.READY) {
-      view = <Splash />;
-    } else if (this.props.userStore.userStatus === USER_STATUS.GUEST) {
-      view = <Entrance />;
-    } else if (this.props.userStore.userStatus === USER_STATUS.USER) {
+  let view;
+  if (props.userStore.userStatus === USER_STATUS.READY) {
+    view = <Splash />;
+  } else if (props.userStore.userStatus === USER_STATUS.GUEST) {
+    if (accessToken != null) {
+      console.log(`accessToken2 : ${accessToken}`);
       view = <Main />;
+    } else {
+      console.log(`accessToken2 : ${accessToken}`);
+      view = <Entrance />;
     }
-    return <View style={styles.body}>{view}</View>;
+  } else if (props.userStore.userStatus === USER_STATUS.USER) {
+    if (accessToken != null) {
+      console.log(`accessToken2 : ${accessToken}`);
+      view = <Main />;
+    } else {
+      console.log(`accessToken2 : ${accessToken}`);
+      view = <Entrance />;
+    }
   }
-}
+  return <View style={styles.body}>{view}</View>;
+};
 
 const styles = StyleSheet.create({
   body: {
@@ -39,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default inject('userStore', 'friendListStore')(observer(App));

@@ -52,7 +52,7 @@ class PhoneCodeInputTextView extends React.Component {
           textContentType="creditCardNumber"
           onFocus={this.handleFocus}
           blurOnSubmit
-          placeholder="숫자6자리"
+          placeholder="인증번호 입력"
         />
       </View>
     );
