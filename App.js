@@ -11,29 +11,35 @@ import Entrance from './app/src/view/entrance/Entrance';
 const App = (props) => {
   let accessToken = null;
 
-  useEffect(() => {
-    const getAccessToken = async () => {
-      try {
-        await Realm.open({ schema: [AuthTable] }).then((realm) => {
-          return realm.objects(accessToken);
-        });
-      } catch (e) {
-        console.log('no access token');
-      }
-      return null;
-    };
-
-    const testAccessToken = async () => {
-      await Realm.open({ schema: [AuthTable] }).then((realm) => {
-        realm.write(() => {
-          realm.create('Auth', { accessToken: 'new_sang_token' });
-        });
+  const getAccessToken = () => {
+    Realm.open({ schema: [AuthTable] })
+      .then((realm) => {
+        // return realm.objects('Auth').filtered('accessToken = $0', accessToken);
+        console.log(realm.objects('Auth'));
+        return realm.objects('Auth');
+      })
+      .catch(() => {
+        console.log('can not open table');
       });
+    return null;
+  };
 
-      accessToken = getAccessToken();
+  useEffect(() => {
+    const testAccessToken = (testToken: String) => {
+      console.log(`input value : ${testToken}`);
+      Realm.open({ schema: [AuthTable] })
+        .then((realm) => {
+          realm.write(() => {
+            realm.create('Auth', { accessToken: testToken });
+            accessToken = getAccessToken();
+          });
+        })
+        .catch(() => {
+          console.log('can not write table');
+        });
     };
 
-    testAccessToken().then();
+    testAccessToken('ship_sang_token');
   }, []);
 
   /* async componentDidMount() {
@@ -47,18 +53,14 @@ const App = (props) => {
     view = <Splash />;
   } else if (props.userStore.userStatus === USER_STATUS.GUEST) {
     if (accessToken) {
-      console.log(`accessToken : ${accessToken}`);
       view = <Main />;
     } else {
-      console.log(`accessToken : ${accessToken}`);
       view = <Entrance />;
     }
   } else if (props.userStore.userStatus === USER_STATUS.USER) {
     if (accessToken) {
-      console.log(`accessToken : ${accessToken}`);
       view = <Main />;
     } else {
-      console.log(`accessToken : ${accessToken}`);
       view = <Entrance />;
     }
   }

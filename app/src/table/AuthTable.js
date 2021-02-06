@@ -5,7 +5,7 @@ export default class AuthTable {
   create = async (authDto: AuthDto) => {
     await Realm.open({ schema: [AuthTable] }).then((realm) => {
       return realm.create('Auth', {
-        name: authDto.name,
+        accessToken: authDto.accessToken,
       });
     });
   };
