@@ -11,12 +11,10 @@ import Entrance from './app/src/view/entrance/Entrance';
 const App = (props) => {
   let accessToken = null;
 
-  const getAccessToken = () => {
-    Realm.open({ schema: [AuthTable] })
+  const getAccessToken = async () => {
+    await Realm.open({ schema: [AuthTable] })
       .then((realm) => {
-        // return realm.objects('Auth').filtered('accessToken = $0', accessToken);
-        console.log(realm.objects('Auth'));
-        return realm.objects('Auth');
+        return realm.objects('Auth').sorted('accessToken');
       })
       .catch(() => {
         console.log('can not open table');
@@ -25,13 +23,14 @@ const App = (props) => {
   };
 
   useEffect(() => {
-    const testAccessToken = (testToken: String) => {
+    const testAccessToken = async (testToken: String) => {
       console.log(`input value : ${testToken}`);
-      Realm.open({ schema: [AuthTable] })
+      await Realm.open({ schema: [AuthTable] })
         .then((realm) => {
           realm.write(() => {
             realm.create('Auth', { accessToken: testToken });
             accessToken = getAccessToken();
+            console.log(accessToken);
           });
         })
         .catch(() => {
@@ -39,7 +38,7 @@ const App = (props) => {
         });
     };
 
-    testAccessToken('ship_sang_token');
+    testAccessToken('nothing').then();
   }, []);
 
   /* async componentDidMount() {
@@ -52,15 +51,19 @@ const App = (props) => {
   if (props.userStore.userStatus === USER_STATUS.READY) {
     view = <Splash />;
   } else if (props.userStore.userStatus === USER_STATUS.GUEST) {
-    if (accessToken) {
+    if (accessToken != null) {
+      console.log(`accessToken2 : ${accessToken}`);
       view = <Main />;
     } else {
+      console.log(`accessToken2 : ${accessToken}`);
       view = <Entrance />;
     }
   } else if (props.userStore.userStatus === USER_STATUS.USER) {
-    if (accessToken) {
+    if (accessToken != null) {
+      console.log(`accessToken2 : ${accessToken}`);
       view = <Main />;
     } else {
+      console.log(`accessToken2 : ${accessToken}`);
       view = <Entrance />;
     }
   }

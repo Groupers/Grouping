@@ -14,6 +14,6 @@ export default class AuthTable {
 AuthTable.schema = {
   name: 'Auth',
   properties: {
-    accessToken: 'string',
+    accessToken: 'string?',
   },
 };
