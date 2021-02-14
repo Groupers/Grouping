@@ -12,7 +12,7 @@ export default class GroupingStore {
 
   groupTable = new GroupTable();
 
-  groupingCreation: GroupingCreationDto;
+  groupingCreation =  new GroupingCreationDto();
 
   constructor(mainStore: MainStore) {
     this.mainStore = mainStore;

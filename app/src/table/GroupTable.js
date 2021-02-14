@@ -8,8 +8,8 @@ export default class GroupTable {
       return realm.create('Group', {
         title: groupingCreationDto.title,
         isHidden: groupingCreationDto.isHidden,
-        minAge: groupingCreationDto.minAge,
-        maxAge: groupingCreationDto.maxAge,
+        minAge: groupingCreationDto.minUserAge,
+        maxAge: groupingCreationDto.maxUserAge,
         gender: groupingCreationDto.gender,
         pointX: groupingCreationDto.pointX,
         pointY: groupingCreationDto.pointY,

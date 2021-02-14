@@ -1,4 +1,3 @@
-import axios from 'axios';
 import auth from '@react-native-firebase/auth';
 import { SERVER_URL } from '../constant/HttpProperty';
 

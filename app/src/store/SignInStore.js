@@ -65,6 +65,7 @@ export default class SignInStore {
   };
 
   @action inputTextChanged = (inputText) => {
+    console.log("phone?", inputText);
     this.inputText = inputText;
     this.phoneNumberChanged(inputText);
     // 입력된 값 이메일 형태일 때
@@ -72,7 +73,7 @@ export default class SignInStore {
       this.emailTextChanged(inputText);
     } else if (this.phoneValidator.validatePhoneNumber(this.formattedPhoneNumber))
       // 입력된 값 핸드폰번호 형태일 때
-      this.phoneNumberTextChanged(inputText);
+      this.phoneNumberTextChanged(this.formattedPhoneNumber);
 
     if (
       this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED ||
@@ -141,13 +142,14 @@ export default class SignInStore {
   };
 
   @action phoneNumberTextChanged = (text) => {
+    console.log("isPhone?", text)
     if (String(text).length === 0) {
       this.phoneStatus = INPUT_PHONE_STATUS.NONE;
       this.phoneNumberText = text;
       return;
     }
 
-    if (!this.phoneValidator.validatePhoneNumber(this.formattedPhoneNumber)) {
+    if (!this.phoneValidator.validatePhoneNumber(text)) {
       this.phoneStatus = INPUT_PHONE_STATUS.NOT_FORMATTED;
       this.phoneNumberText = text;
       return;
@@ -189,6 +191,7 @@ export default class SignInStore {
   }
 
   @action signIn = async () => {
+    console.log("signIn?", this.inputText, this.passwordText);
     if (this.emailStatus === INPUT_EMAIL_STATUS.SUCCEED) {
       this.groupingUserDto = await this.signRepository.signInWithEmail(
         this.inputText,
@@ -205,6 +208,7 @@ export default class SignInStore {
         }
       );
     } else if (this.phoneStatus === INPUT_PHONE_STATUS.SUCCEED) {
+      console.log("signInWithPhone?", this.phoneNumberText, this.passwordText);
       this.groupingUserDto = await this.signRepository.signInWithPhone(
         this.phoneNumberText,
         this.passwordText,

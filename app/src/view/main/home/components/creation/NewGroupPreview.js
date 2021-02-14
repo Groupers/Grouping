@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import ImagePicker from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import { StackActions } from '@react-navigation/native';
 import GroupName from './GroupName';
 import GroupingUserDto from '../../../../../dto/GroupingUserDto';
@@ -45,6 +45,8 @@ const NewGroupPreview = (props) => {
     props.groupingCreationMainStore.groupingCreationViewChanged(
       GROUPING_CREATION_VIEW_STATUS.CONFIRM
     );
+    console.log("onHeaderNextButtonClicked");
+
     props.groupingCreationMainStore
       .groupCreation()
       .then(props.navigation.dispatch(StackActions.popToTop()));
@@ -52,25 +54,20 @@ const NewGroupPreview = (props) => {
 
   const showPicker = () => {
     const options = {
-      title: 'Select Avatar',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
+      mediaType:'photo',
     };
 
-    ImagePicker.showImagePicker(options, (response) => {
+    launchImageLibrary(options, (response) => {
       if (response.didCancel) {
         console.log('사용자가 취소하였습니다.');
       } else if (response.error) {
         console.log('에러 : ', response.error);
         // 에러시에 alert 를 사용할지 추가 논의 필요
       } else {
-        const uri = { uri: response.uri };
-        console.log(response.uri);
-        props.groupingCreationMainStore.groupingBackgroundImageChanged({
-          ...uri,
-        });
+        console.log(response.uri, response.type, response.fileName);
+       props.groupingCreationMainStore.groupingBackgroundImageChanged(
+          response.uri, response.type, response.fileName,
+        );
       }
     });
   };

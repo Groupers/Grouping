@@ -153,7 +153,7 @@ export default class res {
       isSucceed = true;
       console.log(isSucceed);
     } catch (e) {
-      console.log('인증번호 요청 에러');
+      console.log('인증번호 요청 에러!');
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR;
     }
     if (isSucceed) {
@@ -181,7 +181,6 @@ export default class res {
       return;
     }
     this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_FORMATTED;
-    console.log(phoneCode.toString());
   };
 
   @action phoneCodeFocused = (index) => {

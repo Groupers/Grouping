@@ -47,6 +47,7 @@ class SignIn extends React.Component {
   }
 
   async signInButtonClicked() {
+    console.log("clicked!");
     await this.props.signInStore.signIn();
   }
 

@@ -43,11 +43,11 @@ export default class SignProcessStore {
   };
 
   @action emailCompleted = async (email) => {
-    const isSucceed = await this.signRepository.enrollEmail(email, (responseCode) => {});
-    if (isSucceed) {
+    // const isSucceed = await this.signRepository.enrollEmail(email, (responseCode) => {});
+    // if (isSucceed) {
       this.groupingUserDto.email = email;
       this.signViewStatus = SIGN_VIEW_STATUS.EMAIL_COMPLETED;
-    }
+    // }
   };
 
   @action passwordCompleted = (password) => {
@@ -68,20 +68,20 @@ export default class SignProcessStore {
   @action birthdayCompleted = async (birthday) => {
     this.signViewStatus = SIGN_VIEW_STATUS.BIRTHDAY_COMPLETED;
     this.groupingUserDto.birthday = birthday;
-    const groupingUserDto = await this.signRepository.completeSignUp(
+    const accessTokenDto = await this.signRepository.completeSignUp(
       this.groupingUserDto,
       (responseCode) => {}
     );
-    this.userStore.signUpCompleted(groupingUserDto);
+    this.userStore.signUpCompleted(accessTokenDto);
   };
 
   @action phoneCompleted = async (phoneNumber) => {
-    const isSucceed = await this.signRepository.enrollPhoneNumber(phoneNumber, () => {});
+    // const isSucceed = await this.signRepository.enrollPhoneNumber(phoneNumber, () => {});
 
-    if (isSucceed === true) {
+    // if (isSucceed === true) {
       this.signViewStatus = SIGN_VIEW_STATUS.PHONE_COMPLETED;
       this.groupingUserDto.phoneNumber = phoneNumber;
-    }
+    // }
   };
 
   @action termsAgreementCompleted = async () => {};
