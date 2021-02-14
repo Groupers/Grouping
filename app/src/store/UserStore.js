@@ -1,7 +1,7 @@
 import { observable, action, computed } from 'mobx';
 import UserRepository from '../repository/UserRepository';
 import { USER_STATUS } from '../constant/UserStatus';
-import GroupingUserDto from '../dto/GroupingUserDto';
+import AccessTokenDto from '../dto/AccessTokenDto';
 import UserTable from '../table/UserTable';
 
 export default class UserStore {
@@ -14,6 +14,7 @@ export default class UserStore {
   @observable userStatus = USER_STATUS.GUEST;
 
   @action ready = async () => {
+    console.log("hello~~~~~~ userStore");
     await this.userTable.findByEmail(this.groupingUser.email);
     await this.userRepository.initialize();
     // this.userStatus = USER_STATUS.GUEST;
@@ -34,8 +35,13 @@ export default class UserStore {
     this.userStatus = USER_STATUS.USER;
   };
 
-  @action signUpCompleted = (groupingUserDto: GroupingUserDto) => {
-    this.groupingUser = groupingUserDto;
+  @action signUpCompleted = async (accessTokenDto: AccessTokenDto) => {
+    console.log("signup completed : " + accessTokenDto.accessToken);
+    console.log("userTable : " + this.userTable);
+    let data = await this.userRepository.setAccessToken(accessTokenDto.accessToken);
+    let result = await this.userRepository.getUser();
+    console.log("hello : " + data);
+    console.log("ended : "+ result);
     this.userStatus = USER_STATUS.USER;
   };
 

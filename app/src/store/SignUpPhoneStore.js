@@ -114,17 +114,22 @@ export default class SignUpPhoneStore {
   @action sendPhoneCode = async () => {
     console.log('send code');
     let isSucceed = false;
-    const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
+    const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {
+      console.log("fail", responseCode);
+    });
+    console.log("after send code.1", data);
     if (data.phoneNumberAvailable !== true) {
+      console.log("berfore send code.!11", data);
       this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
       return;
     }
     try {
+      console.log("berfore send code.", data);
       this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
       console.log(this.codeConfirmation);
       isSucceed = true;
     } catch (e) {
-      console.log('인증번호 요청 에러');
+      console.log('인증번호 요청 에러', e);
       this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_CODE_SEND_ERROR;
     }
     if (isSucceed) {

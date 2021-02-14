@@ -4,10 +4,29 @@ import { USER_URL } from '../constant/HttpProperty';
 import CommonResponse from '../dto/CommonResponse';
 import { ResponseCode } from '../constant/ResponseCode';
 import GroupingUserDto from '../dto/GroupingUserDto';
-
+import getRealm from '../table/realm';
 const TARGET_URL = `${USER_URL}`;
 
 export default class UserRepository {
+
+  async setAccessToken(accessToken) {
+    const realm = await getRealm();
+    console.log("realm  path : "+ realm.path);
+
+    realm.write(()=>{
+        realm.create('User',  {accessToken: accessToken}, 'modified')
+    });
+  }
+
+    async getUser() {
+        const realm = await getRealm();
+        console.log("realm  path : "+ realm.path);
+      let data =   realm.objects('User');
+      console.log("realm result : " + data);
+      return data;
+      }
+
+
   initialize = async () => {
     axios
       .post(`${TARGET_URL}/auth`, {})

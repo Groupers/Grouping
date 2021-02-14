@@ -26,6 +26,8 @@ export default class GroupingCreationMainStore {
 
   ageValidator = new AgeValidator();
 
+  userStore = new UserStore();
+
   @observable groupingCreationViewStatus = GROUPING_CREATION_VIEW_STATUS.NAME;
 
   @observable groupingCreationDto = new GroupingCreationDto();
@@ -64,9 +66,11 @@ export default class GroupingCreationMainStore {
 
   // @observable groupingBackgroundImageURI = require('../assets/default_group_image.jpg');
   @observable groupingBackgroundImageURI = '';
+  @observable groupingBackgroundImageType = '';
+  @observable groupingBackgroundImageName = '';
 
-  constructor(groupingStore: GroupingStore) {
-    this.groupingStore = groupingStore;
+  constructor(userStore: UserStore) {
+    this.userStore = userStore;
   }
 
   @action groupingInitializeGender = () => {
@@ -150,13 +154,16 @@ export default class GroupingCreationMainStore {
     this.availableAgeChanged = true;
   };
 
-  @action groupingBackgroundImageChanged = ({ uri }) => {
+  @action groupingBackgroundImageChanged = ( uri, type, fileName ) => {
+    console.log("hohoiho", uri, type, fileName);
     if (Platform.OS === 'ios') {
       const askPermission = async () => {
         try {
           const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
           if (result === RESULTS.GRANTED) {
-            this.groupingBackgroundImageURI = { uri };
+            this.groupingBackgroundImageURI =  uri;
+            this.groupingBackgroundImageName = fileName;
+            this.groupingBackgroundImageType = type;
             console.log('background image changed IOS');
             console.log(`IOS${this.groupingBackgroundImageURI}`);
           }
@@ -166,7 +173,7 @@ export default class GroupingCreationMainStore {
       };
       askPermission().then();
     }
-    this.groupingBackgroundImageURI = { uri };
+    this.groupingBackgroundImageURI =  uri ;
     console.log('background image changed');
     console.log(this.groupingBackgroundImageURI);
   };
@@ -217,16 +224,29 @@ export default class GroupingCreationMainStore {
   }
 
   @action groupCreation = async () => {
+    console.log("groupingCreationDto : ", this.groupingCreationDto.minUserAge, this.groupingCreationDto.maxUserAge);
+    this.groupingCreationDto.representGroupingUserId
     const response = await this.groupCreationRepository.completeGroupCreation(
       this.groupingCreationDto,
       (responseCode) => {
-        console.log(`responseCode : ${responseCode}`);
       }
     );
     console.log(`response : ${response.data.code}`);
+
+    const representImage = {
+      uri: this.getBackgroundImageURI,
+      type: this.getBackgroundImageType,
+      name: this.getBackgroundImageName,
+    };
+
+    console.log("file of photo : ", representImage);
+
+
     await this.groupCreationRepository.completeGroupRepresentImgUpload(
       this.groupingUserId,
       this.getBackgroundImageURI,
+      this.getBackgroundImageName,
+      this.getBackgroundImageType,
       (responseCode) => {
         console.log(`responseCode : ${responseCode}`);
       }
@@ -261,6 +281,14 @@ export default class GroupingCreationMainStore {
 
   @computed get getBackgroundImageURI() {
     return this.groupingBackgroundImageURI;
+  }
+
+  @computed get getBackgroundImageType() {
+    return this.groupingBackgroundImageType;
+  }
+
+  @computed get getBackgroundImageName() {
+    return this.groupingBackgroundImageName;
   }
 
   @computed get selectedGenderLimitMessage() {
@@ -312,12 +340,14 @@ export default class GroupingCreationMainStore {
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
-    this.groupingCreationDto.representGroupingUserId = new GroupingUserDto().groupingUserId;
+    this.groupingCreationDto.representGroupingUserId = this.userStore.getUserId;
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;
     this.groupingCreationDto.hashtagList = [];
     this.selectedGender = '';
     this.groupingBackgroundImageURI = '';
+    this.groupingBackgroundImageName = '';
+    this.groupingBackgroundImageType = '';
   }
 }

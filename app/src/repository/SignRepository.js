@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { SIGN_URL } from '../constant/HttpProperty';
+import {SIGN_URL} from '../constant/HttpProperty';
 import CommonResponse from '../dto/CommonResponse';
 import CheckEmailResponseDto from '../dto/CheckEmailResponseDto';
 import CheckPhoneNumberResponseDto from '../dto/CheckPhoneNumberResponseDto';
-import { ResponseCode } from '../constant/ResponseCode';
+import {ResponseCode} from '../constant/ResponseCode';
 import GroupingUserDto from '../dto/GroupingUserDto';
+import AccessTokenDto from '../dto/AccessTokenDto';
 
 const TARGET_URL = `${SIGN_URL}`;
 
 export default class SignRepository {
   async checkEmail(email, failedCallback) {
     const response = await axios.get(`${TARGET_URL}/email`, {
-      params: { email },
+      params: {email},
     });
     const commonResponse = new CommonResponse(response.data);
 
@@ -24,7 +25,7 @@ export default class SignRepository {
   }
 
   async enrollEmail(email, failedCallback) {
-    const response = await axios.post(`${TARGET_URL}/email`, { email });
+    const response = await axios.post(`${TARGET_URL}/email`, {email});
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
@@ -35,9 +36,9 @@ export default class SignRepository {
   }
 
   async checkPhoneNumber(phoneNumber, failedCallback) {
-    console.log('checkPhoneNumber1');
+    console.log('checkPhoneNumber1', TARGET_URL);
     const response = await axios.get(`${TARGET_URL}/phone-number`, {
-      params: { 'phone-number': phoneNumber },
+      params: {'phone-number': phoneNumber},
     });
 
     const commonResponse = new CommonResponse(response.data);
@@ -51,6 +52,7 @@ export default class SignRepository {
     return new CheckPhoneNumberResponseDto(commonResponse.data);
   }
 
+  // deprecated
   async enrollPhoneNumber(phoneNumber, failedCallback) {
     console.log('enrollPhoneNumber1');
     const response = await axios.post(`${TARGET_URL}/phone-number`, {
@@ -115,12 +117,12 @@ export default class SignRepository {
     const commonResponse = new CommonResponse(response.data);
 
     if (commonResponse.code !== ResponseCode.SUCCEED) {
-      commonResponse.data;
       failedCallback(commonResponse.code);
       return;
     }
 
-    return new GroupingUserDto(commonResponse.data);
+console.log("accessToken : "+ commonResponse.data);
+    return new AccessTokenDto(commonResponse.data);
   }
 
   async signInWithEmail(email, password, failedCallback) {
