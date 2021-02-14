@@ -19,6 +19,7 @@ import { TIME_OUT } from '../../../constant/TimeOut';
 import { SIGN_UP_PHONE_VIEW_STATUS } from '../../../constant/SignUpPhoneStatus';
 import PhoneCodeNextButton from '../components/PhoneCodeNextButton';
 import { COLORS } from '../../../assets/Colors';
+import { INPUT_PHONE_STATUS } from '../../../constant/InputPhoneStatus';
 
 const SignUpPhone = (props) => {
   const [minutes, setMinutes] = useState(TIME_OUT.START_TIME);
@@ -89,10 +90,12 @@ const SignUpPhone = (props) => {
   const signUpNextButtonClicked = async () => {
     props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
     props.signUpPhoneStore.isAllCompleted ? signUpNextButtonClicked.bind(this) : null;
-    await props.signUpPhoneStore
-      .validatePhoneCode()
-      .then(await props.signUpPhoneStore.completePhoneNumber());
-    props.navigation.navigate('SignUpEmail');
+    if (props.signUpPhoneStore.phoneValidationStatus === INPUT_PHONE_STATUS.SUCCEED) {
+      await props.signUpPhoneStore.completePhoneNumber();
+      props.navigation.navigate('SignUpEmail');
+    } else {
+      console.log('wrong code');
+    }
   };
 
   const authorizeButtonClicked = () => {
