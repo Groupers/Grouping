@@ -90,6 +90,7 @@ const SignUpPhone = (props) => {
   const signUpNextButtonClicked = async () => {
     props.signUpPhoneStore.phoneCodeValidationSucceed.bind(this);
     props.signUpPhoneStore.isAllCompleted ? signUpNextButtonClicked.bind(this) : null;
+    await props.signUpPhoneStore.phoneCodeValidationSucceed();
     if (props.signUpPhoneStore.phoneValidationStatus === INPUT_PHONE_STATUS.SUCCEED) {
       await props.signUpPhoneStore.completePhoneNumber();
       props.navigation.navigate('SignUpEmail');
