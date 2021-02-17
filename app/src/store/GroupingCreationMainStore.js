@@ -224,6 +224,7 @@ export default class GroupingCreationMainStore {
       }
     );
     console.log(`response : ${response.data.code}`);
+    console.log(`groupingUserId : ${this.groupingUserId}`);
     await this.groupCreationRepository.completeGroupRepresentImgUpload(
       this.groupingUserId,
       this.getBackgroundImageURI,
@@ -301,6 +302,7 @@ export default class GroupingCreationMainStore {
 
   @action initialize() {
     this.groupingUserId = new GroupingUserDto().groupingUserId;
+    console.log(`initialize create new group progress : groupingUserId : ${this.groupingUserId}`);
     this.groupingTitle = '';
     this.groupingKeyword = '';
     this.groupingDescription = '';
@@ -312,7 +314,7 @@ export default class GroupingCreationMainStore {
     this.groupingDescriptionCompleted = false;
     this.groupingAddressCompleted = false;
     this.groupingCreationDto = new GroupingCreationDto();
-    this.groupingCreationDto.representGroupingUserId = new GroupingUserDto().groupingUserId;
+    this.groupingCreationDto.representGroupingUserId = this.groupingUserId;
     this.groupingCreationDto.isHidden = false;
     this.groupingCreationDto.pointX = 100;
     this.groupingCreationDto.pointY = 100;

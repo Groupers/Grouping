@@ -48,6 +48,8 @@ export default class SignUpPhoneStore {
 
   @action initialize() {
     this.timeOut = TIME_OUT.START_TIME;
+    this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_BEFORE;
+    this.phoneValidationStatus = INPUT_PHONE_STATUS.NONE;
   }
 
   @action startTimer() {
@@ -71,6 +73,7 @@ export default class SignUpPhoneStore {
   }
 
   @action completePhoneNumber = async () => {
+    console.log('completePhoneNumber 호출');
     await this.signProcessStore.phoneCompleted(this.phoneNumber);
   };
 
@@ -121,7 +124,7 @@ export default class SignUpPhoneStore {
     }
     try {
       this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
-      console.log(this.codeConfirmation);
+      console.log(`codeConfirmation : ${this.codeConfirmation}`);
       isSucceed = true;
     } catch (e) {
       console.log('인증번호 요청 에러');
@@ -180,10 +183,12 @@ export default class SignUpPhoneStore {
       this.codeConfirmation != null
     ) {
       try {
+        console.log('인증코드 확인 : ');
         console.log(this.phoneCode.trim());
         isSucceed = await this.codeConfirmation.confirm(this.phoneCode.trim());
         console.log(`isSucceed${isSucceed}`);
       } catch {
+        console.log('인증코드 불일치');
         this.phoneCode = '';
         this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_VALID;
         return;
