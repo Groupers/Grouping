@@ -119,11 +119,11 @@ export default class SignUpPhoneStore {
   @action sendPhoneCode = async () => {
     console.log('send code');
     let isSucceed = false;
-    // const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
-    // if (data.phoneNumberAvailable !== true) {
-    //   this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
-    //   return;
-    // }
+    const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
+    if (data.phoneNumberAvailable !== true) {
+      this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
+      return;
+    }
     try {
       this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
       console.log(`codeConfirmation : ${this.codeConfirmation}`);

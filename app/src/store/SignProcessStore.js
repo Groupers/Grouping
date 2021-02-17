@@ -76,8 +76,8 @@ export default class SignProcessStore {
   };
 
   @action phoneCompleted = async (phoneNumber) => {
-    // const isSucceed = await this.signRepository.enrollPhoneNumber(phoneNumber, () => {});
-    const isSucceed = true;
+    const isSucceed = await this.signRepository.enrollPhoneNumber(phoneNumber, () => {});
+    // const isSucceed = true;
     if (isSucceed === true) {
       this.signViewStatus = SIGN_VIEW_STATUS.PHONE_COMPLETED;
       this.groupingUserDto.phoneNumber = phoneNumber;
