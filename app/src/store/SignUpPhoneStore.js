@@ -48,6 +48,10 @@ export default class SignUpPhoneStore {
 
   @action initialize() {
     this.timeOut = TIME_OUT.START_TIME;
+    this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_BEFORE;
+    this.phoneValidationStatus = INPUT_PHONE_STATUS.NONE;
+    this.phoneNumber = '';
+    this.phoneCode = '';
   }
 
   @action startTimer() {
@@ -115,11 +119,11 @@ export default class SignUpPhoneStore {
   @action sendPhoneCode = async () => {
     console.log('send code');
     let isSucceed = false;
-    const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
-    if (data.phoneNumberAvailable !== true) {
-      this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
-      return;
-    }
+    // const data = await this.signRepository.checkPhoneNumber(this.phoneNumber, (responseCode) => {});
+    // if (data.phoneNumberAvailable !== true) {
+    //   this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_NUMBER_ALREADY_EXISTED;
+    //   return;
+    // }
     try {
       this.codeConfirmation = await this.firebaseRepository.sendSignUpPhoneCode(this.phoneNumber);
       console.log(`codeConfirmation : ${this.codeConfirmation}`);

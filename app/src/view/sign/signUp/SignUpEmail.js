@@ -26,7 +26,7 @@ import { INPUT_EMAIL_STATUS } from '../../../constant/InputEmailStatus';
 
 // 이 예제에는 없지만 state가 변경될 떄엔 props 를 받았을 때 와 비슷하지만 shouldComponentUpdate 부터 시작됩니다.
 
-@inject('signUpEmailStore')
+@inject('signUpEmailStore', 'signUpPhoneStore')
 @observer
 class SignUpEmail extends React.Component {
   constructor(props) {
@@ -39,7 +39,8 @@ class SignUpEmail extends React.Component {
   async componentDidMount() {
     this.focusListener = this.props.navigation.addListener(
       'focus',
-      this.props.signUpEmailStore.clearEmail.bind(this)
+      this.props.signUpEmailStore.clearEmail.bind(this),
+      this.props.signUpPhoneStore.initialize.bind(this)
     );
   }
 
