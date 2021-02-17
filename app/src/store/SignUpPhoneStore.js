@@ -183,10 +183,12 @@ export default class SignUpPhoneStore {
       this.codeConfirmation != null
     ) {
       try {
+        console.log('인증코드 확인 : ');
         console.log(this.phoneCode.trim());
         isSucceed = await this.codeConfirmation.confirm(this.phoneCode.trim());
         console.log(`isSucceed${isSucceed}`);
       } catch {
+        console.log('인증코드 불일치');
         this.phoneCode = '';
         this.phoneValidationStatus = INPUT_PHONE_STATUS.PHONE_CODE_NOT_VALID;
         return;
