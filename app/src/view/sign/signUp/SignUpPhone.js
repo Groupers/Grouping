@@ -92,6 +92,7 @@ const SignUpPhone = (props) => {
     await props.signUpPhoneStore.phoneCodeValidationSucceed();
     if (props.signUpPhoneStore.phoneValidationStatus === INPUT_PHONE_STATUS.SUCCEED) {
       await props.signUpPhoneStore.completePhoneNumber();
+      props.signUpPhoneStore.initialize();
       props.navigation.navigate('SignUpEmail');
     } else {
       console.log('wrong code');

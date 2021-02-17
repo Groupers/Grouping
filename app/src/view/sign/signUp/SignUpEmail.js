@@ -39,8 +39,7 @@ class SignUpEmail extends React.Component {
   async componentDidMount() {
     this.focusListener = this.props.navigation.addListener(
       'focus',
-      this.props.signUpEmailStore.clearEmail.bind(this),
-      this.props.signUpPhoneStore.initialize.bind(this)
+      this.props.signUpEmailStore.clearEmail.bind(this)
     );
   }
 

@@ -50,8 +50,6 @@ export default class SignUpPhoneStore {
     this.timeOut = TIME_OUT.START_TIME;
     this.phoneValidationViewStatus = SIGN_UP_PHONE_VIEW_STATUS.PHONE_NUMBER_SENT_BEFORE;
     this.phoneValidationStatus = INPUT_PHONE_STATUS.NONE;
-    this.phoneNumber = '';
-    this.phoneCode = '';
   }
 
   @action startTimer() {
