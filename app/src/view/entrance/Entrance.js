@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
-import { Dimensions, Keyboard, StyleSheet, Text } from 'react-native';
+import { Dimensions, Image, Keyboard, StyleSheet, Text } from 'react-native';
 
 import { Icon } from 'react-native-elements';
 import SignIn from '../sign/signIn/SignIn';
@@ -19,6 +19,7 @@ import SignUpName from '../sign/signUp/SignUpName';
 import SignUpGender from '../sign/signUp/SignUpGender';
 import SignUpBirthday from '../sign/signUp/SignUpBirthday';
 import ResetPasswordConfirmEmail from '../sign/signIn/ResetPasswordConfirmEmail';
+import { WINDOW_SIZE } from '../../constant/WindowSize';
 
 // 컴포넌트를 생성 할 때는 constructor -> componentWillMount -> render -> componentDidMount 순으로 진행됩니다.
 
@@ -123,7 +124,18 @@ class Entrance extends React.Component {
               },
               headerTitle: '',
               headerBackImage: () => {
-                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
+                return (
+                  <Image
+                    source={require('../../../../Img/btn_back.png')}
+                    type="feather"
+                    color="lightgray"
+                    style={{
+                      marginStart: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
+                      height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                      width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                    }}
+                  />
+                );
               },
             }}
           >
@@ -156,7 +168,18 @@ class Entrance extends React.Component {
               headerTitle: '',
               // // headerBackTitle:"<",
               headerBackImage: () => {
-                return <Icon name="chevron-left" type="feather" size={26} color="lightgray" />;
+                return (
+                  <Image
+                    source={require('../../../../Img/btn_back.png')}
+                    type="feather"
+                    color="lightgray"
+                    style={{
+                      marginStart: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
+                      height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                      width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                    }}
+                  />
+                );
               },
             }}
           >

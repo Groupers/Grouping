@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   textArea: {
     marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
   },
-  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, marginBottom: 6, color: COLORS.BLACK },
+  title: { fontSize: 26 * WINDOW_SIZE.HEIGHT_WEIGHT, marginBottom: 6, color: COLORS.BLACK ,width:300*WINDOW_SIZE.WIDTH_WEIGHT},
   bottomContainer: {
     // borderWidth:2,
     width: '100%',
