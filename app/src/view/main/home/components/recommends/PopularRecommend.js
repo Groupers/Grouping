@@ -11,7 +11,14 @@ const PopularRecommend = () => {
       <View style={styles.textBlock}>
         <TouchableOpacity style={{ flexDirection: 'row' }}>
           <Text style={styles.textStyle}>지금 내 주변 인기 그룹</Text>
-          <Icon name="navigate-next" size={20} color={COLORS.BLACK} />
+          <Image
+            style={{
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              alignSelf: 'center',
+            }}
+            source={require('../../../../../../../Img/component_ic_middle_ic_more_1.png')}
+          />
         </TouchableOpacity>
         <Text style={{ fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT }}>#고양이 #사진 #카페투어</Text>
       </View>
@@ -90,7 +97,8 @@ const styles = StyleSheet.create({
     width: 144 * WINDOW_SIZE.HEIGHT_WEIGHT,
     borderRadius: 12 * (WINDOW_SIZE.HEIGHT_WEIGHT / WINDOW_SIZE.WIDTH_WEIGHT),
     backgroundColor: 'purple',
-  },  carouselTitle: {
+  },
+  carouselTitle: {
     fontSize: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
     color: COLORS.BLACK,
     lineHeight: 18 * WINDOW_SIZE.HEIGHT_WEIGHT,

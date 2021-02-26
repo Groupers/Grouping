@@ -19,7 +19,14 @@ const PersonalRecommend = (props) => {
         <TouchableOpacity style={{ flexDirection: 'row' }}>
           {/* 추후변경 */}
           <Text style={styles.textStyle}>연수님 맞춤 추천 그룹</Text>
-          <Icon name="navigate-next" size={22} color="black" />
+          <Image
+            style={{
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              alignSelf: 'center',
+            }}
+            source={require('../../../../../../../Img/component_ic_middle_ic_more_1.png')}
+          />
         </TouchableOpacity>
       </View>
       <FlatList

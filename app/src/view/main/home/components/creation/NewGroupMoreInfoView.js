@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import { SwipeablePanel } from 'rn-swipeable-panel/dist';
 import { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
@@ -139,6 +139,9 @@ const NewGroupMoreInfoView = (props) => {
             flexDirection: 'row',
             height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
             alignItems: 'center',
+            borderBottomWidth: 1,
+            width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+            borderColor: COLORS.GRAY_4,
           }}
         >
           <View
@@ -146,20 +149,27 @@ const NewGroupMoreInfoView = (props) => {
               width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
               height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
               paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
-              paddingTop: 2,
+              justifyContent: 'center',
             }}
           >
-            <Icon name="place" size={15} />
+            <Image
+              source={require('../../../../../../../Img/component_ic_middle_ic_location.png')}
+              style={{
+                height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              }}
+            />
           </View>
           <Text
             style={{
               color: props.groupingCreationMainStore.addressFontColor,
               fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              marginStart: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
             }}
           >
             {props.groupingCreationMainStore.groupingAddressCompleted === true
               ? props.groupingCreationMainStore.groupingAddress
-              : '활동 위치'}
+              : '활동 위치는 어디인가요?'}
           </Text>
         </View>
       </TouchableOpacity>
@@ -169,6 +179,9 @@ const NewGroupMoreInfoView = (props) => {
             flexDirection: 'row',
             height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
             alignItems: 'center',
+            borderBottomWidth: 1,
+            width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+            borderColor: COLORS.GRAY_4,
           }}
         >
           <View
@@ -176,15 +189,23 @@ const NewGroupMoreInfoView = (props) => {
               width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
               height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
               paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
-              paddingTop: 2,
+              justifyContent: 'center',
             }}
           >
-            <Icon name="add" size={15} />
+            <Image
+              style={{
+                height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                alignSelf: 'center',
+              }}
+              source={require('../../../../../../../Img/component_ic_middle_plus_ic.png')}
+            />
           </View>
           <Text
             style={{
               color: props.groupingCreationMainStore.genderFontColor,
               fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              marginStart: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
             }}
           >
             {props.groupingCreationMainStore.selectedGenderLimitMessage}
@@ -197,6 +218,9 @@ const NewGroupMoreInfoView = (props) => {
             flexDirection: 'row',
             height: 48 * WINDOW_SIZE.HEIGHT_WEIGHT,
             alignItems: 'center',
+            borderBottomWidth: 1,
+            width: 300 * WINDOW_SIZE.WIDTH_WEIGHT,
+            borderColor: COLORS.GRAY_4,
           }}
         >
           <View
@@ -204,15 +228,24 @@ const NewGroupMoreInfoView = (props) => {
               width: 20 * WINDOW_SIZE.WIDTH_WEIGHT,
               height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
               paddingRight: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
-              paddingTop: 2,
+              justifyContent: 'center',
             }}
           >
-            <Icon name="add" size={15} />
+            <Image
+              style={{
+                height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                alignSelf: 'center',
+              }}
+              source={require('../../../../../../../Img/component_ic_middle_plus_ic.png')}
+            />
           </View>
           <Text
             style={{
               color: props.groupingCreationMainStore.availableFontColor,
               fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              marginStart: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
+              height: 20 * WINDOW_SIZE.HEIGHT_WEIGHT,
             }}
           >
             {props.groupingCreationMainStore.selectedAgeLimitMessage}
@@ -339,16 +372,24 @@ const NewGroupMoreInfoView = (props) => {
               paddingTop: 2,
             }}
           >
-            <Icon name="subject" size={15} />
+            <Image
+              style={{
+                height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                alignSelf: 'center',
+              }}
+              source={require('../../../../../../../Img/component_ic_middle_ic_text.png')}
+            />
           </View>
           <Text
             style={{
               fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
               color: props.groupingCreationMainStore.descriptionFontColor,
+              marginStart: 4 * WINDOW_SIZE.WIDTH_WEIGHT,
             }}
           >
             {props.groupingCreationMainStore.groupingDescription === ''
-              ? '그룹 소개글'
+              ? '그룹 소개글을 입력해 주세요'
               : props.groupingCreationMainStore.groupingDescription}
           </Text>
         </View>
