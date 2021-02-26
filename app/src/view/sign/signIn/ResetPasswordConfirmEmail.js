@@ -10,6 +10,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ToastAndroid,
+  ScrollView,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { COLORS } from '../../../assets/Colors';
@@ -70,7 +71,6 @@ const ResetPasswordConfirmEmail = (props) => {
                 onChangeText={props.signUpEmailStore.emailTextChanged.bind(this)}
               />
             </View>
-
             {/* <SignErrorMessageView text={props.resetPasswordStore.errorMessage} /> */}
             <View style={styles.bottomContainer}>
               <NextButton

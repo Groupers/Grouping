@@ -18,7 +18,15 @@ import LabelView from '../../../../sign/components/LabelView';
 const NewGroupInterestsInputView = (props) => {
   const [input, setInput] = React.useState('');
   const [keywordList, setKeywordList] = React.useState([]);
-  const sampleHotKeyword = ['헬스', '온라인 스터디', '홈트', '베이킹'];
+  const sampleHotKeyword = [
+    '헬스',
+    '온라인스터디',
+    '홈트',
+    '베이킹',
+    '리액트네이티브',
+    '등산',
+    '운동',
+  ];
 
   const rightIconStyle = (selectedColor) => {
     return {
@@ -164,7 +172,8 @@ const NewGroupInterestsInputView = (props) => {
           {sampleHotKeyword.map((keyword) => (
             <View style={styles.hotkeywordListBlock}>
               <TouchableOpacity
-                onPress={() => onKeywordRemove(keyword)}
+                // onPress={() => onKeywordRemove(keyword)}
+                onPress={() => onKeywordInserted(keyword)}
                 style={{ flexDirection: 'row', alignItems: 'center' }}
               >
                 <Text style={{ color: COLORS.BLACK, fontSize: 11 * WINDOW_SIZE.HEIGHT_WEIGHT }}>
