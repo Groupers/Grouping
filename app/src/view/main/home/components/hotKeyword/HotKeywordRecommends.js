@@ -48,10 +48,10 @@ const HotKeywordRecommend = () => {
     );
   };
 
-  const HotKeywordGroupItem = ({ item }) => (
+  const HotKeywordGroupItem = ({ item, index }) => (
     <View
+      flexDirection="row"
       style={{
-        flexDirection: 'row',
         alignSelf: 'center',
         height: 66 * WINDOW_SIZE.HEIGHT_WEIGHT,
         justifyContent: 'center',
@@ -68,14 +68,26 @@ const HotKeywordRecommend = () => {
         }}
       />
       <View
-        style={{
-          borderBottomWidth: 1 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          flex: 1,
-          marginLeft: 16 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          paddingBottom: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          paddingTop: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
-          borderColor: COLORS.FONT_GRAY,
-        }}
+        style={
+          index === 0
+            ? {
+                flex: 1,
+                marginLeft: 16 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                paddingBottom: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                paddingTop: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                borderColor: COLORS.FONT_GRAY,
+                width: 200 * WINDOW_SIZE.WIDTH_WEIGHT,
+              }
+            : {
+                flex: 1,
+                marginLeft: 16 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                paddingBottom: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                paddingTop: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+                borderColor: COLORS.FONT_GRAY,
+                width: 200 * WINDOW_SIZE.WIDTH_WEIGHT,
+                borderTopWidth: 1 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              }
+        }
       >
         <Text
           style={{

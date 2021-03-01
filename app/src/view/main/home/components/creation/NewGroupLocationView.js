@@ -65,12 +65,13 @@ const NewGroupLocationView = (props) => {
   // };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: COLORS.WHITE }}>
       <AddressSearchTextView
         onChangeText={onAddressKeywordChanged}
         value={props.groupingCreationMainStore.groupingAddressSearchKeyword}
         navigation={props.navigation}
       />
+      <View style={{ height: 1, backgroundColor: COLORS.GRAY_4 }} />
       <AddressSearchResultView
         onClick={onAddressSelected.bind(this)}
         addressList={props.groupingCreationMainStore.groupingAddressSearchResult}

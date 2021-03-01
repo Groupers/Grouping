@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -34,7 +35,7 @@ const AddressSearchTextView = (props) => {
 
   const rightIconStyle = (groupingCreationView) => {
     return {
-      marginRight: 15 * WINDOW_SIZE.WIDTH_WEIGHT,
+      marginLeft: 17 * WINDOW_SIZE.WIDTH_WEIGHT,
       fontSize: 18 * WINDOW_SIZE.WIDTH_WEIGHT,
       color: props.groupingCreationMainStore.isHeaderRightIconActivated(groupingCreationView)
         ? Colors.black
@@ -56,7 +57,13 @@ const AddressSearchTextView = (props) => {
     // >
     //   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.main}>
-      <Icon name="place" size={15} />
+      <Image
+        source={require('../../../../Img/component_ic_middle_ic_location.png')}
+        style={{
+          height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+        }}
+      />
       <TextInput
         placeholderTextColor={COLORS.FONT_GRAY}
         style={styles.search}
@@ -67,16 +74,18 @@ const AddressSearchTextView = (props) => {
         value={props.value}
         onChangeText={props.onChangeText != null ? (text) => onAddressKeywordChanged(text) : null}
       />
-      <Icon
-        name="cancel"
-        size={14}
-        color={COLORS.DARK_GRAY}
-        style={{ padding: 17 * WINDOW_SIZE.HEIGHT_WEIGHT }}
+
+      <Image
+        source={require('../../../../Img/component_input_btn_del.png')}
+        style={{
+          height: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+          width: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+        }}
         onPress={InitializeAddressKeyword}
       />
       <TouchableOpacity onPress={props.navigation.goBack} style={rightIconStyle()}>
         <View>
-          <Text>취소</Text>
+          <Text style={{ fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT, fontWeight: 'bold' }}>취소</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -108,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
     marginLeft: 15,
-    color: 'black',
+    color: COLORS.GRAY_2,
     padding: 0,
   },
 });

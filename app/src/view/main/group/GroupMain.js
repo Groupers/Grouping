@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet, SafeAreaView, Text } from 'react-native';
+import { ScrollView, StyleSheet, SafeAreaView, Text, View } from 'react-native';
 import { COLORS } from '../../../assets/Colors';
 
 import JoinedGroup from './components/joinedGroup/JoinedGroup';
 import { WINDOW_SIZE } from '../../../constant/WindowSize';
 import Header from '../../../component/common/Header';
+import ChannelHeader from './components/ChannelHeader';
 
 const GroupMain = ({ navigation }) => {
   const navigateTo = (arrival) => {
@@ -12,25 +13,26 @@ const GroupMain = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={style.container}>
-      <SafeAreaView style={style.paddingBlock}>
-        <Header navigateTo={navigateTo} navigateMap="group" />
-        <JoinedGroup navigateTo={navigateTo} />
-        <Text>Carousel</Text>
-      </SafeAreaView>
-    </ScrollView>
+    <View>
+      <ChannelHeader navigateTo={navigateTo} navigateMap="group" />
+      <ScrollView style={style.container}>
+        <SafeAreaView style={style.paddingBlock}>
+          <JoinedGroup navigateTo={navigateTo} />
+          <Text>Carousel</Text>
+        </SafeAreaView>
+      </ScrollView>
+    </View>
   );
 };
 
 const style = StyleSheet.create({
   container: {
     zIndex: 1,
-    backgroundColor: COLORS.HOME_TAP_MAIN,
+    backgroundColor: COLORS.WHITE,
   },
   paddingBlock: {
-    padding: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    margin: 32 * WINDOW_SIZE.WIDTH_WEIGHT,
-    marginTop: 0,
+    paddingLeft: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
+    paddingRight: 24 * WINDOW_SIZE.WIDTH_WEIGHT,
     display: 'flex',
   },
 });

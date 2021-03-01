@@ -19,7 +19,14 @@ const PersonalRecommend = (props) => {
         <TouchableOpacity style={{ flexDirection: 'row' }}>
           {/* 추후변경 */}
           <Text style={styles.textStyle}>연수님 맞춤 추천 그룹</Text>
-          <Icon name="navigate-next" size={22} color="black" />
+          <Image
+            style={{
+              height: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              width: 22 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              alignSelf: 'center',
+            }}
+            source={require('../../../../../../../Img/component_ic_middle_ic_more_1.png')}
+          />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -33,6 +40,7 @@ const PersonalRecommend = (props) => {
     </View>
   );
 };
+
 class RecmmendGroupItem {
   tag;
 
@@ -85,7 +93,6 @@ const personalItem = ({ item }) => (
             width: 230 * WINDOW_SIZE.HEIGHT_WEIGHT,
             height: 132 * WINDOW_SIZE.HEIGHT_WEIGHT,
             borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
-            backgroundColor: 'yellow',
             marginTop: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
           }}
           source={{
@@ -98,17 +105,18 @@ const personalItem = ({ item }) => (
             position: 'absolute',
             top: 0,
             left: 0,
-            backgroundColor: 'orange',
             width: 108 * WINDOW_SIZE.HEIGHT_WEIGHT,
             height: 124 * WINDOW_SIZE.HEIGHT_WEIGHT,
             borderRadius: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
             padding: 12 * WINDOW_SIZE.HEIGHT_WEIGHT,
+            backgroundColor: '#ff6a4ddd',
           }}
         >
           <Text
             style={{
               color: 'white',
               fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              fontWeight: 'bold',
             }}
             numberOfLines={1}
           >
@@ -118,6 +126,7 @@ const personalItem = ({ item }) => (
             style={{
               color: 'white',
               fontSize: 14 * WINDOW_SIZE.HEIGHT_WEIGHT,
+              fontWeight: 'bold',
             }}
             numberOfLines={1}
           >
